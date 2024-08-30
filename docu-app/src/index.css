@@ -138,3 +138,15 @@ li code {
   display: inline-block;
   vertical-align: middle; /* Align text with the middle of the image */
 }
+
+@media (max-width: 880px) {
+table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  overflow-x: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+}
