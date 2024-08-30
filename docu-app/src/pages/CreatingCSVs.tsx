@@ -6,7 +6,7 @@ const CreatingCSVs: React.FC = () => {
     <div className='creatingCSVsContainer'>
       <h3>Beacon 2 RI Tools</h3>
 
-      <h2>Creating the CSV files</h2>
+      <h1>Creating the CSV files</h1>
 
       <p>
         The CSV file is an intermediate file to allow Beacon2 RI tools v2 to

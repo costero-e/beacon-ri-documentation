@@ -160,7 +160,10 @@
     align-items: flex-start;
     position: relative;
     margin-top: 0;
+    height: auto;
+    z-index: -2;
   }
+
 
   .menuDiv {
     width: 100%;
@@ -223,21 +226,6 @@
     flex-direction: column;
   }
 
-  .inputSearch {
-    border-radius: 24px;
-    padding: 10px 24px 10px 44px;
-    margin-right: 40px; /* Add padding to the right to make space for the clear button */
-    border: none;
-    width: 50% !important;
-    height: 20px;
-    color: #274a62;
-    background-color: rgb(255 254 254);
-    font-size: 14px;
-    font-weight: 400;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-      Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue',
-      sans-serif;
-  }
   .codeSnippet pre {
     border: 1px solid #e2e4e5;
     padding: 16px;

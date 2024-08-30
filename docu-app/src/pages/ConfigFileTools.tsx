@@ -20,8 +20,7 @@ const ConfigFileTools: React.FC = () => {
   return (
     <div className='configFileToolsContainer'>
       <h3>Beacon 2 RI Tools</h3>
-
-      <h2>Configuration File</h2>
+      <h1>Configuration File</h1>
       <p>
         In order to use Beacon2 RI tools v2 one needs to modify a configuration
         file with the desired files and options for the different collections.

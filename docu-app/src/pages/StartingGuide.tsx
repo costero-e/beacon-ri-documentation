@@ -15,7 +15,7 @@ const StartingGuide: React.FC = () => {
   return (
     <div className='startingGuideContainer'>
       <h3>Beacon 2 RI Tools</h3>
-
+      <h1>Starting guide</h1>
       <h2>Tools Introduction</h2>
       <p>
         The Beacon2 RI tools v2 is a set of tools written in Python available in

@@ -78,3 +78,14 @@ p {
   color: rgb(15 91 229);
   text-decoration: none;
 }
+
+
+@media (max-width: 800px) {
+    .deploymentContainer {
+      padding-left: 74px;
+      padding-right: 16px;
+      width: 100%; /* Ensure full width within the parent container */
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+  }
