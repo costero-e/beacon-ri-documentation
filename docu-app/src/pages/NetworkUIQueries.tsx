@@ -6,6 +6,7 @@ const NetworkUIQueries: React.FC = () => {
     <div className="networkUIQueriesContainer">
       <h3>Network UI</h3>
       <h1>Queries</h1>
+      <h4>Coming soon...</h4>
     </div>
   );
 };
