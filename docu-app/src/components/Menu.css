@@ -20,7 +20,7 @@
 
 .menuItem {
   padding: 0px 40px 0px 40px;
-  cursor: default;
+  cursor: pointer;
   position: relative;
   height: 46px;
   font-weight: 600;
@@ -98,7 +98,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0px 40px 0px 40px;
-  cursor: default;
+  cursor: pointer;
   background-color: #e5ecf3;
   color: #4a88b1;
   border: none;
@@ -111,6 +111,10 @@
   font-family: inherit;
 }
 
+.subMenuItem:hover{
+  background-color: white;
+}
+
 .subMenuItem.active {
   color: #185177;
 }
@@ -120,12 +124,16 @@
 }
 
 .nestedSubMenuItem {
-  cursor: default;
+  cursor: pointer;
   color: #185177;
   height: 16px;
   padding: 8px 24px 8px 76px;
   font-family: inherit;
   font-size: 13px;
+}
+
+.nestedSubMenuItem:hover{
+  background-color: white;
 }
 
 .menuItem.active {

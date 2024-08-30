@@ -79,7 +79,7 @@ const Navbar = ({ onSearch }: NavbarProps) => {
       <div className='divOptionsInput'>
         <div className='inputContainer'>
           <div className='inputDiv'>
-            <img src='./zoom-in.png' className='searchIcon' alt='Search Icon' />
+            <img src='./Zoom-in.png' className='searchIcon' alt='Search Icon' />
             <input
               className='inputSearch'
               type='text'
