@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+
+  documentation-ui:
+    build:
+      context: ./docu-app
+    command: node /opt/yarn-v1.22.19/bin/yarn.js start
+    container_name: docu-app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - 3003:3000
+    stdin_open: true
