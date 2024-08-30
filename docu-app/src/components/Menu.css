@@ -91,6 +91,7 @@
 .subMenu {
   background-color: #e5ecf3;
   width: 100%;
+  margin-top: 13px;
 }
 
 .subMenuItem {
@@ -111,7 +112,7 @@
   font-family: inherit;
 }
 
-.subMenuItem:hover{
+.subMenuItem:hover {
   background-color: white;
 }
 
@@ -132,7 +133,7 @@
   font-size: 13px;
 }
 
-.nestedSubMenuItem:hover{
+.nestedSubMenuItem:hover {
   background-color: white;
 }
 
@@ -271,6 +272,4 @@
     justify-content: flex-start;
     display: flex;
   }
-
-
 }
