@@ -1,9 +1,8 @@
 .appContainer {
-    display: flex;
-  }
-  
-  .contentContainer {
-    display: flex;
-    flex: 1; /* Take remaining space */
-  }
-  
+  display: flex;
+  flex-direction: column;
+}
+
+.contentContainer {
+  display: flex;
+}

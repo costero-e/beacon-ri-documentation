@@ -1,5 +1,32 @@
-.landingPage{
-    margin-left: 54px;
-    height: 100vw;
-    width: 80%;
+.landingPage {
+  padding-left: 125px;
+  height: 100vw;
+  width: 80%;
+  margin-right: 125px;
+}
+
+.landingPage h3 {
+  margin-bottom: 40px;
+}
+
+h4 {
+  font-size: 16px;
+  color: #4a88b1;
+  margin-bottom: 40px;
+}
+
+.collaborators-div{
+    margin-top: 40px;
+}
+
+
+.collaborators-img{
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.relationship-elements{
+  width: 90%;
+  margin-top: 14px;
 }

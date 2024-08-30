@@ -1,0 +1,80 @@
+.deploymentContainer {
+  padding-left: 74px;
+  padding-right: 16px;
+  width: 75%; /* Ensure full width within the parent container */
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 40px;
+}
+
+.deploymentContainer h1 {
+  font-size: 20px;
+}
+
+.deploymentContainer h2 {
+  font-size: 16px;
+  margin-top: 20px; /* Existing margin-top */
+  margin-bottom: 40px; /* Existing margin-bottom */
+  padding-top: 100px; /* Add extra space above the H2 element */
+  margin-top: -80px; /* Negative margin to offset the padding */
+}
+
+.deploymentContainer p {
+  font-size: 14px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+p {
+  font-size: 14px;
+}
+
+.codeSnippet pre {
+  border: 1px solid #e2e4e5;
+  padding: 16px;
+  background-color: #f8f8f8;
+  font-family: menlo;
+  font-size: 13px;
+  margin-right: 27px;
+  border-radius: 8px;
+  width: 700px;
+  text-wrap: wrap;
+  display: flex;
+  padding-right: 0px;
+  /* align-items: center; */
+  justify-content: space-between;
+  white-space: pre-wrap; /* This allows the text to wrap to the next line */
+  word-break: break-all;
+  line-height: 20px;
+}
+
+.note {
+    align-items: flex-start;
+    border: none;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-right: 16px;
+    padding-left: 16px;
+    background-color: #f0f7ff;
+    font-family: menlo;
+    font-size: 13px;
+    margin-right: 27px;
+    width: 686px;
+    border-radius: 8px;
+    justify-content: flex-start;
+    display: flex;
+}
+
+.deploymentContainer ul li {
+  font-size: 13px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 19px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.deploymentContainer a {
+  color: rgb(15 91 229);
+  text-decoration: none;
+}

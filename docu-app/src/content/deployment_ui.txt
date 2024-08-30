@@ -1,0 +1,1 @@
+Use the deployment for all the containers for beacon to also deploy the UI. You will find it running in http://localhost:3000

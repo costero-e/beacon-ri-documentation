@@ -1,0 +1,8 @@
+.creatingCSVsContainer{
+    padding-left: 74px;
+    padding-right: 16px;
+    width: 75%;; /* Ensure full width within the parent container */
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-bottom: 40px;
+}

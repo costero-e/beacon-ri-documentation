@@ -1,6 +1,6 @@
 .menuContainer {
   left: 0;
-  height: 100vh;
+  height: 95vh;
   color: white;
   display: flex;
   width: -moz-fit-content;
@@ -13,8 +13,8 @@
 
 .menuDiv {
   width: 229px;
-  height: 100%;
-  background-color: #185177; /* Ensure menuDiv has the background color */
+  height: 94%;
+  background-color: #185177;
   padding: 24px 0px 120px 0px;
 }
 
@@ -31,14 +31,23 @@
   align-items: center;
 }
 
+.menuItem:hover{
+color: rgb(134, 196, 229);
+}
+
 .menuItem.active {
   background-color: white;
   color: #185177;
 }
 
 .backIcon {
-  width: 12px;
+  width: 14px;
   padding: 23px 22px 12px 26px;
+}
+
+.forwardIcon{
+  width: 14px;
+  padding: 23px 2px 12px 6px;
 }
 
 .buttonHideSubmenu {
@@ -50,6 +59,14 @@
   cursor: pointer;
 }
 
+.buttonShowSubmenu{
+  background: none;
+  border: none;
+  margin-top: -3px;
+  margin-bottom: -12px;
+  cursor: pointer;
+}
+
 .EGALogo {
   width: 147px;
   width: 147px;
@@ -57,10 +74,10 @@
 }
 
 .subMenuContainer {
-  width: 313px; /* Width of the sub-menu container */
-  height: 100%;
-  background-color: #e5ecf3; /* Ensure subMenuContainer has the background color */
-  margin-top: 100px;
+  width: 313px;
+  height: 94%;
+  background-color: #e5ecf3;
+  margin-top: 80px;
   margin-right: -33px;
 }
 
@@ -68,7 +85,7 @@
   width: 33px;
   height: 100%;
   background-color: #e5ecf3;
-  margin-top: 100px;
+  margin-top: 80px;
   margin-right: -33px;
 }
 

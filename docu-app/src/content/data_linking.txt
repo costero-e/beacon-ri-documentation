@@ -1,0 +1,33 @@
+Linking ids to dataset and cohort
+
+In case your data is splitted by dataset or cohort, you will need to tell beacon which biosample ids and which individual ids belong to which dataset.
+
+Edit the file datasets.yml that is inside beacon/request folder and write the dataset with an array of all the ids (for individuals and biosamples together).
+
+dataset_name: [“individualId1”, “individualId2”, “biosampleId1”, “biosampleId2”]
+
+cohort_name: [“individualId1”, “individualId2”, “biosampleId1”, “biosampleId2”]
+
+Note that the dataset_name and cohort_name have to be identical as how is spelled the id for the dataset or cohort in the BFF record.
+
+Extract filtering terms
+
+To automatically fill in the filtering terms endpoint and be able to apply the ontologies that are found inside your data to query your beacon, please execute the next script:
+
+docker exec beacon python beacon/db/extract_filtering_terms.py
+
+Manually adding filtering terms (optional)
+
+To manually add filtering terms to your beacon, you will need to add them in your mongodb, by executing the next command, for example, for an alphanumeric term that applies to the libraryStrategy field for the runs collection:
+
+db.filtering_terms.insertMany([{ "type": "alphanumeric", "id": "libraryStrategy", "scope": [ "runs"] }])
+
+After that, you will need to specify that this alphanumeric term is not related to an ontology by editing the conf.py inside beacon and deploy folder in the alphanumeric_terms array:
+
+alphanumeric_terms = ['libraryStrategy', 'molecularAttributes.geneIds', 'diseases.ageOfOnset.iso8601duration']
+
+Get descendant terms (optional)
+
+If you have extracted filtering terms. in case you wish to add information about the descendant terms and similarity found for each ontology and be able to use the similarity and descendant terms beacon options, please execute the next script:
+
+docker exec beacon python beacon/db/get_descendants.py.

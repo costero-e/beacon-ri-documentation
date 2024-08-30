@@ -1,33 +1,121 @@
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSearchableContent } from '../context/SearchableContentContext'
 import './Navbar.css'
 
-import React, { useContext } from 'react';
-import { SearchContext } from '../App'; 
-
 interface NavbarProps {
-    onSearch: (term: string) => void;
-  }
+  onSearch: (term: string) => void
+}
 
-  
-function Navbar({ onSearch }: NavbarProps) {
-  const { setSearchTerm } = useContext(SearchContext);
+const Navbar = ({ onSearch }: NavbarProps) => {
+  const { searchableContent } = useSearchableContent()
+  const [searchTerm, setSearchTerm] = useState<string>('')
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchTerm = e.target.value;
-    setSearchTerm(searchTerm);
-    // Optionally, you can perform search immediately based on the typed term
-  };
+    const term = e.target.value
+    setSearchTerm(term)
+    console.log(`Search term: ${term}`)
+    onSearch(term)
+  }
+
+  const handleClearSearch = () => {
+    setSearchTerm('')
+    onSearch('')
+  }
+
+  const highlightText = (text: string, highlight: string) => {
+    if (!highlight.trim()) {
+      return text
+    }
+    const regex = new RegExp(`(${highlight})`, 'gi')
+    const parts = text.split(regex)
+    return parts.map((part, index) =>
+      part.toLowerCase() === highlight.toLowerCase() ? (
+        <span key={index} className='highlight'>
+          {part}
+        </span>
+      ) : (
+        part
+      )
+    )
+  }
+
+  const navigate = useNavigate()
+
+  const handleResultClick = (route: string) => {
+    console.log(`Navigating to: ${route}`)
+    navigate(route)
+  }
+
+  const searchResults = searchTerm
+    ? searchableContent
+        .filter(item =>
+          item.text.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+        .map(item => {
+          const startIndex = item.text
+            .toLowerCase()
+            .indexOf(searchTerm.toLowerCase())
+          const endIndex = startIndex + searchTerm.length
+          const previewText = `${item.text.substring(
+            Math.max(0, startIndex - 20),
+            startIndex
+          )}${searchTerm}${item.text.substring(
+            endIndex,
+            Math.min(item.text.length, endIndex + 20)
+          )}`
+          return {
+            ...item,
+            previewText
+          }
+        })
+    : []
+
+  console.log('Search results:', searchResults)
 
   return (
     <div className='containerNav'>
       <h1>Beacon v2 RI documentation</h1>
-      <input
-        className='inputSearch'
-        type='text'
-        placeholder='Search keywords'
-        onChange={handleSearchChange}
-      />
+      <div className='divOptionsInput'>
+        <div className='inputContainer'>
+          <div className='inputDiv'>
+            <img src='./zoom-in.png' className='searchIcon' alt='Search Icon' />
+            <input
+              className='inputSearch'
+              type='text'
+              placeholder='Search keywords'
+              value={searchTerm}
+              onChange={handleSearchChange}
+            ></input>
+
+            {searchTerm && (
+              <button className='clearButton' onClick={handleClearSearch}>
+                &times;
+              </button>
+            )}
+          </div>
+          {searchResults.length > 0 && (
+            <div className='searchResults'>
+              {searchResults.map((result, index) => (
+                <div
+                  key={index}
+                  className='searchResultItem'
+                  onClick={() => handleResultClick(result.route)}
+                >
+                  <div className='titleResult'>
+                    <strong>{result.title}</strong>
+                  </div>
+                  <div className='previewTextResult'>
+                    • {highlightText(result.previewText, searchTerm)}...
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar
