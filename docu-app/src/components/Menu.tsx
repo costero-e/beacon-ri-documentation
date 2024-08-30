@@ -42,12 +42,12 @@ function Menu () {
     'Introduction',
     'Beacon 2 RI API',
     'Beacon 2 RI Tools',
-    'Beacon Verifier',
+    //'Beacon Verifier',
     'Beacon UI',
-    'Beacon Network UI',
-    'Tutorials',
-    'FAQs',
-    'Official Links'
+    'Beacon Network UI'
+    //'Tutorials',
+    // 'FAQs',
+    // 'Official Links'
   ]
 
   const subMenuItems: { [key: string]: string[] } = {
