@@ -10,5 +10,3 @@ ENV PATH /docu-app/node_modules/.bin:$PATH
 COPY . .
 
 RUN yarn install --production
-
-
