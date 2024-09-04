@@ -9,8 +9,8 @@ import ManualDeployment from './pages/ManualDeployment'
 import ContentPreloader from './components/ContentPreloader'
 import AutomatedDeployment from './pages/AutomatedDeployment'
 import DataLinking from './pages/DataLinking'
-import ApiConfiguration from './pages/ApiConfiguration'  // Import ApiConfiguration component
-import QueryingApi from './pages/QueryingApi'  // Import QueryingApi component
+import ApiConfiguration from './pages/ApiConfiguration' // Import ApiConfiguration component
+import QueryingApi from './pages/QueryingApi' // Import QueryingApi component
 import StartingGuide from './pages/StartingGuide'
 import ConfigFileTools from './pages/ConfigFileTools'
 import CreatingCSVs from './pages/CreatingCSVs'
@@ -40,6 +40,11 @@ export const SearchContext = React.createContext<SearchContextProps>({
 function App () {
   const [searchTerm, setSearchTerm] = useState<string>('')
   const [searchResults, setSearchResults] = useState<string[]>([])
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState(false)
+
+  const toggleSubmenu = () => {
+    setIsSubmenuOpen(!isSubmenuOpen)
+  }
 
   const handleSearch = (term: string) => {
     setSearchTerm(term)
@@ -54,32 +59,68 @@ function App () {
         <div className='appContainer'>
           <Navbar onSearch={handleSearch} />
           <div className='contentContainer'>
-            <Menu />
-            <Routes>
-              <Route path='/' element={<LandingPage />} />
-              <Route path='/manual-deployment' element={<ManualDeployment />} />
-              <Route path='/automated-deployment' element={<AutomatedDeployment />} />
-              <Route path='/data-linking' element={<DataLinking />} />
-              <Route path='/api-configuration' element={<ApiConfiguration />} /> {/* Add route for ApiConfiguration */}
-              <Route path='/querying-api' element={<QueryingApi />} /> {/* Add route for QueryingApi */}
-              <Route path='/starting-guide' element={<StartingGuide />} /> 
-              <Route path='/configuration-file' element={<ConfigFileTools />} /> 
-              <Route path='/creating_csvs' element={<CreatingCSVs />} /> 
-              <Route path='/conversion_csv_bff' element={<ConversionCSVBFF />} /> 
-              <Route path='/conversion_vcf_bff' element={<ConversionVCFBFF />} />
-              <Route path='/ui_deployment' element={<BeaconUIDeployment />} /> 
-              <Route path='/ui_configuration' element={<BeaconUIConfiguration />} /> 
-              <Route path='/ui_queries' element={<BeaconUIQueries />} /> 
-              <Route path='/networkui_deployment' element={<NetworkUIDeployment />} /> 
-              <Route path='/networkui_configuration' element={<NetworkUIConfiguration />} /> 
-              <Route path='/networkui_queries' element={<NetworkUIQueries />} /> 
-              {/* Add more routes as needed */}
-            </Routes>
+            <Menu isSubmenuOpen={isSubmenuOpen} toggleSubmenu={toggleSubmenu} />
+            <div
+              className={`contentContainer ${
+                isSubmenuOpen ? 'withSubmenuOpen' : 'withSubmenuClosed'
+              }`}
+            >
+              <Routes>
+                <Route path='/' element={<LandingPage />} />
+                <Route
+                  path='/manual-deployment'
+                  element={<ManualDeployment />}
+                />
+                <Route
+                  path='/automated-deployment'
+                  element={<AutomatedDeployment />}
+                />
+                <Route path='/data-linking' element={<DataLinking />} />
+                <Route
+                  path='/api-configuration'
+                  element={<ApiConfiguration />}
+                />
+                <Route path='/querying-api' element={<QueryingApi />} />
+                <Route path='/starting-guide' element={<StartingGuide />} />
+                <Route
+                  path='/configuration-file'
+                  element={<ConfigFileTools />}
+                />
+                <Route path='/creating_csvs' element={<CreatingCSVs />} />
+                <Route
+                  path='/conversion_csv_bff'
+                  element={<ConversionCSVBFF />}
+                />
+                <Route
+                  path='/conversion_vcf_bff'
+                  element={<ConversionVCFBFF />}
+                />
+                <Route path='/ui_deployment' element={<BeaconUIDeployment />} />
+                <Route
+                  path='/ui_configuration'
+                  element={<BeaconUIConfiguration />}
+                />
+                <Route path='/ui_queries' element={<BeaconUIQueries />} />
+                <Route
+                  path='/networkui_deployment'
+                  element={<NetworkUIDeployment />}
+                />
+                <Route
+                  path='/networkui_configuration'
+                  element={<NetworkUIConfiguration />}
+                />
+                <Route
+                  path='/networkui_queries'
+                  element={<NetworkUIQueries />}
+                />
+              </Routes>
+            </div>
           </div>
         </div>
       </Router>
     </SearchableContentProvider>
   )
 }
+
 
 export default App

@@ -44,7 +44,7 @@ const ConversionVCFBFF = () => {
 
   return (
     <div className='conversionContainer'>
-      <h3>Beacon 2 RI API</h3>
+      <h3>Beacon 2 RI Tools</h3>
       <h1>Conversion from VCF to BFF</h1>
       <p>
         If you do not want to fill the CSV file for the{' '}

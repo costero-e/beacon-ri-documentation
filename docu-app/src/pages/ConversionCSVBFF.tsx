@@ -45,7 +45,7 @@ const ConversionCSVBFF = () => {
 
   return (
     <div className='conversionContainer'>
-      <h3>Beacon 2 RI API</h3>
+      <h3>Beacon 2 RI Tools</h3>
       <h1>Conversion from CSV to BFF</h1>
       <p>
         Before getting the BFF (json) final documents, please make sure your{' '}

@@ -3,23 +3,20 @@ import { useNavigate } from 'react-router-dom'
 import './Menu.css'
 
 type ParentMenu = 'Beacon UI' | 'Beacon Network UI' | 'Beacon 2 RI Tools'
-type SubMenuItemsBeaconUI =
-  | 'Deployment'
-  | 'Configuration UI'
-  | 'Querying the UI'
-type SubMenuItemsBeaconTools =
-  | 'Creating the CSV files'
-  | 'Conversion from CSV to BFF'
-  | 'Conversion from VCF to BFF'
+
+interface MenuProps {
+  isSubmenuOpen: boolean
+  toggleSubmenu: () => void
+}
 
 const directNavigationMenus: Record<ParentMenu, Record<string, string>> = {
   'Beacon UI': {
-    Deployment: '/ui_deployment',
+    'Deployment': '/ui_deployment',
     'Configuration UI': '/ui_configuration',
     'Querying the UI': '/ui_queries'
   },
   'Beacon Network UI': {
-    Deployment: '/networkui_deployment',
+    'Deployment': '/networkui_deployment',
     'Configuration UI': '/networkui_configuration',
     'Querying the UI': '/networkui_queries'
   },
@@ -30,115 +27,116 @@ const directNavigationMenus: Record<ParentMenu, Record<string, string>> = {
   }
 }
 
-function Menu () {
-  const [activeMenu, setActiveMenu] = useState<string | null>(null)
+const subMenuItems: { [key: string]: string[] } = {
+  'Beacon 2 RI API': [
+    'Automated Deployment',
+    'Manual Deployment',
+    'Data Linking',
+    'Configuration',
+    'Querying the API'
+  ],
+  'Beacon 2 RI Tools': [
+    'Starting Guide',
+    'Configuration File',
+    'Creating the CSV files',
+    'Conversion from CSV to BFF',
+    'Conversion from VCF to BFF'
+  ],
+  'Beacon UI': ['Deployment', 'Configuration UI', 'Querying the UI'],
+  'Beacon Network UI': ['Deployment', 'Configuration UI', 'Querying the UI']
+}
+
+const nestedSubMenuItems: { [key: string]: string[] } = {
+  'Automated Deployment': [
+    'Cloning the repository',
+    'Execute start script from root'
+  ],
+  'Manual Deployment': [
+    'Cloning the repository',
+    'Creating the containers',
+    'Data injection',
+    'Data indexing'
+  ],
+  'Data Linking': [
+    'Linking ids to dataset and cohort',
+    'Extract filtering terms',
+    'Manually adding filtering terms',
+    'Get descendant terms'
+  ],
+  'Configuration': [
+    'Managing dataset permissions',
+    'Supplying AAI credentials',
+    'Handling CORS',
+    'Editing your beacon information',
+    'Limiting the granularity',
+    'Adding beacon handovers'
+  ],
+  'Querying the API': [
+    'GET Method',
+    'GET query examples',
+    'POST Method',
+    'POST query examples',
+    'List of endpoints'
+  ],
+  'Configuration File': [
+    'Generic config parameters',
+    'VCF conversion config parameters'
+  ],
+  'Starting Guide': ['Tools Introduction', 'Installation Guide'],
+  'Beacon UI': ['Deployment', 'Configuration', 'Querying the UI'],
+  'Beacon Network UI': ['Deployment', 'Configuration', 'Querying the UI']
+}
+
+function Menu ({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
+  const [activeMenu, setActiveMenu] = useState<string | null>('Introduction')
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null)
-  const [activeNestedSubMenuItem, setActiveNestedSubMenuItem] = useState<
-    string | null
-  >(null)
+  const [activeNestedSubMenuItem, setActiveNestedSubMenuItem] = useState<string | null>(null)
   const navigate = useNavigate()
 
   const menuItems: string[] = [
     'Introduction',
     'Beacon 2 RI API',
     'Beacon 2 RI Tools',
-    //'Beacon Verifier',
     'Beacon UI',
     'Beacon Network UI'
-    //'Tutorials',
-    // 'FAQs',
-    // 'Official Links'
   ]
 
-  const subMenuItems: { [key: string]: string[] } = {
-    'Beacon 2 RI API': [
-      'Automated Deployment',
-      'Manual Deployment',
-      'Data Linking',
-      'Configuration',
-      'Querying the API'
-    ],
-    'Beacon 2 RI Tools': [
-      'Starting Guide',
-      'Configuration File',
-      'Creating the CSV files',
-      'Conversion from CSV to BFF',
-      'Conversion from VCF to BFF'
-    ],
-    'Beacon UI': ['Deployment', 'Configuration UI', 'Querying the UI'],
-    'Beacon Network UI': ['Deployment', 'Configuration UI', 'Querying the UI']
-  }
-
-  const nestedSubMenuItems: { [key: string]: string[] } = {
-    'Automated Deployment': [
-      'Cloning the repository',
-      'Execute start script from root'
-    ],
-    'Manual Deployment': [
-      'Cloning the repository',
-      'Creating the containers',
-      'Data injection',
-      'Data indexing'
-    ],
-    'Data Linking': [
-      'Linking ids to dataset and cohort',
-      'Extract filtering terms',
-      'Manually adding filtering terms',
-      'Get descendant terms'
-    ],
-    Configuration: [
-      'Managing dataset permissions',
-      'Supplying AAI credentials',
-      'Handling CORS',
-      'Editing your beacon information',
-      'Limiting the granularity',
-      'Adding beacon handovers'
-    ],
-    'Querying the API': [
-      'GET Method',
-      'GET query examples',
-      'POST Method',
-      'POST query examples',
-      'List of endpoints'
-    ],
-    'Configuration File': [
-      'Generic config parameters',
-      'VCF conversion config parameters'
-    ],
-    'Starting Guide': ['Tools Introduction', 'Installation Guide'],
-    'Beacon UI': ['Deployment', 'Configuration', 'Querying the UI'],
-    'Beacon Network UI': ['Deployment', 'Configuration', 'Querying the UI']
-  }
-
   const handleClick = (item: string) => {
-    setActiveMenu(activeMenu === item ? null : item)
-    setActiveSubMenu(null) // Close sub-menu when a new main menu item is clicked
-    setActiveNestedSubMenuItem(null) // Close nested sub-menu when a new main menu item is clicked
+    const isMenuItemActive = activeMenu === item
 
     if (item === 'Introduction') {
+      setActiveMenu('Introduction') // Mark "Introduction" as active
+      setActiveSubMenu(null)
+      setActiveNestedSubMenuItem(null)
       navigate('/')
-      setActiveMenu(null) // Hide the submenu
-      window.scrollTo({ top: 0, behavior: 'smooth' }) // Scroll to the top of the page
+      if (isSubmenuOpen) {
+        toggleSubmenu() // Close the submenu if open
+      }
+      return
+    }
+
+    setActiveMenu(item)
+    setActiveSubMenu(null)
+    setActiveNestedSubMenuItem(null)
+
+    if (!isSubmenuOpen) {
+      toggleSubmenu() // Open the submenu if it's not already open
     }
   }
 
-  const handleHideSubmenu = () => {
-    setActiveMenu(null)
-  }
-
-  const handleShowSubmenu = () => {
-    if (activeMenu) {
-      setActiveMenu(activeMenu) // Reopen the submenu
-    }
+  const handleToggleSubmenu = () => {
+    toggleSubmenu()
   }
 
   const handleSubMenuClick = (subItem: string, parentMenu: string) => {
+    setActiveSubMenu(subItem) // Mark the subItem as active
+    setActiveNestedSubMenuItem(null)
+
     if (
       directNavigationMenus[parentMenu as ParentMenu] &&
       directNavigationMenus[parentMenu as ParentMenu][subItem]
     ) {
       navigate(directNavigationMenus[parentMenu as ParentMenu][subItem])
-      // Close the menu after navigation
     } else {
       setActiveSubMenu(activeSubMenu === subItem ? null : subItem)
       setActiveNestedSubMenuItem(null) // Close nested sub-menu when a new sub-menu item is clicked
@@ -149,15 +147,13 @@ function Menu () {
     subItem: string,
     nestedItem: string
   ) => {
-    setActiveNestedSubMenuItem(
-      activeNestedSubMenuItem === nestedItem ? null : nestedItem
-    )
+    setActiveNestedSubMenuItem(nestedItem)
 
     const basePathMap: { [key: string]: string } = {
       'Automated Deployment': '/automated-deployment',
       'Manual Deployment': '/manual-deployment',
       'Data Linking': '/data-linking',
-      Configuration: '/api-configuration',
+      'Configuration': '/api-configuration',
       'Querying the API': '/querying-api',
       'Beacon UI': '/beacon-ui',
       'Beacon Network UI': '/beacon-network-ui',
@@ -188,8 +184,8 @@ function Menu () {
       'List of endpoints': '#list-of-endpoints',
       'Generic config parameters': '#generic-config-parameters',
       'VCF conversion config parameters': '#vcf-conversion-config-parameters',
-      Deployment: '#deployment',
-      Configuration: '#configuration',
+      'Deployment': '#deployment',
+      'Configuration': '#configuration',
       'Querying the UI': '#querying-ui',
       'Tools Introduction': '#tools-introduction',
       'Installation Guide': '#installation-guide'
@@ -228,15 +224,10 @@ function Menu () {
           </div>
         ))}
       </div>
-      {activeMenu && (
+      {activeMenu && activeMenu !== 'Introduction' && isSubmenuOpen && (
         <div className='subMenuContainer'>
-          <button className='buttonHideSubmenu'>
-            <img
-              src='./back.png'
-              className='backIcon'
-              alt='backIcon'
-              onClick={handleHideSubmenu}
-            ></img>
+          <button className='buttonHideSubmenu' onClick={handleToggleSubmenu}>
+            <img src='./back.png' className='backIcon' alt='backIcon'></img>
           </button>
           {activeMenu && subMenuItems[activeMenu] && (
             <div className='subMenu'>
@@ -244,7 +235,7 @@ function Menu () {
                 <div key={subItem}>
                   <button
                     className={`subMenuItem ${
-                      activeSubMenu === subItem ? 'active' : ''
+                      activeSubMenu === subItem || activeNestedSubMenuItem === subItem ? 'active2' : ''
                     }`}
                     onClick={() => handleSubMenuClick(subItem, activeMenu)}
                   >
@@ -297,12 +288,9 @@ function Menu () {
           )}
         </div>
       )}
-      {!activeMenu && (
+      {!isSubmenuOpen && activeMenu !== 'Introduction' && (
         <div className='subMenuContainerNoExpanded'>
-          <button
-            className='buttonShowSubmenu'
-            onClick={() => setActiveMenu('Beacon UI')}
-          >
+          <button className='buttonShowSubmenu' onClick={handleToggleSubmenu}>
             <img
               src='./forward.png'
               className='forwardIcon'

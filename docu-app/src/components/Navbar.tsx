@@ -1,111 +1,113 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSearchableContent } from '../context/SearchableContentContext'
-import './Navbar.css'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSearchableContent } from '../context/SearchableContentContext';
+import './Navbar.css';
 
 interface NavbarProps {
-  onSearch: (term: string) => void
+  onSearch: (term: string) => void;
 }
 
 const Navbar = ({ onSearch }: NavbarProps) => {
-  const { searchableContent } = useSearchableContent()
-  const [searchTerm, setSearchTerm] = useState<string>('')
+  const { searchableContent } = useSearchableContent();
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [isSearchResultsVisible, setIsSearchResultsVisible] = useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const term = e.target.value
-    setSearchTerm(term)
-    console.log(`Search term: ${term}`)
-    onSearch(term)
-  }
+    const term = e.target.value;
+    setSearchTerm(term);
+    onSearch(term);
+
+    // Show search results only if there's a search term
+    setIsSearchResultsVisible(term !== '');
+  };
 
   const handleClearSearch = () => {
-    setSearchTerm('')
-    onSearch('')
-  }
+    setSearchTerm('');
+    onSearch('');
+    setIsSearchResultsVisible(false); // Hide search results when cleared
+  };
 
   const highlightText = (text: string, highlight: string) => {
     if (!highlight.trim()) {
-      return text
+      return text;
     }
-    const regex = new RegExp(`(${highlight})`, 'gi')
-    const parts = text.split(regex)
+    const regex = new RegExp(`(${highlight})`, 'gi');
+    const parts = text.split(regex);
     return parts.map((part, index) =>
       part.toLowerCase() === highlight.toLowerCase() ? (
-        <span key={index} className='highlight'>
+        <span key={index} className="highlight">
           {part}
         </span>
       ) : (
         part
       )
-    )
-  }
+    );
+  };
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleResultClick = (route: string) => {
-    console.log(`Navigating to: ${route}`)
-    navigate(route)
-  }
+    navigate(route);
+    setIsSearchResultsVisible(false); // Hide search results after navigation
+  };
 
   const searchResults = searchTerm
     ? searchableContent
-        .filter(item =>
+        .filter((item) =>
           item.text.toLowerCase().includes(searchTerm.toLowerCase())
         )
-        .map(item => {
+        .map((item) => {
           const startIndex = item.text
             .toLowerCase()
-            .indexOf(searchTerm.toLowerCase())
-          const endIndex = startIndex + searchTerm.length
+            .indexOf(searchTerm.toLowerCase());
+          const endIndex = startIndex + searchTerm.length;
           const previewText = `${item.text.substring(
             Math.max(0, startIndex - 20),
             startIndex
           )}${searchTerm}${item.text.substring(
             endIndex,
             Math.min(item.text.length, endIndex + 20)
-          )}`
+          )}`;
           return {
             ...item,
-            previewText
-          }
+            previewText,
+          };
         })
-    : []
-
-  console.log('Search results:', searchResults)
+    : [];
 
   return (
-    <div className='containerNav'>
+    <div className="containerNav">
       <h1>Beacon v2 RI documentation</h1>
-      <div className='divOptionsInput'>
-        <div className='inputContainer'>
-          <div className='inputDiv'>
-            <img src='./Zoom-in.png' className='searchIcon' alt='Search Icon' />
+      <div className="divOptionsInput">
+        <div className="inputContainer">
+          <div className="inputDiv">
+            <img src="./Zoom-in.png" className="searchIcon" alt="Search Icon" />
             <input
-              className='inputSearch'
-              type='text'
-              placeholder='Search keywords'
+              className="inputSearch"
+              type="text"
+              placeholder="Search keywords"
               value={searchTerm}
               onChange={handleSearchChange}
             ></input>
 
             {searchTerm && (
-              <button className='clearButton' onClick={handleClearSearch}>
+              <button className="clearButton" onClick={handleClearSearch}>
                 &times;
               </button>
             )}
           </div>
-          {searchResults.length > 0 && (
-            <div className='searchResults'>
+          {isSearchResultsVisible && searchResults.length > 0 && (
+            <div className="searchResults">
               {searchResults.map((result, index) => (
                 <div
                   key={index}
-                  className='searchResultItem'
+                  className="searchResultItem"
                   onClick={() => handleResultClick(result.route)}
                 >
-                  <div className='titleResult'>
+                  <div className="titleResult">
                     <strong>{result.title}</strong>
                   </div>
-                  <div className='previewTextResult'>
+                  <div className="previewTextResult">
                     • {highlightText(result.previewText, searchTerm)}...
                   </div>
                 </div>
@@ -115,7 +117,8 @@ const Navbar = ({ onSearch }: NavbarProps) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
+

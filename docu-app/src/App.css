@@ -4,5 +4,25 @@
 }
 
 .contentContainer {
-  display: flex;
+  transition: margin-left 0.3s ease;
+  margin-top: 56px;
+}
+
+
+/* When screen is larger than 1223px */
+@media (min-width: 1224px) {
+  .contentContainer.withSubmenuOpen {
+    margin-left: 500px; /* Add margin for when the submenu is open */
+  }
+
+  .contentContainer.withSubmenuClosed {
+    margin-left: 280px; /* Add margin for when the submenu is closed */
+  }
+}
+
+/* For smaller screens, remove margin */
+@media (max-width: 1223px) {
+  .contentContainer {
+    margin-left: 0; /* No margin on smaller screens */
+  }
 }

@@ -6,7 +6,7 @@ function LandingPage () {
     <div className='landingPage'>
       <div>
         {' '}
-        <h4>Documentation</h4>
+    
         <h3>Beacon v2 Reference Implementation Documentation</h3>
         <p>
           Welcome to the documentation for the Beacon v2 Reference

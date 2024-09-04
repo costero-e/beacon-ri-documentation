@@ -3,10 +3,12 @@
   height: 95vh;
   color: white;
   display: flex;
+  width: -moz-fit-content;
   width: fit-content;
-  position: sticky;
-  margin-top: -100px;
-  top: 0;
+  position: fixed;
+  /* top: 0; */
+  z-index: 2000;
+  margin-top: -70px;
 }
 
 .menuDiv {
@@ -38,6 +40,10 @@
 .menuItem.active {
   background-color: white;
   color: #185177;
+}
+
+.subMenuItem.active2 {
+  background-color: white;
 }
 
 .backIcon {
@@ -74,7 +80,7 @@
 
 .subMenuContainer {
   width: 313px;
-  height: 94%;
+  height: 100%;
   background-color: #e5ecf3;
   margin-top: 80px;
   margin-right: -33px;
@@ -161,18 +167,25 @@
     position: relative;
     margin-top: 0;
     height: auto;
-    z-index: -2;
+    z-index: 999; /* Ensure it is below searchResults but above background */
+    position: relative;
   }
 
+  /* Optional: Disable pointer events for the overlapping search results area */
+  .menuContainer .overlappingSearchResults {
+    pointer-events: none; /* This ensures the menu can be clicked when search results are displayed */
+  }
 
   .menuDiv {
+    margin-top: 22px;
     width: 100%;
-    height: auto;
+    height: 75px;
     padding: 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    align-content: center;
+    justify-content: space-evenly;
   }
 
   .menuItem {
@@ -259,5 +272,33 @@
     border-radius: 8px;
     justify-content: flex-start;
     display: flex;
+  }
+}
+
+@media (max-width: 500px) {
+  .landingPage {
+    padding-left: 20px;
+    height: 100vw;
+    width: -moz-fit-content !important;
+    width: fit-content !important;
+    margin-right: 0px;
+  }
+
+  .subMenu {
+    background-color: #e5ecf3;
+    width: 100%;
+    margin-top: 167px;
+  }
+  .menuDiv {
+    margin-top: 37px;
+    width: 100%;
+    height: 109px;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-evenly;
+    position: fixed;
   }
 }
