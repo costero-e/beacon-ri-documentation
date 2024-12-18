@@ -5,6 +5,12 @@
   margin-right: 125px;
 }
 
+.landingPage h2 {
+  margin: 0;
+  padding: 0;
+  color: #4a88b1;
+}
+
 .landingPage h3 {
   margin-bottom: 40px;
 }
@@ -15,22 +21,20 @@ h4 {
   margin-bottom: 40px;
 }
 
-.collaborators-div{
-    margin-top: 40px;
+.collaborators-div {
+  margin-top: 40px;
 }
 
-
-.collaborators-img{
+.collaborators-img {
   height: 50px;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.relationship-elements{
+.relationship-elements {
   width: 90%;
   margin-top: 14px;
 }
-
 
 @media (max-width: 500px) {
   .landingPage {
