@@ -1,67 +1,69 @@
-import './ConversionCSVBFF.css'
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import copyIcon from '../assets/copy-symbol.png'
+import "./ConversionCSVBFF.css";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import copyIcon from "../assets/copy-symbol.svg";
 
 const ConversionCSVBFF = () => {
-  const location = useLocation()
+  const location = useLocation();
 
   // State to manage copy success for each snippet independently
-  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>({})
+  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   useEffect(() => {
     if (location.hash) {
       setTimeout(() => {
-        const element = document.getElementById(location.hash.substring(1))
+        const element = document.getElementById(location.hash.substring(1));
         if (element) {
-          const yOffset = -80 // Adjust this value based on your header height
+          const yOffset = -80; // Adjust this value based on your header height
           const y =
-            element.getBoundingClientRect().top + window.pageYOffset + yOffset
-          window.scrollTo({ top: y, behavior: 'smooth' })
+            element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+          window.scrollTo({ top: y, behavior: "smooth" });
         }
-      }, 0)
+      }, 0);
     }
-  }, [location])
+  }, [location]);
 
   const copyToClipboard = (snippetId: string, textToCopy: string) => {
     navigator.clipboard
       .writeText(textToCopy)
       .then(() => {
-        setCopySuccess(prevState => ({
+        setCopySuccess((prevState) => ({
           ...prevState,
-          [snippetId]: true
-        }))
+          [snippetId]: true,
+        }));
         setTimeout(
           () =>
-            setCopySuccess(prevState => ({
+            setCopySuccess((prevState) => ({
               ...prevState,
-              [snippetId]: false
+              [snippetId]: false,
             })),
           1500
-        ) // Reset copy success after 1.5 seconds
+        ); // Reset copy success after 1.5 seconds
       })
-      .catch(error => console.log(error))
-  }
+      .catch((error) => console.log(error));
+  };
 
   return (
-    <div className='conversionContainer'>
+    <div className="conversionContainer">
       <h3>Beacon 2 RI Tools</h3>
       <h1>Conversion from CSV to BFF</h1>
       <p>
-        Before getting the BFF (json) final documents, please make sure your{' '}
-        {''}
+        Before getting the BFF (json) final documents, please make sure your{" "}
+        {""}
         <a
-          href='https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf/conf.py'
-          target='_blank'
-          rel='noopener noreferrer'
+          href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf/conf.py"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           conf.py
         </a>
-        , which you will find inside the {''}
+        , which you will find inside the {""}
         <a
-          href='https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf'
-          target='_blank'
-          rel='noopener noreferrer'
+          href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           conf folder
         </a>
@@ -73,148 +75,148 @@ const ConversionCSVBFF = () => {
         convert CSV data for each collection are:
       </p>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>docker exec -it ri-tools python analyses_csv.py</code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                'analyses',
-                'docker exec -it ri-tools python analyses_csv.py'
+                "analyses",
+                "docker exec -it ri-tools python analyses_csv.py"
               )
             }
           >
-            {copySuccess['analyses'] ? (
-              'Copied!'
+            {copySuccess["analyses"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>docker exec -it ri-tools python biosamples_csv.py</code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                'biosamples',
-                'docker exec -it ri-tools python biosamples_csv.py'
+                "biosamples",
+                "docker exec -it ri-tools python biosamples_csv.py"
               )
             }
           >
-            {copySuccess['biosamples'] ? (
-              'Copied!'
+            {copySuccess["biosamples"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>docker exec -it ri-tools python cohorts_csv.py</code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                'cohorts',
-                'docker exec -it ri-tools python cohorts_csv.py'
+                "cohorts",
+                "docker exec -it ri-tools python cohorts_csv.py"
               )
             }
           >
-            {copySuccess['cohorts'] ? (
-              'Copied!'
+            {copySuccess["cohorts"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>docker exec -it ri-tools python datasets_csv.py</code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                'datasets',
-                'docker exec -it ri-tools python datasets_csv.py'
+                "datasets",
+                "docker exec -it ri-tools python datasets_csv.py"
               )
             }
           >
-            {copySuccess['datasets'] ? (
-              'Copied!'
+            {copySuccess["datasets"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>docker exec -it ri-tools python genomicVariations_csv.py</code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                'genomicVariations',
-                'docker exec -it ri-tools python genomicVariations_csv.py'
+                "genomicVariations",
+                "docker exec -it ri-tools python genomicVariations_csv.py"
               )
             }
           >
-            {copySuccess['genomicVariations'] ? (
-              'Copied!'
+            {copySuccess["genomicVariations"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>docker exec -it ri-tools python individuals_csv.py</code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                'individuals',
-                'docker exec -it ri-tools python individuals_csv.py'
+                "individuals",
+                "docker exec -it ri-tools python individuals_csv.py"
               )
             }
           >
-            {copySuccess['individuals'] ? (
-              'Copied!'
+            {copySuccess["individuals"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>docker exec -it ri-tools python runs_csv.py</code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                'runs',
-                'docker exec -it ri-tools python runs_csv.py'
+                "runs",
+                "docker exec -it ri-tools python runs_csv.py"
               )
             }
           >
-            {copySuccess['runs'] ? (
-              'Copied!'
+            {copySuccess["runs"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
@@ -229,18 +231,18 @@ const ConversionCSVBFF = () => {
       <p>
         These files can be used in a MongoDB for beacon usage. To know how to
         import them into a Beacon v2, please follow the instructions described
-        in {''}
+        in {""}
         <a
-          href='https://github.com/EGA-archive/beacon2-ri-api'
-          target='_blank'
-          rel='noopener noreferrer'
+          href="https://github.com/EGA-archive/beacon2-ri-api"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Beacon v2 RI API
         </a>
         .
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default ConversionCSVBFF
+export default ConversionCSVBFF;

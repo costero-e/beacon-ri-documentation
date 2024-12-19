@@ -1,24 +1,26 @@
-import React, { useState } from 'react'
-import './NetworkUIConfiguration.css'
-import copyIcon from '../assets/copy-symbol.png'
+import React, { useState } from "react";
+import "./NetworkUIConfiguration.css";
+import copyIcon from "../assets/copy-symbol.svg";
 
 const NetworkUIConfiguration: React.FC = () => {
-  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>({})
+  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        setCopySuccess(prev => ({ ...prev, [snippetId]: true }))
+        setCopySuccess((prev) => ({ ...prev, [snippetId]: true }));
         setTimeout(() => {
-          setCopySuccess(prev => ({ ...prev, [snippetId]: false }))
-        }, 1500)
+          setCopySuccess((prev) => ({ ...prev, [snippetId]: false }));
+        }, 1500);
       })
-      .catch(error => console.error('Failed to copy text: ', error))
-  }
+      .catch((error) => console.error("Failed to copy text: ", error));
+  };
 
   return (
-    <div className='networkUIConfigurationContainer'>
+    <div className="networkUIConfigurationContainer">
       <h3>Network UI</h3>
       <h1>Configuration</h1>
 
@@ -29,29 +31,29 @@ const NetworkUIConfiguration: React.FC = () => {
         reasons it should be ignored:
       </p>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>
             REACT_APP_CLIENT_ID='ID of your LS Login' <br />
             REACT_APP_CLIENT_SECRET='password of your LS Login' <br />
-            REACT_APP_KEYCLOAK_CLIENT_SECRET='password of your Keycloak login'{' '}
+            REACT_APP_KEYCLOAK_CLIENT_SECRET='password of your Keycloak login'{" "}
             <br />
             REACT_APP_KEYCLOAK_CLIENT_ID='ID of your Keycloak login' <br />
             REACT_APP_KEYCLOAK_CLIENT_REALM='REALM of your Keycloak login'
           </code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
                 `REACT_APP_CLIENT_ID='ID of your LS Login'\nREACT_APP_CLIENT_SECRET='password of your LS Login'\nREACT_APP_KEYCLOAK_CLIENT_SECRET='password of your Keycloak login'\nREACT_APP_KEYCLOAK_CLIENT_ID='ID of your Keycloak login'\nREACT_APP_KEYCLOAK_CLIENT_REALM='REALM of your Keycloak login'`,
-                'env-config'
+                "env-config"
               )
             }
           >
-            {copySuccess['env-config'] ? (
-              'Copied!'
+            {copySuccess["env-config"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
@@ -61,29 +63,29 @@ const NetworkUIConfiguration: React.FC = () => {
         You will need to have created your Life Science and Keycloak
         environments before:
       </p>
-      <p className='note'>
-        <img className='note-symbol' src='/note-symbol.png' alt='Note symbol' />
+      <p className="note">
+        <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
         <div>
           For Life Science environment, please first create a user. After that,
           you will need to register a service registry in order to be able to
-          administrate your logins. Please go{' '}
+          administrate your logins. Please go{" "}
           <a
-            href='https://services.aai.lifescience-ri.eu/spreg/'
-            target='_blank'
-            rel='noopener noreferrer'
+            href="https://services.aai.lifescience-ri.eu/spreg/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             here
-          </a>{' '}
+          </a>{" "}
           and ask for a New Service - type OIDC.
         </div>
       </p>
 
       <p>
-        Then please edit the file{' '}
+        Then please edit the file{" "}
         <a
-          href='https://github.com/elixir-europe/beacon-network-ui/tree/main/frontend/src'
-          target='_blank'
-          rel='noopener noreferrer'
+          href="https://github.com/elixir-europe/beacon-network-ui/tree/main/frontend/src"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           config.json
         </a>
@@ -92,7 +94,7 @@ const NetworkUIConfiguration: React.FC = () => {
         example:
       </p>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>
             {`{
@@ -102,7 +104,7 @@ const NetworkUIConfiguration: React.FC = () => {
 }`}
           </code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
                 `{
@@ -110,28 +112,28 @@ const NetworkUIConfiguration: React.FC = () => {
   "REDIRECT_URL": "https://yourUIdomain.com",
   "KEYCLOAK_URL": "https://yourKEYCLOAKdomain.com"
 }`,
-                'config-json'
+                "config-json"
               )
             }
           >
-            {copySuccess['config-json'] ? (
-              'Copied!'
+            {copySuccess["config-json"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
-      <p className='note'>
-        <img className='note-symbol' src='/note-symbol.png' alt='Note symbol' />
+      <p className="note">
+        <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
         <div>
           In the root folder (frontend) you will find a file called .gitignore
           with the list of all files that need to be ignored.
         </div>
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default NetworkUIConfiguration
+export default NetworkUIConfiguration;

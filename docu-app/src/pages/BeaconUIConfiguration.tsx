@@ -1,24 +1,26 @@
-import React, { useState } from 'react'
-import './BeaconUIConfiguration.css' // Add styles if needed
-import copyIcon from '../assets/copy-symbol.png' // Adjust the path as needed
+import React, { useState } from "react";
+import "./BeaconUIConfiguration.css"; // Add styles if needed
+import copyIcon from "../assets/copy-symbol.svg"; // Adjust the path as needed
 
 const BeaconUIConfiguration: React.FC = () => {
-  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>({})
+  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        setCopySuccess(prev => ({ ...prev, [snippetId]: true }))
+        setCopySuccess((prev) => ({ ...prev, [snippetId]: true }));
         setTimeout(() => {
-          setCopySuccess(prev => ({ ...prev, [snippetId]: false }))
-        }, 1500)
+          setCopySuccess((prev) => ({ ...prev, [snippetId]: false }));
+        }, 1500);
       })
-      .catch(error => console.error('Failed to copy text: ', error))
-  }
+      .catch((error) => console.error("Failed to copy text: ", error));
+  };
 
   return (
-    <div className='beaconUIConfigurationContainer'>
+    <div className="beaconUIConfigurationContainer">
       <h3>Beacon UI</h3>
       <h1>Configuration</h1>
       <p>
@@ -28,7 +30,7 @@ const BeaconUIConfiguration: React.FC = () => {
         reasons it should be ignored:
       </p>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>
             REACT_APP_CLIENT_ID="ID of your LS Login" <br />
@@ -36,18 +38,18 @@ const BeaconUIConfiguration: React.FC = () => {
             REACT_APP_KEYCLOAK_CLIENT_SECRET="password of your Keycloak login"
           </code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
                 `REACT_APP_CLIENT_ID="ID of your LS Login"\nREACT_APP_CLIENT_SECRET="password of your LS Login"\nREACT_APP_KEYCLOAK_CLIENT_SECRET="password of your Keycloak login"`,
-                'env-config'
+                "env-config"
               )
             }
           >
-            {copySuccess['env-config'] ? (
-              'Copied!'
+            {copySuccess["env-config"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
@@ -56,18 +58,18 @@ const BeaconUIConfiguration: React.FC = () => {
       <p>
         Tip: for Life Science environment, please first create a user (
         <a
-          href='https://lifescience-ri.eu/ls-login/users/how-to-get-and-use-life-science-id.html'
-          target='_blank'
-          rel='noopener noreferrer'
+          href="https://lifescience-ri.eu/ls-login/users/how-to-get-and-use-life-science-id.html"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           create a user
         </a>
         ). After that you will need to register a service registry in order to
         be able to administrate your logins. Please go &nbsp;
         <a
-          href='https://services.aai.lifescience-ri.eu/spreg/'
-          target='_blank'
-          rel='noopener noreferrer'
+          href="https://services.aai.lifescience-ri.eu/spreg/"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           here
         </a>
@@ -77,9 +79,9 @@ const BeaconUIConfiguration: React.FC = () => {
       <p>
         Then please edit the file &nbsp;
         <a
-          href='https://github.com/EGA-archive/beacon2-ri-api/blob/master/frontend/src/config.json'
-          target='_blank'
-          rel='noopener noreferrer'
+          href="https://github.com/EGA-archive/beacon2-ri-api/blob/master/frontend/src/config.json"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           config.json
         </a>
@@ -87,18 +89,18 @@ const BeaconUIConfiguration: React.FC = () => {
         requests. Find below an example:
       </p>
 
-      <div className='codeSnippet'>
+      <div className="codeSnippet">
         <pre>
           <code>
-            {'{'} <br />
+            {"{"} <br />
             &nbsp;&nbsp;"API_URL":
             "https://yourAPIdomain.com/beacon-network/v2.0.0", <br />
             &nbsp;&nbsp;"REDIRECT_URL": "https://yourUIdomain.com", <br />
             &nbsp;&nbsp;"KEYCLOAK_URL": "https://yourKEYCLOAKdomain.com" <br />
-            {'}'}
+            {"}"}
           </code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
                 `{
@@ -106,14 +108,14 @@ const BeaconUIConfiguration: React.FC = () => {
   "REDIRECT_URL": "https://yourUIdomain.com",
   "KEYCLOAK_URL": "https://yourKEYCLOAKdomain.com"
 }`,
-                'config-json'
+                "config-json"
               )
             }
           >
-            {copySuccess['config-json'] ? (
-              'Copied!'
+            {copySuccess["config-json"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
@@ -125,15 +127,15 @@ const BeaconUIConfiguration: React.FC = () => {
         accepted by CORS.
       </p>
 
-      <p className='note'>
-        <img className='note-symbol' src='/note-symbol.png' alt='Note symbol' />
+      <p className="note">
+        <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
         <div>
           Note that in the frontend folder you will find a file called
           .gitignore with the list of all files that need to be ignored.
         </div>
       </p>
     </div>
-  )
-}
+  );
+};
 
-export default BeaconUIConfiguration
+export default BeaconUIConfiguration;

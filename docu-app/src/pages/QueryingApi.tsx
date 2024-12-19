@@ -1,51 +1,53 @@
-import './QueryingAPI.css'
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import copyIcon from '../assets/copy-symbol.png'
+import "./QueryingAPI.css";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import copyIcon from "../assets/copy-symbol.svg";
 
 const QueryingAPI = () => {
-  const location = useLocation()
+  const location = useLocation();
 
-  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>({})
+  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   useEffect(() => {
     if (location.hash) {
-      const elementId = location.hash.substring(1)
-      const element = document.getElementById(elementId)
+      const elementId = location.hash.substring(1);
+      const element = document.getElementById(elementId);
       if (element) {
-        const yOffset = -100
+        const yOffset = -100;
         const y =
-          element.getBoundingClientRect().top + window.pageYOffset + yOffset
-        window.scrollTo({ top: y, behavior: 'smooth' })
+          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
       }
     }
-  }, [location])
+  }, [location]);
 
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        setCopySuccess(prev => ({ ...prev, [snippetId]: true }))
+        setCopySuccess((prev) => ({ ...prev, [snippetId]: true }));
         setTimeout(() => {
-          setCopySuccess(prev => ({ ...prev, [snippetId]: false }))
-        }, 1500)
+          setCopySuccess((prev) => ({ ...prev, [snippetId]: false }));
+        }, 1500);
       })
-      .catch(error => console.error('Failed to copy text: ', error))
-  }
+      .catch((error) => console.error("Failed to copy text: ", error));
+  };
 
   return (
-    <div className='queryingApiContainer'>
+    <div className="queryingApiContainer">
       <h3>Beacon 2 RI API</h3>
       <h1>Querying the API</h1>
       <p>Beacon RI accepts two types of request methods: GET and POST.</p>
-      <div className='note'>
-        <img className='note-symbol' src='/note-symbol.png' alt='Note symbol' />
+      <div className="note">
+        <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
         <div>
-          You can find further introduction to Beacon parameters in{' '}
+          You can find further introduction to Beacon parameters in{" "}
           <a
-            href='https://docs.genomebeacons.org/variant-queries/'
-            target='_blank'
-            rel='noopener noreferrer'
+            href="https://docs.genomebeacons.org/variant-queries/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             Beacon v2 Documentation
           </a>
@@ -53,7 +55,7 @@ const QueryingAPI = () => {
         </div>
       </div>
 
-      <h2 id='get-method'>GET Method</h2>
+      <h2 id="get-method">GET Method</h2>
       <p>
         GET method is a bit more limited as this method only accepts request
         parameters, three generic parameters, and ontology filters.
@@ -79,21 +81,21 @@ const QueryingAPI = () => {
             <td>requestedSchema</td>
             <td>String</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>requestedSchema=ga4gh-service-info-v1.0</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
                     copyToClipboard(
-                      'requestedSchema=ga4gh-service-info-v1.0',
-                      'requestedSchema'
+                      "requestedSchema=ga4gh-service-info-v1.0",
+                      "requestedSchema"
                     )
                   }
                 >
-                  {copySuccess['requestedSchema'] ? (
-                    'Copied!'
+                  {copySuccess["requestedSchema"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -106,16 +108,16 @@ const QueryingAPI = () => {
               Default: 0
             </td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>skip=0</code>
                 <button
-                  className='copyButtonCode'
-                  onClick={() => copyToClipboard('skip=0', 'skip')}
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("skip=0", "skip")}
                 >
-                  {copySuccess['skip'] ? (
-                    'Copied!'
+                  {copySuccess["skip"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -130,16 +132,16 @@ const QueryingAPI = () => {
               Max: 100
             </td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>limit=10</code>
                 <button
-                  className='copyButtonCode'
-                  onClick={() => copyToClipboard('limit=10', 'limit')}
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("limit=10", "limit")}
                 >
-                  {copySuccess['limit'] ? (
-                    'Copied!'
+                  {copySuccess["limit"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -164,16 +166,16 @@ const QueryingAPI = () => {
               (or comma-separated integers)
             </td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>start=16050074</code>
                 <button
-                  className='copyButtonCode'
-                  onClick={() => copyToClipboard('start=16050074', 'start')}
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("start=16050074", "start")}
                 >
-                  {copySuccess['start'] ? (
-                    'Copied!'
+                  {copySuccess["start"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -186,16 +188,16 @@ const QueryingAPI = () => {
               (or comma-separated integers)
             </td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>end=16052080</code>
                 <button
-                  className='copyButtonCode'
-                  onClick={() => copyToClipboard('end=16052080', 'end')}
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("end=16052080", "end")}
                 >
-                  {copySuccess['end'] ? (
-                    'Copied!'
+                  {copySuccess["end"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -205,18 +207,18 @@ const QueryingAPI = () => {
             <td>assemblyId</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>assemblyId=GRCh38</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('assemblyId=GRCh38', 'assemblyId')
+                    copyToClipboard("assemblyId=GRCh38", "assemblyId")
                   }
                 >
-                  {copySuccess['assemblyId'] ? (
-                    'Copied!'
+                  {copySuccess["assemblyId"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -226,18 +228,18 @@ const QueryingAPI = () => {
             <td>referenceName</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>referenceName=22</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('referenceName=22', 'referenceName')
+                    copyToClipboard("referenceName=22", "referenceName")
                   }
                 >
-                  {copySuccess['referenceName'] ? (
-                    'Copied!'
+                  {copySuccess["referenceName"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -247,18 +249,18 @@ const QueryingAPI = () => {
             <td>referenceBases</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>referenceBases=G</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('referenceBases=G', 'referenceBases')
+                    copyToClipboard("referenceBases=G", "referenceBases")
                   }
                 >
-                  {copySuccess['referenceBases'] ? (
-                    'Copied!'
+                  {copySuccess["referenceBases"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -268,18 +270,18 @@ const QueryingAPI = () => {
             <td>alternateBases</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>alternateBases=G</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('alternateBases=G', 'alternateBases')
+                    copyToClipboard("alternateBases=G", "alternateBases")
                   }
                 >
-                  {copySuccess['alternateBases'] ? (
-                    'Copied!'
+                  {copySuccess["alternateBases"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -289,18 +291,18 @@ const QueryingAPI = () => {
             <td>variantMinLength</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>variantMinLength=5</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('variantMinLength=5', 'variantMinLength')
+                    copyToClipboard("variantMinLength=5", "variantMinLength")
                   }
                 >
-                  {copySuccess['variantMinLength'] ? (
-                    'Copied!'
+                  {copySuccess["variantMinLength"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -310,18 +312,18 @@ const QueryingAPI = () => {
             <td>variantMaxLength</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>variantMaxLength=2</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('variantMaxLength=2', 'variantMaxLength')
+                    copyToClipboard("variantMaxLength=2", "variantMaxLength")
                   }
                 >
-                  {copySuccess['variantMaxLength'] ? (
-                    'Copied!'
+                  {copySuccess["variantMaxLength"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -331,16 +333,16 @@ const QueryingAPI = () => {
             <td>geneId</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>geneId=CCNL2</code>
                 <button
-                  className='copyButtonCode'
-                  onClick={() => copyToClipboard('geneId=CCNL2', 'geneId')}
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("geneId=CCNL2", "geneId")}
                 >
-                  {copySuccess['geneId'] ? (
-                    'Copied!'
+                  {copySuccess["geneId"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -350,21 +352,21 @@ const QueryingAPI = () => {
             <td>aminoacidChange</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>aminoacidChange=p.Thr130Met</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
                     copyToClipboard(
-                      'aminoacidChange=p.Thr130Met',
-                      'aminoacidChange'
+                      "aminoacidChange=p.Thr130Met",
+                      "aminoacidChange"
                     )
                   }
                 >
-                  {copySuccess['aminoacidChange'] ? (
-                    'Copied!'
+                  {copySuccess["aminoacidChange"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -374,18 +376,18 @@ const QueryingAPI = () => {
             <td>variantType</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>variantType=SNP</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('variantType=SNP', 'variantType')
+                    copyToClipboard("variantType=SNP", "variantType")
                   }
                 >
-                  {copySuccess['variantType'] ? (
-                    'Copied!'
+                  {copySuccess["variantType"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -395,23 +397,23 @@ const QueryingAPI = () => {
             <td>genomicAlleleShortForm</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>
                   genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G
                 </code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
                     copyToClipboard(
-                      'genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G',
-                      'genomicAlleleShortForm'
+                      "genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G",
+                      "genomicAlleleShortForm"
                     )
                   }
                 >
-                  {copySuccess['genomicAlleleShortForm'] ? (
-                    'Copied!'
+                  {copySuccess["genomicAlleleShortForm"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -421,21 +423,21 @@ const QueryingAPI = () => {
             <td>clinicalRelevance</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>clinicalRelevance=pathogenic</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
                     copyToClipboard(
-                      'clinicalRelevance=pathogenic',
-                      'clinicalRelevance'
+                      "clinicalRelevance=pathogenic",
+                      "clinicalRelevance"
                     )
                   }
                 >
-                  {copySuccess['clinicalRelevance'] ? (
-                    'Copied!'
+                  {copySuccess["clinicalRelevance"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -461,21 +463,21 @@ const QueryingAPI = () => {
               (comma-separated strings of ontologies)
             </td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>filters=NCIT:C16576,NCIT:C42331</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
                     copyToClipboard(
-                      'filters=NCIT:C16576,NCIT:C42331',
-                      'filters'
+                      "filters=NCIT:C16576,NCIT:C42331",
+                      "filters"
                     )
                   }
                 >
-                  {copySuccess['filters'] ? (
-                    'Copied!'
+                  {copySuccess["filters"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -484,87 +486,87 @@ const QueryingAPI = () => {
         </tbody>
       </table>
 
-      <h2 id='get-query-examples'>GET query examples</h2>
+      <h2 id="get-query-examples">GET query examples</h2>
 
-      <h5 className='cursive'>Beacon Sequence Query</h5>
-      <div className='codeSnippet'>
+      <h5 className="cursive">Beacon Sequence Query</h5>
+      <div className="codeSnippet">
         <pre>
           <code>
             http://localhost:5050/api/g_variants?referenceName=22&start=7577120&referenceBases=G&alternateBases=A
           </code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                'http://localhost:5050/api/g_variants?referenceName=22&start=7577120&referenceBases=G&alternateBases=A',
-                'beacon-sequence-query'
+                "http://localhost:5050/api/g_variants?referenceName=22&start=7577120&referenceBases=G&alternateBases=A",
+                "beacon-sequence-query"
               )
             }
           >
-            {copySuccess['beacon-sequence-query'] ? (
-              'Copied!'
+            {copySuccess["beacon-sequence-query"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
-      <h5 className='cursive'>Beacon GeneId Query</h5>
-      <div className='codeSnippet'>
+      <h5 className="cursive">Beacon GeneId Query</h5>
+      <div className="codeSnippet">
         <pre>
           <code>
             http://localhost:5050/api/g_variants?geneId=CHR_START-DUXAP8&variantMaxLength=2&variantType=INDEL
           </code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                'http://localhost:5050/api/g_variants?geneId=CHR_START-DUXAP8&variantMaxLength=2&variantType=INDEL',
-                'beacon-geneid-query'
+                "http://localhost:5050/api/g_variants?geneId=CHR_START-DUXAP8&variantMaxLength=2&variantType=INDEL",
+                "beacon-geneid-query"
               )
             }
           >
-            {copySuccess['beacon-geneid-query'] ? (
-              'Copied!'
+            {copySuccess["beacon-geneid-query"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
-      <h5 className='cursive'>Beacon Bracket Query</h5>
-      <div className='codeSnippet'>
+      <h5 className="cursive">Beacon Bracket Query</h5>
+      <div className="codeSnippet">
         <pre>
           <code>
             http://localhost:5050/api/g_variants?referenceName=22&start=16050074,16050076&end=16050090&variantType=SNP
           </code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                'http://localhost:5050/api/g_variants?referenceName=22&start=16050074,16050076&end=16050090&variantType=SNP',
-                'beacon-bracket-query'
+                "http://localhost:5050/api/g_variants?referenceName=22&start=16050074,16050076&end=16050090&variantType=SNP",
+                "beacon-bracket-query"
               )
             }
           >
-            {copySuccess['beacon-bracket-query'] ? (
-              'Copied!'
+            {copySuccess["beacon-bracket-query"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
-      <h2 id='post-method'>POST Method</h2>
+      <h2 id="post-method">POST Method</h2>
       <p>
         In POST method requests, the endpoints accept all generic parameters and
         all the filters, apart from the request parameters.
       </p>
 
-      <h6 className='underline'>Query Parameters</h6>
+      <h6 className="underline">Query Parameters</h6>
       <table>
         <thead>
           <tr>
@@ -606,22 +608,22 @@ const QueryingAPI = () => {
             </td>
 
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>skip=0</code>
                 <br />
               </div>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>limit=10</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('skip=0 limit=10', 'pagination')
+                    copyToClipboard("skip=0 limit=10", "pagination")
                   }
                 >
-                  {copySuccess['pagination'] ? (
-                    'Copied!'
+                  {copySuccess["pagination"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -637,21 +639,21 @@ const QueryingAPI = () => {
               Enum: "boolean" "count" "aggregated" "record"
             </td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>requestedGranularity="record"</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
                     copyToClipboard(
                       'requestedGranularity="record"',
-                      'requestedGranularity'
+                      "requestedGranularity"
                     )
                   }
                 >
-                  {copySuccess['requestedGranularity'] ? (
-                    'Copied!'
+                  {copySuccess["requestedGranularity"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -665,16 +667,16 @@ const QueryingAPI = () => {
               Default: false
             </td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>testMode=false</code>
                 <button
-                  className='copyButtonCode'
-                  onClick={() => copyToClipboard('testMode=false', 'testMode')}
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("testMode=false", "testMode")}
                 >
-                  {copySuccess['testMode'] ? (
-                    'Copied!'
+                  {copySuccess["testMode"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -698,16 +700,16 @@ const QueryingAPI = () => {
               (or comma-separated integers)
             </td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>start=16050074</code>
                 <button
-                  className='copyButtonCode'
-                  onClick={() => copyToClipboard('start=16050074', 'start')}
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("start=16050074", "start")}
                 >
-                  {copySuccess['start'] ? (
-                    'Copied!'
+                  {copySuccess["start"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -720,16 +722,16 @@ const QueryingAPI = () => {
               (or comma-separated integers)
             </td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>end=16052080</code>
                 <button
-                  className='copyButtonCode'
-                  onClick={() => copyToClipboard('end=16052080', 'end')}
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("end=16052080", "end")}
                 >
-                  {copySuccess['end'] ? (
-                    'Copied!'
+                  {copySuccess["end"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -739,18 +741,18 @@ const QueryingAPI = () => {
             <td>assemblyId</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>assemblyId=GRCh38</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('assemblyId=GRCh38', 'assemblyId')
+                    copyToClipboard("assemblyId=GRCh38", "assemblyId")
                   }
                 >
-                  {copySuccess['assemblyId'] ? (
-                    'Copied!'
+                  {copySuccess["assemblyId"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -760,18 +762,18 @@ const QueryingAPI = () => {
             <td>referenceName</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>referenceName=22</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('referenceName=22', 'referenceName')
+                    copyToClipboard("referenceName=22", "referenceName")
                   }
                 >
-                  {copySuccess['referenceName'] ? (
-                    'Copied!'
+                  {copySuccess["referenceName"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -781,18 +783,18 @@ const QueryingAPI = () => {
             <td>referenceBases</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>referenceBases=G</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('referenceBases=G', 'referenceBases')
+                    copyToClipboard("referenceBases=G", "referenceBases")
                   }
                 >
-                  {copySuccess['referenceBases'] ? (
-                    'Copied!'
+                  {copySuccess["referenceBases"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -802,18 +804,18 @@ const QueryingAPI = () => {
             <td>alternateBases</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>alternateBases=G</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('alternateBases=G', 'alternateBases')
+                    copyToClipboard("alternateBases=G", "alternateBases")
                   }
                 >
-                  {copySuccess['alternateBases'] ? (
-                    'Copied!'
+                  {copySuccess["alternateBases"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -823,18 +825,18 @@ const QueryingAPI = () => {
             <td>variantMinLength</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>variantMinLength=5</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('variantMinLength=5', 'variantMinLength')
+                    copyToClipboard("variantMinLength=5", "variantMinLength")
                   }
                 >
-                  {copySuccess['variantMinLength'] ? (
-                    'Copied!'
+                  {copySuccess["variantMinLength"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -844,18 +846,18 @@ const QueryingAPI = () => {
             <td>variantMaxLength</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>variantMaxLength=2</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('variantMaxLength=2', 'variantMaxLength')
+                    copyToClipboard("variantMaxLength=2", "variantMaxLength")
                   }
                 >
-                  {copySuccess['variantMaxLength'] ? (
-                    'Copied!'
+                  {copySuccess["variantMaxLength"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -865,16 +867,16 @@ const QueryingAPI = () => {
             <td>geneId</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>geneId=CCNL2</code>
                 <button
-                  className='copyButtonCode'
-                  onClick={() => copyToClipboard('geneId=CCNL2', 'geneId')}
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("geneId=CCNL2", "geneId")}
                 >
-                  {copySuccess['geneId'] ? (
-                    'Copied!'
+                  {copySuccess["geneId"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -884,21 +886,21 @@ const QueryingAPI = () => {
             <td>aminoacidChange</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>aminoacidChange=p.Thr130Met</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
                     copyToClipboard(
-                      'aminoacidChange=p.Thr130Met',
-                      'aminoacidChange'
+                      "aminoacidChange=p.Thr130Met",
+                      "aminoacidChange"
                     )
                   }
                 >
-                  {copySuccess['aminoacidChange'] ? (
-                    'Copied!'
+                  {copySuccess["aminoacidChange"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -908,18 +910,18 @@ const QueryingAPI = () => {
             <td>variantType</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>variantType=SNP</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard('variantType=SNP', 'variantType')
+                    copyToClipboard("variantType=SNP", "variantType")
                   }
                 >
-                  {copySuccess['variantType'] ? (
-                    'Copied!'
+                  {copySuccess["variantType"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -929,23 +931,23 @@ const QueryingAPI = () => {
             <td>genomicAlleleShortForm</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>
                   genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G
                 </code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
                     copyToClipboard(
-                      'genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G',
-                      'genomicAlleleShortForm'
+                      "genomicAlleleShortForm=NC_000022.11:g.16050075A&gt;G",
+                      "genomicAlleleShortForm"
                     )
                   }
                 >
-                  {copySuccess['genomicAlleleShortForm'] ? (
-                    'Copied!'
+                  {copySuccess["genomicAlleleShortForm"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -955,21 +957,21 @@ const QueryingAPI = () => {
             <td>clinicalRelevance</td>
             <td>string</td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>clinicalRelevance=pathogenic</code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
                     copyToClipboard(
-                      'clinicalRelevance=pathogenic',
-                      'clinicalRelevance'
+                      "clinicalRelevance=pathogenic",
+                      "clinicalRelevance"
                     )
                   }
                 >
-                  {copySuccess['clinicalRelevance'] ? (
-                    'Copied!'
+                  {copySuccess["clinicalRelevance"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -994,11 +996,11 @@ const QueryingAPI = () => {
               CustomFilter (object) (Filtering Term Element)
             </td>
             <td>
-              <div className='codeSnippet-table'>
+              <div className="codeSnippet-table">
                 <code>
-                  {'filters: ['}
+                  {"filters: ["}
                   <br />
-                  &nbsp;&nbsp;{'{'}
+                  &nbsp;&nbsp;{"{"}
                   <br />
                   &nbsp;&nbsp;&nbsp;&nbsp;{`"id": "geographicOrigin",`}
                   <br />
@@ -1006,23 +1008,23 @@ const QueryingAPI = () => {
                   <br />
                   &nbsp;&nbsp;&nbsp;&nbsp;{`"value": "England"`}
                   <br />
-                  &nbsp;&nbsp;{'}'}
+                  &nbsp;&nbsp;{"}"}
                   <br />
-                  {']'}
+                  {"]"}
                 </code>
                 <button
-                  className='copyButtonCode'
+                  className="copyButtonCode"
                   onClick={() =>
                     copyToClipboard(
                       `"filters": [\n  {\n    "id": "geographicOrigin",\n    "operator": "!",\n    "value": "England"\n  }\n]`,
-                      'filters-example'
+                      "filters-example"
                     )
                   }
                 >
-                  {copySuccess['filters-example'] ? (
-                    'Copied!'
+                  {copySuccess["filters-example"] ? (
+                    "Copied!"
                   ) : (
-                    <img className='copySymbol' src={copyIcon} alt='Copy' />
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
                   )}
                 </button>
               </div>
@@ -1030,10 +1032,10 @@ const QueryingAPI = () => {
           </tr>
         </tbody>
       </table>
-      <h6 className='underline'>POST query examples</h6>
+      <h6 className="underline">POST query examples</h6>
 
-      <h5 className='cursive'>Genomic query</h5>
-      <div className='codeSnippet'>
+      <h5 className="cursive">Genomic query</h5>
+      <div className="codeSnippet">
         <pre>
           <code>
             {`curl -H 'Content-Type: application/json' -X POST -d '{
@@ -1049,7 +1051,7 @@ const QueryingAPI = () => {
 }' http://localhost:5050/api/g_variants`}
           </code>
           <button
-            className='copyButtonCode'
+            className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
                 `curl -H 'Content-Type: application/json' -X POST -d '{
@@ -1063,22 +1065,22 @@ const QueryingAPI = () => {
     "requestedGranularity": "record"
   }
 }' http://localhost:5050/api/g_variants`,
-                'genomic-query'
+                "genomic-query"
               )
             }
           >
-            {copySuccess['genomic-query'] ? (
-              'Copied!'
+            {copySuccess["genomic-query"] ? (
+              "Copied!"
             ) : (
-              <img className='copySymbol' src={copyIcon} alt='Copy' />
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
             )}
           </button>
         </pre>
       </div>
 
       <div>
-        <h5 className='cursive'>Simple CURIE based filters query</h5>
-        <div className='codeSnippet'>
+        <h5 className="cursive">Simple CURIE based filters query</h5>
+        <div className="codeSnippet">
           <pre>
             <code>
               {`curl -H 'Content-Type: application/json' -X POST -d '{
@@ -1094,7 +1096,7 @@ const QueryingAPI = () => {
 }' http://localhost:5050/api/individuals`}
             </code>
             <button
-              className='copyButtonCode'
+              className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
                   `curl -H 'Content-Type: application/json' -X POST -d '{
@@ -1108,21 +1110,21 @@ const QueryingAPI = () => {
     "requestedGranularity": "record"
   }
 }' http://localhost:5050/api/individuals`,
-                  'curie-query'
+                  "curie-query"
                 )
               }
             >
-              {copySuccess['curie-query'] ? (
-                'Copied!'
+              {copySuccess["curie-query"] ? (
+                "Copied!"
               ) : (
-                <img className='copySymbol' src={copyIcon} alt='Copy' />
+                <img className="copySymbol" src={copyIcon} alt="Copy" />
               )}
             </button>
           </pre>
         </div>
 
-        <h5 className='cursive'>Numerical value query</h5>
-        <div className='codeSnippet'>
+        <h5 className="cursive">Numerical value query</h5>
+        <div className="codeSnippet">
           <pre>
             <code>
               {`curl \\
@@ -1141,7 +1143,7 @@ const QueryingAPI = () => {
   http://localhost:5050/api/individuals`}
             </code>
             <button
-              className='copyButtonCode'
+              className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
                   `curl \\
@@ -1158,21 +1160,21 @@ const QueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/individuals`,
-                  'numerical-query'
+                  "numerical-query"
                 )
               }
             >
-              {copySuccess['numerical-query'] ? (
-                'Copied!'
+              {copySuccess["numerical-query"] ? (
+                "Copied!"
               ) : (
-                <img className='copySymbol' src={copyIcon} alt='Copy' />
+                <img className="copySymbol" src={copyIcon} alt="Copy" />
               )}
             </button>
           </pre>
         </div>
 
-        <h5 className='cursive'>Alphanumerical value query (Exact value)</h5>
-        <div className='codeSnippet'>
+        <h5 className="cursive">Alphanumerical value query (Exact value)</h5>
+        <div className="codeSnippet">
           <pre>
             <code>
               {`curl \\
@@ -1191,7 +1193,7 @@ const QueryingAPI = () => {
   http://localhost:5050/api/individuals`}
             </code>
             <button
-              className='copyButtonCode'
+              className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
                   `curl \\
@@ -1208,21 +1210,21 @@ const QueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/individuals`,
-                  'exact-value-query'
+                  "exact-value-query"
                 )
               }
             >
-              {copySuccess['exact-value-query'] ? (
-                'Copied!'
+              {copySuccess["exact-value-query"] ? (
+                "Copied!"
               ) : (
-                <img className='copySymbol' src={copyIcon} alt='Copy' />
+                <img className="copySymbol" src={copyIcon} alt="Copy" />
               )}
             </button>
           </pre>
         </div>
 
-        <h5 className='cursive'>Alphanumerical value query (Like value)</h5>
-        <div className='codeSnippet'>
+        <h5 className="cursive">Alphanumerical value query (Like value)</h5>
+        <div className="codeSnippet">
           <pre>
             <code>
               {`curl \\
@@ -1241,7 +1243,7 @@ const QueryingAPI = () => {
   http://localhost:5050/api/individuals`}
             </code>
             <button
-              className='copyButtonCode'
+              className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
                   `curl \\
@@ -1258,21 +1260,21 @@ const QueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/individuals`,
-                  'like-value-query'
+                  "like-value-query"
                 )
               }
             >
-              {copySuccess['like-value-query'] ? (
-                'Copied!'
+              {copySuccess["like-value-query"] ? (
+                "Copied!"
               ) : (
-                <img className='copySymbol' src={copyIcon} alt='Copy' />
+                <img className="copySymbol" src={copyIcon} alt="Copy" />
               )}
             </button>
           </pre>
         </div>
 
-        <h5 className='cursive'>Alphanumerical value query (NOT value)</h5>
-        <div className='codeSnippet'>
+        <h5 className="cursive">Alphanumerical value query (NOT value)</h5>
+        <div className="codeSnippet">
           <pre>
             <code>
               {`curl \\
@@ -1291,7 +1293,7 @@ const QueryingAPI = () => {
   http://localhost:5050/api/individuals`}
             </code>
             <button
-              className='copyButtonCode'
+              className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
                   `curl \\
@@ -1308,21 +1310,21 @@ const QueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/individuals`,
-                  'not-value-query'
+                  "not-value-query"
                 )
               }
             >
-              {copySuccess['not-value-query'] ? (
-                'Copied!'
+              {copySuccess["not-value-query"] ? (
+                "Copied!"
               ) : (
-                <img className='copySymbol' src={copyIcon} alt='Copy' />
+                <img className="copySymbol" src={copyIcon} alt="Copy" />
               )}
             </button>
           </pre>
         </div>
 
-        <h5 className='cursive'>Semantic similarity query</h5>
-        <div className='codeSnippet'>
+        <h5 className="cursive">Semantic similarity query</h5>
+        <div className="codeSnippet">
           <pre>
             <code>
               {`curl \\
@@ -1341,7 +1343,7 @@ const QueryingAPI = () => {
   http://localhost:5050/api/individuals`}
             </code>
             <button
-              className='copyButtonCode'
+              className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
                   `curl \\
@@ -1358,21 +1360,21 @@ const QueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/individuals`,
-                  'similarity-query'
+                  "similarity-query"
                 )
               }
             >
-              {copySuccess['similarity-query'] ? (
-                'Copied!'
+              {copySuccess["similarity-query"] ? (
+                "Copied!"
               ) : (
-                <img className='copySymbol' src={copyIcon} alt='Copy' />
+                <img className="copySymbol" src={copyIcon} alt="Copy" />
               )}
             </button>
           </pre>
         </div>
 
-        <h5 className='cursive'>Custom filter query</h5>
-        <div className='codeSnippet'>
+        <h5 className="cursive">Custom filter query</h5>
+        <div className="codeSnippet">
           <pre>
             <code>
               {`curl \\
@@ -1391,7 +1393,7 @@ const QueryingAPI = () => {
   http://localhost:5050/api/biosamples`}
             </code>
             <button
-              className='copyButtonCode'
+              className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
                   `curl \\
@@ -1408,21 +1410,21 @@ const QueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/biosamples`,
-                  'custom-filter-query'
+                  "custom-filter-query"
                 )
               }
             >
-              {copySuccess['custom-filter-query'] ? (
-                'Copied!'
+              {copySuccess["custom-filter-query"] ? (
+                "Copied!"
               ) : (
-                <img className='copySymbol' src={copyIcon} alt='Copy' />
+                <img className="copySymbol" src={copyIcon} alt="Copy" />
               )}
             </button>
           </pre>
         </div>
 
-        <h5 className='cursive'>Join genomic query</h5>
-        <div className='codeSnippet'>
+        <h5 className="cursive">Join genomic query</h5>
+        <div className="codeSnippet">
           <pre>
             <code>
               {`curl \\
@@ -1448,7 +1450,7 @@ const QueryingAPI = () => {
   http://localhost:5050/api/g_variants`}
             </code>
             <button
-              className='copyButtonCode'
+              className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
                   `curl \\
@@ -1472,21 +1474,21 @@ const QueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/g_variants`,
-                  'join-genomic-query'
+                  "join-genomic-query"
                 )
               }
             >
-              {copySuccess['join-genomic-query'] ? (
-                'Copied!'
+              {copySuccess["join-genomic-query"] ? (
+                "Copied!"
               ) : (
-                <img className='copySymbol' src={copyIcon} alt='Copy' />
+                <img className="copySymbol" src={copyIcon} alt="Copy" />
               )}
             </button>
           </pre>
         </div>
 
-        <h5 className='cursive'>Join individuals query</h5>
-        <div className='codeSnippet'>
+        <h5 className="cursive">Join individuals query</h5>
+        <div className="codeSnippet">
           <pre>
             <code>
               {`curl \\
@@ -1512,7 +1514,7 @@ const QueryingAPI = () => {
   http://localhost:5050/api/individuals`}
             </code>
             <button
-              className='copyButtonCode'
+              className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
                   `curl \\
@@ -1536,21 +1538,21 @@ const QueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/individuals`,
-                  'join-individuals-query'
+                  "join-individuals-query"
                 )
               }
             >
-              {copySuccess['join-individuals-query'] ? (
-                'Copied!'
+              {copySuccess["join-individuals-query"] ? (
+                "Copied!"
               ) : (
-                <img className='copySymbol' src={copyIcon} alt='Copy' />
+                <img className="copySymbol" src={copyIcon} alt="Copy" />
               )}
             </button>
           </pre>
         </div>
 
-        <h5 className='cursive'>Query with access token</h5>
-        <div className='codeSnippet'>
+        <h5 className="cursive">Query with access token</h5>
+        <div className="codeSnippet">
           <pre>
             <code>
               {`curl \\
@@ -1571,7 +1573,7 @@ const QueryingAPI = () => {
   http://localhost:5050/api/individuals`}
             </code>
             <button
-              className='copyButtonCode'
+              className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
                   `curl \\
@@ -1590,14 +1592,14 @@ const QueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/individuals`,
-                  'query-with-token'
+                  "query-with-token"
                 )
               }
             >
-              {copySuccess['query-with-token'] ? (
-                'Copied!'
+              {copySuccess["query-with-token"] ? (
+                "Copied!"
               ) : (
-                <img className='copySymbol' src={copyIcon} alt='Copy' />
+                <img className="copySymbol" src={copyIcon} alt="Copy" />
               )}
             </button>
           </pre>
@@ -1606,14 +1608,14 @@ const QueryingAPI = () => {
 
       {/* Add other POST query examples similarly */}
 
-      <h6 className='underline'>List of endpoints</h6>
-      <h5 className='cursive'>Endpoints that accept all query parameters</h5>
+      <h6 className="underline">List of endpoints</h6>
+      <h5 className="cursive">Endpoints that accept all query parameters</h5>
       <ul>
         <li>/api/g_variants</li>
         <li>/api/individuals</li>
       </ul>
 
-      <h5 className='cursive'>
+      <h5 className="cursive">
         Endpoints that only accept filters and generic parameters
       </h5>
       <ul>
@@ -1624,50 +1626,50 @@ const QueryingAPI = () => {
         <li>/api/runs</li>
       </ul>
 
-      <h5 className='cursive'>Endpoints that only accept generic parameters</h5>
+      <h5 className="cursive">Endpoints that only accept generic parameters</h5>
       <ul>
         <li>/api/filtering_terms</li>
-        <li>/api/analyses/{'{id}'}</li>
-        <li>/api/analyses/{'{id}'}/g_variants</li>
+        <li>/api/analyses/{"{id}"}</li>
+        <li>/api/analyses/{"{id}"}/g_variants</li>
         <li>/api/analyses/filtering_terms</li>
-        <li>/api/biosamples/{'{id}'}</li>
-        <li>/api/biosamples/{'{id}'}/analyses</li>
-        <li>/api/biosamples/{'{id}'}/g_variants</li>
-        <li>/api/biosamples/{'{id}'}/runs</li>
+        <li>/api/biosamples/{"{id}"}</li>
+        <li>/api/biosamples/{"{id}"}/analyses</li>
+        <li>/api/biosamples/{"{id}"}/g_variants</li>
+        <li>/api/biosamples/{"{id}"}/runs</li>
         <li>/api/biosamples/filtering_terms</li>
-        <li>/api/cohorts/{'{id}'}</li>
-        <li>/api/cohorts/{'{id}'}/analyses</li>
-        <li>/api/cohorts/{'{id}'}/biosamples</li>
-        <li>/api/cohorts/{'{id}'}/g_variants</li>
-        <li>/api/cohorts/{'{id}'}/individuals</li>
-        <li>/api/cohorts/{'{id}'}/runs</li>
+        <li>/api/cohorts/{"{id}"}</li>
+        <li>/api/cohorts/{"{id}"}/analyses</li>
+        <li>/api/cohorts/{"{id}"}/biosamples</li>
+        <li>/api/cohorts/{"{id}"}/g_variants</li>
+        <li>/api/cohorts/{"{id}"}/individuals</li>
+        <li>/api/cohorts/{"{id}"}/runs</li>
         <li>/api/cohorts/filtering_terms</li>
-        <li>/api/datasets/{'{id}'}</li>
-        <li>/api/datasets/{'{id}'}/analyses</li>
-        <li>/api/datasets/{'{id}'}/biosamples</li>
-        <li>/api/datasets/{'{id}'}/g_variants</li>
-        <li>/api/datasets/{'{id}'}/individuals</li>
-        <li>/api/datasets/{'{id}'}/runs</li>
+        <li>/api/datasets/{"{id}"}</li>
+        <li>/api/datasets/{"{id}"}/analyses</li>
+        <li>/api/datasets/{"{id}"}/biosamples</li>
+        <li>/api/datasets/{"{id}"}/g_variants</li>
+        <li>/api/datasets/{"{id}"}/individuals</li>
+        <li>/api/datasets/{"{id}"}/runs</li>
         <li>/api/datasets/filtering_terms</li>
-        <li>/api/g_variants/{'{id}'}</li>
-        <li>/api/g_variants/{'{id}'}/analyses</li>
-        <li>/api/g_variants/{'{id}'}/biosamples</li>
-        <li>/api/g_variants/{'{id}'}/individuals</li>
-        <li>/api/g_variants/{'{id}'}/runs</li>
+        <li>/api/g_variants/{"{id}"}</li>
+        <li>/api/g_variants/{"{id}"}/analyses</li>
+        <li>/api/g_variants/{"{id}"}/biosamples</li>
+        <li>/api/g_variants/{"{id}"}/individuals</li>
+        <li>/api/g_variants/{"{id}"}/runs</li>
         <li>/api/g_variants/filtering_terms</li>
-        <li>/api/individuals/{'{id}'}</li>
-        <li>/api/individuals/{'{id}'}/analyses</li>
-        <li>/api/individuals/{'{id}'}/biosamples</li>
-        <li>/api/individuals/{'{id}'}/g_variants</li>
-        <li>/api/individuals/{'{id}'}/runs</li>
+        <li>/api/individuals/{"{id}"}</li>
+        <li>/api/individuals/{"{id}"}/analyses</li>
+        <li>/api/individuals/{"{id}"}/biosamples</li>
+        <li>/api/individuals/{"{id}"}/g_variants</li>
+        <li>/api/individuals/{"{id}"}/runs</li>
         <li>/api/individuals/filtering_terms</li>
-        <li>/api/runs/{'{id}'}</li>
-        <li>/api/runs/{'{id}'}/analyses</li>
-        <li>/api/runs/{'{id}'}/g_variants</li>
+        <li>/api/runs/{"{id}"}</li>
+        <li>/api/runs/{"{id}"}/analyses</li>
+        <li>/api/runs/{"{id}"}/g_variants</li>
         <li>/api/runs/filtering_terms</li>
       </ul>
 
-      <h5 className='cursive'>Endpoints that don’t accept query parameters</h5>
+      <h5 className="cursive">Endpoints that don’t accept query parameters</h5>
       <ul>
         <li>/api</li>
         <li>/api/info</li>
@@ -1677,7 +1679,7 @@ const QueryingAPI = () => {
         <li>/api/map</li>
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default QueryingAPI
+export default QueryingAPI;

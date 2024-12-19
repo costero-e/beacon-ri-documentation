@@ -1,277 +1,281 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import './Menu.css'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Menu.css";
 
-type ParentMenu = 'Beacon UI' | 'Beacon Network UI' | 'Beacon 2 RI Tools'
+type ParentMenu = "Beacon UI" | "Beacon Network UI" | "Beacon 2 RI Tools";
 
 interface MenuProps {
-  isSubmenuOpen: boolean
-  toggleSubmenu: () => void
+  isSubmenuOpen: boolean;
+  toggleSubmenu: () => void;
 }
 
 const directNavigationMenus: Record<ParentMenu, Record<string, string>> = {
-  'Beacon UI': {
-    'Deployment': '/ui_deployment',
-    'Configuration UI': '/ui_configuration',
-    'Querying the UI': '/ui_queries'
+  "Beacon UI": {
+    Deployment: "/ui_deployment",
+    "Configuration UI": "/ui_configuration",
+    "Querying the UI": "/ui_queries",
   },
-  'Beacon Network UI': {
-    'Deployment': '/networkui_deployment',
-    'Configuration UI': '/networkui_configuration',
-    'Querying the UI': '/networkui_queries'
+  "Beacon Network UI": {
+    Deployment: "/networkui_deployment",
+    "Configuration UI": "/networkui_configuration",
+    "Querying the UI": "/networkui_queries",
   },
-  'Beacon 2 RI Tools': {
-    'Creating the CSV files': '/creating_csvs',
-    'Conversion from CSV to BFF': '/conversion_csv_bff',
-    'Conversion from VCF to BFF': '/conversion_vcf_bff'
-  }
-}
+  "Beacon 2 RI Tools": {
+    "Creating the CSV files": "/creating_csvs",
+    "Conversion from CSV to BFF": "/conversion_csv_bff",
+    "Conversion from VCF to BFF": "/conversion_vcf_bff",
+  },
+};
 
 const subMenuItems: { [key: string]: string[] } = {
-  'Beacon 2 RI API': [
-    'Automated Deployment',
-    'Manual Deployment',
-    'Data Linking',
-    'Configuration',
-    'Querying the API'
+  "Beacon 2 RI API": [
+    "Automated Deployment",
+    "Manual Deployment",
+    "Data Linking",
+    "Configuration",
+    "Querying the API",
   ],
-  'Beacon 2 RI Tools': [
-    'Starting Guide',
-    'Configuration File',
-    'Creating the CSV files',
-    'Conversion from CSV to BFF',
-    'Conversion from VCF to BFF'
+  "Beacon 2 RI Tools": [
+    "Starting Guide",
+    "Configuration File",
+    "Creating the CSV files",
+    "Conversion from CSV to BFF",
+    "Conversion from VCF to BFF",
   ],
-  'Beacon UI': ['Deployment', 'Configuration UI', 'Querying the UI'],
-  'Beacon Network UI': ['Deployment', 'Configuration UI', 'Querying the UI']
-}
+  "Beacon UI": ["Deployment", "Configuration UI", "Querying the UI"],
+  "Beacon Network UI": ["Deployment", "Configuration UI", "Querying the UI"],
+};
 
 const nestedSubMenuItems: { [key: string]: string[] } = {
-  'Automated Deployment': [
-    'Cloning the repository',
-    'Execute start script from root'
+  "Automated Deployment": [
+    "Cloning the repository",
+    "Execute start script from root",
   ],
-  'Manual Deployment': [
-    'Cloning the repository',
-    'Creating the containers',
-    'Data injection',
-    'Data indexing'
+  "Manual Deployment": [
+    "Cloning the repository",
+    "Creating the containers",
+    "Data injection",
+    "Data indexing",
   ],
-  'Data Linking': [
-    'Linking ids to dataset and cohort',
-    'Extract filtering terms',
-    'Manually adding filtering terms',
-    'Get descendant terms'
+  "Data Linking": [
+    "Linking ids to dataset and cohort",
+    "Extract filtering terms",
+    "Manually adding filtering terms",
   ],
-  'Configuration': [
-    'Managing dataset permissions',
-    'Supplying AAI credentials',
-    'Handling CORS',
-    'Editing your beacon information',
-    'Limiting the granularity',
-    'Adding beacon handovers'
+  Configuration: [
+    "Managing dataset permissions",
+    "Supplying AAI credentials",
+    "Handling CORS",
+    "Editing your beacon information",
+    "Limiting the granularity",
+    "Adding beacon handovers",
   ],
-  'Querying the API': [
-    'GET Method',
-    'GET query examples',
-    'POST Method',
-    'POST query examples',
-    'List of endpoints'
+  "Querying the API": [
+    "GET Method",
+    "GET query examples",
+    "POST Method",
+    "POST query examples",
+    "List of endpoints",
   ],
-  'Configuration File': [
-    'Generic config parameters',
-    'VCF conversion config parameters'
+  "Configuration File": [
+    "Generic config parameters",
+    "VCF conversion config parameters",
   ],
-  'Starting Guide': ['Tools Introduction', 'Installation Guide'],
-  'Beacon UI': ['Deployment', 'Configuration', 'Querying the UI'],
-  'Beacon Network UI': ['Deployment', 'Configuration', 'Querying the UI']
-}
+  "Starting Guide": ["Tools Introduction", "Installation Guide"],
+  "Beacon UI": ["Deployment", "Configuration", "Querying the UI"],
+  "Beacon Network UI": ["Deployment", "Configuration", "Querying the UI"],
+};
 
-function Menu ({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
-  const [activeMenu, setActiveMenu] = useState<string | null>('Introduction')
-  const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null)
-  const [activeNestedSubMenuItem, setActiveNestedSubMenuItem] = useState<string | null>(null)
-  const navigate = useNavigate()
+function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
+  const [activeMenu, setActiveMenu] = useState<string | null>("Introduction");
+  const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
+  const [activeNestedSubMenuItem, setActiveNestedSubMenuItem] = useState<
+    string | null
+  >(null);
+  const navigate = useNavigate();
 
   const menuItems: string[] = [
-    'Introduction',
-    'Beacon 2 RI API',
-    'Beacon 2 RI Tools',
-    'Beacon UI',
-    'Beacon Network UI'
-  ]
+    "Introduction",
+    "Beacon 2 RI API",
+    "Beacon 2 RI Tools",
+    "Beacon UI",
+    "Beacon Network UI",
+  ];
 
   const handleClick = (item: string) => {
-    const isMenuItemActive = activeMenu === item
+    const isMenuItemActive = activeMenu === item;
 
-    if (item === 'Introduction') {
-      setActiveMenu('Introduction') // Mark "Introduction" as active
-      setActiveSubMenu(null)
-      setActiveNestedSubMenuItem(null)
-      navigate('/')
+    if (item === "Introduction") {
+      setActiveMenu("Introduction"); // Mark "Introduction" as active
+      setActiveSubMenu(null);
+      setActiveNestedSubMenuItem(null);
+      navigate("/");
       if (isSubmenuOpen) {
-        toggleSubmenu() // Close the submenu if open
+        toggleSubmenu(); // Close the submenu if open
       }
-      return
+      return;
     }
 
-    setActiveMenu(item)
-    setActiveSubMenu(null)
-    setActiveNestedSubMenuItem(null)
+    setActiveMenu(item);
+    setActiveSubMenu(null);
+    setActiveNestedSubMenuItem(null);
 
     if (!isSubmenuOpen) {
-      toggleSubmenu() // Open the submenu if it's not already open
+      toggleSubmenu(); // Open the submenu if it's not already open
     }
-  }
+  };
 
   const handleToggleSubmenu = () => {
-    toggleSubmenu()
-  }
+    toggleSubmenu();
+  };
 
   const handleSubMenuClick = (subItem: string, parentMenu: string) => {
-    setActiveSubMenu(subItem) // Mark the subItem as active
-    setActiveNestedSubMenuItem(null)
+    setActiveSubMenu(subItem); // Mark the subItem as active
+    setActiveNestedSubMenuItem(null);
 
     if (
       directNavigationMenus[parentMenu as ParentMenu] &&
       directNavigationMenus[parentMenu as ParentMenu][subItem]
     ) {
-      navigate(directNavigationMenus[parentMenu as ParentMenu][subItem])
+      navigate(directNavigationMenus[parentMenu as ParentMenu][subItem]);
     } else {
-      setActiveSubMenu(activeSubMenu === subItem ? null : subItem)
-      setActiveNestedSubMenuItem(null) // Close nested sub-menu when a new sub-menu item is clicked
+      setActiveSubMenu(activeSubMenu === subItem ? null : subItem);
+      setActiveNestedSubMenuItem(null); // Close nested sub-menu when a new sub-menu item is clicked
     }
-  }
+  };
 
   const handleNestedSubMenuItemClick = (
     subItem: string,
     nestedItem: string
   ) => {
-    setActiveNestedSubMenuItem(nestedItem)
+    setActiveNestedSubMenuItem(nestedItem);
 
     const basePathMap: { [key: string]: string } = {
-      'Automated Deployment': '/automated-deployment',
-      'Manual Deployment': '/manual-deployment',
-      'Data Linking': '/data-linking',
-      'Configuration': '/api-configuration',
-      'Querying the API': '/querying-api',
-      'Beacon UI': '/beacon-ui',
-      'Beacon Network UI': '/beacon-network-ui',
-      'Configuration File': '/configuration-file',
-      'Starting Guide': '/starting-guide'
-    }
+      "Automated Deployment": "/automated-deployment",
+      "Manual Deployment": "/manual-deployment",
+      "Data Linking": "/data-linking",
+      Configuration: "/api-configuration",
+      "Querying the API": "/querying-api",
+      "Beacon UI": "/beacon-ui",
+      "Beacon Network UI": "/beacon-network-ui",
+      "Configuration File": "/configuration-file",
+      "Starting Guide": "/starting-guide",
+    };
 
     const pathMap: { [key: string]: string } = {
-      'Cloning the repository': '#cloning-repository',
-      'Execute start script from root': '#execute-start-script',
-      'Creating the containers': '#creating-the-containers',
-      'Data injection': '#data-injection',
-      'Data indexing': '#data-indexing',
-      'Linking ids to dataset and cohort': '#linking-ids-to-dataset-and-cohort',
-      'Extract filtering terms': '#extract-filtering-terms',
-      'Manually adding filtering terms': '#manually-adding-filtering-terms',
-      'Get descendant terms': '#get-descendant-terms',
-      'Managing dataset permissions': '#managing-dataset-permissions',
-      'Supplying AAI credentials': '#supplying-aai-credentials',
-      'Handling CORS': '#handling-cors',
-      'Editing your beacon information': '#editing-beacon-info',
-      'Limiting the granularity': '#limiting-granularity',
-      'Adding beacon handovers': '#adding-beacon-handovers',
-      'GET Method': '#get-method',
-      'GET query examples': '#get-query-examples',
-      'POST Method': '#post-method',
-      'POST query examples': '#post-query-examples',
-      'List of endpoints': '#list-of-endpoints',
-      'Generic config parameters': '#generic-config-parameters',
-      'VCF conversion config parameters': '#vcf-conversion-config-parameters',
-      'Deployment': '#deployment',
-      'Configuration': '#configuration',
-      'Querying the UI': '#querying-ui',
-      'Tools Introduction': '#tools-introduction',
-      'Installation Guide': '#installation-guide'
-    }
+      "Cloning the repository": "#cloning-repository",
+      "Execute start script from root": "#execute-start-script",
+      "Creating the containers": "#creating-the-containers",
+      "Data injection": "#data-injection",
+      "Data indexing": "#data-indexing",
+      "Linking ids to dataset and cohort": "#linking-ids-to-dataset-and-cohort",
+      "Extract filtering terms": "#extract-filtering-terms",
+      "Manually adding filtering terms": "#manually-adding-filtering-terms",
+      "Get descendant terms": "#get-descendant-terms",
+      "Managing dataset permissions": "#managing-dataset-permissions",
+      "Supplying AAI credentials": "#supplying-aai-credentials",
+      "Handling CORS": "#handling-cors",
+      "Editing your beacon information": "#editing-beacon-info",
+      "Limiting the granularity": "#limiting-granularity",
+      "Adding beacon handovers": "#adding-beacon-handovers",
+      "GET Method": "#get-method",
+      "GET query examples": "#get-query-examples",
+      "POST Method": "#post-method",
+      "POST query examples": "#post-query-examples",
+      "List of endpoints": "#list-of-endpoints",
+      "Generic config parameters": "#generic-config-parameters",
+      "VCF conversion config parameters": "#vcf-conversion-config-parameters",
+      Deployment: "#deployment",
+      Configuration: "#configuration",
+      "Querying the UI": "#querying-ui",
+      "Tools Introduction": "#tools-introduction",
+      "Installation Guide": "#installation-guide",
+    };
 
-    const basePath = basePathMap[subItem]
-    const hash = pathMap[nestedItem]
+    const basePath = basePathMap[subItem];
+    const hash = pathMap[nestedItem];
 
     if (basePath && hash) {
-      navigate(`${basePath}${hash}`)
+      navigate(`${basePath}${hash}`);
     }
-  }
+  };
 
   return (
-    <div className='menuContainer'>
-      <div className='menuDiv'>
+    <div className="menuContainer">
+      <div className="menuDiv">
         <a
-          href='https://ega-archive.org/'
-          className='logoInstitution'
-          target='_blank'
-          rel='noreferrer'
+          href="https://ega-archive.org/"
+          className="logoInstitution"
+          target="_blank"
+          rel="noreferrer"
         >
           <img
-            className='EGALogo'
-            src='./ega_logo_white.png'
-            alt='EGALogo'
+            className="EGALogo"
+            src="./ega_logo_white.png"
+            alt="EGALogo"
           ></img>
         </a>
-        {menuItems.map(item => (
+        {menuItems.map((item) => (
           <div
             key={item}
-            className={`menuItem ${activeMenu === item ? 'active' : ''}`}
+            className={`menuItem ${activeMenu === item ? "active" : ""}`}
             onClick={() => handleClick(item)}
           >
             {item}
           </div>
         ))}
       </div>
-      {activeMenu && activeMenu !== 'Introduction' && isSubmenuOpen && (
-        <div className='subMenuContainer'>
-          <button className='buttonHideSubmenu' onClick={handleToggleSubmenu}>
-            <img src='./back.png' className='backIcon' alt='backIcon'></img>
+      {activeMenu && activeMenu !== "Introduction" && isSubmenuOpen && (
+        <div className="subMenuContainer">
+          <button className="buttonHideSubmenu" onClick={handleToggleSubmenu}>
+            <img src="./back.png" className="backIcon" alt="backIcon"></img>
           </button>
           {activeMenu && subMenuItems[activeMenu] && (
-            <div className='subMenu'>
+            <div className="subMenu">
               {subMenuItems[activeMenu].map((subItem: string) => (
                 <div key={subItem}>
                   <button
                     className={`subMenuItem ${
-                      activeSubMenu === subItem || activeNestedSubMenuItem === subItem ? 'active2' : ''
+                      activeSubMenu === subItem ||
+                      activeNestedSubMenuItem === subItem
+                        ? "active2"
+                        : ""
                     }`}
                     onClick={() => handleSubMenuClick(subItem, activeMenu)}
                   >
                     {subItem}
                     {!(
-                      activeMenu === 'Beacon UI' ||
-                      activeMenu === 'Beacon Network UI' ||
-                      (activeMenu === 'Beacon 2 RI Tools' &&
+                      activeMenu === "Beacon UI" ||
+                      activeMenu === "Beacon Network UI" ||
+                      (activeMenu === "Beacon 2 RI Tools" &&
                         [
-                          'Creating the CSV files',
-                          'Conversion from CSV to BFF',
-                          'Conversion from VCF to BFF'
+                          "Creating the CSV files",
+                          "Conversion from CSV to BFF",
+                          "Conversion from VCF to BFF",
                         ].includes(subItem))
                     ) && (
                       <img
                         src={
                           activeSubMenu === subItem
-                            ? '../arrow-down.png'
-                            : '../arrow-right.png'
+                            ? "../arrow-down.png"
+                            : "../arrow-right.png"
                         }
                         alt={
-                          activeSubMenu === subItem ? 'Arrow Up' : 'Arrow Down'
+                          activeSubMenu === subItem ? "Arrow Up" : "Arrow Down"
                         }
-                        className='arrowIcon'
+                        className="arrowIcon"
                       />
                     )}
                   </button>
                   {activeSubMenu === subItem && nestedSubMenuItems[subItem] && (
-                    <div className='nestedSubMenu'>
+                    <div className="nestedSubMenu">
                       {nestedSubMenuItems[subItem].map((nestedItem: string) => (
                         <div
                           key={nestedItem}
                           className={`nestedSubMenuItem ${
                             activeNestedSubMenuItem === nestedItem
-                              ? 'active'
-                              : ''
+                              ? "active"
+                              : ""
                           }`}
                           onClick={() =>
                             handleNestedSubMenuItemClick(subItem, nestedItem)
@@ -288,19 +292,19 @@ function Menu ({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
           )}
         </div>
       )}
-      {!isSubmenuOpen && activeMenu !== 'Introduction' && (
-        <div className='subMenuContainerNoExpanded'>
-          <button className='buttonShowSubmenu' onClick={handleToggleSubmenu}>
+      {!isSubmenuOpen && activeMenu !== "Introduction" && (
+        <div className="subMenuContainerNoExpanded">
+          <button className="buttonShowSubmenu" onClick={handleToggleSubmenu}>
             <img
-              src='./forward.png'
-              className='forwardIcon'
-              alt='forwardIcon'
+              src="./forward.png"
+              className="forwardIcon"
+              alt="forwardIcon"
             ></img>
           </button>
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default Menu
+export default Menu;

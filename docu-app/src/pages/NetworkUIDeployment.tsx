@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
-import './NetworkUIDeployment.css'; 
-import copyIcon from '../assets/copy-symbol.png'; 
+import React, { useState } from "react";
+import "./NetworkUIDeployment.css";
+import copyIcon from "../assets/copy-symbol.svg";
 
 const NetworkUIDeployment: React.FC = () => {
-  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>({});
+  const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   const copyToClipboard = (text: string, snippetId: string) => {
-    navigator.clipboard.writeText(text)
+    navigator.clipboard
+      .writeText(text)
       .then(() => {
         setCopySuccess((prev) => ({ ...prev, [snippetId]: true }));
         setTimeout(() => {
           setCopySuccess((prev) => ({ ...prev, [snippetId]: false }));
         }, 1500);
       })
-      .catch((error) => console.error('Failed to copy text: ', error));
+      .catch((error) => console.error("Failed to copy text: ", error));
   };
 
   return (
@@ -22,7 +25,9 @@ const NetworkUIDeployment: React.FC = () => {
       <h1>Deployment</h1>
 
       <p>
-        Please run the following command in order to build the Docker images as defined in the <code>docker-compose.yml</code> file and to start the containers in detached mode (running in the background):
+        Please run the following command in order to build the Docker images as
+        defined in the <code>docker-compose.yml</code> file and to start the
+        containers in detached mode (running in the background):
       </p>
 
       <div className="codeSnippet">
@@ -31,10 +36,17 @@ const NetworkUIDeployment: React.FC = () => {
           <button
             className="copyButtonCode"
             onClick={() =>
-              copyToClipboard("docker-compose up -d --build", "docker-compose-command")
+              copyToClipboard(
+                "docker-compose up -d --build",
+                "docker-compose-command"
+              )
             }
           >
-            {copySuccess["docker-compose-command"] ? "Copied!" : <img className="copySymbol" src={copyIcon} alt="Copy" />}
+            {copySuccess["docker-compose-command"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
           </button>
         </pre>
       </div>
