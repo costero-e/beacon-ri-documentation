@@ -45,7 +45,7 @@ h2 {
 
 h5 {
   font-style: oblique;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 14px;
 }
 
@@ -106,6 +106,10 @@ li {
   margin-top: 20px;
   margin-bottom: 20px;
   font-size: 14px;
+}
+
+.endpoint-list li {
+  margin: 10px 0;
 }
 
 button.subMenuItem:focus,

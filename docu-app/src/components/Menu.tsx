@@ -32,7 +32,7 @@ const subMenuItems: { [key: string]: string[] } = {
     "Automated Deployment",
     "Manual Deployment",
     "Data Linking",
-    "Configuration",
+    "API Configuration",
     "Querying the API",
   ],
   "Beacon 2 RI Tools": [
@@ -62,7 +62,7 @@ const nestedSubMenuItems: { [key: string]: string[] } = {
     "Extract filtering terms",
     "Manually adding filtering terms",
   ],
-  Configuration: [
+  "API Configuration": [
     "Managing dataset permissions",
     "Supplying AAI credentials",
     "Handling CORS",
@@ -70,13 +70,7 @@ const nestedSubMenuItems: { [key: string]: string[] } = {
     "Limiting the granularity",
     "Adding beacon handovers",
   ],
-  "Querying the API": [
-    "GET Method",
-    "GET query examples",
-    "POST Method",
-    "POST query examples",
-    "List of endpoints",
-  ],
+  "Querying the API": ["GET Method", "POST Method"],
   "Configuration File": [
     "Generic config parameters",
     "VCF conversion config parameters",
@@ -100,6 +94,9 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
     "Beacon 2 RI Tools",
     "Beacon UI",
     "Beacon Network UI",
+    "Tutorials",
+    "FAQs",
+    "Official Links",
   ];
 
   const handleClick = (item: string) => {
@@ -154,7 +151,7 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
       "Automated Deployment": "/automated-deployment",
       "Manual Deployment": "/manual-deployment",
       "Data Linking": "/data-linking",
-      Configuration: "/api-configuration",
+      "API Configuration": "/api-configuration",
       "Querying the API": "/querying-api",
       "Beacon UI": "/beacon-ui",
       "Beacon Network UI": "/beacon-network-ui",
@@ -186,7 +183,7 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
       "Generic config parameters": "#generic-config-parameters",
       "VCF conversion config parameters": "#vcf-conversion-config-parameters",
       Deployment: "#deployment",
-      Configuration: "#configuration",
+      "API Configuration": "#configuration",
       "Querying the UI": "#querying-ui",
       "Tools Introduction": "#tools-introduction",
       "Installation Guide": "#installation-guide",

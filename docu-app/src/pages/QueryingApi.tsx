@@ -37,7 +37,22 @@ const QueryingAPI = () => {
 
   return (
     <div className="queryingApiContainer">
-      <h3>Beacon 2 RI API</h3>
+      <h2 className="user-path">
+        Documentation
+        <img
+          src="arrow-right-light.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        Beacon 2 RI API
+        <img
+          src="arrow-right-bold.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        <span className="user-path-title">Data Linking</span>
+      </h2>
+      <h3>Querying the API</h3>
       <h1>Querying the API</h1>
       <p>Beacon RI accepts two types of request methods: GET and POST.</p>
       <div className="note">
@@ -58,7 +73,7 @@ const QueryingAPI = () => {
       <h2 id="get-method">GET Method</h2>
       <p>
         GET method is a bit more limited as this method only accepts request
-        parameters, three generic parameters, and ontology filters.
+        parameters, three generic parameters and ontology filters.
       </p>
 
       <h6>Query Parameters</h6>
@@ -78,7 +93,7 @@ const QueryingAPI = () => {
         </thead>
         <tbody>
           <tr>
-            <td>requestedSchema</td>
+            <td>• requestedSchema</td>
             <td>String</td>
             <td>
               <div className="codeSnippet-table">
@@ -102,7 +117,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>skip</td>
+            <td>• skip</td>
             <td>
               integer (Skip) ≥ 0<br />
               Default: 0
@@ -124,7 +139,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>limit</td>
+            <td>• limit</td>
             <td>
               integer (Limit) ≥ 0<br />
               Default: 10
@@ -160,7 +175,7 @@ const QueryingAPI = () => {
         </thead>
         <tbody>
           <tr>
-            <td>start</td>
+            <td>• start</td>
             <td>
               integer &lt;int64&gt; ≥ 0<br />
               (or comma-separated integers)
@@ -182,7 +197,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>end</td>
+            <td>• end</td>
             <td>
               integer &lt;int64&gt; ≥ 0<br />
               (or comma-separated integers)
@@ -204,7 +219,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>assemblyId</td>
+            <td>• assemblyId</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -225,7 +240,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>referenceName</td>
+            <td>• referenceName</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
               <div className="codeSnippet-table">
@@ -246,7 +261,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>referenceBases</td>
+            <td>• referenceBases</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -267,15 +282,15 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>alternateBases</td>
+            <td>• alternateBases</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
-                <code>alternateBases=G</code>
+                <code>alternateBases=A</code>
                 <button
                   className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard("alternateBases=G", "alternateBases")
+                    copyToClipboard("alternateBases=A", "alternateBases")
                   }
                 >
                   {copySuccess["alternateBases"] ? (
@@ -288,7 +303,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>variantMinLength</td>
+            <td>• variantMinLength</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
               <div className="codeSnippet-table">
@@ -309,7 +324,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>variantMaxLength</td>
+            <td>• variantMaxLength</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
               <div className="codeSnippet-table">
@@ -330,7 +345,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>geneId</td>
+            <td>• geneId</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -349,7 +364,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>aminoacidChange</td>
+            <td>• aminoacidChange</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -373,7 +388,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>variantType</td>
+            <td>• variantType</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -394,7 +409,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>genomicAlleleShortForm</td>
+            <td>• genomicAlleleShortForm</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -420,7 +435,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>clinicalRelevance</td>
+            <td>• clinicalRelevance</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -456,7 +471,7 @@ const QueryingAPI = () => {
         </thead>
         <tbody>
           <tr>
-            <td>filters</td>
+            <td>• filters</td>
             <td>
               string
               <br />
@@ -577,7 +592,7 @@ const QueryingAPI = () => {
         </thead>
         <tbody>
           <tr>
-            <td>includeResultsetResponses</td>
+            <td>• includeResultsetResponses</td>
             <td>
               string <br />
               Default: "HIT"
@@ -588,23 +603,20 @@ const QueryingAPI = () => {
           </tr>
           <tr>
             <td>
-              pagination <li>skip</li>
+              • pagination object (Pagination) Items:
+              <li>skip</li>
               <li>limit</li>
             </td>
             <td>
-              <ul>
-                <></>
-                <li>
-                  integer (Skip) ≥ 0<br />
-                  Default: 0
-                </li>
-                <li>
-                  integer (Limit) ≥ 0<br />
-                  Default: 10
-                  <br />
-                  Max: 100
-                </li>
-              </ul>
+              <></>
+              integer (Skip) ≥ 0<br />
+              Default: 0 <br />
+              <br />
+              integer (Limit) ≥ 0
+              <br />
+              Default: 10
+              <br />
+              Max: 100
             </td>
 
             <td>
@@ -612,6 +624,7 @@ const QueryingAPI = () => {
                 <code>skip=0</code>
                 <br />
               </div>
+              <br />
               <div className="codeSnippet-table">
                 <code>limit=10</code>
                 <button
@@ -630,7 +643,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>requestedGranularity</td>
+            <td>• requestedGranularity</td>
             <td>
               string (Granularity)
               <br />
@@ -660,11 +673,12 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>testMode</td>
+            <td>• testMode</td>
             <td>
               boolean (TestMode)
               <br />
-              Default: false
+              Default: false <br />
+              (comma separated strings of ontologies)
             </td>
             <td>
               <div className="codeSnippet-table">
@@ -694,7 +708,7 @@ const QueryingAPI = () => {
         </thead>
         <tbody>
           <tr>
-            <td>start</td>
+            <td>• start</td>
             <td>
               integer &lt;int64&gt; ≥ 0<br />
               (or comma-separated integers)
@@ -716,7 +730,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>end</td>
+            <td>• end</td>
             <td>
               integer &lt;int64&gt; ≥ 0<br />
               (or comma-separated integers)
@@ -738,7 +752,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>assemblyId</td>
+            <td>• assemblyId</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -759,7 +773,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>referenceName</td>
+            <td>• referenceName</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
               <div className="codeSnippet-table">
@@ -780,7 +794,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>referenceBases</td>
+            <td>• referenceBases</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -801,15 +815,15 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>alternateBases</td>
+            <td>• alternateBases</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
-                <code>alternateBases=G</code>
+                <code>alternateBases=A</code>
                 <button
                   className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard("alternateBases=G", "alternateBases")
+                    copyToClipboard("alternateBases=A", "alternateBases")
                   }
                 >
                   {copySuccess["alternateBases"] ? (
@@ -822,7 +836,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>variantMinLength</td>
+            <td>• variantMinLength</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
               <div className="codeSnippet-table">
@@ -843,7 +857,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>variantMaxLength</td>
+            <td>• variantMaxLength</td>
             <td>integer &lt;int64&gt; ≥ 0</td>
             <td>
               <div className="codeSnippet-table">
@@ -864,7 +878,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>geneId</td>
+            <td>• geneId</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -883,7 +897,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>aminoacidChange</td>
+            <td>• aminoacidChange</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -907,7 +921,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>variantType</td>
+            <td>• variantType</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -928,7 +942,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>genomicAlleleShortForm</td>
+            <td>• genomicAlleleShortForm</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -954,7 +968,7 @@ const QueryingAPI = () => {
             </td>
           </tr>
           <tr>
-            <td>clinicalRelevance</td>
+            <td>• clinicalRelevance</td>
             <td>string</td>
             <td>
               <div className="codeSnippet-table">
@@ -990,10 +1004,13 @@ const QueryingAPI = () => {
         </thead>
         <tbody>
           <tr>
-            <td>filters</td>
+            <td>• filters</td>
             <td>
-              Array of OntologyFilter (object) or AlphanumericFilter (object) or
-              CustomFilter (object) (Filtering Term Element)
+              Array of OntologyFilter <br />
+              (object) or <br />
+              AlphanumericFilter (object) <br />
+              or CustomFilter (object) <br />
+              (Filtering Term Element)
             </td>
             <td>
               <div className="codeSnippet-table">
@@ -1038,33 +1055,63 @@ const QueryingAPI = () => {
       <div className="codeSnippet">
         <pre>
           <code>
-            {`curl -H 'Content-Type: application/json' -X POST -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "requestParameters": { "alternateBases": "G", "referenceBases": "A", "start": [16050074], "end": [16050568], "variantType": "SNP" },
-    "filters": [],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' http://localhost:5050/api/g_variants`}
+            {`curl \\
+  -H 'Content-Type: application/json' \\
+  -X POST \\
+  -d '{
+    "meta": {
+        "apiVersion": "2.0"
+    },
+    "query": {
+        "requestParameters": {
+            "alternateBases": "G",
+            "referenceBases": "A",
+            "start": [16050074],
+            "end": [16050568],
+            "variantType": "SNP"
+        },
+        "filters": [],
+        "includeResultsetResponses": "HIT",
+        "pagination": {
+            "skip": 0,
+            "limit": 10
+        },
+        "testMode": false,
+        "requestedGranularity": "record"
+    }
+}' \\
+  http://localhost:5050/api/g_variants`}
           </code>
           <button
             className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                `curl -H 'Content-Type: application/json' -X POST -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "requestParameters": { "alternateBases": "G", "referenceBases": "A", "start": [16050074], "end": [16050568], "variantType": "SNP" },
-    "filters": [],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' http://localhost:5050/api/g_variants`,
+                `curl \\
+  -H 'Content-Type: application/json' \\
+  -X POST \\
+  -d '{
+    "meta": {
+        "apiVersion": "2.0"
+    },
+    "query": {
+        "requestParameters": {
+            "alternateBases": "G",
+            "referenceBases": "A",
+            "start": [16050074],
+            "end": [16050568],
+            "variantType": "SNP"
+        },
+        "filters": [],
+        "includeResultsetResponses": "HIT",
+        "pagination": {
+            "skip": 0,
+            "limit": 10
+        },
+        "testMode": false,
+        "requestedGranularity": "record"
+    }
+}' \\
+  http://localhost:5050/api/g_variants`,
                 "genomic-query"
               )
             }
@@ -1083,33 +1130,57 @@ const QueryingAPI = () => {
         <div className="codeSnippet">
           <pre>
             <code>
-              {`curl -H 'Content-Type: application/json' -X POST -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "requestParameters": {},
-    "filters": [{"id": "NCIT:C20197", "scope": "individual"}, {"id": "NCIT:C42331", "scope": "individual"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' http://localhost:5050/api/individuals`}
+              {`curl \\
+  -H 'Content-Type: application/json' \\
+  -X POST \\
+  -d '{
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "requestParameters": {},
+      "filters": [
+        { "id": "NCIT:C20197", "scope": "individual" },
+        { "id": "NCIT:C42331", "scope": "individual" }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
+  http://localhost:5050/api/individuals`}
             </code>
             <button
               className="copyButtonCode"
               onClick={() =>
                 copyToClipboard(
-                  `curl -H 'Content-Type: application/json' -X POST -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "requestParameters": {},
-    "filters": [{"id": "NCIT:C20197", "scope": "individual"}, {"id": "NCIT:C42331", "scope": "individual"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' http://localhost:5050/api/individuals`,
+                  `curl \\
+  -H 'Content-Type: application/json' \\
+  -X POST \\
+  -d '{
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "requestParameters": {},
+      "filters": [
+        { "id": "NCIT:C20197", "scope": "individual" },
+        { "id": "NCIT:C42331", "scope": "individual" }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
+  http://localhost:5050/api/individuals`,
                   "curie-query"
                 )
               }
@@ -1131,15 +1202,26 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "filters": [{"id": "Weight", "operator": ">", "value": "75"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "filters": [
+        {
+          "id": "Weight",
+          "operator": ">",
+          "value": "75"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`}
             </code>
             <button
@@ -1150,15 +1232,26 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "filters": [{"id": "Weight", "operator": ">", "value": "75"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "filters": [
+        {
+          "id": "Weight",
+          "operator": ">",
+          "value": "75"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`,
                   "numerical-query"
                 )
@@ -1181,15 +1274,26 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "filters": [{"id": "geographicOrigin", "operator": "=", "value": "England"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "filters": [
+        {
+          "id": "geographicOrigin",
+          "operator": "=",
+          "value": "England"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`}
             </code>
             <button
@@ -1200,15 +1304,26 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "filters": [{"id": "geographicOrigin", "operator": "=", "value": "England"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "filters": [
+        {
+          "id": "geographicOrigin",
+          "operator": "=",
+          "value": "England"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`,
                   "exact-value-query"
                 )
@@ -1231,15 +1346,26 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "filters": [{"id": "geographicOrigin", "operator": "=", "value": "%land%"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "filters": [
+        {
+          "id": "geographicOrigin",
+          "operator": "=",
+          "value": "England"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`}
             </code>
             <button
@@ -1250,21 +1376,32 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "filters": [{"id": "geographicOrigin", "operator": "=", "value": "%land%"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "filters": [
+        {
+          "id": "geographicOrigin",
+          "operator": "=",
+          "value": "%land%"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`,
-                  "like-value-query"
+                  "exact-value-query"
                 )
               }
             >
-              {copySuccess["like-value-query"] ? (
+              {copySuccess["exact-value-query"] ? (
                 "Copied!"
               ) : (
                 <img className="copySymbol" src={copyIcon} alt="Copy" />
@@ -1281,15 +1418,26 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "filters": [{"id": "geographicOrigin", "operator": "!", "value": "%land%"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "filters": [
+        {
+          "id": "geographicOrigin",
+          "operator": "!",
+          "value": "%land%"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`}
             </code>
             <button
@@ -1300,15 +1448,26 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "filters": [{"id": "geographicOrigin", "operator": "!", "value": "%land%"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "filters": [
+        {
+          "id": "geographicOrigin",
+          "operator": "!",
+          "value": "%land%"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`,
                   "not-value-query"
                 )
@@ -1331,15 +1490,25 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "filters": [{"id": "NCIT:C16576", "similarity": "high"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "filters": [
+        {
+          "id": "NCIT:C16576",
+          "similarity": "high"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`}
             </code>
             <button
@@ -1350,15 +1519,25 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "filters": [{"id": "NCIT:C16576", "similarity": "high"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "filters": [
+        {
+          "id": "NCIT:C16576",
+          "similarity": "high"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`,
                   "similarity-query"
                 )
@@ -1431,22 +1610,36 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "requestParameters": {
-      "alternateBases": "G" ,
-      "referenceBases": "A" ,
-      "start": [ 16050074 ],
-      "end": [ 16050568 ],
-      "variantType": "SNP"
+    "meta": {
+      "apiVersion": "2.0"
     },
-    "filters": [{"id": "NCIT:C20197", "scope": "individual"}, {"id": "NCIT:C42331", "scope": "individual"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 100 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "query": {
+      "requestParameters": {
+        "alternateBases": "G",
+        "referenceBases": "A",
+        "start": [16050074],
+        "end": [16050568],
+        "variantType": "SNP"
+      },
+      "filters": [
+        {
+          "id": "NCIT:C20197",
+          "scope": "individual"
+        },
+        {
+          "id": "NCIT:C42331",
+          "scope": "individual"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 100
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/g_variants`}
             </code>
             <button
@@ -1457,22 +1650,36 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "requestParameters": {
-      "alternateBases": "G" ,
-      "referenceBases": "A" ,
-      "start": [ 16050074 ],
-      "end": [ 16050568 ],
-      "variantType": "SNP"
+    "meta": {
+      "apiVersion": "2.0"
     },
-    "filters": [{"id": "NCIT:C20197", "scope": "individual"}, {"id": "NCIT:C42331", "scope": "individual"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 100 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "query": {
+      "requestParameters": {
+        "alternateBases": "G",
+        "referenceBases": "A",
+        "start": [16050074],
+        "end": [16050568],
+        "variantType": "SNP"
+      },
+      "filters": [
+        {
+          "id": "NCIT:C20197",
+          "scope": "individual"
+        },
+        {
+          "id": "NCIT:C42331",
+          "scope": "individual"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 100
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/g_variants`,
                   "join-genomic-query"
                 )
@@ -1488,6 +1695,7 @@ const QueryingAPI = () => {
         </div>
 
         <h5 className="cursive">Join individuals query</h5>
+
         <div className="codeSnippet">
           <pre>
             <code>
@@ -1495,22 +1703,34 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "requestParameters": {
-      "alternateBases": "G" ,
-      "referenceBases": "A" ,
-      "start": [ 16050004 ],
-      "end": [ 16950115 ],
-      "variantType": "SNP"
+    "meta": {
+      "apiVersion": "2.0"
     },
-    "filters": [{"id": "NCIT:C20197"}, {"id": "NCIT:C42331"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "query": {
+      "requestParameters": {
+        "alternateBases": "G",
+        "referenceBases": "A",
+        "start": [16050004],
+        "end": [16950115],
+        "variantType": "SNP"
+      },
+      "filters": [
+        {
+          "id": "NCIT:C20197"
+        },
+        {
+          "id": "NCIT:C42331"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`}
             </code>
             <button
@@ -1521,22 +1741,34 @@ const QueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "requestParameters": {
-      "alternateBases": "G" ,
-      "referenceBases": "A" ,
-      "start": [ 16050004 ],
-      "end": [ 16950115 ],
-      "variantType": "SNP"
+    "meta": {
+      "apiVersion": "2.0"
     },
-    "filters": [{"id": "NCIT:C20197"}, {"id": "NCIT:C42331"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "query": {
+      "requestParameters": {
+        "alternateBases": "G",
+        "referenceBases": "A",
+        "start": [16050004],
+        "end": [16950115],
+        "variantType": "SNP"
+      },
+      "filters": [
+        {
+          "id": "NCIT:C20197"
+        },
+        {
+          "id": "NCIT:C42331"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`,
                   "join-individuals-query"
                 )
@@ -1560,16 +1792,27 @@ const QueryingAPI = () => {
   -H 'Authorization: Bearer <access_token>' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "requestParameters": {},
-    "filters": [{"id": "geographicOrigin", "operator": "=", "value": "%land%"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "requestParameters": {},
+      "filters": [
+        {
+          "id": "geographicOrigin",
+          "operator": "=",
+          "value": "%land%"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`}
             </code>
             <button
@@ -1581,16 +1824,27 @@ const QueryingAPI = () => {
   -H 'Authorization: Bearer <access_token>' \\
   -X POST \\
   -d '{
-  "meta": { "apiVersion": "2.0" },
-  "query": {
-    "requestParameters": {},
-    "filters": [{"id": "geographicOrigin", "operator": "=", "value": "%land%"}],
-    "includeResultsetResponses": "HIT",
-    "pagination": { "skip": 0, "limit": 10 },
-    "testMode": false,
-    "requestedGranularity": "record"
-  }
-}' \\
+    "meta": {
+      "apiVersion": "2.0"
+    },
+    "query": {
+      "requestParameters": {},
+      "filters": [
+        {
+          "id": "geographicOrigin",
+          "operator": "=",
+          "value": "%land%"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": {
+        "skip": 0,
+        "limit": 10
+      },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
   http://localhost:5050/api/individuals`,
                   "query-with-token"
                 )
@@ -1606,8 +1860,6 @@ const QueryingAPI = () => {
         </div>
       </div>
 
-      {/* Add other POST query examples similarly */}
-
       <h6 className="underline">List of endpoints</h6>
       <h5 className="cursive">Endpoints that accept all query parameters</h5>
       <ul>
@@ -1618,7 +1870,7 @@ const QueryingAPI = () => {
       <h5 className="cursive">
         Endpoints that only accept filters and generic parameters
       </h5>
-      <ul>
+      <ul className="endpoint-list">
         <li>/api/analyses</li>
         <li>/api/biosamples</li>
         <li>/api/cohorts</li>
@@ -1627,7 +1879,7 @@ const QueryingAPI = () => {
       </ul>
 
       <h5 className="cursive">Endpoints that only accept generic parameters</h5>
-      <ul>
+      <ul className="endpoint-list">
         <li>/api/filtering_terms</li>
         <li>/api/analyses/{"{id}"}</li>
         <li>/api/analyses/{"{id}"}/g_variants</li>
@@ -1670,7 +1922,7 @@ const QueryingAPI = () => {
       </ul>
 
       <h5 className="cursive">Endpoints that don’t accept query parameters</h5>
-      <ul>
+      <ul className="endpoint-list">
         <li>/api</li>
         <li>/api/info</li>
         <li>/api/service-info</li>

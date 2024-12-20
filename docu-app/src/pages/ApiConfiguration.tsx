@@ -74,8 +74,23 @@ const ApiConfiguration = () => {
 
   return (
     <div className="apiConfigContainer">
+      <h2 className="user-path">
+        Documentation
+        <img
+          src="arrow-right-light.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        Beacon 2 RI API
+        <img
+          src="arrow-right-bold.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        <span className="user-path-title">API Configuration</span>
+      </h2>
       <h3>Beacon 2 RI API</h3>
-      <h1>Configuration</h1>
+      <h1>API Configuration</h1>
 
       <h2 id="managing-dataset-permissions">Managing dataset permissions</h2>
       <p>
@@ -85,7 +100,7 @@ const ApiConfiguration = () => {
       <ul>
         <li>
           A public dataset is a dataset that will be returned in a beacon query
-          without an authentication token.
+          without an authentication token. 
         </li>
         <li>
           A registered dataset is a dataset that will be shown after a user
@@ -104,13 +119,17 @@ const ApiConfiguration = () => {
 
       <h4 id="method-1">Method 1: Edit the .yml files</h4>
       <p>
-        For a public dataset, edit the public_datasets.yml file inside
+        For a <b>public dataset</b>, edit the public_datasets.yml file inside
         permissions folder and add the dataset with the exact name it appears in
         the id from its pertinent record in datasets mongo collection:
       </p>
       <div className="codeSnippet">
         <pre>
-          <code>public_datasets:\n- dataset_id</code>
+          <code>
+            public_datasets:
+            <br />
+            -dataset_id
+          </code>
           <button
             className="copyButtonCode"
             onClick={() => copyToClipboard("method-1-public")}
@@ -125,13 +144,16 @@ const ApiConfiguration = () => {
       </div>
 
       <p>
-        For a registered dataset, edit the registered_datasets.yml file inside
-        permissions folder and add the dataset with the exact name it appears in
-        the id from its pertinent record in datasets mongo collection:
+        For a <b>registered dataset</b>, edit the registered_datasets.yml file
+        inside permissions folder and add the dataset with the exact name it
+        appears in the id from its pertinent record in datasets mongo
+        collection:
       </p>
       <div className="codeSnippet">
         <pre>
-          <code>registered_datasets:\n- dataset_id</code>
+          <code>
+            registered_datasets: <br /> -dataset_id
+          </code>
           <button
             className="copyButtonCode"
             onClick={() => copyToClipboard("method-1-registered")}
@@ -146,15 +168,18 @@ const ApiConfiguration = () => {
       </div>
 
       <p>
-        For a controlled dataset, edit the controlled_datasets.yml file inside
-        permissions folder and add the dataset inside the username you wish to
-        give permissions with the exact name for the dataset as it appears in
-        the id from its pertinent record in datasets mongo collection and the
-        exact name the user has in Keycloak:
+        For a <b>controlled dataset</b>, edit the controlled_datasets.yml file
+        inside permissions folder and add the dataset inside the username you
+        wish to give permissions with the exact name for the dataset as it
+        appears in the id from its pertinent record in datasets mongo collection
+        and the exact name the user has in Keycloak:
       </p>
       <div className="codeSnippet">
         <pre>
-          <code>username:\n- dataset_id</code>
+          <code>
+            username: <br />
+            -dataset_id
+          </code>
           <button
             className="copyButtonCode"
             onClick={() => copyToClipboard("method-1-controlled")}
@@ -176,7 +201,11 @@ const ApiConfiguration = () => {
       <div className="codeSnippet">
         <pre>
           <code>
-            SECRET_KEY="your_permissions_ui_secret_key"\nOIDC_RP_CLIENT_ID='your_client_id'\nOIDC_RP_CLIENT_SECRET='your_client_secret'
+            SECRET_KEY="your_permissions_ui_secret_key"
+            <br />
+            OIDC_RP_CLIENT_ID='your_client_id'
+            <br />
+            OIDC_RP_CLIENT_SECRET='your_client_secret'
           </code>
           <button
             className="copyButtonCode"
@@ -210,24 +239,37 @@ const ApiConfiguration = () => {
           </button>
         </pre>
       </div>
-
       <p>
-        After that, open the UI in port http://localhost:8010 and navigate
-        through public, registered and controlled datasets to assign permissions
-        for the datasets you have inside your mongo database.
+        <p>
+          After that, open the UI in port{" "}
+          <a
+            href="http://localhost:8010"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            http://localhost:8010
+          </a>{" "}
+          and navigate through public, registered, and controlled datasets to
+          assign permissions for the datasets you have inside your Mongo
+          database.
+        </p>
       </p>
 
       <h2 id="supplying-aai-credentials">Supplying AAI credentials</h2>
       <p>
-        For making Keycloak or LifeSciende AAI work with beacon, you will need
-        to add the client ID and client secret for each IDP in a new file you
-        have to create inside permissions folder. This file must be called .env
-        and needs to have the following variables:
+        For making <b>Keycloak</b> or <b>LifeSciende AAI</b> work with beacon,
+        you will need to add the client ID and client secret for each IDP in a
+        new file you have to create inside permissions folder. This file must be
+        called .env and needs to have the following variables:
       </p>
+
       <div className="codeSnippet">
         <pre>
           <code>
-            LSAAI_CLIENT_ID='your_lsaai_client_id'\nLSAAI_CLIENT_SECRET='your_lsaai_client_secret'\nKEYCLOAK_CLIENT_ID='your_keycloak_client_id'\nKEYCLOAK_CLIENT_SECRET='your_keycloak_client_secret'
+            LSAAI_CLIENT_ID='your_lsaai_client_id' <br />
+            LSAAI_CLIENT_SECRET='your_lsaai_client_secret' <br />
+            KEYCLOAK_CLIENT_ID='your_keycloak_client_id' <br />
+            KEYCLOAK_CLIENT_SECRET='your_keycloak_client_secret'
           </code>
           <button
             className="copyButtonCode"
@@ -240,6 +282,17 @@ const ApiConfiguration = () => {
             )}
           </button>
         </pre>
+        <p className="note">
+          <img
+            className="note-symbol"
+            src="/note-symbol.png"
+            alt="Note symbol"
+          />
+          <div>
+            Note that you only need to fill variables for the AAI method you
+            want to enable.
+          </div>
+        </p>
       </div>
 
       <p>After that, make sure you build your beacon container again:</p>
@@ -264,7 +317,7 @@ const ApiConfiguration = () => {
         To avoid CORS using beacon and the frontend or a third-party
         authorization site like Keycloak, you will have to include all these
         URLs inside __main__.py in the beacon folder, including them in the CORS
-        middleware.
+        middleware,
       </p>
       <div className="codeSnippet">
         <pre>
@@ -305,23 +358,6 @@ const ApiConfiguration = () => {
             <br />
             &nbsp;&nbsp;&nbsp;&nbsp;&#125;)
             <br />
-            <br />
-            for route in list(beacon.router.routes()):
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;cors.add(route, &#123;
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"your_URL":
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aiohttp_cors.ResourceOptions(allow_credentials=True,
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expose_headers="*",
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow_methods=("POST",
-            "PATCH", "GET", "OPTIONS"),
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow_headers=DEFAULT_ALLOW_HEADERS)
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&#125;)
           </code>
           <button
             className="copyButtonCode"
@@ -339,20 +375,32 @@ const ApiConfiguration = () => {
       <h2 id="editing-beacon-info">Editing your beacon information</h2>
       <p>
         To show correctly your beacon’s information you will need to edit both
-        conf.py files from beacon and deploy folders. To do so, edit the
-        following variables:
+        conf.py files from beacon and deploy folders. <br />
+        To do so, edit the following variables:
       </p>
       <div className="codeSnippet">
         <pre>
           <code>
-            {`beacon_id = 'org.ega-archive.beacon-ri-demo'\n`}
-            {`beacon_name = 'Beacon Reference Implementation demo'\n`}
-            {`api_version = 'v2.0.0'\n`}
+            {`beacon_id = 'org.ega-archive.beacon-ri-demo' # ID of the Beacon`}
+            <br />
+            {`beacon_name = 'Beacon Reference Implementation demo' # Name of the Beacon service`}
+            <br />
+            {`api_version = 'v2.0.0'  # Version of the Beacon implementation`}
+            <br />
             {`uri = 'https://beacon-apis-demo.ega-archive.org/api/'\n`}
-            {`org_id = 'EGA'\n`}
-            {`org_name = 'European Genome-Phenome Archive (EGA)'\n`}
-            {`org_description = 'The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.'\n`}
-            {`org_adress = 'C/ Dr. Aiguader, 88\nPRBB Building\n08003 Barcelona, Spain'\n`}
+            {`org_id = 'EGA' # Id of the organization`}
+            <br />
+            {`org_name = 'European Genome-Phenome Archive (EGA)' # Full name`}
+            <br />
+            <>
+              {`org_description = ('The European Genome-phenome Archive (EGA)'
+            'is a service for permanent archiving and sharing' 
+            'of all types of personally identifiable genetic' 
+            'and phenotypic data resulting from biomedical research projects.')\n`}
+            </>
+            {`org_adress = ('C/ Dr. Aiguader, 88'
+          'PRBB Building'
+          '08003 Barcelona, Spain')\n`}
             {`org_welcome_url = 'https://ega-archive.org/'\n`}
             {`org_contact_url = 'mailto:beacon.ega@crg.eu'\n`}
             {`org_logo_url = 'https://legacy.ega-archive.org/images/logo.png'\n`}
@@ -375,20 +423,32 @@ const ApiConfiguration = () => {
             )}
           </button>
         </pre>
+        <p className="note">
+          <img
+            className="note-symbol"
+            src="/note-symbol.png"
+            alt="Note symbol"
+          />
+          <div>
+            Note that this is the info that will be shown in the /info endpoint
+            for your beacon.
+          </div>
+        </p>
       </div>
 
       <h2 id="limiting-granularity">Limiting the granularity</h2>
       <p>
-        Beacon RI can limit the granularity per user or for all the beacon. If
-        you want to limit the granularity for all the users to a maximum, you
-        can point it in conf.py for both beacon and deploy folders, by editing
-        the next variables:
+        Beacon RI can limit the granularity per user or for all the beacon.
+        <br /> <br /> If you want to{" "}
+        <b>limit the granularity for all the users to a maximum</b>, you can
+        point it in conf.py for both beacon and deploy folders, by editing the
+        next variables:
       </p>
       <div className="codeSnippet">
         <pre>
           <code>
-            default_beacon_granularity = "record"\nmax_beacon_granularity =
-            "record"
+            default_beacon_granularity = "record" <br />
+            max_beacon_granularity = "record"
           </code>
           <button
             className="copyButtonCode"
@@ -404,14 +464,18 @@ const ApiConfiguration = () => {
       </div>
 
       <p>
-        If you want to limit the granularity per user, you can do this by
+        If you want to <b>limit the granularity per user</b>, you can do this
         editing the response_type.yml file inside beacon/request folder, adding
         the username and the maximum granularity you want to allow this user to
         have:
       </p>
       <div className="codeSnippet">
         <pre>
-          <code>dummy_user:\n- record</code>
+          <code>
+            dummy_user:
+            <br />
+            -record
+          </code>
           <button
             className="copyButtonCode"
             onClick={() => copyToClipboard("granularity-response")}
@@ -430,7 +494,7 @@ const ApiConfiguration = () => {
         You can specify what are the handovers for your beacon by adding them in
         the array of your conf.py file inside beacon folder:
       </p>
-      <div className="codeSnippet">
+      <div className="codeSnippet custom-codeSnippet">
         <pre>
           <code>
             beacon_handovers = [<br />

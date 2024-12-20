@@ -21,9 +21,9 @@
 }
 
 h4 {
-  font-size: 16px;
-  color: #4a88b1;
+  font-size: 14px;
   margin-bottom: 40px;
+  text-decoration: underline;
 }
 
 .collaborators-div {
