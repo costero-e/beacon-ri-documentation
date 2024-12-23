@@ -1,7 +1,7 @@
 import "./QueryingAPI.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import copyIcon from "../assets/copy-symbol.svg";
+import copyIcon from "../../assets/copy-symbol.svg";
 
 const QueryingAPI = () => {
   const location = useLocation();
@@ -50,9 +50,9 @@ const QueryingAPI = () => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <span className="user-path-title">Data Linking</span>
+        <span className="user-path-title">Querying the API</span>
       </h2>
-      <h3>Querying the API</h3>
+      <h3>Beacon 2 RI API</h3>
       <h1>Querying the API</h1>
       <p>Beacon RI accepts two types of request methods: GET and POST.</p>
       <div className="note">

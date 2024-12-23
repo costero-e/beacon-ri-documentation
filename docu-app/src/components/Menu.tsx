@@ -35,6 +35,14 @@ const subMenuItems: { [key: string]: string[] } = {
     "API Configuration",
     "Querying the API",
   ],
+
+  "Beacon 2 PI API": [
+    "Automated Deployment",
+    "Manual Deployment",
+    "Filtering Terms",
+    "Configuration",
+    "PI Querying the API",
+  ],
   "Beacon 2 RI Tools": [
     "Starting Guide",
     "Configuration File",
@@ -46,39 +54,81 @@ const subMenuItems: { [key: string]: string[] } = {
   "Beacon Network UI": ["Deployment", "Configuration UI", "Querying the UI"],
 };
 
-const nestedSubMenuItems: { [key: string]: string[] } = {
-  "Automated Deployment": [
-    "Cloning the repository",
-    "Execute start script from root",
-  ],
-  "Manual Deployment": [
-    "Cloning the repository",
-    "Creating the containers",
-    "Data injection",
-    "Data indexing",
-  ],
-  "Data Linking": [
-    "Linking ids to dataset and cohort",
-    "Extract filtering terms",
-    "Manually adding filtering terms",
-  ],
-  "API Configuration": [
-    "Managing dataset permissions",
-    "Supplying AAI credentials",
-    "Handling CORS",
-    "Editing your beacon information",
-    "Limiting the granularity",
-    "Adding beacon handovers",
-  ],
-  "Querying the API": ["GET Method", "POST Method"],
-  "Configuration File": [
-    "Generic config parameters",
-    "VCF conversion config parameters",
-  ],
-  "Starting Guide": ["Tools Introduction", "Installation Guide"],
-  "Beacon UI": ["Deployment", "Configuration", "Querying the UI"],
-  "Beacon Network UI": ["Deployment", "Configuration", "Querying the UI"],
-};
+const nestedSubMenuItems: { [key: string]: { key: string; label: string }[] } =
+  {
+    "Automated Deployment": [
+      { key: "cloning-repository", label: "Cloning the repository" },
+      { key: "execute-start-script", label: "Execute start script from root" },
+    ],
+    "Manual Deployment": [
+      { key: "cloning-repository", label: "Cloning the repository" },
+      { key: "creating-containers", label: "Creating the containers" },
+      { key: "data-injection", label: "Data injection" },
+      { key: "data-indexing", label: "Data indexing" },
+    ],
+    "Data Linking": [
+      { key: "linking-ids", label: "Linking ids to dataset and cohort" },
+      { key: "extract-filtering-terms", label: "Extract filtering terms" },
+      {
+        key: "manually-adding-terms",
+        label: "Manually adding filtering terms",
+      },
+    ],
+    "API Configuration": [
+      { key: "managing-permissions", label: "Managing dataset permissions" },
+      { key: "supplying-aai", label: "Supplying AAI credentials" },
+      { key: "handling-cors", label: "Handling CORS" },
+      { key: "editing-beacon-info", label: "Editing your beacon information" },
+      { key: "limiting-granularity", label: "Limiting the granularity" },
+      { key: "adding-handovers", label: "Adding beacon handovers" },
+    ],
+    Configuration: [
+      { key: "editing-info", label: "Editing your beacon information" },
+      { key: "managing-permissions", label: "Managing dataset permissions" },
+      { key: "supplying-aai", label: "Supplying AAI credentials" },
+      { key: "handling-cors", label: "Handling CORS" },
+      { key: "default-granularity", label: "Setting the default granularity" },
+      { key: "adding-handovers", label: "Adding beacon handovers" },
+      { key: "configuring-entry-types", label: "Configuring your entry types" },
+      { key: "setting-logs", label: "Setting the logs" },
+      { key: "tls-config", label: "TLS configuration" },
+      { key: "tls-mongodb", label: "TLS secured MongoDB" },
+    ],
+    "Querying the API": [
+      { key: "get-method", label: "GET Method" },
+      { key: "post-method", label: "POST Method" },
+    ],
+    "PI Querying the API": [
+      { key: "pi-get-method", label: "GET Method" },
+      { key: "pi-post-method", label: "POST Method" },
+    ],
+    "Configuration File": [
+      { key: "generic-config", label: "Generic config parameters" },
+      { key: "vcf-config", label: "VCF conversion config parameters" },
+    ],
+    "Starting Guide": [
+      { key: "tools-intro", label: "Tools Introduction" },
+      { key: "installation-guide", label: "Installation Guide" },
+    ],
+    "Beacon UI": [
+      { key: "ui-deployment", label: "Deployment" },
+      { key: "ui-configuration", label: "Configuration" },
+      { key: "ui-querying", label: "Querying the UI" },
+    ],
+    "Beacon Network UI": [
+      { key: "network-deployment", label: "Deployment" },
+      { key: "network-configuration", label: "Configuration" },
+      { key: "network-querying", label: "Querying the UI" },
+    ],
+    "Filtering Terms": [
+      { key: "extract-terms", label: "Extract filtering terms" },
+      {
+        key: "manually-adding-terms",
+        label: "Manually adding filtering terms",
+      },
+      { key: "get-descendant-terms", label: "Get descendant terms" },
+    ],
+  };
 
 function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>("Introduction");
@@ -90,8 +140,10 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
 
   const menuItems: string[] = [
     "Introduction",
+    "Beacon 2 PI API",
     "Beacon 2 RI API",
     "Beacon 2 RI Tools",
+    "Beacon Verifier",
     "Beacon UI",
     "Beacon Network UI",
     "Tutorials",
@@ -143,54 +195,61 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
 
   const handleNestedSubMenuItemClick = (
     subItem: string,
-    nestedItem: string
+    nestedItem: { key: string; label: string }
   ) => {
-    setActiveNestedSubMenuItem(nestedItem);
+    setActiveNestedSubMenuItem(nestedItem.key);
 
     const basePathMap: { [key: string]: string } = {
       "Automated Deployment": "/automated-deployment",
       "Manual Deployment": "/manual-deployment",
       "Data Linking": "/data-linking",
       "API Configuration": "/api-configuration",
+      Configuration: "/pi-api-configuration",
       "Querying the API": "/querying-api",
+      "PI Querying the API": "/pi-querying-api",
       "Beacon UI": "/beacon-ui",
       "Beacon Network UI": "/beacon-network-ui",
       "Configuration File": "/configuration-file",
       "Starting Guide": "/starting-guide",
+      "Filtering Terms": "/filtering-terms",
     };
 
     const pathMap: { [key: string]: string } = {
-      "Cloning the repository": "#cloning-repository",
-      "Execute start script from root": "#execute-start-script",
-      "Creating the containers": "#creating-the-containers",
-      "Data injection": "#data-injection",
-      "Data indexing": "#data-indexing",
-      "Linking ids to dataset and cohort": "#linking-ids-to-dataset-and-cohort",
-      "Extract filtering terms": "#extract-filtering-terms",
-      "Manually adding filtering terms": "#manually-adding-filtering-terms",
-      "Get descendant terms": "#get-descendant-terms",
-      "Managing dataset permissions": "#managing-dataset-permissions",
-      "Supplying AAI credentials": "#supplying-aai-credentials",
-      "Handling CORS": "#handling-cors",
-      "Editing your beacon information": "#editing-beacon-info",
-      "Limiting the granularity": "#limiting-granularity",
-      "Adding beacon handovers": "#adding-beacon-handovers",
-      "GET Method": "#get-method",
-      "GET query examples": "#get-query-examples",
-      "POST Method": "#post-method",
-      "POST query examples": "#post-query-examples",
-      "List of endpoints": "#list-of-endpoints",
-      "Generic config parameters": "#generic-config-parameters",
-      "VCF conversion config parameters": "#vcf-conversion-config-parameters",
-      Deployment: "#deployment",
-      "API Configuration": "#configuration",
-      "Querying the UI": "#querying-ui",
-      "Tools Introduction": "#tools-introduction",
-      "Installation Guide": "#installation-guide",
+      "cloning-repository": "#cloning-repository",
+      "execute-start-script": "#execute-start-script",
+      "creating-containers": "#creating-the-containers",
+      "data-injection": "#data-injection",
+      "data-indexing": "#data-indexing",
+      "linking-ids": "#linking-ids-to-dataset-and-cohort",
+      "extract-filtering-terms": "#extract-filtering-terms",
+      "manually-adding-terms": "#manually-adding-filtering-terms",
+      "get-descendant-terms": "#get-descendant-terms",
+      "managing-permissions": "#managing-dataset-permissions",
+      "supplying-aai": "#supplying-aai-credentials",
+      "handling-cors": "#handling-cors",
+      "editing-beacon-info": "#editing-beacon-info",
+      "limiting-granularity": "#limiting-granularity",
+      "adding-handovers": "#adding-beacon-handovers",
+      "get-method": "#get-method",
+      "post-method": "#post-method",
+      "pi-get-method": "#pi-get-method",
+      "pi-post-method": "#pi-post-method",
+      "generic-config": "#generic-config-parameters",
+      "vcf-config": "#vcf-conversion-config-parameters",
+      deployment: "#deployment",
+      "api-configuration": "#configuration",
+      "default-granularity": "#setting-default-granularity",
+      "configuring-entry-types": "#configuring-entry-types",
+      "setting-logs": "#setting-logs",
+      "tls-config": "#TLS-configuration",
+      "tls-mongodb": "#TLS-secured-MongoDB",
+      "querying-ui": "#querying-ui",
+      "tools-intro": "#tools-introduction",
+      "installation-guide": "#installation-guide",
     };
 
     const basePath = basePathMap[subItem];
-    const hash = pathMap[nestedItem];
+    const hash = pathMap[nestedItem.key];
 
     if (basePath && hash) {
       navigate(`${basePath}${hash}`);
@@ -266,11 +325,11 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
                   </button>
                   {activeSubMenu === subItem && nestedSubMenuItems[subItem] && (
                     <div className="nestedSubMenu">
-                      {nestedSubMenuItems[subItem].map((nestedItem: string) => (
+                      {nestedSubMenuItems[subItem].map((nestedItem) => (
                         <div
-                          key={nestedItem}
+                          key={nestedItem.key}
                           className={`nestedSubMenuItem ${
-                            activeNestedSubMenuItem === nestedItem
+                            activeNestedSubMenuItem === nestedItem.key
                               ? "active"
                               : ""
                           }`}
@@ -278,7 +337,7 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
                             handleNestedSubMenuItemClick(subItem, nestedItem)
                           }
                         >
-                          {nestedItem}
+                          {nestedItem.label}
                         </div>
                       ))}
                     </div>

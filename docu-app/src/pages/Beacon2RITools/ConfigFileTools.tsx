@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ConfigFileTools.css";
-import copyIcon from "../assets/copy-symbol.svg";
+import copyIcon from "../../assets/copy-symbol.svg";
 
 const ConfigFileTools: React.FC = () => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(

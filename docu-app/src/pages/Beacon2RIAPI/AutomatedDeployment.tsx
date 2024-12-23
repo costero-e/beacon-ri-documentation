@@ -1,7 +1,7 @@
 import "./AutomatedDeployment.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import copyIcon from "../assets/copy-symbol.svg";
+import copyIcon from "../../assets/copy-symbol.svg";
 
 const AutomatedDeployment = () => {
   const location = useLocation();

@@ -1,0 +1,544 @@
+Beacon RI accepts two types of request methods: GET and POST.
+
+GET Method
+
+GET method is a bit more limited as this method only accepts request parameters, three generic parameters and ontology filters.
+
+Query Parameters
+These are the defined set of parameters (key-value pair) attached to the end of a URL used to provide additional information to a web server when making requests.
+
+Generic parameters
+
+requestedSchema	string
+Example: requestedSchema=ga4gh-service-info-v1.0
+
+skip	integer (Skip) >= 0
+Default: 0
+Example: skip=0
+
+limit	integer (Limit) >= 0
+Default: 10
+Max: 100
+Example: limit=10
+
+Request parameters
+
+	start	integer <int64> >= 0 (or comma separated integers)
+	Example: start=16050074
+
+end	integer <int64> >= 0 (or comma separated integers)
+Example: end=16052080
+
+	assemblyId	string
+	Example: assemblyId=GRCh38 
+
+referenceName	<int64> >= 0
+Example: referenceName=22
+
+referenceBases	string
+Example: referenceBases=G
+
+alternateBases	string
+Example: alternateBases=G
+
+variantMinLength	integer <int64> >= 0
+Example: variantMinLength=5
+
+variantMaxLength	integer <int64> >= 0
+Example: variantMaxLength=2
+
+geneId		string
+Example: geneId=CCNL2
+
+aminoacidChange	string
+Example: aminoacidChange=p.Thr130Met
+
+variantType	string
+Example: variantType=SNP
+
+genomicAlleleShortForm	string
+Example: genomicAlleleShortForm=NC_000022.11:g.16050075A>G
+
+clinicalRelevance	string
+Example: clinicalRelevance=pathogenic
+
+Filters
+	
+	filters	string (comma separated strings of ontologies)
+	Example: filters=NCIT:C16576,NCIT:C42331
+
+GET query examples
+
+Beacon Sequence Query
+
+http://localhost:5050/api/g_variants?referenceName=22&start=7577120&referenceBases=G&alternateBases=A
+
+Beacon GeneId Query
+
+http://localhost:5050/api/g_variants?geneId=CHR_START-DUXAP8&variantMaxLength=2&variantType=INDEL
+
+Beacon Bracket Query
+
+http://localhost:5050/api/g_variants?referenceName=22&start=16050074,16050076&end=16050090&variantType=SNP
+
+
+POST Method
+
+In POST method requests, the endpoints accept all generic parameters and all the filters, apart from the request parameters.
+
+Query Parameters
+
+Generic parameters
+
+includeResultsetResponses	string (IncludeResultsetResponses)
+Default: "HIT"
+Enum: "ALL" "HIT" "MISS" "NONE"
+
+pagination	object (Pagination)
+Items: 
+skip	integer (Skip) >= 0
+Default: 0
+Example: skip=0
+
+limit	integer (Limit) >= 0
+Default: 10
+Max: 100
+Example: limit=10
+
+requestedGranularity	string (Granularity)
+Default: "boolean"
+Enum: "boolean" "count" "aggregated" "record"
+
+testMode	
+boolean (TestMode)
+Default: false
+
+Request parameters
+
+	start	integer <int64> >= 0 (or comma separated integers)
+	Example: start=16050074
+
+end	integer <int64> >= 0 (or comma separated integers)
+Example: end=16052080
+
+	assemblyId	string
+	Example: assemblyId=GRCh38 
+
+referenceName	<int64> >= 0
+Example: referenceName=22
+
+referenceBases	string
+Example: referenceBases=G
+
+alternateBases	string
+Example: alternateBases=G
+
+variantMinLength	integer <int64> >= 0
+Example: variantMinLength=5
+
+variantMaxLength	integer <int64> >= 0
+Example: variantMaxLength=2
+
+geneId		string
+Example: geneId=CCNL2
+
+aminoacidChange	string
+Example: aminoacidChange=p.Thr130Met
+
+variantType	string
+Example: variantType=SNP
+
+genomicAlleleShortForm	string
+Example: genomicAlleleShortForm=NC_000022.11:g.16050075A>G
+
+clinicalRelevance	string
+Example: clinicalRelevance=pathogenic
+
+Filters
+	
+	filters	Array of OntologyFilter (object) or AlphanumericFilter (object) or CustomFilter (object) (Filtering Term Element)
+	Example:
+       "filters": [    {
+        "id": "geographicOrigin",
+        "operator": "!",
+        "value": "England"
+    }]
+
+POST query examples
+
+Genomic query
+
+curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+    	"requestParameters": {
+	"alternateBases": "G" ,
+	"referenceBases": "A" ,
+"start": [ 16050074 ],
+        	"end": [ 16050568 ],
+     		"variantType": "SNP"
+    	},
+    	"filters": [],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 10
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/g_variants
+
+
+Simple CURIE based filters query
+
+curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+    	"requestParameters": {
+    	},
+    	"filters": [
+{"id": "NCIT:C20197", "scope": "individual"}, {"id": "NCIT:C42331", "scope": "individual"}],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 10
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/individuals
+
+Numerical value query
+
+curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+    	"filters": [{
+    	"id": "Weight",
+    	"operator": ">",
+    	"value": "75"
+	}],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 10
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/individuals
+
+
+
+Alphanumerical value query (Exact value)
+
+curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+    	"filters": [	{
+    	"id": "geographicOrigin",  
+    	"operator": "=",
+    	"value": "England"    
+	}],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 10
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/individuals
+
+Alphanumerical value query (Like value)
+
+curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+    	"filters": [	{
+    	"id": "geographicOrigin",
+    	"operator": "=",
+    	"value": "%land%"
+	}],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 10
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/individuals
+
+
+Alphanumerical value query (NOT value)
+
+curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+    	"filters": [	{
+    	"id": "geographicOrigin",
+    	"operator": "!",
+    	"value": "%land%"
+	}],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 10
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/individuals
+
+
+
+
+Semantic similarity query
+
+curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+    	"filters": [    	{
+    	"id": "NCIT:C16576",
+    	"similarity": "high"
+	}],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 10
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/individuals
+
+Custom filter query
+
+curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+    	"filters": [    	{
+    	"id": "sampleOriginType:blood"
+	}],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 10
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/biosamples
+
+Join genomic query
+
+curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+    	"requestParameters": {
+	"alternateBases": "G" ,
+	"referenceBases": "A" ,
+"start": [ 16050074 ],
+        	"end": [ 16050568 ],
+     		"variantType": "SNP"
+    	},
+    	"filters": [
+{"id": "NCIT:C20197", "scope": "individual"}, {"id": "NCIT:C42331", "scope": "individual"}],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 100
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/g_variants
+
+
+
+
+
+Join individuals query
+
+curl \
+  -H 'Content-Type: application/json' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+    	"requestParameters": {
+	"alternateBases": "G" ,
+	"referenceBases": "A" ,
+"start": [ 16050004 ],
+        	"end": [ 16950115 ],
+        	"variantType": "SNP"
+    	},
+    	"filters": [
+{"id": "NCIT:C20197"}, {"id": "NCIT:C42331"}],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 10
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/individuals
+
+Query with access token
+
+curl \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer <access_token>' \
+  -X POST \
+  -d '{
+	"meta": {
+    	"apiVersion": "2.0"
+	},
+	"query": {
+"requestParameters": {    	},
+ 
+    	"filters": [	{
+    	"id": "geographicOrigin",
+    	"operator": "=",
+    	"value": "%land%"
+	}],
+    	"includeResultsetResponses": "HIT",
+    	"pagination": {
+        	"skip": 0,
+        	"limit": 10
+    	},
+    	"testMode": false,
+    	"requestedGranularity": "record"
+	}
+}' \
+  http://localhost:5050/api/individuals
+
+
+List of endpoints
+
+Endpoints that accept all query parameters
+
+/api/g_variants
+/api/individuals
+
+Endpoints that only accept filters and generic parameters
+
+/api/analyses
+/api/biosamples
+/api/cohorts
+/api/datasets
+/api/runs
+
+Endpoints that only accept generic parameters
+
+/api/filtering_terms
+/api/analyses/{id}
+/api/analyses/{id]/g_variants
+/api/analyses/filtering_terms
+/api/biosamples/{id}
+/api/biosamples/{id}/analyses
+/api/biosamples/{id}/g_variants
+/api/biosamples/{id}/runs
+/api/biosamples/filtering_terms
+/api/cohorts/{id}
+/api/cohorts/{id}/analyses
+/api/cohorts/{id}/biosamples
+/api/cohorts/{id}/g_variants
+/api/cohorts/{id}/individuals
+/api/cohorts/{id}/runs
+/api/cohorts/filtering_terms
+/api/datasets/{id}
+/api/datasets/{id}/analyses
+/api/datasets/{id}/biosamples
+/api/datasets/{id}/g_variants
+/api/datasets/{id}/individuals
+/api/datasets/{id}/runs
+/api/datasets/filtering_terms
+/api/g_variants/{id}
+/api/g_variants/{id}/analyses
+/api/g_variants/{id}/biosamples
+/api/g_variants/{id}/individuals
+/api/g_variants/{id}/runs
+/api/g_variants/filtering_terms
+/api/individuals/{id}
+/api/individuals/{id}/analyses
+/api/individuals/{id}/biosamples
+/api/individuals/{id}/g_variants
+/api/individuals/{id}/runs
+/api/individuals/filtering_terms
+/api/runs/{id}
+/api/runs/{id}/analyses
+/api/runs/{id}/g_variants
+/api/runs/filtering_terms
+
+Endpoints that don’t accept query parameters
+
+/api
+/api/info
+/api/service-info
+/api/configuration
+/api/entry_types
+/api/map
+
+
+

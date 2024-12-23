@@ -1,9 +1,9 @@
-import "./ManualDeployment.css";
+import "../Beacon2RIAPI/ManualDeployment.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import copyIcon from "../assets/copy-symbol.svg";
+import copyIcon from "../../assets/copy-symbol.svg";
 
-const ManualDeployment = () => {
+const PiManualDeployment = () => {
   const location = useLocation();
 
   // State to manage copy success for each snippet independently
@@ -82,7 +82,7 @@ const ManualDeployment = () => {
           alt="arrow right"
           className="arrow-icon"
         />
-        Beacon 2 RI API
+        Beacon 2 PI API
         <img
           src="arrow-right-bold.svg"
           alt="arrow right"
@@ -90,7 +90,7 @@ const ManualDeployment = () => {
         />
         <span className="user-path-title"> Manual Deployment</span>
       </h2>
-      <h3>Beacon 2 RI API</h3>
+      <h3>Beacon 2 PI API</h3>
       <h1>Manual Deployment</h1>
 
       <h2 id="cloning-repository">Cloning the repository</h2>
@@ -312,4 +312,4 @@ const ManualDeployment = () => {
   );
 };
 
-export default ManualDeployment;
+export default PiManualDeployment;

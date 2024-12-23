@@ -1,0 +1,132 @@
+Managing dataset permissions
+
+There are 3 possible levels of beacon security for a dataset: public, registered and controlled.
+A public dataset is a dataset that will be returned in a beacon query without an authentication token. 
+A registered dataset is a dataset that will be shown after a user sends a valid token (in other words, is logged in).
+A controlled dataset is a dataset that needs a user to send a valid token for authentication and the user needs to be allowed to query that dataset.
+There are two possible methods to administer these permissions for your datasets in beacon:
+
+Method 1: Edit the .yml files
+
+For a public dataset, edit the public_datasets.yml file inside permissions folder and add the dataset with the exact name it appears in the id from its pertinent record in datasets mongo collection:
+
+public_datasets:
+- dataset_id
+
+For a registered dataset, edit the registered_datasets.yml file inside permissions folder and add the dataset with the exact name it appears in the id from its pertinent record in datasets mongo collection:
+
+registered_datasets:
+- dataset_id
+
+For a controlled dataset, edit the controlled_datasets.yml file inside permissions folder and add the dataset inside the username you wish to give permissions with the exact name for the dataset as it appears in the id from its pertinent record in datasets mongo collection and the exact name the user has in Keycloak:
+
+username:
+- dataset_id
+
+Method 2: Launching the beacon admin UI
+
+Create an .env file inside permissions/permissions-ui/web folder and add the next variables with their values:
+
+SECRET_KEY="your_permissions_ui_secret_key"
+OIDC_RP_CLIENT_ID='your_client_id'
+OIDC_RP_CLIENT_SECRET='your_client_secret'
+
+Execute the next command to launch the UI:
+
+docker exec beacon-permissions bash permissions/permissions-ui/start.sh
+
+After that, open the ui in port http://localhost:8010 and navigate through public, registered and controlled datasets to assign permissions for the datasets you have inside your mongo database.
+
+Supplying AAI credentials
+
+For making Keycloak or LifeSciende AAI work with beacon, you will need to add the client ID and client secret for each IDP in a new file you have to create inside permissions folder. This file must be called .env and needs to have the following variables:
+
+LSAAI_CLIENT_ID='your_lsaai_client_id'
+LSAAI_CLIENT_SECRET='your_lsaai_client_secret'
+KEYCLOAK_CLIENT_ID='your_keycloak_client_id'
+KEYCLOAK_CLIENT_SECRET='your_keycloak_client_secret'
+
+Note that you only need to fill variables for the AAI method you want to enable.
+
+After that, make sure you build your beacon container again:
+
+cd deploy && docker-compose up -d --build beacon
+
+Handling CORS
+
+To avoid CORS using beacon and the frontend or a third-party authorization site like Keycloak, you will have to include all these URLs inside __main__.py in the beacon folder, including them in the CORS middleware,
+
+middlewares=[web.normalize_path_middleware(), middlewares.error_middleware, cors_middleware(origins=["your_URL"...
+
+ and CORS routes lists:
+
+   for route in list(beacon.router.routes()):
+        cors.add(route, {
+        "your_URL":
+            aiohttp_cors.ResourceOptions(allow_credentials=True,
+            expose_headers="*",
+            allow_methods=("POST", "PATCH", "GET", "OPTIONS"),
+            allow_headers=DEFAULT_ALLOW_HEADERS),
+
+Editing your beacon information
+
+To show correctly your beacon’s information you will need to edit both conf.py files from beacon and deploy folders.
+To do so, edit the following variables:
+
+beacon_id = 'org.ega-archive.beacon-ri-demo'  # ID of the Beacon
+beacon_name = 'Beacon Reference Implementation demo'  # Name of the Beacon service
+api_version = 'v2.0.0'  # Version of the Beacon implementation
+uri = 'https://beacon-apis-demo.ega-archive.org/api/'
+org_id = 'EGA'  # Id of the organization
+org_name = 'European Genome-Phenome Archive (EGA)'  # Full name
+org_description = ('The European Genome-phenome Archive (EGA) '
+                   'is a service for permanent archiving and sharing '
+                   'of all types of personally identifiable genetic '
+                   'and phenotypic data resulting from biomedical research projects.')
+org_adress = ('C/ Dr. Aiguader, 88'
+              'PRBB Building'
+              '08003 Barcelona, Spain')
+org_welcome_url = 'https://ega-archive.org/'
+org_contact_url = 'mailto:beacon.ega@crg.eu'
+org_logo_url = 'https://legacy.ega-archive.org/images/logo.png'
+org_info = ''
+description = r"This Beacon is based on synthetic data hosted at the <a href='https://ega-archive.org/datasets/EGAD00001003338'>EGA</a>. The dataset contains 2504 samples including genetic data based on 1K Genomes data, and 76 individual attributes and phenotypic data derived from UKBiobank."
+version = 'v2.0'
+welcome_url = 'https://beacon.ega-archive.org/'
+alternative_url = 'https://beacon-apis-demo.ega-archive.org/api/'
+create_datetime = '2021-11-29T12:00:00.000000'
+update_datetime = ''
+
+Note that this is the info that will be shown in the /info endpoint for your beacon.
+
+Limiting the granularity
+
+Beacon RI can limit the granularity per user or for all the beacon.
+If you want to limit the granularity for all the users to a maximum, you can point it in conf.py for both beacon and deploy folders, by editing the next variables:
+
+default_beacon_granularity = "record"
+max_beacon_granularity = "record"
+
+If you want to limit the granularity per user, you can do this editing the response_type.yml file inside beacon/request folder, adding the username and the maximum granularity you want to allow this user to have:
+
+dummy_user:
+- record
+
+Adding beacon handovers
+
+You can specify what are the handovers for your beacon by adding them in the array of your conf.py file inside beacon folder:
+
+beacon_handovers = [
+    {
+        'handoverType': {
+            'id': 'CUSTOM:000001',
+            'label': 'Project description'
+        },
+        'note': 'Project description',
+        'url': 'https://www.nist.gov/programs-projects/genome-bottle'
+    }
+]
+
+
+
+

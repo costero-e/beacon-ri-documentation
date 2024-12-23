@@ -1,27 +1,29 @@
 import "./App.css";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 import LandingPage from "./pages/LandingPage";
 import { SearchableContentProvider } from "./context/SearchableContentContext";
-import ManualDeployment from "./pages/ManualDeployment";
+import ManualDeployment from "./pages/Beacon2RIAPI/ManualDeployment";
 import ContentPreloader from "./components/ContentPreloader";
-import AutomatedDeployment from "./pages/AutomatedDeployment";
-import DataLinking from "./pages/DataLinking";
-import ApiConfiguration from "./pages/ApiConfiguration"; // Import ApiConfiguration component
-import QueryingApi from "./pages/QueryingApi"; // Import QueryingApi component
-import StartingGuide from "./pages/StartingGuide";
-import ConfigFileTools from "./pages/ConfigFileTools";
-import CreatingCSVs from "./pages/CreatingCSVs";
-import ConversionCSVBFF from "./pages/ConversionCSVBFF";
-import ConversionVCFBFF from "./pages/ConversionVCFBFF";
-import BeaconUIDeployment from "./pages/BeaconUIDeployment";
-import BeaconUIConfiguration from "./pages/BeaconUIConfiguration";
-import BeaconUIQueries from "./pages/BeaconUIQueries";
-import NetworkUIDeployment from "./pages/NetworkUIDeployment";
-import NetworkUIConfiguration from "./pages/NetworkUIConfiguration";
-import NetworkUIQueries from "./pages/NetworkUIQueries";
+import AutomatedDeployment from "./pages/Beacon2RIAPI/AutomatedDeployment";
+import DataLinking from "./pages/Beacon2RIAPI/DataLinking";
+import ApiConfiguration from "./pages/Beacon2RIAPI/ApiConfiguration";
+import QueryingApi from "./pages/Beacon2RIAPI/QueryingApi";
+import StartingGuide from "./pages/Beacon2RITools/StartingGuide";
+import ConfigFileTools from "./pages/Beacon2RITools/ConfigFileTools";
+import CreatingCSVs from "./pages/Beacon2RITools/CreatingCSVs";
+import ConversionCSVBFF from "./pages/Beacon2RITools/ConversionCSVBFF";
+import ConversionVCFBFF from "./pages/Beacon2RITools/ConversionVCFBFF";
+import BeaconUIDeployment from "./pages/BeaconUI/BeaconUIDeployment";
+import BeaconUIConfiguration from "./pages/BeaconUI/BeaconUIConfiguration";
+import BeaconUIQueries from "./pages/BeaconUI/BeaconUIQueries";
+import NetworkUIDeployment from "./pages/BeaconNetworkUI/NetworkUIDeployment";
+import NetworkUIConfiguration from "./pages/BeaconNetworkUI/NetworkUIConfiguration";
+import NetworkUIQueries from "./pages/BeaconNetworkUI/NetworkUIQueries";
+import PiApiConfiguration from "./pages/Beacon2PIAPI/PiApiConfiguration";
+import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -55,7 +57,7 @@ function App() {
   return (
     <SearchableContentProvider>
       <Router>
-        <ContentPreloader /> {/* Preload content for search */}
+        <ContentPreloader />
         <div className="appContainer">
           <Navbar onSearch={handleSearch} />
           <div className="contentContainer">
@@ -67,19 +69,25 @@ function App() {
             >
               <Routes>
                 <Route path="/" element={<LandingPage />} />
-                <Route
-                  path="/manual-deployment"
-                  element={<ManualDeployment />}
-                />
+
                 <Route
                   path="/automated-deployment"
                   element={<AutomatedDeployment />}
+                />
+                <Route
+                  path="/manual-deployment"
+                  element={<ManualDeployment />}
                 />
                 <Route path="/data-linking" element={<DataLinking />} />
                 <Route
                   path="/api-configuration"
                   element={<ApiConfiguration />}
                 />
+                <Route
+                  path="/pi-api-configuration"
+                  element={<PiApiConfiguration />}
+                />
+                <Route path="/pi-querying-api" element={<PiQueryingAPI />} />
                 <Route path="/querying-api" element={<QueryingApi />} />
                 <Route path="/starting-guide" element={<StartingGuide />} />
                 <Route

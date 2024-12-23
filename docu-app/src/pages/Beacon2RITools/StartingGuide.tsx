@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import copyIcon from "../assets/copy-symbol.svg"; // Make sure the path is correct
+import copyIcon from "../../assets/copy-symbol.svg";
 import "./StartingGuide.css";
 
 const StartingGuide: React.FC = () => {
@@ -16,12 +16,27 @@ const StartingGuide: React.FC = () => {
 
   return (
     <div className="startingGuideContainer">
+      <h2 className="user-path">
+        Documentation
+        <img
+          src="arrow-right-light.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        Beacon 2 RI Tools
+        <img
+          src="arrow-right-bold.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        <span className="user-path-title">Starting Guide</span>
+      </h2>
       <h3>Beacon 2 RI Tools</h3>
       <h1>Starting guide</h1>
       <h2>Tools Introduction</h2>
       <p>
         The Beacon2 RI tools v2 is a set of tools written in Python available in
-        the following {""}
+        the following GitHub repository.
         <a
           href="https://github.com/EGA-archive/beacon2-ri-tools-v2"
           target="_blank"
@@ -32,10 +47,11 @@ const StartingGuide: React.FC = () => {
         .
       </p>
       <p>
-        The main goal of Beacon RI tools v2.0 is to obtain the Beacon Friendly
-        Format (BFF) files, which are JSON files following Beacon v2 official
-        specifications. These files have the correct format and structure to be
-        injected into a Beacon v2 MongoDB database.
+        The main goal of Beacon RI tools v2.0 is to obtain the{" "}
+        <b>Beacon Friendly Format (BFF) files </b>, which are JSON files
+        following Beacon v2 official specifications. These files have the
+        correct format and structure to be injected into a Beacon v2 MongoDB
+        database.
       </p>
       <div className="note">
         <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />

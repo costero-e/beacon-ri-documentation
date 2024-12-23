@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import "./BeaconUIConfiguration.css"; // Add styles if needed
-import copyIcon from "../assets/copy-symbol.svg"; // Adjust the path as needed
+import "./NetworkUIConfiguration.css";
+import copyIcon from "../../assets/copy-symbol.svg";
 
-const BeaconUIConfiguration: React.FC = () => {
+const NetworkUIConfiguration: React.FC = () => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
@@ -20,9 +20,10 @@ const BeaconUIConfiguration: React.FC = () => {
   };
 
   return (
-    <div className="beaconUIConfigurationContainer">
-      <h3>Beacon UI</h3>
+    <div className="networkUIConfigurationContainer">
+      <h3>Network UI</h3>
       <h1>Configuration</h1>
+
       <p>
         Please first create a <code>.env</code> file inside the frontend folder
         so that you can modify some variables. Take into account that the file
@@ -33,15 +34,18 @@ const BeaconUIConfiguration: React.FC = () => {
       <div className="codeSnippet">
         <pre>
           <code>
-            REACT_APP_CLIENT_ID="ID of your LS Login" <br />
-            REACT_APP_CLIENT_SECRET="password of your LS Login" <br />
-            REACT_APP_KEYCLOAK_CLIENT_SECRET="password of your Keycloak login"
+            REACT_APP_CLIENT_ID='ID of your LS Login' <br />
+            REACT_APP_CLIENT_SECRET='password of your LS Login' <br />
+            REACT_APP_KEYCLOAK_CLIENT_SECRET='password of your Keycloak login'{" "}
+            <br />
+            REACT_APP_KEYCLOAK_CLIENT_ID='ID of your Keycloak login' <br />
+            REACT_APP_KEYCLOAK_CLIENT_REALM='REALM of your Keycloak login'
           </code>
           <button
             className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                `REACT_APP_CLIENT_ID="ID of your LS Login"\nREACT_APP_CLIENT_SECRET="password of your LS Login"\nREACT_APP_KEYCLOAK_CLIENT_SECRET="password of your Keycloak login"`,
+                `REACT_APP_CLIENT_ID='ID of your LS Login'\nREACT_APP_CLIENT_SECRET='password of your LS Login'\nREACT_APP_KEYCLOAK_CLIENT_SECRET='password of your Keycloak login'\nREACT_APP_KEYCLOAK_CLIENT_ID='ID of your Keycloak login'\nREACT_APP_KEYCLOAK_CLIENT_REALM='REALM of your Keycloak login'`,
                 "env-config"
               )
             }
@@ -56,48 +60,48 @@ const BeaconUIConfiguration: React.FC = () => {
       </div>
 
       <p>
-        Tip: for Life Science environment, please first create a user (
-        <a
-          href="https://lifescience-ri.eu/ls-login/users/how-to-get-and-use-life-science-id.html"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          create a user
-        </a>
-        ). After that you will need to register a service registry in order to
-        be able to administrate your logins. Please go &nbsp;
-        <a
-          href="https://services.aai.lifescience-ri.eu/spreg/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          here
-        </a>
-        &nbsp; and ask for a New Service - type OIDC.
+        You will need to have created your Life Science and Keycloak
+        environments before:
+      </p>
+      <p className="note">
+        <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
+        <div>
+          For Life Science environment, please first create a user. After that,
+          you will need to register a service registry in order to be able to
+          administrate your logins. Please go{" "}
+          <a
+            href="https://services.aai.lifescience-ri.eu/spreg/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            here
+          </a>{" "}
+          and ask for a New Service - type OIDC.
+        </div>
       </p>
 
       <p>
-        Then please edit the file &nbsp;
+        Then please edit the file{" "}
         <a
-          href="https://github.com/EGA-archive/beacon2-ri-api/blob/master/frontend/src/config.json"
+          href="https://github.com/elixir-europe/beacon-network-ui/tree/main/frontend/src"
           target="_blank"
           rel="noopener noreferrer"
         >
           config.json
         </a>
-        . You need to decide where you want the UI to point to when making
-        requests. Find below an example:
+        , which can be found inside the folder frontend/src. You need to decide
+        where you want the UI to point to when making requests. Find below an
+        example:
       </p>
 
       <div className="codeSnippet">
         <pre>
           <code>
-            {"{"} <br />
-            &nbsp;&nbsp;"API_URL":
-            "https://yourAPIdomain.com/beacon-network/v2.0.0", <br />
-            &nbsp;&nbsp;"REDIRECT_URL": "https://yourUIdomain.com", <br />
-            &nbsp;&nbsp;"KEYCLOAK_URL": "https://yourKEYCLOAKdomain.com" <br />
-            {"}"}
+            {`{
+  "API_URL": "https://yourAPIdomain.com/beacon-network/v2.0.0",
+  "REDIRECT_URL": "https://yourUIdomain.com",
+  "KEYCLOAK_URL": "https://yourKEYCLOAKdomain.com"
+}`}
           </code>
           <button
             className="copyButtonCode"
@@ -121,21 +125,15 @@ const BeaconUIConfiguration: React.FC = () => {
         </pre>
       </div>
 
-      <p>
-        Finally, please include the URL of your User interface to the file
-        beacon/_main_.py (line 103), so that it becomes part of the list of URLs
-        accepted by CORS.
-      </p>
-
       <p className="note">
         <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
         <div>
-          Note that in the frontend folder you will find a file called
-          .gitignore with the list of all files that need to be ignored.
+          In the root folder (frontend) you will find a file called .gitignore
+          with the list of all files that need to be ignored.
         </div>
       </p>
     </div>
   );
 };
 
-export default BeaconUIConfiguration;
+export default NetworkUIConfiguration;
