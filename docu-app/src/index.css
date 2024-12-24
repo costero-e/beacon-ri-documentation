@@ -39,7 +39,7 @@ h2 {
   font-size: 16px;
   margin-top: 40px; /* Existing margin-top */
   margin-bottom: 40px; /* Existing margin-bottom */
-  padding-top: 120px; /* Add extra space above the H2 element */
+  padding-top: 120px;
   margin-top: -80px; /* Negative margin to offset the padding */
 }
 

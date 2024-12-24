@@ -6,50 +6,43 @@ import copyIcon from "../../assets/copy-symbol.svg";
 const PiManualDeployment = () => {
   const location = useLocation();
 
-  // State to manage copy success for each snippet independently
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
 
   useEffect(() => {
     if (location.hash) {
-      setTimeout(() => {
-        const element = document.getElementById(location.hash.substring(1));
-        if (element) {
-          const yOffset = -80; // Adjust this value based on your header height
-          const y =
-            element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }
-      }, 0);
+      const elementId = location.hash.substring(1);
+      const element = document.getElementById(elementId);
+
+      if (element) {
+        const yOffset = -80; // Adjust for fixed header height
+        const y =
+          element.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
     }
-  }, [location]);
+  }, [location.hash]);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {
       "cloning-repository":
-        "git clone https://github.com/EGA-archive/beacon2-ri-api.git",
-      "create-network": "docker network create my-app-network",
-      "cd-deploy": "cd deploy && docker-compose up -d --build",
-      "copy-files": [
-        "docker cp /path/to/analyses.json rimongo:tmp/analyses.json",
-        "docker cp /path/to/biosamples.json rimongo:tmp/biosamples.json",
-        "docker cp /path/to/cohorts.json rimongo:tmp/cohorts.json",
-        "docker cp /path/to/datasets.json rimongo:tmp/datasets.json",
-        "docker cp /path/to/genomicVariations.json rimongo:tmp/genomicVariations.json",
-        "docker cp /path/to/individuals.json rimongo:tmp/individuals.json",
-        "docker cp /path/to/runs.json rimongo:tmp/runs.json",
-      ].join("\n"),
+        "git clone https://github.com/EGA-archive/beacon2-pi-api.git",
+      "cd-deploy": "docker-compose up -d --build",
+      "create-network": "docker-compose up -d –build beaconprod db",
       "data-injection": [
-        'docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/datasets.json --collection datasets',
-        'docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/analyses.json --collection analyses',
-        'docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/biosamples.json --collection biosamples',
-        'docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/cohorts.json --collection cohorts',
-        'docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/genomicVariations.json --collection genomicVariations',
-        'docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/individuals.json --collection individuals',
-        'docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/runs.json --collection runs',
+        'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/datasets.json --collection datasets',
+        'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/individuals.json --collection individuals',
+        'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/cohorts.json --collection cohorts',
+        'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/analyses.json --collection analyses',
+        'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/biosamples.json --collection biosamples',
+        'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/genomicVariations.json --collection genomicVariations',
+        'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/runs.json --collection runs',
+        'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/targets.json --collection targets',
+        'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/caseLevelData.json --collection caseLevelData',
       ].join("\n"),
-      "data-indexing": "docker exec beacon python beacon/reindex.py",
+      "data-indexing":
+        "docker exec beaconprod python /beacon/connections/mongo/reindex.py",
     }[snippetId];
 
     if (textToCopy) {
@@ -67,7 +60,7 @@ const PiManualDeployment = () => {
                 [snippetId]: false,
               })),
             1500
-          ); // Reset copy success after 1.5 seconds
+          );
         })
         .catch((error) => console.log(error));
     }
@@ -90,9 +83,8 @@ const PiManualDeployment = () => {
         />
         <span className="user-path-title"> Manual Deployment</span>
       </h2>
-      <h3>Beacon 2 PI API</h3>
+      <h3>Beacon 2 Production Implementation API</h3>
       <h1>Manual Deployment</h1>
-
       <h2 id="cloning-repository">Cloning the repository</h2>
       <p>
         First of all, start by cloning the GitHub repository in your system.
@@ -101,8 +93,8 @@ const PiManualDeployment = () => {
         <pre>
           <code>
             git clone{" "}
-            <a href="https://github.com/EGA-archive/beacon2-ri-api.git">
-              https://github.com/EGA-archive/beacon2-ri-api.git
+            <a href="https://github.com/EGA-archive/beacon2-pi-api.git">
+              https://github.com/EGA-archive/beacon2-pi-api.git
             </a>
           </code>
           <button
@@ -118,42 +110,21 @@ const PiManualDeployment = () => {
         </pre>
       </div>
 
-      <h2 id="create-network">Creating the containers</h2>
-      <p>
-        Create the external docker network needed before building the
-        containers.
-      </p>
-      <div className="codeSnippet">
-        <pre>
-          <code>docker network create my-app-network</code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("create-network")}
-          >
-            {copySuccess["create-network"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
-      </div>
+      <h2 id="creating-the-containers">Creating the containers</h2>
       <p>Make sure the next list of ports are free of use in your system:</p>
+
       <ul>
         <li>27017 → mongo</li>
-        <li>8081 → mongo-express</li>
+        <li>8081 → mongo-express (optional)</li>
         <li>5050 → beacon</li>
-        <li>5051 → permissions</li>
-        <li>8010 → permissions UI</li>
-        <li>8080 → Keycloak</li>
-        <li>9991 → Keycloak SSL</li>
-        <li>3000 → Beacon UI</li>
+        <li>8080 → Keycloak (optional)</li>
+        <li>9991 → Keycloak SSL (optional)</li>
       </ul>
 
       <p>Light up the containers from the deploy folder.</p>
       <div className="codeSnippet">
         <pre>
-          <code>cd deploy && docker-compose up -d --build</code>
+          <code>docker-compose up -d --build</code>
           <button
             className="copyButtonCode"
             onClick={() => copyToClipboard("cd-deploy")}
@@ -166,6 +137,29 @@ const PiManualDeployment = () => {
           </button>
         </pre>
       </div>
+
+      <p>
+        If you wish to light up only some of the services, not all, just write
+        the name of the services in the <b>docker-compose.yml</b> file right
+        after the command (e.g. for having the mandatory services only):
+      </p>
+
+      <div className="codeSnippet">
+        <pre>
+          <code>docker-compose up -d –build beaconprod db</code>
+          <button
+            className="copyButtonCode"
+            onClick={() => copyToClipboard("create-network")}
+          >
+            {copySuccess["create-network"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
+
       <p>If the containers are built correctly:</p>
       <ul>
         <li>
@@ -176,17 +170,6 @@ const PiManualDeployment = () => {
             rel="noopener noreferrer"
           >
             http://localhost:5050/api
-          </a>
-          .
-        </li>
-        <li>
-          The Beacon UI will run in{" "}
-          <a
-            href="http://localhost:3000"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            http://localhost:3000
           </a>
           .
         </li>
@@ -216,38 +199,21 @@ const PiManualDeployment = () => {
 
       <h2 id="data-injection">Data injection</h2>
       <p>
-        Copy all the available BFF files to the mongo container using the
-        following commands:
+        Copy all the available BFF files you have to the
+        <a
+          href="https://github.com/EGA-archive/beacon2-pi-api/tree/main/beacon/connections/mongo/data"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          data folder for mongo database
+        </a>
+        .
       </p>
-      <div className="codeSnippet">
-        <pre>
-          <code>
-            {`docker cp /path/to/analyses.json rimongo:tmp/analyses.json\n`}
-            {`docker cp /path/to/biosamples.json rimongo:tmp/biosamples.json\n`}
-            {`docker cp /path/to/cohorts.json rimongo:tmp/cohorts.json\n`}
-            {`docker cp /path/to/datasets.json rimongo:tmp/datasets.json\n`}
-            {`docker cp /path/to/genomicVariations.json rimongo:tmp/genomicVariations.json\n`}
-            {`docker cp /path/to/individuals.json rimongo:tmp/individuals.json\n`}
-            {`docker cp /path/to/runs.json rimongo:tmp/runs.json`}
-          </code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("copy-files")}
-          >
-            {copySuccess["copy-files"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
-      </div>
       <p className="note">
         <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
         <div>
-          Not all the above commands are needed to run a beacon. A beacon can
-          run without data or data for a single collection (e.g. only
-          individuals).
+          Tip: A beacon can run without data or data for a single collection
+          (e.g. only individuals).
         </div>
       </p>
       <p>
@@ -256,14 +222,25 @@ const PiManualDeployment = () => {
       <div className="codeSnippet codeSnippet-mongodb">
         <pre>
           <code>
-            {`docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/datasets.json --collection datasets\n`}
-            {`docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/analyses.json --collection analyses\n`}
-            {`docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/biosamples.json --collection biosamples\n`}
-            {`docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/cohorts.json --collection cohorts\n`}
-            {`docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/genomicVariations.json --collection genomicVariations\n`}
-            {`docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/individuals.json --collection individuals\n`}
-            {`docker exec rimongo mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /tmp/runs.json --collection runs`}
+            {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/datasets.json --collection datasets\n`}
+            <br />
+            {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/individuals.json --collection individuals\n`}
+            <br />
+            {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/cohorts.json --collection cohorts\n`}
+            <br />
+            {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/analyses.json --collection analyses\n`}
+            <br />
+            {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/biosamples.json --collection biosamples\n`}
+            <br />
+            {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/genomicVariations.json --collection genomicVariations\n`}
+            <br />
+            {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/runs.json --collection runs\n`}
+            <br />
+            {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/targets.json --collection targets\n`}
+            <br />
+            {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/caseLevelData.json --collection caseLevelData`}
           </code>
+
           <button
             className="copyButtonCode"
             onClick={() => copyToClipboard("data-injection")}
@@ -289,7 +266,9 @@ const PiManualDeployment = () => {
       </p>
       <div className="codeSnippet">
         <pre>
-          <code>docker exec beacon python beacon/reindex.py</code>
+          <code>
+            docker exec beaconprod python /beacon/connections/mongo/reindex.py
+          </code>
           <button
             className="copyButtonCode"
             onClick={() => copyToClipboard("data-indexing")}
@@ -305,7 +284,8 @@ const PiManualDeployment = () => {
       <p className="note">
         <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
         <div>
-          You will need to run this script each time you inject new data.
+          Note that you will need to run this script each time you inject new
+          data.
         </div>
       </p>
     </div>

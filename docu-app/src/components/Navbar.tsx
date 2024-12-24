@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSearchableContent } from '../context/SearchableContentContext';
-import './Navbar.css';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSearchableContent } from "../context/SearchableContentContext";
+import "./Navbar.css";
 
 interface NavbarProps {
   onSearch: (term: string) => void;
@@ -9,8 +9,9 @@ interface NavbarProps {
 
 const Navbar = ({ onSearch }: NavbarProps) => {
   const { searchableContent } = useSearchableContent();
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [isSearchResultsVisible, setIsSearchResultsVisible] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [isSearchResultsVisible, setIsSearchResultsVisible] =
+    useState<boolean>(false);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
@@ -18,12 +19,12 @@ const Navbar = ({ onSearch }: NavbarProps) => {
     onSearch(term);
 
     // Show search results only if there's a search term
-    setIsSearchResultsVisible(term !== '');
+    setIsSearchResultsVisible(term !== "");
   };
 
   const handleClearSearch = () => {
-    setSearchTerm('');
-    onSearch('');
+    setSearchTerm("");
+    onSearch("");
     setIsSearchResultsVisible(false); // Hide search results when cleared
   };
 
@@ -31,7 +32,7 @@ const Navbar = ({ onSearch }: NavbarProps) => {
     if (!highlight.trim()) {
       return text;
     }
-    const regex = new RegExp(`(${highlight})`, 'gi');
+    const regex = new RegExp(`(${highlight})`, "gi");
     const parts = text.split(regex);
     return parts.map((part, index) =>
       part.toLowerCase() === highlight.toLowerCase() ? (
@@ -77,7 +78,7 @@ const Navbar = ({ onSearch }: NavbarProps) => {
 
   return (
     <div className="containerNav">
-      <h1>Beacon v2 RI documentation</h1>
+      <h1 className="main-title">Beacon v2 Documentation</h1>
       <div className="divOptionsInput">
         <div className="inputContainer">
           <div className="inputDiv">
@@ -121,4 +122,3 @@ const Navbar = ({ onSearch }: NavbarProps) => {
 };
 
 export default Navbar;
-

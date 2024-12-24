@@ -37,8 +37,8 @@ const subMenuItems: { [key: string]: string[] } = {
   ],
 
   "Beacon 2 PI API": [
-    "Automated Deployment",
-    "Manual Deployment",
+    "PI Automated Deployment",
+    "PI Manual Deployment",
     "Filtering Terms",
     "Configuration",
     "PI Querying the API",
@@ -60,7 +60,17 @@ const nestedSubMenuItems: { [key: string]: { key: string; label: string }[] } =
       { key: "cloning-repository", label: "Cloning the repository" },
       { key: "execute-start-script", label: "Execute start script from root" },
     ],
+    "PI Automated Deployment": [
+      { key: "cloning-repository", label: "Cloning the repository" },
+      { key: "execute-start-script", label: "Execute start script from root" },
+    ],
     "Manual Deployment": [
+      { key: "cloning-repository", label: "Cloning the repository" },
+      { key: "creating-containers", label: "Creating the containers" },
+      { key: "data-injection", label: "Data injection" },
+      { key: "data-indexing", label: "Data indexing" },
+    ],
+    "PI Manual Deployment": [
       { key: "cloning-repository", label: "Cloning the repository" },
       { key: "creating-containers", label: "Creating the containers" },
       { key: "data-injection", label: "Data injection" },
@@ -83,7 +93,7 @@ const nestedSubMenuItems: { [key: string]: { key: string; label: string }[] } =
       { key: "adding-handovers", label: "Adding beacon handovers" },
     ],
     Configuration: [
-      { key: "editing-info", label: "Editing your beacon information" },
+      { key: "editing-beacon-info", label: "Editing your beacon information" },
       { key: "managing-permissions", label: "Managing dataset permissions" },
       { key: "supplying-aai", label: "Supplying AAI credentials" },
       { key: "handling-cors", label: "Handling CORS" },
@@ -189,7 +199,7 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
       navigate(directNavigationMenus[parentMenu as ParentMenu][subItem]);
     } else {
       setActiveSubMenu(activeSubMenu === subItem ? null : subItem);
-      setActiveNestedSubMenuItem(null); // Close nested sub-menu when a new sub-menu item is clicked
+      setActiveNestedSubMenuItem(null);
     }
   };
 
@@ -201,7 +211,9 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
 
     const basePathMap: { [key: string]: string } = {
       "Automated Deployment": "/automated-deployment",
+      "PI Automated Deployment": "/pi-automated-deployment",
       "Manual Deployment": "/manual-deployment",
+      "PI Manual Deployment": "/pi-manual-deployment",
       "Data Linking": "/data-linking",
       "API Configuration": "/api-configuration",
       Configuration: "/pi-api-configuration",

@@ -15,6 +15,7 @@ import configurationUIText from "../content/configuration_ui.txt";
 import deploymentNetworkUIText from "../content/deployment_networkui.txt";
 import configurationNetworkUIText from "../content/configuration_networkui.txt";
 import PiQueryingApiText from "../content/pi_query_api.txt";
+import PiManualDeploymentText from "../content/pi_manual_deployment.txt";
 
 const ContentPreloader = () => {
   useRegisterTextContent(
@@ -26,6 +27,12 @@ const ContentPreloader = () => {
     "/manual-deployment",
     manualDeploymentText,
     "Manual Deployment"
+  );
+
+  useRegisterTextContent(
+    "/pi-manual-deployment",
+    PiManualDeploymentText,
+    "Pi Manual Deployment"
   );
 
   useRegisterTextContent("/data-linking", dataLinkingText, "Data Linking");

@@ -23,16 +23,22 @@ const PiQueryingAPI = () => {
     }
   }, [location]);
 
-  const copyToClipboard = (text: string, snippetId: string) => {
+  const copyToClipboard = (text: string, key: string) => {
     navigator.clipboard
       .writeText(text)
       .then(() => {
-        setCopySuccess((prev) => ({ ...prev, [snippetId]: true }));
+        setCopySuccess((prevState) => ({
+          ...prevState,
+          [key]: true,
+        }));
         setTimeout(() => {
-          setCopySuccess((prev) => ({ ...prev, [snippetId]: false }));
+          setCopySuccess((prevState) => ({
+            ...prevState,
+            [key]: false,
+          }));
         }, 1500);
       })
-      .catch((error) => console.error("Failed to copy text: ", error));
+      .catch(console.error);
   };
 
   return (
@@ -52,7 +58,7 @@ const PiQueryingAPI = () => {
         />
         <span className="user-path-title">Querying the API</span>
       </h2>
-      <h3>Beacon 2 PI API</h3>
+      <h3>Beacon 2 Production Implementation API</h3>
       <h1>Querying the API</h1>
       <p>Beacon PI accepts two types of request methods: GET and POST.</p>
       <div className="note">
@@ -622,7 +628,16 @@ const PiQueryingAPI = () => {
             <td>
               <div className="codeSnippet-table">
                 <code>skip=0</code>
-                <br />
+                <button
+                  className="copyButtonCode"
+                  onClick={() => copyToClipboard("skip=0", "pagination-skip")}
+                >
+                  {copySuccess["pagination-skip"] ? (
+                    "Copied!"
+                  ) : (
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  )}
+                </button>
               </div>
               <br />
               <div className="codeSnippet-table">
@@ -630,10 +645,10 @@ const PiQueryingAPI = () => {
                 <button
                   className="copyButtonCode"
                   onClick={() =>
-                    copyToClipboard("skip=0 limit=10", "pagination")
+                    copyToClipboard("limit=10", "pagination-limit")
                   }
                 >
-                  {copySuccess["pagination"] ? (
+                  {copySuccess["pagination-limit"] ? (
                     "Copied!"
                   ) : (
                     <img className="copySymbol" src={copyIcon} alt="Copy" />

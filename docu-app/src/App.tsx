@@ -24,6 +24,8 @@ import NetworkUIConfiguration from "./pages/BeaconNetworkUI/NetworkUIConfigurati
 import NetworkUIQueries from "./pages/BeaconNetworkUI/NetworkUIQueries";
 import PiApiConfiguration from "./pages/Beacon2PIAPI/PiApiConfiguration";
 import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
+import PiManualDeployment from "./pages/Beacon2PIAPI/PiManualDeployment";
+import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -74,9 +76,18 @@ function App() {
                   path="/automated-deployment"
                   element={<AutomatedDeployment />}
                 />
+
+                <Route
+                  path="/pi-automated-deployment"
+                  element={<PiAutomatedDeployment />}
+                />
                 <Route
                   path="/manual-deployment"
                   element={<ManualDeployment />}
+                />
+                <Route
+                  path="/pi-manual-deployment"
+                  element={<PiManualDeployment />}
                 />
                 <Route path="/data-linking" element={<DataLinking />} />
                 <Route

@@ -13,10 +13,10 @@
 
 .deploymentContainer h2 {
   font-size: 16px;
-  margin-top: 20px; /* Existing margin-top */
-  margin-bottom: 40px; /* Existing margin-bottom */
-  padding-top: 100px; /* Add extra space above the H2 element */
-  margin-top: -80px; /* Negative margin to offset the padding */
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 100px;
+  margin-top: -80px;
 }
 
 .deploymentContainer p {

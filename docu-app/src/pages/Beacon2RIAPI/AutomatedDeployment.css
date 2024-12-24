@@ -49,3 +49,12 @@
   margin-top: 26px;
   margin-bottom: 26px;
 }
+
+.deploymentContainer h4 {
+  text-decoration: none !important;
+  margin: 35px 0;
+}
+
+.automated-deployment {
+  padding-top: 105px !important;
+}
