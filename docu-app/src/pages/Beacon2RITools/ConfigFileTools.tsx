@@ -21,6 +21,21 @@ const ConfigFileTools: React.FC = () => {
 
   return (
     <div className="configFileToolsContainer">
+      <h2 className="user-path">
+        Documentation
+        <img
+          src="arrow-right-light.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        Beacon 2 RI Tools
+        <img
+          src="arrow-right-bold.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        <span className="user-path-title">Configuration File</span>
+      </h2>
       <h3>Beacon 2 RI Tools</h3>
       <h1>Configuration File</h1>
       <p>
@@ -28,16 +43,7 @@ const ConfigFileTools: React.FC = () => {
         file with the desired files and options for the different collections.
       </p>
       <p>
-        You have to edit the configuration file {""}
-        <a
-          href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf/conf.py"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          conf.py
-        </a>{" "}
-        {""}
-        that you will find inside the {""}
+        You will find conf.py inside the{" "}
         <a
           href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf"
           target="_blank"
@@ -48,20 +54,23 @@ const ConfigFileTools: React.FC = () => {
         . Inside this file, you will find the following information:
       </p>
 
-      <h6>Input and Output files config parameters</h6>
+      <h4>Input and Output files config parameters</h4>
       <div className="codeSnippet">
         <pre>
-          <code>
-            csv_filename='csv/examples/cohorts.csv'\noutput_docs_folder='output_docs/CINECA_dataset/'
+          <code id="input-output-config">
+            csv_filename='csv/examples/cohorts.csv'
+            output_docs_folder='output_docs/CINECA_dataset/'
           </code>
           <button
             className="copyButtonCode"
-            onClick={() =>
-              copyToClipboard(
-                "csv_filename='csv/examples/cohorts.csv'\noutput_docs_folder='output_docs/CINECA_dataset/'",
+            onClick={() => {
+              const codeText = document.getElementById(
                 "input-output-config"
-              )
-            }
+              )?.innerText;
+              if (codeText) {
+                copyToClipboard(codeText, "input-output-config");
+              }
+            }}
           >
             {copySuccess["input-output-config"] ? (
               "Copied!"
@@ -72,21 +81,31 @@ const ConfigFileTools: React.FC = () => {
         </pre>
       </div>
 
-      <h6>VCF Conversion config parameters</h6>
+      <h4>VCF Conversion Config Parameters</h4>
       <div className="codeSnippet">
         <pre>
-          <code>
-            num_variants=100000\nreference_genome='GRCh37' # Choose one between
-            NCBI36, GRCh37, GRCh38
+          <code id="vcf-config">
+            allele_frequency=1 # introduce float number, leave 1 if you want to
+            convert all the variants <br />
+            reference_genome='GRCh38' # Choose one between NCBI36, GRCh37,
+            GRCh38
+            <br />
+            datasetId='coadread_tcga_pan_can_atlas_2018'
+            <br />
+            case_level_data=False
+            <br />
+            num_rows=7000000
+            <br />
+            population='Finnish'
           </code>
           <button
             className="copyButtonCode"
-            onClick={() =>
-              copyToClipboard(
-                "num_variants=100000\nreference_genome='GRCh37' # Choose one between NCBI36, GRCh37, GRCh38",
-                "vcf-config"
-              )
-            }
+            onClick={() => {
+              const codeText = document.getElementById("vcf-config")?.innerText;
+              if (codeText) {
+                copyToClipboard(codeText, "vcf-config");
+              }
+            }}
           >
             {copySuccess["vcf-config"] ? (
               "Copied!"
@@ -97,15 +116,17 @@ const ConfigFileTools: React.FC = () => {
         </pre>
       </div>
 
-      <h6>Generic config parameters</h6>
+      <h4>Generic config parameters</h4>
       <p>
         The first part of this configuration only concerns the conversion of CSV
-        to BFF only. It is used only when you are converting from CSV.
+        to BFF. It is used only when you are converting from CSV.
       </p>
       <p>
-        The <code>csv_filename</code> variable sets where the CSV file is and
-        from where the script will read the data. This CSV file needs to have
-        the headers written as you can find in the files inside{" "}
+        The <i>csv_filename</i> variable sets where the CSV file is and from
+        where the script will read the data. Bear in mind that the CSV must be
+        inside the folder
+        <i>csv</i>, and you can use subfolders within it. This CSV file needs to
+        have the headers written as you can find in the files inside{" "}
         <a
           href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates"
           target="_blank"
@@ -115,40 +136,57 @@ const ConfigFileTools: React.FC = () => {
         </a>
         . Note that any header that has a different name from the ones that
         appear inside the templates will not be read by the Beacon2 RI tools v2.
-        The CSV must be inside the folder <code>csv</code>, and you can use
-        subfolders within it.
       </p>
-
       <p>
-        The <code>output_docs_folder</code> sets the folder where your final BFF
-        (json files) will be saved once execution of beacon tools finishes. This
-        folder is mandatory to be always inside <code>output_docs</code>, so
-        only the subdirectory inside <code>output_docs</code> can be modified in
-        this path.
+        The <i>output_docs_folder</i> sets the folder where your final BFF (JSON
+        files) will be saved once execution of beacon tools finishes. This
+        folder is mandatory to be always inside <i>output_docs</i>, so only the
+        subdirectory inside <i>output_docs</i>
+        can be modified in this path.
       </p>
 
-      <h6>VCF conversion config parameters</h6>
+      <h4>VCF conversion config parameters</h4>
       <p>
         The second part of the configuration file pertains to the VCF to BFF
         conversion. This only needs to be used in case you are using a VCF as a
         source for the genomic variants collection.
       </p>
       <p>
-        The <code>num_variants</code> is the variable you need to write in case
-        you are executing the VCF conversor (
-        <code>genomicVariations_vcf.py</code>). This will tell the script how
-        many variants will be read and converted from the file(s).
+        The <i>num_variants</i> is the variable you need to write in case you
+        are executing the VCF conversor <i>(genomicVariations_vcf.py)</i>. This
+        will tell the script how many variants will be read and converted from
+        the file(s).
       </p>
       <p>
-        The <code>reference_genome</code> field is the genome used to map the
-        reads.
+        The <i>reference_genome</i> field is the genome used to map the reads. 
       </p>
       <p>
-        The <code>allele_frequency</code> field lets you set a threshold for the
+        The <i>allele_frequency</i> field lets you set a threshold for the
         allele frequency (AF) of the variants you want to convert from the VCF
         file. If you set it at 0.5, all the variants with 0.5 or less AF will be
         converted to BFF. 1 is the default value (all variants will be
         converted).
+      </p>
+      <p>
+        The <i>datasetId</i> needs to match the id of your datasets.csv or
+        datasets.json file. This will add a datasetId field in every record to
+        match the record with the dataset it belongs to.
+      </p>
+      <p>
+        The <i>case_level_data</i> is a boolean parameter (True or False) which
+        will relate your variants to the samples they belong to. In case you set
+        this to true, please, read as well the case level data paragraph below.
+      </p>
+      <p>
+        The <i>zygosity</i> is a boolean parameter (True or False) which will
+        insert if your sample is homozygous or heterozygous in case you have
+        case_level_data activated.
+      </p>
+      <p>
+        The <i>num_rows</i>  is an approximate calculation of the total number
+        variants in each VCFf. Make sure this is greater than the total variants
+        expected. This was automatically calculated before but it was very slow
+        sometimes to calculate all the variants number in a VCF.
       </p>
     </div>
   );

@@ -32,11 +32,10 @@ const StartingGuide: React.FC = () => {
         <span className="user-path-title">Starting Guide</span>
       </h2>
       <h3>Beacon 2 RI Tools</h3>
-      <h1>Starting guide</h1>
-      <h2>Tools Introduction</h2>
+      <h1>Tools Introduction</h1>
       <p>
         The Beacon2 RI tools v2 is a set of tools written in Python available in
-        the following GitHub repository.
+        the following 
         <a
           href="https://github.com/EGA-archive/beacon2-ri-tools-v2"
           target="_blank"
@@ -46,6 +45,7 @@ const StartingGuide: React.FC = () => {
         </a>
         .
       </p>
+
       <p>
         The main goal of Beacon RI tools v2.0 is to obtain the{" "}
         <b>Beacon Friendly Format (BFF) files </b>, which are JSON files
@@ -56,31 +56,39 @@ const StartingGuide: React.FC = () => {
       <div className="note">
         <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
         <div>
-          To obtain a Beacon v2 with its MongoDB and see how to inject the BFF
-          files, you can check it out and download yours for free at the
-          official GitHub repository of {""}
+          Discover how to set up a Beacon v2 with MongoDB and learn to inject
+          BFF files by visiting the official
           <a
             href="https://github.com/EGA-archive/beacon2-ri-api"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Beacon v2 RI API
+            Beacon v2 PI API
           </a>
-          .
+          —where you can download your own Beacon v2 for free!
         </div>
       </div>
       <p>
-        The Beacon data model consists of 7 collections: analyses, biosamples,
-        cohorts, datasets, genomicVariations, individuals, and runs. Therefore,
-        the Beacon RI tools v2.0 allows the user to create the different 7 BFF
-        options.
+        The Beacon data model consists of 7 collections:
+        <ul>
+          <li> Analyses</li>
+          <li> Biosamples</li>
+          <li> Cohorts</li>
+          <li> Datasets</li>
+          <li> GenomicVariations</li>
+          <li> Individuals</li>
+          <li> Runs</li>
+        </ul>{" "}
       </p>
       <p>
-        To get the different BFF files, you can convert your data from a CSV
-        file with a defined structure, following the Beacon data model, to BFF
-        for all the 7 collections. However, for the genomicVariations
-        collection, you can either convert your data from a CSV or from a VCF
-        file, minimizing conversion time.
+        Therefore the Beacon RI tools v2.0 allows the user to create the
+        different 7 BFF options.
+      </p>
+      <p>
+        The 6 metadata BFF files are created populating a CSV file with a
+        defined structure that follows the Beacon data model. However, the
+        genomicVariations collection can be created either from a CSV or from a
+        VCF file, minimising conversion time.
       </p>
       <p>
         The initial step, since the Beacon2 RI tools v2 cannot convert the data
