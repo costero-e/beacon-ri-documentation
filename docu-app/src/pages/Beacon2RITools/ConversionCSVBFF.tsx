@@ -6,7 +6,6 @@ import copyIcon from "../../assets/copy-symbol.svg";
 const ConversionCSVBFF = () => {
   const location = useLocation();
 
-  // State to manage copy success for each snippet independently
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
@@ -47,11 +46,25 @@ const ConversionCSVBFF = () => {
 
   return (
     <div className="conversionContainer">
+      <h2 className="user-path">
+        Documentation
+        <img
+          src="arrow-right-light.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        Beacon 2 RI Tools
+        <img
+          src="arrow-right-bold.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        <span className="user-path-title">Conversion from CSV to BFF</span>
+      </h2>
       <h3>Beacon 2 RI Tools</h3>
       <h1>Conversion from CSV to BFF</h1>
       <p>
         Before getting the BFF (json) final documents, please make sure your{" "}
-        {""}
         <a
           href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf/conf.py"
           target="_blank"
@@ -59,7 +72,7 @@ const ConversionCSVBFF = () => {
         >
           conf.py
         </a>
-        , which you will find inside the {""}
+        , which you will find inside the{" "}
         <a
           href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf"
           target="_blank"
@@ -71,8 +84,38 @@ const ConversionCSVBFF = () => {
       </p>
       <p>
         Now you can execute the next bash command from the root folder in your
-        terminal. All the possible scripts you can execute (individually) to
-        convert CSV data for each collection are:
+        terminal.
+      </p>
+      <p>
+        If you want to convert all the csv you have at the same time, after
+        saving them in the csv input folder (see configuration head), just
+        execute:
+      </p>
+
+      <div className="codeSnippet">
+        <pre>
+          <code>docker exec -it ri-tools python convert_csvTObff.py</code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                "convert-all",
+                "docker exec -it ri-tools python convert_csvTObff.py"
+              )
+            }
+          >
+            {copySuccess["convert-all"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
+
+      <p>
+        On the other hand, you can convert one by one only, picking one of the
+        following commands for the entry type you need:
       </p>
 
       <div className="codeSnippet">
@@ -223,15 +266,14 @@ const ConversionCSVBFF = () => {
       </div>
 
       <p>
-        Once you execute one of the scripts listed above, it will generate the
-        final JSON files (BFF) in the <code>output_docs</code> folder with the
-        name of the collection followed by the <code>.json</code> extension
-        (e.g. <code>cohorts.json</code>).
+        Once you execute any of the conversion scripts, it will generate the
+        final JSON files (BFF) in the output_docs folder with the name of the
+        collection followed by the .json extension (e.g. cohorts.json).
       </p>
       <p>
         These files can be used in a MongoDB for beacon usage. To know how to
         import them into a Beacon v2, please follow the instructions described
-        in {""}
+        in{" "}
         <a
           href="https://github.com/EGA-archive/beacon2-ri-api"
           target="_blank"
