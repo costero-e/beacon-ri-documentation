@@ -25,6 +25,7 @@ import NetworkUIQueries from "./pages/BeaconNetworkUI/NetworkUIQueries";
 import PiApiConfiguration from "./pages/Beacon2PIAPI/PiApiConfiguration";
 import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
 import PiManualDeployment from "./pages/Beacon2PIAPI/PiManualDeployment";
+import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
 
 interface SearchContextProps {
@@ -90,6 +91,7 @@ function App() {
                   element={<PiManualDeployment />}
                 />
                 <Route path="/data-linking" element={<DataLinking />} />
+                <Route path="/filtering-terms" element={<FilteringTerms />} />
                 <Route
                   path="/api-configuration"
                   element={<ApiConfiguration />}

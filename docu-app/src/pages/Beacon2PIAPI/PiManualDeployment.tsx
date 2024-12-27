@@ -125,6 +125,7 @@ const PiManualDeployment = () => {
       <div className="codeSnippet">
         <pre>
           <code>docker-compose up -d --build</code>
+
           <button
             className="copyButtonCode"
             onClick={() => copyToClipboard("cd-deploy")}
@@ -240,7 +241,6 @@ const PiManualDeployment = () => {
             <br />
             {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/caseLevelData.json --collection caseLevelData`}
           </code>
-
           <button
             className="copyButtonCode"
             onClick={() => copyToClipboard("data-injection")}

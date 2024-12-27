@@ -36,6 +36,7 @@ const ContentPreloader = () => {
   );
 
   useRegisterTextContent("/data-linking", dataLinkingText, "Data Linking");
+
   useRegisterTextContent(
     "/api-configuration",
     configurationRiText,

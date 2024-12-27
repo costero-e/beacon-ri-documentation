@@ -260,6 +260,15 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
       "installation-guide": "#installation-guide",
     };
 
+    // "Filtering Terms": [
+    //   { key: "extract-terms", label: "Extract filtering terms" },
+    //   {
+    //     key: "manually-adding-terms",
+    //     label: "Manually adding filtering terms",
+    //   },
+    //   { key: "get-descendant-terms", label: "Get descendant terms" },
+    // ],
+
     const basePath = basePathMap[subItem];
     const hash = pathMap[nestedItem.key];
 
