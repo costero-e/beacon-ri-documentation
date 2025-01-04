@@ -1,5 +1,5 @@
-import React from 'react';
-import './NetworkUIQueries.css'; 
+import React from "react";
+import "./NetworkUIQueries.css";
 
 const NetworkUIQueries: React.FC = () => {
   return (

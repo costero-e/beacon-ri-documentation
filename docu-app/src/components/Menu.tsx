@@ -153,16 +153,30 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
     "Beacon 2 PI API",
     "Beacon 2 RI API",
     "Beacon 2 RI Tools",
-    "Beacon Verifier",
+    // "Beacon Verifier",
     "Beacon UI",
     "Beacon Network UI",
     "Tutorials",
-    "FAQs",
+    // "FAQs",
     "Official Links",
   ];
 
   const handleClick = (item: string) => {
-    const isMenuItemActive = activeMenu === item;
+    if (item === "Official Links") {
+      navigate("/official-links");
+      setActiveMenu(item);
+      setActiveSubMenu(null);
+      setActiveNestedSubMenuItem(null);
+      return;
+    }
+
+    if (item === "Tutorials") {
+      navigate("/tutorials");
+      setActiveMenu(item);
+      setActiveSubMenu(null);
+      setActiveNestedSubMenuItem(null);
+      return;
+    }
 
     if (item === "Introduction") {
       setActiveMenu("Introduction"); // Mark "Introduction" as active
@@ -224,6 +238,7 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
       "Configuration File": "/configuration-file",
       "Starting Guide": "/starting-guide",
       "Filtering Terms": "/filtering-terms",
+      "Official Links": "/official-links",
     };
 
     const pathMap: { [key: string]: string } = {

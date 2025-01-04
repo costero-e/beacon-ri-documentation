@@ -126,8 +126,13 @@
   background-color: white;
 }
 
+/* Does not read the .active */
 .subMenuItem.active {
   color: #185177;
+}
+
+.subMenuItem.active2 {
+  color: #185177 !important;
 }
 
 .nestedSubMenu {

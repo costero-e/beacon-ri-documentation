@@ -27,6 +27,8 @@ import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
 import PiManualDeployment from "./pages/Beacon2PIAPI/PiManualDeployment";
 import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
+import OfficialLinks from "./pages/OfficialLinks";
+import Tutorials from "./pages/Tutorials";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -72,6 +74,8 @@ function App() {
             >
               <Routes>
                 <Route path="/" element={<LandingPage />} />
+                <Route path="/official-links" element={<OfficialLinks />} />
+                <Route path="/tutorials" element={<Tutorials />} />
 
                 <Route
                   path="/automated-deployment"
