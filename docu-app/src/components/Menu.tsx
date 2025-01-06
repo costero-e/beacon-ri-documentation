@@ -162,6 +162,8 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
   ];
 
   const handleClick = (item: string) => {
+    const hasSubMenu = subMenuItems[item] && subMenuItems[item].length > 0;
+
     if (item === "Official Links") {
       navigate("/official-links");
       setActiveMenu(item);
@@ -179,7 +181,7 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
     }
 
     if (item === "Introduction") {
-      setActiveMenu("Introduction"); // Mark "Introduction" as active
+      setActiveMenu("Introduction");
       setActiveSubMenu(null);
       setActiveNestedSubMenuItem(null);
       navigate("/");
@@ -193,8 +195,14 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
     setActiveSubMenu(null);
     setActiveNestedSubMenuItem(null);
 
-    if (!isSubmenuOpen) {
-      toggleSubmenu(); // Open the submenu if it's not already open
+    // Open the submenu only if it has submenu items
+    if (hasSubMenu) {
+      if (!isSubmenuOpen) {
+        toggleSubmenu(); // Open the submenu if it's not already open
+      }
+    } else {
+      // If no submenu items, navigate directly and don't open submenu
+      navigate(`/${item.toLowerCase().replace(/ /g, "-")}`);
     }
   };
 
@@ -203,7 +211,7 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
   };
 
   const handleSubMenuClick = (subItem: string, parentMenu: string) => {
-    setActiveSubMenu(subItem); // Mark the subItem as active
+    setActiveSubMenu(subItem);
     setActiveNestedSubMenuItem(null);
 
     if (
@@ -275,15 +283,6 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
       "installation-guide": "#installation-guide",
     };
 
-    // "Filtering Terms": [
-    //   { key: "extract-terms", label: "Extract filtering terms" },
-    //   {
-    //     key: "manually-adding-terms",
-    //     label: "Manually adding filtering terms",
-    //   },
-    //   { key: "get-descendant-terms", label: "Get descendant terms" },
-    // ],
-
     const basePath = basePathMap[subItem];
     const hash = pathMap[nestedItem.key];
 
@@ -317,12 +316,14 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
           </div>
         ))}
       </div>
-      {activeMenu && activeMenu !== "Introduction" && isSubmenuOpen && (
-        <div className="subMenuContainer">
-          <button className="buttonHideSubmenu" onClick={handleToggleSubmenu}>
-            <img src="./back.png" className="backIcon" alt="backIcon"></img>
-          </button>
-          {activeMenu && subMenuItems[activeMenu] && (
+      {activeMenu &&
+      subMenuItems[activeMenu] &&
+      subMenuItems[activeMenu].length > 0 ? (
+        activeMenu !== "Introduction" && isSubmenuOpen ? (
+          <div className="subMenuContainer">
+            <button className="buttonHideSubmenu" onClick={handleToggleSubmenu}>
+              <img src="./back.png" className="backIcon" alt="backIcon"></img>
+            </button>
             <div className="subMenu">
               {subMenuItems[activeMenu].map((subItem: string) => (
                 <div key={subItem}>
@@ -381,20 +382,19 @@ function Menu({ isSubmenuOpen, toggleSubmenu }: MenuProps) {
                 </div>
               ))}
             </div>
-          )}
-        </div>
-      )}
-      {!isSubmenuOpen && activeMenu !== "Introduction" && (
-        <div className="subMenuContainerNoExpanded">
-          <button className="buttonShowSubmenu" onClick={handleToggleSubmenu}>
-            <img
-              src="./forward.png"
-              className="forwardIcon"
-              alt="forwardIcon"
-            ></img>
-          </button>
-        </div>
-      )}
+          </div>
+        ) : (
+          <div className="subMenuContainerNoExpanded">
+            <button className="buttonShowSubmenu" onClick={handleToggleSubmenu}>
+              <img
+                src="./forward.png"
+                className="forwardIcon"
+                alt="forwardIcon"
+              ></img>
+            </button>
+          </div>
+        )
+      ) : null}
     </div>
   );
 }

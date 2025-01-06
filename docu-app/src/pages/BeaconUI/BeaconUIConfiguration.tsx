@@ -21,6 +21,21 @@ const BeaconUIConfiguration: React.FC = () => {
 
   return (
     <div className="beaconUIConfigurationContainer">
+      <h2 className="user-path">
+        Documentation
+        <img
+          src="arrow-right-light.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        Beacon UI
+        <img
+          src="arrow-right-bold.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        <span className="user-path-title">Configuration UI</span>
+      </h2>
       <h3>Beacon UI</h3>
       <h1>Configuration</h1>
       <p>

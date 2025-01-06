@@ -21,6 +21,21 @@ const NetworkUIConfiguration: React.FC = () => {
 
   return (
     <div className="networkUIConfigurationContainer">
+      <h2 className="user-path">
+        Documentation
+        <img
+          src="arrow-right-light.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        Beacon Network UI
+        <img
+          src="arrow-right-bold.svg"
+          alt="arrow right"
+          className="arrow-icon"
+        />
+        <span className="user-path-title">Configuration UI</span>
+      </h2>
       <h3>Network UI</h3>
       <h1>Configuration</h1>
 
