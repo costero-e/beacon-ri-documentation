@@ -33,7 +33,7 @@ const PiApiConfiguration = () => {
         "docker exec beacon-permissions bash permissions/permissions-ui/start.sh",
       "aai-env": `LSAAI_CLIENT_ID='your_lsaai_client_id'\nLSAAI_CLIENT_SECRET='your_lsaai_client_secret'\nKEYCLOAK_CLIENT_ID='your_keycloak_client_id'\nKEYCLOAK_CLIENT_SECRET='your_keycloak_client_secret'`,
       "beacon-rebuild": "cd deploy && docker-compose up -d --build beacon",
-      "cors-main": `middlewares=[web.normalize_path_middleware(), middlewares.error_middleware, cors_middleware(origins=["your_URL"...`,
+      "cors-main": `cors_urls = ["http://localhost:3000","https://cancer-beacon-demo.ega-archive.org", "https://beacon-network-demo2.ega-archive.org", "https://beacon.ega-archive.org"]`,
       "cors-routes": `for route in list(beacon.router.routes()):\n        cors.add(route, {\n        "your_URL":\n            aiohttp_cors.ResourceOptions(allow_credentials=True,\n            expose_headers="*",\n            allow_methods=("POST", "PATCH", "GET", "OPTIONS"),\n            allow_headers=DEFAULT_ALLOW_HEADERS)`,
       "beacon-info": `beacon_id = 'org.ega-archive.beacon-ri-demo'\nbeacon_name = 'Beacon Reference Implementation demo'\napi_version = 'v2.0.0'\nuri = 'https://beacon-apis-demo.ega-archive.org/api/'\norg_id = 'EGA'\norg_name = 'European Genome-Phenome Archive (EGA)'\norg_description = 'The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.'\norg_adress = 'C/ Dr. Aiguader, 88\nPRBB Building\n08003 Barcelona, Spain'\norg_welcome_url = 'https://ega-archive.org/'\norg_contact_url = 'mailto:beacon.ega@crg.eu'\norg_logo_url = 'https://legacy.ega-archive.org/images/logo.png'\norg_info = ''\ndescription = "This Beacon is based on synthetic data hosted at the <a href='https://ega-archive.org/datasets/EGAD00001003338'>EGA</a>. The dataset contains 2504 samples including genetic data based on 1K Genomes data, and 76 individual attributes and phenotypic data derived from UKBiobank."\nversion = 'v2.0'\nwelcome_url = 'https://beacon.ega-archive.org/'\nalternative_url = 'https://beacon-apis-demo.ega-archive.org/api/'\ncreate_datetime = '2021-11-29T12:00:00.000000'\nupdate_datetime = ''`,
       "granularity-conf": `default_beacon_granularity = "record"\nmax_beacon_granularity = "record"`,
@@ -325,54 +325,21 @@ const PiApiConfiguration = () => {
       <p>
         To avoid CORS using beacon and the frontend or a third-party
         authorization site like Keycloak, you will have to include all these
-        URLs inside __main__.py in the beacon folder, including them in the CORS
-        middleware,
+        URLs inside variable cors_urls in <b>beacon/conf/conf.py file</b>.
       </p>
       <div className="codeSnippet">
         <pre>
           <code>
-            middlewares=[web.normalize_path_middleware(),
-            middlewares.error_middleware, cors_middleware(origins=["your_URL"...
+            cors_urls =
+            ["http://localhost:3000","https://cancer-beacon-demo.ega-archive.org",
+            "https://beacon-network-demo2.ega-archive.org",
+            "https://beacon.ega-archive.org"]
           </code>
           <button
             className="copyButtonCode"
             onClick={() => copyToClipboard("cors-main")}
           >
             {copySuccess["cors-main"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
-      </div>
-      <p>and CORS routes lists:</p>
-      <div className="codeSnippet">
-        <pre>
-          <code>
-            for route in list(beacon.router.routes()):
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;cors.add(route, &#123;
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"your_URL": &#123;
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aiohttp_cors.ResourceOptions(allow_credentials=True,
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;expose_headers="*",
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow_methods=("POST",
-            "PATCH", "GET", "OPTIONS"),
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow_headers=DEFAULT_ALLOW_HEADERS)&#125;
-            <br />
-            &nbsp;&nbsp;&nbsp;&nbsp;&#125;)
-            <br />
-          </code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("your-text-here")}
-          >
-            {copySuccess["your-text-here"] ? (
               "Copied!"
             ) : (
               <img className="copySymbol" src={copyIcon} alt="Copy" />

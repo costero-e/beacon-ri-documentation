@@ -45,6 +45,12 @@ const StartingGuide: React.FC = () => {
         </a>
         .
       </p>
+      <p>
+        Notice that Beacon RI Tools v2 is meant to work with either Beacon 2 RI
+        API or Beacon 2 PI API. Furthermore, it specifically comes with all the
+        features that are needed for generating Beacon v2 PI API compatible
+        data.
+      </p>
 
       <p>
         The main goal of Beacon RI tools v2.0 is to obtain the{" "}

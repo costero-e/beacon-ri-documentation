@@ -513,13 +513,14 @@ const PiQueryingAPI = () => {
       <div className="codeSnippet">
         <pre>
           <code>
-            http://localhost:5050/api/g_variants?referenceName=22&start=7577120&referenceBases=G&alternateBases=A
+            http://localhost:5050/api/g_variants?start=16050606&alternateBases=A
+            &referenceBases=G&referenceName=22&assemblyId=GRCh37
           </code>
           <button
             className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                "http://localhost:5050/api/g_variants?referenceName=22&start=7577120&referenceBases=G&alternateBases=A",
+                "http://localhost:5050/api/g_variants?start=16050606&alternateBases=A &referenceBases=G&referenceName=22&assemblyId=GRCh37",
                 "beacon-sequence-query"
               )
             }
@@ -533,17 +534,42 @@ const PiQueryingAPI = () => {
         </pre>
       </div>
 
-      <h5 className="cursive">Beacon GeneId Query</h5>
+      <h5 className="cursive">Beacon Range Query</h5>
       <div className="codeSnippet">
         <pre>
           <code>
-            http://localhost:5050/api/g_variants?geneId=CHR_START-DUXAP8&variantMaxLength=2&variantType=INDEL
+            http://localhost:5050/api/g_variants?start=16050606&end=16050607
+            &alternateBases=A&referenceBases=G&referenceName=22&assemblyId=GRCh37
           </code>
           <button
             className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                "http://localhost:5050/api/g_variants?geneId=CHR_START-DUXAP8&variantMaxLength=2&variantType=INDEL",
+                "http://localhost:5050/api/g_variants?start=16050606&end=16050607 &alternateBases=A&referenceBases=G&referenceName=22&assemblyId=GRCh37",
+                "beacon-range-query"
+              )
+            }
+          >
+            {copySuccess["beacon-range-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
+
+      <h5 className="cursive">Beacon GeneId Query</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            http://localhost:5050/api/g_variants?geneId=KRAS&variantType=INDEL
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                "http://localhost:5050/api/g_variants?geneId=KRAS&variantType=INDEL",
                 "beacon-geneid-query"
               )
             }
@@ -561,13 +587,14 @@ const PiQueryingAPI = () => {
       <div className="codeSnippet">
         <pre>
           <code>
-            http://localhost:5050/api/g_variants?referenceName=22&start=16050074,16050076&end=16050090&variantType=SNP
+            http://localhost:5050/api/g_variants?referenceName=22&start=16050074,
+            16050076&end=16050090,16050096&variantType=SNP&assemblyId=GRCh38
           </code>
           <button
             className="copyButtonCode"
             onClick={() =>
               copyToClipboard(
-                "http://localhost:5050/api/g_variants?referenceName=22&start=16050074,16050076&end=16050090&variantType=SNP",
+                "http://localhost:5050/api/g_variants?referenceName=22&start=16050074, 16050076&end=16050090,16050096&variantType=SNP&assemblyId=GRCh38",
                 "beacon-bracket-query"
               )
             }
@@ -581,12 +608,60 @@ const PiQueryingAPI = () => {
         </pre>
       </div>
 
+      <h5 className="cursive">Genomic Allele Query</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            http://localhost:5050/api/g_variants?genomicAlleleShortForm=
+            NC_000021.10:g.9411383C&gt;T
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                "http://localhost:5050/api/g_variants?genomicAlleleShortForm= NC_000021.10:g.9411383C>T",
+                "genomic-allele-query"
+              )
+            }
+          >
+            {copySuccess["genomic-allele-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
+
+      <h5 className="cursive">Aminoacid Change Query</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            http://localhost:5050/api/g_variants?geneId=KRAS&aminoacidChange=Thr130Met
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                "http://localhost:5050/api/g_variants?geneId=KRAS&aminoacidChange=Thr130Met",
+                "aminoacid-change-query"
+              )
+            }
+          >
+            {copySuccess["aminoacid-change-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
+
       <h2 id="pi-post-method">POST Method</h2>
       <p>
         In POST method requests, the endpoints accept all generic parameters and
         all the filters, apart from the request parameters.
       </p>
-
       <h6 className="underline">Query Parameters</h6>
       <table>
         <thead>
@@ -1066,7 +1141,17 @@ const PiQueryingAPI = () => {
       </table>
       <h6 className="underline">POST query examples</h6>
 
-      <h5 className="cursive">Genomic query</h5>
+      <div className="note">
+        <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
+        <div>
+          You can either make a query with a scope field for each of the filters
+          or just not insert the scope in the filter object. If scope is not
+          stated, then, the scope of the filter will be the same than the
+          endpoint being queried.
+        </div>
+      </div>
+
+      <h5 className="cursive">Beacon Range Query</h5>
       <div className="codeSnippet">
         <pre>
           <code>
@@ -1074,27 +1159,16 @@ const PiQueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-        "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
-        "requestParameters": {
-            "alternateBases": "G",
-            "referenceBases": "A",
-            "start": [16050074],
-            "end": [16050568],
-            "variantType": "SNP"
-        },
-        "filters": [],
-        "includeResultsetResponses": "HIT",
-        "pagination": {
-            "skip": 0,
-            "limit": 10
-        },
-        "testMode": false,
-        "requestedGranularity": "record"
+      "requestParameters": {"alternateBases": "G", "referenceBases": "A", "referenceName": "22", "start": [16050074], "end": [16050568], "variantType": "SNP", "assemblyId": "GRCh37"},
+      "filters": [],
+      "includeResultsetResponses": "HIT",
+      "pagination": { "skip": 0, "limit": 10 },
+      "testMode": false,
+      "requestedGranularity": "record"
     }
-}' \\
+  }' \\
   http://localhost:5050/api/g_variants`}
           </code>
           <button
@@ -1105,27 +1179,16 @@ const PiQueryingAPI = () => {
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-        "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
-        "requestParameters": {
-            "alternateBases": "G",
-            "referenceBases": "A",
-            "start": [16050074],
-            "end": [16050568],
-            "variantType": "SNP"
-        },
-        "filters": [],
-        "includeResultsetResponses": "HIT",
-        "pagination": {
-            "skip": 0,
-            "limit": 10
-        },
-        "testMode": false,
-        "requestedGranularity": "record"
+      "requestParameters": {"alternateBases": "G", "referenceBases": "A", "referenceName": "22", "start": [16050074], "end": [16050568], "variantType": "SNP", "assemblyId": "GRCh37"},
+      "filters": [],
+      "includeResultsetResponses": "HIT",
+      "pagination": { "skip": 0, "limit": 10 },
+      "testMode": false,
+      "requestedGranularity": "record"
     }
-}' \\
+  }' \\
   http://localhost:5050/api/g_variants`,
                 "genomic-query"
               )
@@ -1140,158 +1203,129 @@ const PiQueryingAPI = () => {
         </pre>
       </div>
 
-      <div>
-        <h5 className="cursive">Simple CURIE based filters query</h5>
-        <div className="codeSnippet">
-          <pre>
-            <code>
-              {`curl \\
+      <h5 className="cursive">Simple CURIE based filters query</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            {`curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "requestParameters": {},
-      "filters": [
-        { "id": "NCIT:C20197", "scope": "individual" },
-        { "id": "NCIT:C42331", "scope": "individual" }
-      ],
+      "filters": [ { "id": "NCIT:C20197", "scope": "individual" }, { "id": "NCIT:C42331", "scope": "individual" } ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`}
-            </code>
-            <button
-              className="copyButtonCode"
-              onClick={() =>
-                copyToClipboard(
-                  `curl \\
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                `curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "requestParameters": {},
-      "filters": [
-        { "id": "NCIT:C20197", "scope": "individual" },
-        { "id": "NCIT:C42331", "scope": "individual" }
-      ],
+      "filters": [ { "id": "NCIT:C20197", "scope": "individual" }, { "id": "NCIT:C42331", "scope": "individual" } ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`,
-                  "curie-query"
-                )
-              }
-            >
-              {copySuccess["curie-query"] ? (
-                "Copied!"
-              ) : (
-                <img className="copySymbol" src={copyIcon} alt="Copy" />
-              )}
-            </button>
-          </pre>
-        </div>
+                "curie-query"
+              )
+            }
+          >
+            {copySuccess["curie-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
 
-        <h5 className="cursive">Numerical value query</h5>
-        <div className="codeSnippet">
-          <pre>
-            <code>
-              {`curl \\
+      <h5 className="cursive">Numerical Age Query</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            {`curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "filters": [
         {
-          "id": "Weight",
+          "id": "diseases.ageOfOnset.iso8601duration",
           "operator": ">",
           "value": "75"
         }
       ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`}
-            </code>
-            <button
-              className="copyButtonCode"
-              onClick={() =>
-                copyToClipboard(
-                  `curl \\
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                `curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "filters": [
         {
-          "id": "Weight",
+          "id": "diseases.ageOfOnset.iso8601duration",
           "operator": ">",
           "value": "75"
         }
       ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`,
-                  "numerical-query"
-                )
-              }
-            >
-              {copySuccess["numerical-query"] ? (
-                "Copied!"
-              ) : (
-                <img className="copySymbol" src={copyIcon} alt="Copy" />
-              )}
-            </button>
-          </pre>
-        </div>
+                "numerical-query"
+              )
+            }
+          >
+            {copySuccess["numerical-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
 
-        <h5 className="cursive">Alphanumerical value query (Exact value)</h5>
-        <div className="codeSnippet">
-          <pre>
-            <code>
-              {`curl \\
+      <h5 className="cursive">Alphanumerical Value Query (Exact Value)</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            {`curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "filters": [
         {
@@ -1301,27 +1335,22 @@ const PiQueryingAPI = () => {
         }
       ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`}
-            </code>
-            <button
-              className="copyButtonCode"
-              onClick={() =>
-                copyToClipboard(
-                  `curl \\
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                `curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "filters": [
         {
@@ -1331,69 +1360,34 @@ const PiQueryingAPI = () => {
         }
       ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`,
-                  "exact-value-query"
-                )
-              }
-            >
-              {copySuccess["exact-value-query"] ? (
-                "Copied!"
-              ) : (
-                <img className="copySymbol" src={copyIcon} alt="Copy" />
-              )}
-            </button>
-          </pre>
-        </div>
+                "exact-value-query"
+              )
+            }
+          >
+            {copySuccess["exact-value-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
 
-        <h5 className="cursive">Alphanumerical value query (Like value)</h5>
-        <div className="codeSnippet">
-          <pre>
-            <code>
-              {`curl \\
+      <h5 className="cursive">Alphanumerical Value Query (Like Value)</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            {`curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
-    "query": {
-      "filters": [
-        {
-          "id": "geographicOrigin",
-          "operator": "=",
-          "value": "England"
-        }
-      ],
-      "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
-      "testMode": false,
-      "requestedGranularity": "record"
-    }
-  }' \\
-  http://localhost:5050/api/individuals`}
-            </code>
-            <button
-              className="copyButtonCode"
-              onClick={() =>
-                copyToClipboard(
-                  `curl \\
-  -H 'Content-Type: application/json' \\
-  -X POST \\
-  -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "filters": [
         {
@@ -1403,39 +1397,59 @@ const PiQueryingAPI = () => {
         }
       ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
+      "testMode": false,
+      "requestedGranularity": "record"
+    }
+  }' \\
+  http://localhost:5050/api/individuals`}
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                `curl \\
+  -H 'Content-Type: application/json' \\
+  -X POST \\
+  -d '{
+    "meta": { "apiVersion": "2.0" },
+    "query": {
+      "filters": [
+        {
+          "id": "geographicOrigin",
+          "operator": "=",
+          "value": "%land%"
+        }
+      ],
+      "includeResultsetResponses": "HIT",
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`,
-                  "exact-value-query"
-                )
-              }
-            >
-              {copySuccess["exact-value-query"] ? (
-                "Copied!"
-              ) : (
-                <img className="copySymbol" src={copyIcon} alt="Copy" />
-              )}
-            </button>
-          </pre>
-        </div>
+                "exact-value-query"
+              )
+            }
+          >
+            {copySuccess["exact-value-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
 
-        <h5 className="cursive">Alphanumerical value query (NOT value)</h5>
-        <div className="codeSnippet">
-          <pre>
-            <code>
-              {`curl \\
+      <h5 className="cursive">Alphanumerical Value Query (NOT Value)</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            {`curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "filters": [
         {
@@ -1445,27 +1459,22 @@ const PiQueryingAPI = () => {
         }
       ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`}
-            </code>
-            <button
-              className="copyButtonCode"
-              onClick={() =>
-                copyToClipboard(
-                  `curl \\
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                `curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "filters": [
         {
@@ -1475,39 +1484,34 @@ const PiQueryingAPI = () => {
         }
       ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`,
-                  "not-value-query"
-                )
-              }
-            >
-              {copySuccess["not-value-query"] ? (
-                "Copied!"
-              ) : (
-                <img className="copySymbol" src={copyIcon} alt="Copy" />
-              )}
-            </button>
-          </pre>
-        </div>
+                "not-value-query"
+              )
+            }
+          >
+            {copySuccess["not-value-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
 
-        <h5 className="cursive">Semantic similarity query</h5>
-        <div className="codeSnippet">
-          <pre>
-            <code>
-              {`curl \\
+      <h5 className="cursive">Semantic Similarity Query</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            {`curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "filters": [
         {
@@ -1516,27 +1520,22 @@ const PiQueryingAPI = () => {
         }
       ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`}
-            </code>
-            <button
-              className="copyButtonCode"
-              onClick={() =>
-                copyToClipboard(
-                  `curl \\
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                `curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
+    "meta": { "apiVersion": "2.0" },
     "query": {
       "filters": [
         {
@@ -1545,39 +1544,36 @@ const PiQueryingAPI = () => {
         }
       ],
       "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
+      "pagination": { "skip": 0, "limit": 10 },
       "testMode": false,
       "requestedGranularity": "record"
     }
   }' \\
   http://localhost:5050/api/individuals`,
-                  "similarity-query"
-                )
-              }
-            >
-              {copySuccess["similarity-query"] ? (
-                "Copied!"
-              ) : (
-                <img className="copySymbol" src={copyIcon} alt="Copy" />
-              )}
-            </button>
-          </pre>
-        </div>
+                "similarity-query"
+              )
+            }
+          >
+            {copySuccess["similarity-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
 
-        <h5 className="cursive">Custom filter query</h5>
-        <div className="codeSnippet">
-          <pre>
-            <code>
-              {`curl \\
+      <h5 className="cursive">Custom Filter Query</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            {`curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
   "meta": { "apiVersion": "2.0" },
   "query": {
-    "filters": [{"id": "sampleOriginType:blood"}],
+    "filters": [{"id": "sampleOriginType:blood", "scope": "biosample"}],
     "includeResultsetResponses": "HIT",
     "pagination": { "skip": 0, "limit": 10 },
     "testMode": false,
@@ -1585,18 +1581,18 @@ const PiQueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/biosamples`}
-            </code>
-            <button
-              className="copyButtonCode"
-              onClick={() =>
-                copyToClipboard(
-                  `curl \\
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                `curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
   "meta": { "apiVersion": "2.0" },
   "query": {
-    "filters": [{"id": "sampleOriginType:blood"}],
+    "filters": [{"id": "sampleOriginType:blood", "scope": "biosample"}],
     "includeResultsetResponses": "HIT",
     "pagination": { "skip": 0, "limit": 10 },
     "testMode": false,
@@ -1604,275 +1600,223 @@ const PiQueryingAPI = () => {
   }
 }' \\
   http://localhost:5050/api/biosamples`,
-                  "custom-filter-query"
-                )
-              }
-            >
-              {copySuccess["custom-filter-query"] ? (
-                "Copied!"
-              ) : (
-                <img className="copySymbol" src={copyIcon} alt="Copy" />
-              )}
-            </button>
-          </pre>
-        </div>
+                "custom-filter-query"
+              )
+            }
+          >
+            {copySuccess["custom-filter-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
 
-        <h5 className="cursive">Join genomic query</h5>
-        <div className="codeSnippet">
-          <pre>
-            <code>
-              {`curl \\
+      <h5 className="cursive">Join Genomic Query</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            {`curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
+  "meta": { "apiVersion": "2.0" },
+  "query": {
+    "requestParameters": {
+      "alternateBases": "G",
+      "referenceBases": "A",
+      "referenceName": "22",
+      "start": [16050074],
+      "end": [16050568],
+      "variantType": "SNP",
+      "assemblyId": "GRCh37"
     },
-    "query": {
-      "requestParameters": {
-        "alternateBases": "G",
-        "referenceBases": "A",
-        "start": [16050074],
-        "end": [16050568],
-        "variantType": "SNP"
-      },
-      "filters": [
-        {
-          "id": "NCIT:C20197",
-          "scope": "individual"
-        },
-        {
-          "id": "NCIT:C42331",
-          "scope": "individual"
-        }
-      ],
-      "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 100
-      },
-      "testMode": false,
-      "requestedGranularity": "record"
-    }
-  }' \\
+    "filters": [
+      { "id": "NCIT:C20197", "scope": "individual" },
+      { "id": "NCIT:C42331", "scope": "individual" }
+    ],
+    "includeResultsetResponses": "HIT",
+    "pagination": { "skip": 0, "limit": 100 },
+    "testMode": false,
+    "requestedGranularity": "record"
+  }
+}' \\
   http://localhost:5050/api/g_variants`}
-            </code>
-            <button
-              className="copyButtonCode"
-              onClick={() =>
-                copyToClipboard(
-                  `curl \\
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                `curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
+  "meta": { "apiVersion": "2.0" },
+  "query": {
+    "requestParameters": {
+      "alternateBases": "G",
+      "referenceBases": "A",
+      "referenceName": "22",
+      "start": [16050074],
+      "end": [16050568],
+      "variantType": "SNP",
+      "assemblyId": "GRCh37"
     },
-    "query": {
-      "requestParameters": {
-        "alternateBases": "G",
-        "referenceBases": "A",
-        "start": [16050074],
-        "end": [16050568],
-        "variantType": "SNP"
-      },
-      "filters": [
-        {
-          "id": "NCIT:C20197",
-          "scope": "individual"
-        },
-        {
-          "id": "NCIT:C42331",
-          "scope": "individual"
-        }
-      ],
-      "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 100
-      },
-      "testMode": false,
-      "requestedGranularity": "record"
-    }
-  }' \\
+    "filters": [
+      { "id": "NCIT:C20197", "scope": "individual" },
+      { "id": "NCIT:C42331", "scope": "individual" }
+    ],
+    "includeResultsetResponses": "HIT",
+    "pagination": { "skip": 0, "limit": 100 },
+    "testMode": false,
+    "requestedGranularity": "record"
+  }
+}' \\
   http://localhost:5050/api/g_variants`,
-                  "join-genomic-query"
-                )
-              }
-            >
-              {copySuccess["join-genomic-query"] ? (
-                "Copied!"
-              ) : (
-                <img className="copySymbol" src={copyIcon} alt="Copy" />
-              )}
-            </button>
-          </pre>
-        </div>
+                "join-genomic-query"
+              )
+            }
+          >
+            {copySuccess["join-genomic-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
 
-        <h5 className="cursive">Join individuals query</h5>
-
-        <div className="codeSnippet">
-          <pre>
-            <code>
-              {`curl \\
+      <h5 className="cursive">Join Individuals Query</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            {`curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
+  "meta": { "apiVersion": "2.0" },
+  "query": {
+    "requestParameters": {
+      "alternateBases": "G",
+      "referenceBases": "A",
+      "referenceName": "22",
+      "start": [16050074],
+      "end": [16050568],
+      "variantType": "SNP",
+      "assemblyId": "GRCh37"
     },
-    "query": {
-      "requestParameters": {
-        "alternateBases": "G",
-        "referenceBases": "A",
-        "start": [16050004],
-        "end": [16950115],
-        "variantType": "SNP"
-      },
-      "filters": [
-        {
-          "id": "NCIT:C20197"
-        },
-        {
-          "id": "NCIT:C42331"
-        }
-      ],
-      "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
-      "testMode": false,
-      "requestedGranularity": "record"
-    }
-  }' \\
+    "filters": [
+      { "id": "NCIT:C20197", "scope": "individual" },
+      { "id": "NCIT:C42331", "scope": "individual" }
+    ],
+    "includeResultsetResponses": "HIT",
+    "pagination": { "skip": 0, "limit": 10 },
+    "testMode": false,
+    "requestedGranularity": "record"
+  }
+}' \\
   http://localhost:5050/api/individuals`}
-            </code>
-            <button
-              className="copyButtonCode"
-              onClick={() =>
-                copyToClipboard(
-                  `curl \\
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                `curl \\
   -H 'Content-Type: application/json' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
+  "meta": { "apiVersion": "2.0" },
+  "query": {
+    "requestParameters": {
+      "alternateBases": "G",
+      "referenceBases": "A",
+      "referenceName": "22",
+      "start": [16050074],
+      "end": [16050568],
+      "variantType": "SNP",
+      "assemblyId": "GRCh37"
     },
-    "query": {
-      "requestParameters": {
-        "alternateBases": "G",
-        "referenceBases": "A",
-        "start": [16050004],
-        "end": [16950115],
-        "variantType": "SNP"
-      },
-      "filters": [
-        {
-          "id": "NCIT:C20197"
-        },
-        {
-          "id": "NCIT:C42331"
-        }
-      ],
-      "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
-      "testMode": false,
-      "requestedGranularity": "record"
-    }
-  }' \\
+    "filters": [
+      { "id": "NCIT:C20197", "scope": "individual" },
+      { "id": "NCIT:C42331", "scope": "individual" }
+    ],
+    "includeResultsetResponses": "HIT",
+    "pagination": { "skip": 0, "limit": 10 },
+    "testMode": false,
+    "requestedGranularity": "record"
+  }
+}' \\
   http://localhost:5050/api/individuals`,
-                  "join-individuals-query"
-                )
-              }
-            >
-              {copySuccess["join-individuals-query"] ? (
-                "Copied!"
-              ) : (
-                <img className="copySymbol" src={copyIcon} alt="Copy" />
-              )}
-            </button>
-          </pre>
-        </div>
+                "join-individuals-query"
+              )
+            }
+          >
+            {copySuccess["join-individuals-query"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
+      </div>
 
-        <h5 className="cursive">Query with access token</h5>
-        <div className="codeSnippet">
-          <pre>
-            <code>
-              {`curl \\
+      <h5 className="cursive">Query with Access Token</h5>
+      <div className="codeSnippet">
+        <pre>
+          <code>
+            {`curl \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer <access_token>' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
-    "query": {
-      "requestParameters": {},
-      "filters": [
-        {
-          "id": "geographicOrigin",
-          "operator": "=",
-          "value": "%land%"
-        }
-      ],
-      "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
-      "testMode": false,
-      "requestedGranularity": "record"
-    }
-  }' \\
+  "meta": { "apiVersion": "2.0" },
+  "query": {
+    "requestParameters": {},
+    "filters": [
+      { "id": "geographicOrigin", "operator": "=", "value": "%land%" }
+    ],
+    "includeResultsetResponses": "HIT",
+    "pagination": { "skip": 0, "limit": 10 },
+    "testMode": false,
+    "requestedGranularity": "record"
+  }
+}' \\
   http://localhost:5050/api/individuals`}
-            </code>
-            <button
-              className="copyButtonCode"
-              onClick={() =>
-                copyToClipboard(
-                  `curl \\
+          </code>
+          <button
+            className="copyButtonCode"
+            onClick={() =>
+              copyToClipboard(
+                `curl \\
   -H 'Content-Type: application/json' \\
   -H 'Authorization: Bearer <access_token>' \\
   -X POST \\
   -d '{
-    "meta": {
-      "apiVersion": "2.0"
-    },
-    "query": {
-      "requestParameters": {},
-      "filters": [
-        {
-          "id": "geographicOrigin",
-          "operator": "=",
-          "value": "%land%"
-        }
-      ],
-      "includeResultsetResponses": "HIT",
-      "pagination": {
-        "skip": 0,
-        "limit": 10
-      },
-      "testMode": false,
-      "requestedGranularity": "record"
-    }
-  }' \\
+  "meta": { "apiVersion": "2.0" },
+  "query": {
+    "requestParameters": {},
+    "filters": [
+      { "id": "geographicOrigin", "operator": "=", "value": "%land%" }
+    ],
+    "includeResultsetResponses": "HIT",
+    "pagination": { "skip": 0, "limit": 10 },
+    "testMode": false,
+    "requestedGranularity": "record"
+  }
+}' \\
   http://localhost:5050/api/individuals`,
-                  "query-with-token"
-                )
-              }
-            >
-              {copySuccess["query-with-token"] ? (
-                "Copied!"
-              ) : (
-                <img className="copySymbol" src={copyIcon} alt="Copy" />
-              )}
-            </button>
-          </pre>
-        </div>
+                "query-with-token"
+              )
+            }
+          >
+            {copySuccess["query-with-token"] ? (
+              "Copied!"
+            ) : (
+              <img className="copySymbol" src={copyIcon} alt="Copy" />
+            )}
+          </button>
+        </pre>
       </div>
 
       <h6 className="underline">List of endpoints</h6>
