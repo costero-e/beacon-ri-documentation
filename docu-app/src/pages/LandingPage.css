@@ -1,8 +1,9 @@
 .landingPage {
-  padding-left: 125px;
+  padding-left: 60px;
   height: 100vw;
-  width: 80%;
-  margin-right: 125px;
+  width: 1000px;
+  max-width: 100%;
+  margin-right: 100px;
 }
 
 .landingPage h2 {
@@ -38,8 +39,9 @@ h4 {
 }
 
 .relationship-elements {
-  width: 90%;
-  margin-top: 14px;
+  width: 724px;
+  margin: 14px auto 0 auto;
+  display: block;
 }
 
 .footer {

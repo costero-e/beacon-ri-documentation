@@ -99,7 +99,7 @@ const PiQueryingAPI = () => {
         </thead>
         <tbody>
           <tr>
-            <td className="first-table-item">• requestedSchema</td>
+            <td>• requestedSchema</td>
             <td>String</td>
             <td>
               <div className="codeSnippet-table">

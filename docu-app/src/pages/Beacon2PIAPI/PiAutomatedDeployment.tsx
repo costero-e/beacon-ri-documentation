@@ -6,7 +6,6 @@ import copyIcon from "../../assets/copy-symbol.svg";
 const PiAutomatedDeployment = () => {
   const location = useLocation();
 
-  // State to manage copy success for each snippet independently
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
@@ -16,7 +15,7 @@ const PiAutomatedDeployment = () => {
       setTimeout(() => {
         const element = document.getElementById(location.hash.substring(1));
         if (element) {
-          const yOffset = -80; // Adjust this value based on your header height
+          const yOffset = -80;
           const y =
             element.getBoundingClientRect().top + window.pageYOffset + yOffset;
           window.scrollTo({ top: y, behavior: "smooth" });

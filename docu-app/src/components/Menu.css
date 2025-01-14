@@ -126,7 +126,6 @@
   background-color: white;
 }
 
-/* Does not read the .active */
 .subMenuItem.active {
   color: #185177;
 }
@@ -254,7 +253,6 @@
     background-color: #f8f8f8;
     font-family: menlo;
     font-size: 14px;
-    margin-right: 27px;
     border-radius: 8px;
     width: 90% !important;
     text-wrap: wrap;
@@ -276,7 +274,6 @@
     background-color: #f0f7ff;
     font-family: menlo;
     font-size: 14px;
-    margin-right: 27px;
     width: 90% !important;
     border-radius: 8px;
     justify-content: flex-start;

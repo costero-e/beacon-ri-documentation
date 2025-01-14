@@ -1,13 +1,22 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
 .appContainer {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  height: 100vh;
 }
 
 .contentContainer {
   transition: margin-left 0.3s ease;
   margin-top: 56px;
 }
-
 
 /* When screen is larger than 1223px */
 @media (min-width: 1224px) {

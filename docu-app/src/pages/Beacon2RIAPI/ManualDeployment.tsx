@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import copyIcon from "../../assets/copy-symbol.svg";
 
+// I need to import some CSS here
+
 const ManualDeployment = () => {
   const location = useLocation();
 

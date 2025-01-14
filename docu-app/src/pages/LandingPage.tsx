@@ -1,4 +1,3 @@
-import React from "react";
 import "./LandingPage.css";
 
 function LandingPage() {
@@ -60,7 +59,7 @@ function LandingPage() {
       <img
         className="relationship-elements"
         alt="Relationship-elements"
-        src="/scheme_RI_.png"
+        src="/scheme_RI.svg"
       />
       <h2 className="h2-subtitle">
         What brings the new Beacon v2 Production Implementation?
@@ -73,7 +72,7 @@ function LandingPage() {
       <img
         className="relationship-elements"
         alt="Relationship-elements"
-        src="/scheme_PI.png"
+        src="/scheme_PI.svg"
       />
       <p>
         The process to deploy and inject data is the same than in Beacon v2 RI

@@ -92,7 +92,7 @@ const QueryingAPI = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="first-table-item">
+          <tr>
             <td>• requestedSchema</td>
             <td>String</td>
             <td>
