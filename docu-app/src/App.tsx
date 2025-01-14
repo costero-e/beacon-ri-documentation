@@ -59,6 +59,39 @@ function App() {
     setSearchResults(results);
   };
 
+  const menuItems = [
+    "Introduction",
+    "Beacon 2 PI API",
+    "Beacon 2 RI API",
+    "Beacon 2 RI Tools",
+    "Beacon UI",
+    "Beacon Network UI",
+    "Tutorials",
+    "Official Links",
+  ];
+
+  const subMenuItems = {
+    "Beacon 2 RI API": ["Automated Deployment", "Manual Deployment"],
+    "Beacon 2 PI API": ["PI Automated Deployment", "PI Manual Deployment"],
+    "Beacon UI": ["Deployment", "Configuration UI", "Querying the UI"],
+    "Beacon Network UI": ["Deployment", "Configuration UI", "Querying the UI"],
+  };
+
+  const nestedSubMenuItems = {
+    "Automated Deployment": [
+      { key: "cloning-repository", label: "Cloning the repository" },
+      { key: "execute-start-script", label: "Execute start script from root" },
+    ],
+    "Manual Deployment": [
+      { key: "creating-containers", label: "Creating the containers" },
+      { key: "data-injection", label: "Data injection" },
+    ],
+    "PI Automated Deployment": [
+      { key: "pi-cloning-repository", label: "PI Cloning the repository" },
+      { key: "pi-execute-start-script", label: "PI Execute start script" },
+    ],
+  };
+
   return (
     <SearchableContentProvider>
       <Router>
@@ -66,7 +99,13 @@ function App() {
         <div className="appContainer">
           <Navbar onSearch={handleSearch} />
           <div className="contentContainer">
-            <Menu isSubmenuOpen={isSubmenuOpen} toggleSubmenu={toggleSubmenu} />
+            <Menu
+              menuItems={menuItems}
+              subMenuItems={subMenuItems}
+              nestedSubMenuItems={nestedSubMenuItems}
+              isSubmenuOpen={isSubmenuOpen}
+              toggleSubmenu={toggleSubmenu}
+            />
             <div
               className={`contentContainer ${
                 isSubmenuOpen ? "withSubmenuOpen" : "withSubmenuClosed"
