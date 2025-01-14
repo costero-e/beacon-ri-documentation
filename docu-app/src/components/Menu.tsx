@@ -412,7 +412,6 @@ import {
   Collapse,
   Toolbar,
   AppBar,
-  Typography,
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -438,13 +437,97 @@ export default function Menu({
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
 
-  // Handle main menu click
-  const handleMainMenuClick = (item: string) => {
-    setActiveMenu(activeMenu === item ? null : item);
+  // Map of menu items to direct routes
+  const routeMap: { [key: string]: string } = {
+    Introduction: "/",
+
+    "Beacon 2 PI API": "/pi-automated-deployment",
+    "PI Automated Deployment": "/pi-automated-deployment",
+    "PI Manual Deployment": "/pi-manual-deployment",
+    "Filtering Terms": "/filtering-terms",
+    Configuration: "/pi-api-configuration",
+    "PI Querying the API": "/pi-querying-api",
+
+    "Beacon 2 RI API": "/automated-deployment",
+    "Automated Deployment": "/automated-deployment",
+    "Manual Deployment": "/manual-deployment",
+    "Data Linking": "/data-linking",
+    "API Configuration": "/api-configuration",
+    "Querying the API": "/querying-api",
+
+    "Beacon 2 RI Tools": "/starting-guide",
+    "Starting Guide": "/starting-guide",
+    "Configuration File": "/configuration-file",
+    "Creating the CSV Files": "/creating_csvs",
+    "Conversion from CSV to BFF": "/conversion_csv_bff",
+    "Conversion from VCF to BFF": "/conversion_vcf_bff",
+
+    "Beacon UI": "/ui_deployment",
+    Deployment: "/ui_deployment",
+    "Configuration UI": "/ui_configuration",
+    "Querying the UI": "/ui_queries",
+
+    "Beacon Network UI": "/networkui_deployment",
+    "Network Deployment": "/networkui_deployment",
+    "Network Configuration UI": "/networkui_configuration",
+    "Network Querying the UI": "/networkui_queries",
+
+    "Official Links": "/official-links",
+    Tutorials: "/tutorials",
   };
 
-  // Handle sub-menu click
+  const handleMainMenuClick = (item: string) => {
+    if (item === "Beacon 2 PI API") {
+      navigate("/pi-automated-deployment");
+      setActiveMenu(activeMenu === item ? null : item);
+      return;
+    }
+
+    if (item === "Beacon 2 RI API") {
+      navigate("/automated-deployment");
+      setActiveMenu(activeMenu === item ? null : item);
+      return;
+    }
+
+    if (item === "Beacon 2 RI Tools") {
+      navigate("/starting-guide");
+      setActiveMenu(activeMenu === item ? null : item);
+      return;
+    }
+
+    if (item === "Beacon UI") {
+      navigate("/ui_deployment");
+      setActiveMenu(activeMenu === item ? null : item);
+      return;
+    }
+
+    if (item === "Beacon Network UI") {
+      navigate("/networkui_deployment");
+      setActiveMenu(activeMenu === item ? null : item);
+      return;
+    }
+
+    // For other items, handle as usual
+    if (routeMap[item] && !subMenuItems[item]) {
+      navigate(routeMap[item]);
+      setActiveMenu(null); // Collapse menu after navigation
+    } else {
+      setActiveMenu(activeMenu === item ? null : item); // Toggle submenu
+    }
+  };
+
   const handleSubMenuClick = (subItem: string, parentMenu: string) => {
+    console.log(`Submenu clicked: ${subItem}`); // Debug log
+
+    // Navigate directly if the route exists
+    if (routeMap[subItem]) {
+      navigate(routeMap[subItem]);
+      console.log(`Navigating to ${routeMap[subItem]}`);
+      setActiveSubMenu(null); // Collapse after navigation
+      return;
+    }
+
+    // Toggle submenu if no direct route
     setActiveSubMenu(activeSubMenu === subItem ? null : subItem);
   };
 

@@ -64,32 +64,57 @@ function App() {
     "Beacon 2 PI API",
     "Beacon 2 RI API",
     "Beacon 2 RI Tools",
+    // "Beacon Verifier",
     "Beacon UI",
     "Beacon Network UI",
     "Tutorials",
+    // "FAQs",
     "Official Links",
   ];
 
   const subMenuItems = {
-    "Beacon 2 RI API": ["Automated Deployment", "Manual Deployment"],
-    "Beacon 2 PI API": ["PI Automated Deployment", "PI Manual Deployment"],
+    "Beacon 2 PI API": [
+      "PI Automated Deployment",
+      "PI Manual Deployment",
+      "Filtering Terms",
+      "Configuration",
+      "PI Querying the API",
+    ],
+    "Beacon 2 RI API": [
+      "Automated Deployment",
+      "Manual Deployment",
+      "Data Linking",
+      "API Configuration",
+      "Querying the API",
+    ],
+    "Beacon 2 RI Tools": [
+      "Starting Guide",
+      "Configuration File",
+      "Creating the CSV Files",
+      "Conversion from CSV to BFF",
+      "Conversion from VCF to BFF",
+    ],
     "Beacon UI": ["Deployment", "Configuration UI", "Querying the UI"],
-    "Beacon Network UI": ["Deployment", "Configuration UI", "Querying the UI"],
+    "Beacon Network UI": [
+      "Network Deployment",
+      "Network Configuration UI",
+      "Network Querying the UI",
+    ],
   };
 
   const nestedSubMenuItems = {
-    "Automated Deployment": [
-      { key: "cloning-repository", label: "Cloning the repository" },
-      { key: "execute-start-script", label: "Execute start script from root" },
-    ],
-    "Manual Deployment": [
-      { key: "creating-containers", label: "Creating the containers" },
-      { key: "data-injection", label: "Data injection" },
-    ],
-    "PI Automated Deployment": [
-      { key: "pi-cloning-repository", label: "PI Cloning the repository" },
-      { key: "pi-execute-start-script", label: "PI Execute start script" },
-    ],
+    // "Automated Deployment": [
+    //   { key: "cloning-repository", label: "Cloning the repository" },
+    //   { key: "execute-start-script", label: "Execute start script from root" },
+    // ],
+    // "Manual Deployment": [
+    //   { key: "creating-containers", label: "Creating the containers" },
+    //   { key: "data-injection", label: "Data injection" },
+    // ],
+    // "PI Automated Deployment": [
+    //   { key: "pi-cloning-repository", label: "PI Cloning the repository" },
+    //   { key: "pi-execute-start-script", label: "PI Execute start script" },
+    // ],
   };
 
   return (
@@ -115,19 +140,17 @@ function App() {
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/official-links" element={<OfficialLinks />} />
                 <Route path="/tutorials" element={<Tutorials />} />
-
                 <Route
                   path="/automated-deployment"
                   element={<AutomatedDeployment />}
                 />
-
-                <Route
-                  path="/pi-automated-deployment"
-                  element={<PiAutomatedDeployment />}
-                />
                 <Route
                   path="/manual-deployment"
                   element={<ManualDeployment />}
+                />
+                <Route
+                  path="/pi-automated-deployment"
+                  element={<PiAutomatedDeployment />}
                 />
                 <Route
                   path="/pi-manual-deployment"
