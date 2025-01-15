@@ -63,7 +63,7 @@ const StartingGuide: React.FC = () => {
         <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
         <div>
           Discover how to set up a Beacon v2 with MongoDB and learn to inject
-          BFF files by visiting the official
+          BFF files by visiting the official{" "}
           <a
             href="https://github.com/EGA-archive/beacon2-ri-api"
             target="_blank"
@@ -71,7 +71,7 @@ const StartingGuide: React.FC = () => {
           >
             Beacon v2 PI API
           </a>
-          —where you can download your own Beacon v2 for free!
+          — where you can download your own Beacon v2 for free!
         </div>
       </div>
       <p>

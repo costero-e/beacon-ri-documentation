@@ -594,16 +594,25 @@ export default function Menu({
                       sx={{
                         pl: 1,
                         bgcolor: "#E5ECF3",
-                        color: "#4A88B1",
                       }}
                     >
                       <ListItemButton
                         onClick={() => handleSubMenuClick(subItem, menuItem)}
+                        sx={{
+                          color: "#4A88B1",
+                          "&:hover": {
+                            bgcolor: "white",
+                            color: "#185177",
+                          },
+                        }}
                       >
                         <Typography
-                          variant="body1"
+                          variant="body2"
                           fontWeight="bold"
-                          sx={{ color: "#4A88B1", p: 0.2 }}
+                          sx={{
+                            color: "inherit",
+                            p: 0.2,
+                          }}
                         >
                           {subItem}
                         </Typography>
