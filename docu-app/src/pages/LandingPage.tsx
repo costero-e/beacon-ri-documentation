@@ -5,7 +5,9 @@ function LandingPage() {
     <div className="landingPage">
       <div>
         {" "}
-        <h2>Documentation</h2>
+        <a href="/introduction" className="no-undeline">
+          <h2>Documentation</h2>
+        </a>
         <h3>Beacon v2 Reference/Production Implementation Documentation</h3>
         <p>
           Welcome to the documentation for the Beacon v2 Reference/Production

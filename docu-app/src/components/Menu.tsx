@@ -416,6 +416,8 @@ import {
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import "./Menu.css";
 
 const drawerWidth = 240;
@@ -440,10 +442,12 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
       navigate(`/${menuItem.toLowerCase().replace(/ /g, "-")}`);
       setActiveMenuItem(menuItem);
       setActiveMenu(null);
-    } else if (subMenus.length > 0) {
+    } else if (activeMenu === menuItem) {
+      setActiveMenu(null);
+      setActiveMenuItem(null);
+    } else {
       const firstSubMenuItem = subMenus[0];
       navigate(`/${firstSubMenuItem.toLowerCase().replace(/ /g, "-")}`);
-
       setActiveMenu(menuItem);
       setActiveMenuItem(firstSubMenuItem);
     }

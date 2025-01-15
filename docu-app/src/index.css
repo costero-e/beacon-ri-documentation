@@ -182,6 +182,14 @@ li code {
   margin-top: -18px;
 }
 
+.no-undeline {
+  text-decoration: none;
+}
+
+.main-title {
+  padding-left: 60px;
+}
+
 @media (max-width: 880px) {
   table {
     width: 100%;
