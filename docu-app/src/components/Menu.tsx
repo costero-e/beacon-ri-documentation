@@ -402,7 +402,7 @@
 // export default Menu;
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   Box,
   Drawer,
@@ -423,109 +423,34 @@ const drawerWidth = 240;
 interface MenuProps {
   menuItems: string[];
   subMenuItems: { [key: string]: string[] };
-  nestedSubMenuItems: { [key: string]: { key: string; label: string }[] };
   isSubmenuOpen: boolean;
   toggleSubmenu: () => void;
 }
 
-export default function Menu({
-  menuItems,
-  subMenuItems,
-  nestedSubMenuItems,
-  isSubmenuOpen,
-  toggleSubmenu,
-}: MenuProps) {
+export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   const navigate = useNavigate();
+  const location = useLocation();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
+  const [activeMenuItem, setActiveMenuItem] = useState<string | null>(null);
 
-  // Map of menu items to direct routes
-  const routeMap: { [key: string]: string } = {
-    Introduction: "/",
+  const handleMainMenuClick = (menuItem: string) => {
+    const subMenus = subMenuItems[menuItem];
 
-    "Beacon 2 PI API": "/pi-automated-deployment",
-    "PI Automated Deployment": "/pi-automated-deployment",
-    "PI Manual Deployment": "/pi-manual-deployment",
-    "Filtering Terms": "/filtering-terms",
-    Configuration: "/pi-api-configuration",
-    "PI Querying the API": "/pi-querying-api",
+    if (!subMenus) {
+      navigate(`/${menuItem.toLowerCase().replace(/ /g, "-")}`);
+      setActiveMenuItem(menuItem);
+      setActiveMenu(null);
+    } else if (subMenus.length > 0) {
+      const firstSubMenuItem = subMenus[0];
+      navigate(`/${firstSubMenuItem.toLowerCase().replace(/ /g, "-")}`);
 
-    "Beacon 2 RI API": "/automated-deployment",
-    "Automated Deployment": "/automated-deployment",
-    "Manual Deployment": "/manual-deployment",
-    "Data Linking": "/data-linking",
-    "API Configuration": "/api-configuration",
-    "Querying the API": "/querying-api",
-
-    "Beacon 2 RI Tools": "/starting-guide",
-    "Starting Guide": "/starting-guide",
-    "Configuration File": "/configuration-file",
-    "Creating the CSV Files": "/creating_csvs",
-    "Conversion from CSV to BFF": "/conversion_csv_bff",
-    "Conversion from VCF to BFF": "/conversion_vcf_bff",
-
-    "Beacon UI": "/ui_deployment",
-    Deployment: "/ui_deployment",
-    "Configuration UI": "/ui_configuration",
-    "Querying the UI": "/ui_queries",
-
-    "Beacon Network UI": "/networkui_deployment",
-    "Network Deployment": "/networkui_deployment",
-    "Network Configuration UI": "/networkui_configuration",
-    "Network Querying the UI": "/networkui_queries",
-
-    "Official Links": "/official-links",
-    Tutorials: "/tutorials",
-  };
-
-  const handleMainMenuClick = (item: string) => {
-    if (item === "Beacon 2 PI API") {
-      navigate("/pi-automated-deployment");
-      setActiveMenu(activeMenu === item ? null : item);
-      return;
-    }
-
-    if (item === "Beacon 2 RI API") {
-      navigate("/automated-deployment");
-      setActiveMenu(activeMenu === item ? null : item);
-      return;
-    }
-
-    if (item === "Beacon 2 RI Tools") {
-      navigate("/starting-guide");
-      setActiveMenu(activeMenu === item ? null : item);
-      return;
-    }
-
-    if (item === "Beacon UI") {
-      navigate("/ui_deployment");
-      setActiveMenu(activeMenu === item ? null : item);
-      return;
-    }
-
-    if (item === "Beacon Network UI") {
-      navigate("/networkui_deployment");
-      setActiveMenu(activeMenu === item ? null : item);
-      return;
-    }
-
-    // For other items, handle as usual
-    if (routeMap[item] && !subMenuItems[item]) {
-      navigate(routeMap[item]);
-      setActiveMenu(null); // Collapse menu after navigation
-    } else {
-      setActiveMenu(activeMenu === item ? null : item); // Toggle submenu
+      setActiveMenu(menuItem);
+      setActiveMenuItem(firstSubMenuItem);
     }
   };
 
-  const handleSubMenuClick = (subItem: string, parentMenu: string) => {
-    if (routeMap[subItem]) {
-      navigate(routeMap[subItem]);
-      console.log(`Navigating to ${routeMap[subItem]}`);
-      setActiveSubMenu(null);
-      return;
-    }
-    setActiveSubMenu(activeSubMenu === subItem ? null : subItem);
+  const handleSubMenuClick = (subItem: string) => {
+    navigate(`/${subItem.toLowerCase().replace(/ /g, "-")}`);
   };
 
   return (
@@ -547,6 +472,7 @@ export default function Menu({
             boxSizing: "border-box",
             bgcolor: "#185177",
             color: "white",
+            border: "none",
           },
         }}
       >
@@ -560,46 +486,64 @@ export default function Menu({
           </a>
         </Toolbar>
         <Box sx={{ overflow: "auto" }}>
-          <List
-            sx={{
-              paddingTop: "30px",
-            }}
-          >
+          <List sx={{ paddingTop: "30px" }}>
             {menuItems.map((menuItem) => (
               <Box key={menuItem}>
-                <ListItemButton onClick={() => handleMainMenuClick(menuItem)}>
+                <ListItemButton
+                  onClick={() => handleMainMenuClick(menuItem)}
+                  sx={{
+                    bgcolor:
+                      activeMenuItem === menuItem || activeMenu === menuItem
+                        ? "#4A88B1"
+                        : "inherit",
+                    color:
+                      activeMenuItem === menuItem || activeMenu === menuItem
+                        ? "white"
+                        : "inherit",
+                    "&:hover": {
+                      bgcolor: "#4A88B1",
+                      color: "white",
+                    },
+                  }}
+                >
                   <ListItemText
                     primaryTypographyProps={{
                       variant: "body1",
                       fontWeight: "bold",
-                      color: "white",
+                      color: "inherit",
                     }}
                     primary={menuItem}
                   />
-                  {activeMenu === menuItem ? (
-                    <ExpandLessIcon />
-                  ) : (
-                    <ExpandMoreIcon />
-                  )}
+                  {subMenuItems[menuItem] ? (
+                    activeMenu === menuItem ? (
+                      <ExpandLessIcon />
+                    ) : (
+                      <ExpandMoreIcon />
+                    )
+                  ) : null}
                 </ListItemButton>
 
-                <Collapse
-                  in={activeMenu === menuItem}
-                  timeout="auto"
-                  unmountOnExit
-                >
-                  {subMenuItems[menuItem]?.map((subItem) => (
-                    <Box
-                      key={subItem}
-                      sx={{
-                        pl: 1,
-                        bgcolor: "#E5ECF3",
-                      }}
-                    >
+                {subMenuItems[menuItem] && (
+                  <Collapse
+                    in={activeMenu === menuItem}
+                    timeout="auto"
+                    unmountOnExit
+                  >
+                    {subMenuItems[menuItem]?.map((subItem) => (
                       <ListItemButton
-                        onClick={() => handleSubMenuClick(subItem, menuItem)}
+                        key={subItem}
+                        onClick={() => handleSubMenuClick(subItem)}
                         sx={{
-                          color: "#4A88B1",
+                          color:
+                            location.pathname ===
+                            `/${subItem.toLowerCase().replace(/ /g, "-")}`
+                              ? "#185177"
+                              : "#4A88B1",
+                          bgcolor:
+                            location.pathname ===
+                            `/${subItem.toLowerCase().replace(/ /g, "-")}`
+                              ? "white"
+                              : "#E5ECF3",
                           "&:hover": {
                             bgcolor: "white",
                             color: "#185177",
@@ -609,39 +553,14 @@ export default function Menu({
                         <Typography
                           variant="body2"
                           fontWeight="bold"
-                          sx={{
-                            color: "inherit",
-                            p: 0.2,
-                          }}
+                          sx={{ color: "inherit", p: 0.2 }}
                         >
                           {subItem}
                         </Typography>
                       </ListItemButton>
-
-                      <Collapse
-                        in={activeSubMenu === subItem}
-                        timeout="auto"
-                        unmountOnExit
-                      >
-                        {nestedSubMenuItems[subItem]?.map((nestedItem) => (
-                          <ListItemButton
-                            key={nestedItem.key}
-                            sx={{ pl: 10 }}
-                            onClick={() =>
-                              navigate(
-                                `/${subItem.toLowerCase().replace(/ /g, "-")}/${
-                                  nestedItem.key
-                                }`
-                              )
-                            }
-                          >
-                            <ListItemText primary={nestedItem.label} />
-                          </ListItemButton>
-                        ))}
-                      </Collapse>
-                    </Box>
-                  ))}
-                </Collapse>
+                    ))}
+                  </Collapse>
+                )}
               </Box>
             ))}
           </List>

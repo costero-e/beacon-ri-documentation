@@ -102,21 +102,6 @@ function App() {
     ],
   };
 
-  const nestedSubMenuItems = {
-    // "Automated Deployment": [
-    //   { key: "cloning-repository", label: "Cloning the repository" },
-    //   { key: "execute-start-script", label: "Execute start script from root" },
-    // ],
-    // "Manual Deployment": [
-    //   { key: "creating-containers", label: "Creating the containers" },
-    //   { key: "data-injection", label: "Data injection" },
-    // ],
-    // "PI Automated Deployment": [
-    //   { key: "pi-cloning-repository", label: "PI Cloning the repository" },
-    //   { key: "pi-execute-start-script", label: "PI Execute start script" },
-    // ],
-  };
-
   return (
     <SearchableContentProvider>
       <Router>
@@ -127,7 +112,6 @@ function App() {
             <Menu
               menuItems={menuItems}
               subMenuItems={subMenuItems}
-              nestedSubMenuItems={nestedSubMenuItems}
               isSubmenuOpen={isSubmenuOpen}
               toggleSubmenu={toggleSubmenu}
             />
@@ -137,17 +121,9 @@ function App() {
               }`}
             >
               <Routes>
-                <Route path="/" element={<LandingPage />} />
-                <Route path="/official-links" element={<OfficialLinks />} />
-                <Route path="/tutorials" element={<Tutorials />} />
-                <Route
-                  path="/automated-deployment"
-                  element={<AutomatedDeployment />}
-                />
-                <Route
-                  path="/manual-deployment"
-                  element={<ManualDeployment />}
-                />
+                <Route path="/introduction" element={<LandingPage />} />
+
+                {/* Beacon 2 PI API Routes */}
                 <Route
                   path="/pi-automated-deployment"
                   element={<PiAutomatedDeployment />}
@@ -156,50 +132,73 @@ function App() {
                   path="/pi-manual-deployment"
                   element={<PiManualDeployment />}
                 />
-                <Route path="/data-linking" element={<DataLinking />} />
                 <Route path="/filtering-terms" element={<FilteringTerms />} />
+                <Route path="/configuration" element={<PiApiConfiguration />} />
+                <Route
+                  path="/pi-querying-the-api"
+                  element={<PiQueryingAPI />}
+                />
+
+                {/* Beacon 2 RI API Routes */}
+                <Route
+                  path="/automated-deployment"
+                  element={<AutomatedDeployment />}
+                />
+                <Route
+                  path="/manual-deployment"
+                  element={<ManualDeployment />}
+                />
+                <Route path="/data-linking" element={<DataLinking />} />
+
                 <Route
                   path="/api-configuration"
                   element={<ApiConfiguration />}
                 />
-                <Route
-                  path="/pi-api-configuration"
-                  element={<PiApiConfiguration />}
-                />
-                <Route path="/pi-querying-api" element={<PiQueryingAPI />} />
-                <Route path="/querying-api" element={<QueryingApi />} />
+                <Route path="/querying-the-api" element={<QueryingApi />} />
+
+                {/* Beacon 2 RI Tools Routes */}
                 <Route path="/starting-guide" element={<StartingGuide />} />
                 <Route
                   path="/configuration-file"
                   element={<ConfigFileTools />}
                 />
-                <Route path="/creating_csvs" element={<CreatingCSVs />} />
                 <Route
-                  path="/conversion_csv_bff"
+                  path="/creating-the-csv-files"
+                  element={<CreatingCSVs />}
+                />
+                <Route
+                  path="/conversion-from-csv-to-bff"
                   element={<ConversionCSVBFF />}
                 />
                 <Route
-                  path="/conversion_vcf_bff"
+                  path="/conversion-from-vcf-to-bff"
                   element={<ConversionVCFBFF />}
                 />
-                <Route path="/ui_deployment" element={<BeaconUIDeployment />} />
+
+                {/* Beacon UI */}
+                <Route path="/deployment" element={<BeaconUIDeployment />} />
                 <Route
-                  path="/ui_configuration"
+                  path="/configuration-ui"
                   element={<BeaconUIConfiguration />}
                 />
-                <Route path="/ui_queries" element={<BeaconUIQueries />} />
+                <Route path="/querying-the-ui" element={<BeaconUIQueries />} />
+
+                {/* Beacon Network UI */}
                 <Route
-                  path="/networkui_deployment"
+                  path="/network-deployment"
                   element={<NetworkUIDeployment />}
                 />
                 <Route
-                  path="/networkui_configuration"
+                  path="/network-configuration-ui"
                   element={<NetworkUIConfiguration />}
                 />
                 <Route
-                  path="/networkui_queries"
+                  path="/network-querying-the-ui"
                   element={<NetworkUIQueries />}
                 />
+
+                <Route path="/tutorials" element={<Tutorials />} />
+                <Route path="/official-links" element={<OfficialLinks />} />
               </Routes>
             </div>
           </div>

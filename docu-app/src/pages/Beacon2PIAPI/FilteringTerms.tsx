@@ -71,7 +71,7 @@ const FilteringTerms = () => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <span className="user-path-title">PI API Configuration</span>
+        <span className="user-path-title">Filtering Terms</span>
       </h2>
       <h3>Beacon 2 Production Implementation API</h3>
       <h1>Filtering Terms</h1>
