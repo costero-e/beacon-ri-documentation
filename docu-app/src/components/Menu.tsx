@@ -412,9 +412,11 @@ import {
   Collapse,
   Toolbar,
   AppBar,
+  Typography,
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import "./Menu.css";
 
 const drawerWidth = 240;
 
@@ -517,17 +519,12 @@ export default function Menu({
   };
 
   const handleSubMenuClick = (subItem: string, parentMenu: string) => {
-    console.log(`Submenu clicked: ${subItem}`); // Debug log
-
-    // Navigate directly if the route exists
     if (routeMap[subItem]) {
       navigate(routeMap[subItem]);
       console.log(`Navigating to ${routeMap[subItem]}`);
-      setActiveSubMenu(null); // Collapse after navigation
+      setActiveSubMenu(null);
       return;
     }
-
-    // Toggle submenu if no direct route
     setActiveSubMenu(activeSubMenu === subItem ? null : subItem);
   };
 
@@ -545,16 +542,40 @@ export default function Menu({
         sx={{
           width: drawerWidth,
           flexShrink: 0,
-          "& .MuiDrawer-paper": { width: drawerWidth, boxSizing: "border-box" },
+          "& .MuiDrawer-paper": {
+            width: drawerWidth,
+            boxSizing: "border-box",
+            bgcolor: "#185177",
+            color: "white",
+          },
         }}
       >
-        <Toolbar />
+        <Toolbar>
+          <a href="https://ega-archive.org/" target="_blank" rel="noreferrer">
+            <img
+              className="EGALogo"
+              src="./ega_logo_white.png"
+              alt="EGALogo"
+            ></img>
+          </a>
+        </Toolbar>
         <Box sx={{ overflow: "auto" }}>
-          <List>
+          <List
+            sx={{
+              paddingTop: "30px",
+            }}
+          >
             {menuItems.map((menuItem) => (
               <Box key={menuItem}>
                 <ListItemButton onClick={() => handleMainMenuClick(menuItem)}>
-                  <ListItemText primary={menuItem} />
+                  <ListItemText
+                    primaryTypographyProps={{
+                      variant: "body1",
+                      fontWeight: "bold",
+                      color: "white",
+                    }}
+                    primary={menuItem}
+                  />
                   {activeMenu === menuItem ? (
                     <ExpandLessIcon />
                   ) : (
@@ -568,11 +589,24 @@ export default function Menu({
                   unmountOnExit
                 >
                   {subMenuItems[menuItem]?.map((subItem) => (
-                    <Box key={subItem} sx={{ pl: 4 }}>
+                    <Box
+                      key={subItem}
+                      sx={{
+                        pl: 1,
+                        bgcolor: "#E5ECF3",
+                        color: "#4A88B1",
+                      }}
+                    >
                       <ListItemButton
                         onClick={() => handleSubMenuClick(subItem, menuItem)}
                       >
-                        <ListItemText primary={subItem} />
+                        <Typography
+                          variant="body1"
+                          fontWeight="bold"
+                          sx={{ color: "#4A88B1", p: 0.2 }}
+                        >
+                          {subItem}
+                        </Typography>
                       </ListItemButton>
 
                       <Collapse
@@ -583,7 +617,7 @@ export default function Menu({
                         {nestedSubMenuItems[subItem]?.map((nestedItem) => (
                           <ListItemButton
                             key={nestedItem.key}
-                            sx={{ pl: 8 }}
+                            sx={{ pl: 10 }}
                             onClick={() =>
                               navigate(
                                 `/${subItem.toLowerCase().replace(/ /g, "-")}/${
