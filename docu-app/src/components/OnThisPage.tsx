@@ -24,6 +24,9 @@ const OnThisPage = () => {
   const handleClick = (id: string) => {
     setActiveId(id);
   };
+  if (headings.length === 0) {
+    return null;
+  }
 
   return (
     <div className="onThisPageContainer">
