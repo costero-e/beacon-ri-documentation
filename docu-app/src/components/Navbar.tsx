@@ -15,17 +15,16 @@ const Navbar = ({ onSearch }: NavbarProps) => {
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
+    console.log("User Typed:", term);
     setSearchTerm(term);
     onSearch(term);
-
-    // Show search results only if there's a search term
     setIsSearchResultsVisible(term !== "");
   };
 
   const handleClearSearch = () => {
     setSearchTerm("");
     onSearch("");
-    setIsSearchResultsVisible(false); // Hide search results when cleared
+    setIsSearchResultsVisible(false);
   };
 
   const highlightText = (text: string, highlight: string) => {
@@ -49,7 +48,7 @@ const Navbar = ({ onSearch }: NavbarProps) => {
 
   const handleResultClick = (route: string) => {
     navigate(route);
-    setIsSearchResultsVisible(false); // Hide search results after navigation
+    setIsSearchResultsVisible(false);
   };
 
   const searchResults = searchTerm

@@ -10,6 +10,7 @@
   flex-wrap: wrap;
   z-index: 1000;
   padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .containerNav h1 {
@@ -23,7 +24,7 @@
 }
 
 .divOptionsInput {
-  margin-left: 52%;
+  margin-left: 40%;
 }
 
 .inputContainer {
@@ -39,8 +40,8 @@
 .inputSearch {
   border-radius: 24px;
   padding: 10px 24px 10px 44px;
-  padding-right: 40px; /* Add padding to the right to make space for the clear button */
-  border: none;
+  padding-right: 40px;
+  border: 2px solid red !important;
   width: 220px;
   height: 20px;
   color: #274a62;
@@ -134,7 +135,7 @@
     background-color: white;
     border: none;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 1500; /* Higher than the containerNav and menuContainer */
+    z-index: 1500;
     max-height: 300px;
     overflow-y: auto;
     box-sizing: border-box;
@@ -145,23 +146,27 @@
   }
 
   .containerNav h1 {
-    font-size: 16px;
-    color: white;
-    /* position: absolute; */
-    left: 4%;
+    padding-left: 0px;
     top: 50%;
     transform: translateY(-50%);
     margin: 0;
   }
 
   .clearButton {
-    display: none;
+    position: absolute;
+    right: 30px; /* Adjust the right position to align within the input field */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    background: none;
+    border: none;
+    color: grey;
+    cursor: pointer;
   }
 
   .inputSearch {
     border-radius: 24px;
     padding: 10px 24px 10px 44px;
-    margin-right: 2px; /* Add padding to the right to make space for the clear button */
     border: none;
     width: 50% !important;
     height: 15px;
@@ -169,9 +174,6 @@
     background-color: rgb(255 254 254);
     font-size: 14px;
     font-weight: 400;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-      sans-serif;
   }
 
   .inputContainer {
@@ -196,7 +198,30 @@
   }
 }
 
-@media (max-width: 500px) {
+/* @media (max-width: 845px) and (min-width: 535px) {
+  .inputContainer {
+    background-color: coral;
+    top: 20px;
+    left: -290px;
+  }
+
+  .containerNav {
+    height: 100px;
+  }
+
+  .containerNav h1 {
+    position: absolute;
+    font-size: 16px;
+    margin-top: -20px;
+    left: 264px;
+  }
+
+  .contentContainer {
+    margin-top: 70px;
+  }
+} */
+
+@media (max-width: 963px) {
   .containerNav {
     flex-direction: column; /* Stack items vertically */
     height: auto; /* Adjust height to fit content */

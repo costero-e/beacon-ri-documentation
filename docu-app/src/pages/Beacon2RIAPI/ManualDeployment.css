@@ -41,7 +41,6 @@
 
 @media (max-width: 800px) {
   .deploymentContainer {
-    padding-left: 74px;
     padding-right: 16px;
     width: 100%; /* Ensure full width within the parent container */
     max-width: 100%;
@@ -51,7 +50,6 @@
 
 @media (max-width: 500px) {
   .deploymentContainer {
-    padding-left: 40px;
     padding-right: 16px;
     width: 100%; /* Ensure full width within the parent container */
     max-width: 100%;

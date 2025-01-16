@@ -14,24 +14,33 @@ body {
 }
 
 .contentContainer {
-  transition: margin-left 0.3s ease;
   margin-top: 56px;
 }
 
-/* When screen is larger than 1223px */
+/* Large screens (1224px and above) */
 @media (min-width: 1224px) {
   .contentContainer.withSubmenuOpen {
-    margin-left: 500px; /* Add margin for when the submenu is open */
+    margin-left: 400px;
   }
 
   .contentContainer.withSubmenuClosed {
-    margin-left: 280px; /* Add margin for when the submenu is closed */
+    margin-left: 280px;
   }
 }
 
-/* For smaller screens, remove margin */
+/* Medium screens (1223px and below) */
 @media (max-width: 1223px) {
   .contentContainer {
-    margin-left: 0; /* No margin on smaller screens */
+    margin-left: 100px;
   }
+}
+
+/* Small screens (816px and below) */
+@media (max-width: 816px) {
+  .contentContainer {
+    margin-left: 0px;
+  }
+  /* .contentContainer.withSubmenuClosed {
+    margin-left: 20px;
+  } */
 }

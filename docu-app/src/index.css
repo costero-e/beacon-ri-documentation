@@ -76,14 +76,13 @@ th {
   text-wrap: wrap;
   display: flex;
   padding-right: 0px;
-  /* align-items: center; */
   word-break: break-word;
   justify-content: space-between;
   border-radius: 8px;
 }
 
 table {
-  width: 100%;
+  width: 90%;
   border-collapse: separate;
   margin-bottom: 20px;
   position: relative;
@@ -187,7 +186,8 @@ li code {
 }
 
 .main-title {
-  padding-left: 60px;
+  position: fixed;
+  padding-left: 74px;
 }
 
 @media (max-width: 880px) {

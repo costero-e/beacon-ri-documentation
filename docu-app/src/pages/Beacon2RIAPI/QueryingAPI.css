@@ -23,7 +23,6 @@
 
 @media (max-width: 800px) {
   .queryingApiContainer {
-    padding-left: 74px;
     padding-right: 16px;
     width: 100%;
     max-width: 100%;
@@ -33,7 +32,6 @@
 
 @media (max-width: 500px) {
   .queryingApiContainer {
-    padding-left: 40px;
     padding-right: 16px;
     width: 100%;
     max-width: 100%;

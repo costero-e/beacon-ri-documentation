@@ -78,6 +78,12 @@
   padding: 24px 29.5px 0px 29.5px;
 }
 
+@media (max-width: 816px) {
+  .EGALogo {
+    padding: 60px 0px 0px 0px;
+  }
+}
+
 .subMenuContainer {
   width: 313px;
   height: 100%;
@@ -141,6 +147,7 @@
   padding: 8px 24px 8px 76px;
   font-family: inherit;
   font-size: 14px;
+  background-color: red;
 }
 
 .nestedSubMenuItem:hover {
@@ -224,10 +231,6 @@
 
   .buttonHideSubmenu,
   .buttonShowSubmenu {
-    display: none;
-  }
-
-  .EGALogo {
     display: none;
   }
 

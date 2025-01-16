@@ -1,9 +1,11 @@
 .landingPage {
-  padding-left: 60px;
-  height: 100vw;
-  width: 1000px;
+  padding-left: 74px;
+  padding-right: 16px;
+  width: 75%;
   max-width: 100%;
-  margin-right: 100px;
+  box-sizing: border-box;
+  height: 100vh;
+  padding-bottom: 40px;
 }
 
 .landingPage h2 {
@@ -60,7 +62,6 @@ h4 {
 
 @media (max-width: 500px) {
   .landingPage {
-    padding-left: 20px;
     height: 100vw;
     width: -moz-fit-content !important;
     width: fit-content !important;
