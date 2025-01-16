@@ -29,6 +29,7 @@ import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
 import OfficialLinks from "./pages/OfficialLinks";
 import Tutorials from "./pages/Tutorials";
+import OnThisPage from "./components/OnThisPage";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -202,6 +203,7 @@ function App() {
               </Routes>
             </div>
           </div>
+          <OnThisPage />
         </div>
       </Router>
     </SearchableContentProvider>

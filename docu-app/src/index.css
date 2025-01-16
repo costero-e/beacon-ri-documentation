@@ -190,6 +190,32 @@ li code {
   padding-left: 74px;
 }
 
+.onThisPageContainer {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  width: 250px;
+  background: white;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.onThisPageTitle {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.onThisPageLink {
+  text-decoration: none;
+  color: #0056b3;
+}
+
+.onThisPageLink:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 880px) {
   table {
     width: 100%;
