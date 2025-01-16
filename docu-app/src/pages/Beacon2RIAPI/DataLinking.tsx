@@ -2,6 +2,7 @@ import "./DataLinking.css";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import copyIcon from "../../assets/copy-symbol.svg";
+import OnThisPage from "../../components/OnThisPage";
 
 const DataLinking = () => {
   const location = useLocation();
@@ -74,153 +75,167 @@ const DataLinking = () => {
         />
         <span className="user-path-title">Data Linking</span>
       </h2>
-      <h3>Beacon 2 RI API</h3>
-      <h1>Data Linking</h1>
 
-      <h2 id="linking-ids">Linking ids to dataset and cohort</h2>
-      <p>
-        In case your data is splitted by dataset or cohort, you will need to
-        tell beacon which biosample ids and which individual ids belong to which
-        dataset.
-      </p>
-      <p>
-        Edit the file datasets.yml that is inside beacon/request folder and
-        write the dataset with an array of all the ids (for individuals and
-        biosamples together).
-      </p>
-      <div className="codeSnippet">
-        <pre>
-          <code>
+      <div className="contentWrapper">
+        <div className="contentColumn">
+          <h3>Beacon 2 RI API</h3>
+          <h1>Data Linking</h1>
+
+          <h2 id="linking-ids">Linking ids to dataset and cohort</h2>
+          <p>
+            In case your data is splitted by dataset or cohort, you will need to
+            tell beacon which biosample ids and which individual ids belong to
+            which dataset.
+          </p>
+          <p>
+            Edit the file datasets.yml that is inside beacon/request folder and
+            write the dataset with an array of all the ids (for individuals and
+            biosamples together).
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                <div>
+                  dataset_name: [“individualId1”, “individualId2”,
+                  “biosampleId1”, “biosampleId2”]
+                </div>
+                <br></br>
+                <div>
+                  cohort_name: [“individualId1”, “individualId2”,
+                  “biosampleId1”, “biosampleId2”]
+                </div>
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("linking-ids")}
+              >
+                {copySuccess["linking-ids"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
             <div>
-              dataset_name: [“individualId1”, “individualId2”, “biosampleId1”,
-              “biosampleId2”]
+              Note that the dataset_name and cohort_name have to be identical as
+              how is spelled the id for the dataset or cohort in the BFF record.
             </div>
-            <br></br>
-            <div>
-              cohort_name: [“individualId1”, “individualId2”, “biosampleId1”,
-              “biosampleId2”]
-            </div>
-          </code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("linking-ids")}
-          >
-            {copySuccess["linking-ids"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
-      </div>
-      <p className="note">
-        <img className="note-symbol" src="/note-symbol.png" alt="Note symbol" />
-        <div>
-          Note that the dataset_name and cohort_name have to be identical as how
-          is spelled the id for the dataset or cohort in the BFF record.
+          </p>
+
+          <h2 id="extract-filtering-terms">Extract filtering terms</h2>
+          <p>
+            To automatically fill in the filtering terms endpoint and be able to
+            apply the ontologies that are found inside your data to query your
+            beacon, please execute the next script:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                docker exec beacon python beacon/db/extract_filtering_terms.py
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("extract-filtering-terms")}
+              >
+                {copySuccess["extract-filtering-terms"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+
+          <h2 id="manual-filtering-terms">
+            Manually adding filtering terms{" "}
+            <span className="optional">(optional)</span>
+          </h2>
+          <p>
+            To manually add filtering terms to your beacon, you will need to add
+            them in your mongodb, by executing the next command, for example,
+            for an alphanumeric term that applies to the libraryStrategy field
+            for the runs collection:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                db.filtering_terms.insertMany([{"{"} "type": "alphanumeric",
+                "id": "libraryStrategy", "scope": [ "runs"] {"}"}])
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("manual-filtering-terms")}
+              >
+                {copySuccess["manual-filtering-terms"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            After that, you will need to specify that this alphanumeric term is
+            not related to an ontology by editing the conf.py inside beacon and
+            deploy folder in the alphanumeric_terms array:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                alphanumeric_terms = ['libraryStrategy',
+                'molecularAttributes.geneIds',
+                'diseases.ageOfOnset.iso8601duration']
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("conf-py")}
+              >
+                {copySuccess["conf-py"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+
+          <h2 id="get-descendants">
+            Get descendant terms <span className="optional">(optional)</span>
+          </h2>
+          <p>
+            If you have extracted filtering terms. in case you wish to add
+            information about the descendant terms and similarity found for each
+            ontology and be able to use the similarity and descendant terms
+            beacon options, please execute the next script:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                docker exec beacon python beacon/db/get_descendants.py
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("get-descendants")}
+              >
+                {copySuccess["get-descendants"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
         </div>
-      </p>
-
-      <h2 id="extract-filtering-terms">Extract filtering terms</h2>
-      <p>
-        To automatically fill in the filtering terms endpoint and be able to
-        apply the ontologies that are found inside your data to query your
-        beacon, please execute the next script:
-      </p>
-      <div className="codeSnippet">
-        <pre>
-          <code>
-            docker exec beacon python beacon/db/extract_filtering_terms.py
-          </code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("extract-filtering-terms")}
-          >
-            {copySuccess["extract-filtering-terms"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
-      </div>
-
-      <h2 id="manual-filtering-terms">
-        Manually adding filtering terms{" "}
-        <span className="optional">(optional)</span>
-      </h2>
-      <p>
-        To manually add filtering terms to your beacon, you will need to add
-        them in your mongodb, by executing the next command, for example, for an
-        alphanumeric term that applies to the libraryStrategy field for the runs
-        collection:
-      </p>
-      <div className="codeSnippet">
-        <pre>
-          <code>
-            db.filtering_terms.insertMany([{"{"} "type": "alphanumeric", "id":
-            "libraryStrategy", "scope": [ "runs"] {"}"}])
-          </code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("manual-filtering-terms")}
-          >
-            {copySuccess["manual-filtering-terms"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
-      </div>
-      <p>
-        After that, you will need to specify that this alphanumeric term is not
-        related to an ontology by editing the conf.py inside beacon and deploy
-        folder in the alphanumeric_terms array:
-      </p>
-      <div className="codeSnippet">
-        <pre>
-          <code>
-            alphanumeric_terms = ['libraryStrategy',
-            'molecularAttributes.geneIds',
-            'diseases.ageOfOnset.iso8601duration']
-          </code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("conf-py")}
-          >
-            {copySuccess["conf-py"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
-      </div>
-
-      <h2 id="get-descendants">
-        Get descendant terms <span className="optional">(optional)</span>
-      </h2>
-      <p>
-        If you have extracted filtering terms. in case you wish to add
-        information about the descendant terms and similarity found for each
-        ontology and be able to use the similarity and descendant terms beacon
-        options, please execute the next script:
-      </p>
-      <div className="codeSnippet">
-        <pre>
-          <code>docker exec beacon python beacon/db/get_descendants.py</code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("get-descendants")}
-          >
-            {copySuccess["get-descendants"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
+        <div className="sidebarColumn">
+          <OnThisPage />
+        </div>
       </div>
     </div>
   );

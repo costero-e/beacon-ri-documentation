@@ -202,8 +202,8 @@ function App() {
                 <Route path="/official-links" element={<OfficialLinks />} />
               </Routes>
             </div>
+            <OnThisPage />
           </div>
-          <OnThisPage />
         </div>
       </Router>
     </SearchableContentProvider>

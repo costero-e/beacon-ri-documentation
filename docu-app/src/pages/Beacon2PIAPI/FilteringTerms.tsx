@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
+import OnThisPage from "../../components/OnThisPage";
 
 const FilteringTerms = () => {
   const location = useLocation();
@@ -73,83 +74,90 @@ const FilteringTerms = () => {
         />
         <span className="user-path-title">Filtering Terms</span>
       </h2>
-      <h3>Beacon 2 Production Implementation API</h3>
-      <h1>Filtering Terms</h1>
-      <h2 id="extract-terms">Extract filtering terms</h2>
-      <p>
-        To automatically fill in the filtering terms endpoint and be able to
-        apply the ontologies that are found inside your data to query your
-        beacon, please execute the next script:
-      </p>
-      <div className="codeSnippet">
-        <pre>
-          <code>
-            docker exec beaconprod python
-            beacon/connections/mongo/extract_filtering_terms.py
-          </code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("extract-terms")}
-          >
-            {copySuccess["extract-terms"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
-      </div>
-      <h2 id="manually-adding-terms">
-        Manually adding filtering terms{" "}
-        <span className="optional">(optional)</span>
-      </h2>
-      <p>
-        To manually add filtering terms to your beacon, execute the following
-        command in MongoDB for the `libraryStrategy` field in the `runs`
-        collection:
-      </p>
-      <div className="codeSnippet">
-        <pre>
-          <code>
-            db.filtering_terms.insertMany([{"{"} "type": "alphanumeric", "id":
-            "libraryStrategy", "scope": [ "runs"] {"}"}])
-          </code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("manual-filtering-terms")}
-          >
-            {copySuccess["manual-filtering-terms"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
-      </div>
-      <h2 id="get-descendant-terms">
-        Get descendant terms <span className="optional">(optional)</span>
-      </h2>
-      <p>
-        To add descendant terms and similarity for ontologies, execute this
-        script:
-      </p>
-      <div className="codeSnippet">
-        <pre>
-          <code>
-            docker exec beaconprod python
-            /beacon/connections/mongo/get_descendants.py
-          </code>
-          <button
-            className="copyButtonCode"
-            onClick={() => copyToClipboard("get-descendant-terms")}
-          >
-            {copySuccess["get-descendant-terms"] ? (
-              "Copied!"
-            ) : (
-              <img className="copySymbol" src={copyIcon} alt="Copy" />
-            )}
-          </button>
-        </pre>
+      <div className="contentWrapper">
+        <div className="contentColumn">
+          <h3>Beacon 2 Production Implementation API</h3>
+          <h1>Filtering Terms</h1>
+          <h2 id="extract-terms">Extract filtering terms</h2>
+          <p>
+            To automatically fill in the filtering terms endpoint and be able to
+            apply the ontologies that are found inside your data to query your
+            beacon, please execute the next script:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                docker exec beaconprod python
+                beacon/connections/mongo/extract_filtering_terms.py
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("extract-terms")}
+              >
+                {copySuccess["extract-terms"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+          <h2 id="manually-adding-terms">
+            Manually adding filtering terms{" "}
+            <span className="optional">(optional)</span>
+          </h2>
+          <p>
+            To manually add filtering terms to your beacon, execute the
+            following command in MongoDB for the `libraryStrategy` field in the
+            `runs` collection:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                db.filtering_terms.insertMany([{"{"} "type": "alphanumeric",
+                "id": "libraryStrategy", "scope": [ "runs"] {"}"}])
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("manual-filtering-terms")}
+              >
+                {copySuccess["manual-filtering-terms"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+          <h2 id="get-descendant-terms">
+            Get descendant terms <span className="optional">(optional)</span>
+          </h2>
+          <p>
+            To add descendant terms and similarity for ontologies, execute this
+            script:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                docker exec beaconprod python
+                /beacon/connections/mongo/get_descendants.py
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("get-descendant-terms")}
+              >
+                {copySuccess["get-descendant-terms"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+        </div>
+        <div className="sidebarColumn">
+          <OnThisPage />
+        </div>
       </div>
     </div>
   );

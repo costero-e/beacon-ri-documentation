@@ -150,6 +150,7 @@ function LandingPage() {
           />
         </div>
       </div>
+
       <footer className="footer">
         <span className="footer-text">
           © Copyright 2024, B2RI Documentation Contributors

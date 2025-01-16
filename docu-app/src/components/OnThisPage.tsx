@@ -1,23 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import "../index.css";
+import "../App.css";
 
 const OnThisPage = () => {
+  const location = useLocation();
   const [headings, setHeadings] = useState<{ id: string; text: string }[]>([]);
+  const [activeId, setActiveId] = useState<string | null>(null);
 
   useEffect(() => {
-    // Select all headings with an ID
     const headingElements = Array.from(
       document.querySelectorAll("h2[id], h3[id], h4[id]")
     );
 
-    // Extract IDs and text
     const headingsArray = headingElements.map((heading) => ({
       id: heading.id,
       text: heading.textContent || "",
     }));
 
     setHeadings(headingsArray);
-  }, []);
+  }, [location.pathname]);
+
+  const handleClick = (id: string) => {
+    setActiveId(id);
+  };
 
   return (
     <div className="onThisPageContainer">
@@ -25,7 +31,13 @@ const OnThisPage = () => {
       <ul>
         {headings.map((heading) => (
           <li key={heading.id}>
-            <a href={`#${heading.id}`} className="onThisPageLink">
+            <a
+              href={`#${heading.id}`}
+              className={`onThisPageLink ${
+                activeId === heading.id ? "active" : ""
+              }`}
+              onClick={() => handleClick(heading.id)}
+            >
               {heading.text}
             </a>
           </li>

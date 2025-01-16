@@ -1,5 +1,6 @@
 import React from "react";
 import "./NetworkUIQueries.css";
+import OnThisPage from "../../components/OnThisPage";
 
 const NetworkUIQueries: React.FC = () => {
   return (
@@ -19,9 +20,16 @@ const NetworkUIQueries: React.FC = () => {
         />
         <span className="user-path-title">Querying the UI</span>
       </h2>
-      <h3>Network UI</h3>
-      <h1>Queries</h1>
-      <h4>Coming soon...</h4>
+      <div className="contentWrapper">
+        <div className="contentColumn">
+          <h3>Network UI</h3>
+          <h1>Queries</h1>
+          <h4>Coming soon...</h4>
+        </div>
+        <div className="sidebarColumn">
+          <OnThisPage />
+        </div>
+      </div>
     </div>
   );
 };
