@@ -18,19 +18,26 @@ const StartingGuide: React.FC = () => {
   return (
     <div className="startingGuideContainer">
       <h2 className="user-path">
-        Documentation
+        <a href="/introduction" className="no-undeline">
+          Documentation
+        </a>
         <img
           src="arrow-right-light.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        Beacon 2 RI Tools
+        <a href="/starting-guide" className="no-undeline">
+          Beacon 2 RI Tools
+        </a>
+
         <img
           src="arrow-right-bold.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        <span className="user-path-title">Starting Guide</span>
+        <a href="/starting-guide" className="no-undeline">
+          <span className="user-path-title">Starting Guide</span>
+        </a>
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">

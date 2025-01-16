@@ -6,13 +6,17 @@ const Tutorials: React.FC = () => {
   return (
     <div className="networkUIQueriesContainer">
       <h2 className="user-path">
-        Documentation
+        <a href="/introduction" className="no-undeline">
+          Documentation
+        </a>
         <img
           src="arrow-right-bold.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        <span className="user-path-title">Tutorials</span>
+        <a href="/tutorials" className="no-undeline">
+          <span className="user-path-title">Tutorials</span>
+        </a>
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">

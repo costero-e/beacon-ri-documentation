@@ -23,19 +23,26 @@ const NetworkUIDeployment: React.FC = () => {
   return (
     <div className="networkUIDeploymentContainer">
       <h2 className="user-path">
-        Documentation
+        <a href="/introduction" className="no-undeline">
+          Documentation
+        </a>
         <img
           src="arrow-right-light.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        Beacon Network UI
+        <a href="/network-deployment" className="no-undeline">
+          Beacon Network UI
+        </a>
+
         <img
           src="arrow-right-bold.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        <span className="user-path-title">Deployment</span>
+        <a href="/network-deployment" className="no-undeline">
+          <span className="user-path-title">Deployment</span>
+        </a>
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">

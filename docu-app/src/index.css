@@ -183,6 +183,7 @@ li code {
 
 .no-undeline {
   text-decoration: none;
+  color: #4a88b1 !important;
 }
 
 .main-title {

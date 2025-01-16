@@ -25,19 +25,26 @@ const CreatingCSVs: React.FC = () => {
   return (
     <div className="creatingCSVsContainer">
       <h2 className="user-path">
-        Documentation
+        <a href="/introduction" className="no-undeline">
+          Documentation
+        </a>
         <img
           src="arrow-right-light.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        Beacon 2 RI Tools
+        <a href="/creating-the-csv-files" className="no-undeline">
+          Beacon 2 RI Tools
+        </a>
+
         <img
           src="arrow-right-bold.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        <span className="user-path-title">Creating the CSV files</span>
+        <a href="/creating-the-csv-files" className="no-undeline">
+          <span className="user-path-title">Creating the CSV files</span>
+        </a>
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">

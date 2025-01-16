@@ -70,19 +70,25 @@ const PiManualDeployment = () => {
   return (
     <div className="deploymentContainer">
       <h2 className="user-path">
-        Documentation
+        <a href="/introduction" className="no-undeline">
+          Documentation
+        </a>
         <img
           src="arrow-right-light.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        Beacon 2 PI API
+        <a href="/pi-manual-deployment" className="no-undeline">
+          Beacon 2 PI API
+        </a>
         <img
           src="arrow-right-bold.svg"
           alt="arrow right"
           className="arrow-icon"
         />
-        <span className="user-path-title"> Manual Deployment</span>
+        <a href="/pi-manual-deployment" className="no-undeline">
+          <span className="user-path-title"> Manual Deployment</span>
+        </a>
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
