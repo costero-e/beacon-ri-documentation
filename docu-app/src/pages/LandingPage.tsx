@@ -5,7 +5,7 @@ function LandingPage() {
     <div className="landingPage">
       <div>
         {" "}
-        <a href="/introduction" className="no-undeline">
+        <a href="/" className="no-undeline">
           <h2>Documentation</h2>
         </a>
         <h3>Beacon v2 Reference/Production Implementation Documentation</h3>

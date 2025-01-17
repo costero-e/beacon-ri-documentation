@@ -122,7 +122,7 @@ function App() {
               }`}
             >
               <Routes>
-                <Route path="/introduction" element={<LandingPage />} />
+                <Route path="/" element={<LandingPage />} />
 
                 {/* Beacon 2 PI API Routes */}
                 <Route

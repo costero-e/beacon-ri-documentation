@@ -6,7 +6,7 @@ const BeaconUIDeployment: React.FC = () => {
   return (
     <div className="beaconUIDeploymentContainer">
       <h2 className="user-path">
-        <a href="/introduction" className="no-undeline">
+        <a href="/" className="no-undeline">
           Documentation
         </a>
         <img

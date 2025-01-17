@@ -18,7 +18,7 @@ const StartingGuide: React.FC = () => {
   return (
     <div className="startingGuideContainer">
       <h2 className="user-path">
-        <a href="/introduction" className="no-undeline">
+        <a href="/" className="no-undeline">
           Documentation
         </a>
         <img

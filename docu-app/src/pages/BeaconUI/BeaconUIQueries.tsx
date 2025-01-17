@@ -6,7 +6,7 @@ const BeaconUIQueries: React.FC = () => {
   return (
     <div className="beaconUIQueriesContainer">
       <h2 className="user-path">
-        <a href="/introduction" className="no-undeline">
+        <a href="/" className="no-undeline">
           Documentation
         </a>
         <img
