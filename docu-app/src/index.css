@@ -149,7 +149,18 @@ li code {
   font-size: 14px;
   border-radius: 8px;
   justify-content: flex-start;
-  display: flex;
+}
+
+.note div {
+  flex: 1;
+  min-width: 0;
+}
+
+.note b {
+  display: inline-block;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .codeSnippet pre {
@@ -199,13 +210,14 @@ li code {
 
 .contentColumn {
   flex: 1;
-  min-width: 0;
+  min-width: 250px;
   flex-shrink: 0;
 }
 
 .sidebarColumn {
   flex: 1;
   max-width: 250px;
+  min-width: none;
   flex-shrink: 0;
   height: auto;
 }
@@ -220,12 +232,6 @@ li code {
   font-size: 14px;
   position: fixed;
   top: 289px;
-}
-
-.onThisPageContainer.hidden {
-  opacity: 0;
-  transform: translateY(-20px);
-  pointer-events: none;
 }
 
 .onThisPageTitle {
@@ -255,5 +261,20 @@ li code {
     overflow-x: scroll;
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 5380px) {
+  .onThisPageContainer {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .onThisPageTitle {
+    font-size: 12px;
+  }
+
+  .onThisPageLink {
+    font-size: 12px;
   }
 }
