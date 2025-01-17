@@ -264,7 +264,7 @@ li code {
   }
 }
 
-@media (max-width: 5380px) {
+@media (max-width: 580px) {
   .onThisPageContainer {
     font-size: 12px;
     padding: 5px;
