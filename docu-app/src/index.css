@@ -218,6 +218,8 @@ li code {
   border-right: none;
   border-bottom: none;
   font-size: 14px;
+  position: fixed;
+  top: 289px;
 }
 
 .onThisPageContainer.hidden {
