@@ -207,6 +207,7 @@ li code {
   flex: 1;
   max-width: 250px;
   flex-shrink: 0;
+  height: auto;
 }
 
 .onThisPageContainer {
@@ -217,8 +218,6 @@ li code {
   border-right: none;
   border-bottom: none;
   font-size: 14px;
-  margin-top: 30px;
-  margin-left: -70px;
 }
 
 .onThisPageContainer.hidden {
@@ -235,10 +234,11 @@ li code {
 
 .onThisPageLink {
   text-decoration: none;
-  color: #0056b3;
+  color: #185177 !important;
 }
 .onThisPageLink.active {
   font-weight: bold;
+  color: #185177 !important;
 }
 
 .onThisPageLink:hover {

@@ -73,7 +73,7 @@ const ConversionVCFBFF = () => {
         <div className="contentColumn">
           <h3>Beacon 2 RI Tools</h3>
           <h1>Conversion from VCF to BFF</h1>
-          <h4>Reading your VCF</h4>
+          <h2 id="reading-VCF">Reading your VCF</h2>
           <p>
             Beacon RI Tools v2 will read the different columns for your variants
             in the VCF and place them inside the Legacy Variation schema for the
@@ -140,7 +140,7 @@ const ConversionVCFBFF = () => {
               not filled in)
             </p>
           </ul>
-          <h4>Variant data conversion</h4>
+          <h2 id="variant-data-conversion"> Variant data conversion</h2>
           <p>
             If you do not want to fill the CSV file for the genomicVariations
             collection or you already have your data in the VCF format, you can
@@ -322,7 +322,7 @@ const ConversionVCFBFF = () => {
             At this point, you should have your data ready to be injected into
             the Beacon v2 RI API.
           </p>
-          <h4>Case Level Data conversion</h4>
+          <h2 id="case-level-data-conversion">Case level data conversion</h2>
           <p>
             If you are converting with the paramater <b>case_level_data</b> to
             True, this will add data into two collections: <b>targets</b> and

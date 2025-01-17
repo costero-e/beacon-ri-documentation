@@ -64,7 +64,9 @@ const ConfigFileTools: React.FC = () => {
             . Inside this file, you will find the following information:
           </p>
 
-          <h4>Input and Output files config parameters</h4>
+          <h2 id="input-output-files-config">
+            Input and Output files config parameters
+          </h2>
           <div className="codeSnippet">
             <pre>
               <code id="input-output-config">
@@ -91,7 +93,7 @@ const ConfigFileTools: React.FC = () => {
             </pre>
           </div>
 
-          <h4>VCF Conversion Config Parameters</h4>
+          <h2 id="VCF-conversion">VCF conversion config parameters</h2>
           <div className="codeSnippet">
             <pre>
               <code id="vcf-config">
@@ -127,7 +129,7 @@ const ConfigFileTools: React.FC = () => {
             </pre>
           </div>
 
-          <h4>Generic config parameters</h4>
+          <h2 id="generic-config-parameters">Generic config parameters</h2>
           <p>
             The first part of this configuration only concerns the conversion of
             CSV to BFF. It is used only when you are converting from CSV.
@@ -158,7 +160,9 @@ const ConfigFileTools: React.FC = () => {
             can be modified in this path.
           </p>
 
-          <h4>VCF conversion config parameters</h4>
+          <h2 id="VCF-conversion-config-parameters">
+            VCF conversion config parameters
+          </h2>
           <p>
             The second part of the configuration file pertains to the VCF to BFF
             conversion. This only needs to be used in case you are using a VCF

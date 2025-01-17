@@ -202,7 +202,6 @@ function App() {
                 <Route path="/official-links" element={<OfficialLinks />} />
               </Routes>
             </div>
-            <OnThisPage />
           </div>
         </div>
       </Router>

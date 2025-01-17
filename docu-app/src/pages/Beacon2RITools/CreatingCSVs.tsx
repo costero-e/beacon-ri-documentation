@@ -54,7 +54,7 @@ const CreatingCSVs: React.FC = () => {
             The CSV file is an intermediate file to allow Beacon2 RI tools v2
             convert to BFF since the CSVs follow an harmonized structure.
           </p>
-          <h4>Picking headers</h4>
+          <h2 id="picking-headers">Picking headers</h2>
           <p>
             You will find all the possible headers to be used for each entry
             type (analyses, biosamples, individuals…) in their respective
@@ -203,11 +203,7 @@ const CreatingCSVs: React.FC = () => {
               </button>
             </pre>
           </div>
-          <p>
-            Find out more info on how to fill data in the next section (Filling
-            data).
-          </p>
-          <h4>Filling data</h4>
+          <h2 id="filling-data">Filling data</h2>
           <p>
             If you want to convert metadata or phenoclinic data into BFF, you
             will have to create the different CSV files for each collection

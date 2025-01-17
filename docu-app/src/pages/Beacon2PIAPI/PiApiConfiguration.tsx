@@ -209,7 +209,10 @@ const PiApiConfiguration = () => {
               query that dataset.
             </li>
           </ul>
-          <h4>Edit the .yml files inside permissions/datasets</h4>
+          <br></br>
+          <h4 id="edit-yml-files">
+            Edit the .yml files inside permissions/datasets
+          </h4>
           <p>
             For a <b>public dataset</b>, edit the public_datasets.yml file
             inside permissions folder and add the dataset with the exact name it

@@ -522,7 +522,7 @@ const QueryingAPI = () => {
             </tbody>
           </table>
 
-          <h2 id="get-query-examples">GET query examples</h2>
+          <h4 id="get-query-examples">GET query examples</h4>
 
           <h5 className="cursive">Beacon Sequence Query</h5>
           <div className="codeSnippet">
@@ -1078,7 +1078,9 @@ const QueryingAPI = () => {
               </tr>
             </tbody>
           </table>
-          <h6 className="underline">POST query examples</h6>
+          <h4 className="underline" id="post-query-examples">
+            POST query examples
+          </h4>
 
           <h5 className="cursive">Genomic query</h5>
           <div className="codeSnippet">

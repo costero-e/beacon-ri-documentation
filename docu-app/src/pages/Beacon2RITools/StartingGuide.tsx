@@ -126,7 +126,7 @@ const StartingGuide: React.FC = () => {
             {""} of the same repository.
           </p>
 
-          <h2>Installation Guide</h2>
+          <h2 id="installation-guide">Installation Guide</h2>
           <p>
             First of all, clone or download the Beacon2 RI tools v2 repository
             to your computer:

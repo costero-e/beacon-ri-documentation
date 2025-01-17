@@ -77,7 +77,7 @@ const PiAutomatedDeployment = () => {
         <div className="contentColumn">
           <h3>Beacon 2 Production Implementation API</h3>
 
-          <h2>Prerequisites</h2>
+          <h2 id="prerequisites">Prerequisites</h2>
           <p>
             You should have installed:
             <ul>
@@ -112,7 +112,7 @@ const PiAutomatedDeployment = () => {
               </li>
             </ul>
           </p>
-          <h2 className="automated-deployment">Automated Deployment</h2>
+          <h2 id="automated-deployment">Automated Deployment</h2>
           <p>
             This deployment just uses a bash script and a Makefile and only
             ready for the mongo database case production.

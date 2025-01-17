@@ -123,6 +123,7 @@ const ApiConfiguration = () => {
               query that dataset.
             </li>
           </ul>
+          <br></br>
           <p>
             There are two possible methods to administer these permissions for
             your datasets in beacon:
@@ -205,7 +206,7 @@ const ApiConfiguration = () => {
               </button>
             </pre>
           </div>
-
+          <br></br>
           <h4 id="method-2">Method 2: Launching the beacon admin UI</h4>
           <p>
             Create an .env file inside permissions/permissions-ui/web folder and
@@ -371,9 +372,7 @@ const ApiConfiguration = () => {
                 "PATCH", "GET", "OPTIONS"),
                 <br />
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow_headers=DEFAULT_ALLOW_HEADERS)&#125;
-                <br />
                 &nbsp;&nbsp;&nbsp;&nbsp;&#125;)
-                <br />
               </code>
               <button
                 className="copyButtonCode"

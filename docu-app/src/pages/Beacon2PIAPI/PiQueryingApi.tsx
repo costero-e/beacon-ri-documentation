@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import noteSymbol from "../../assets/note-symbol.png";
 
 const PiQueryingAPI = () => {
   const location = useLocation();
@@ -526,7 +527,7 @@ const PiQueryingAPI = () => {
             </tbody>
           </table>
 
-          <h2>GET query examples</h2>
+          <h2 id="pi-get-examples">GET query examples</h2>
 
           <h5 className="cursive">Beacon Sequence Query</h5>
           <div className="codeSnippet">
@@ -1168,7 +1169,8 @@ const PiQueryingAPI = () => {
               </tr>
             </tbody>
           </table>
-          <h6 className="underline">POST query examples</h6>
+
+          <h2 id="pi-post-examples">POST query examples</h2>
 
           <div className="note">
             <img
