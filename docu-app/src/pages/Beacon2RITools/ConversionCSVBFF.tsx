@@ -57,7 +57,7 @@ const ConversionCSVBFF = () => {
           className="arrow-icon"
         />
         <a href="/conversion-from-csv-to-bff" className="no-undeline">
-          Beacon 2 RI Tools
+          Beacon 2 RI Tools v2
         </a>
         <img
           src="arrow-right-bold.svg"
@@ -70,7 +70,7 @@ const ConversionCSVBFF = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon 2 RI Tools</h3>
+          <h3>Beacon 2 RI Tools v2</h3>
           <h1>Conversion from CSV to BFF</h1>
           <p>
             Before getting the BFF (json) final documents, please make sure your{" "}

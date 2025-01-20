@@ -57,7 +57,7 @@ const ConversionVCFBFF = () => {
           className="arrow-icon"
         />
         <a href="/conversion-from-vcf-to-bff" className="no-undeline">
-          Beacon 2 RI Tools
+          Beacon 2 RI Tools v2
         </a>
 
         <img
@@ -71,7 +71,7 @@ const ConversionVCFBFF = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon 2 RI Tools</h3>
+          <h3>Beacon 2 RI Tools v2</h3>
           <h1>Conversion from VCF to BFF</h1>
           <h2 id="reading-VCF">Reading your VCF</h2>
           <p>
@@ -113,33 +113,168 @@ const ConversionVCFBFF = () => {
             Some of the fields will be parsed into BFF. Right now, the fields
             that will be read are:
           </p>
-          <ul>
-            <p>Symbol → molecularAttributes|geneIds</p>
-            <p>Uploaded_Allele → variation|variantType</p>
-            <p>HGVSp → molecularAttributes|aminoacidChanges</p>
-            <p>Consequence → molecularAttributes|molecularEffects|label</p>
+          <ul className="list-no-bullets">
+            <li>Symbol → molecularAttributes|geneIds</li>
+            <li>Uploaded_Allele → variation|variantType</li>
+            <li>HGVSp → molecularAttributes|aminoacidChanges</li>
+            <li>Consequence → molecularAttributes|molecularEffects|label</li>
           </ul>
+
           <p>
             Additionally, for filling in the required fields, the INFO column
             will read the next entries:
           </p>
-          <ul>
-            <p>VT → variation|variantType (in case VCF is not VEP annotated)</p>
-            <p>AF → frequencyInPopulations|frequencies|alleleFrequency</p>
-            <p>AN → frequencyInPopulations|frequencies|alleleNumber</p>
-            <p>AC → frequencyInPopulations|frequencies|alleleCount</p>
-            <p>
-              AC_Hom → frequencyInPopulations|frequencies|alleleCountHomozygous
-            </p>
-            <p>
-              AC_Het →
-              frequencyInPopulations|frequencies|alleleCountHeterozygous
-            </p>
-            <p>
-              END → variation|location|interval|end|value (in case END colum is
-              not filled in)
-            </p>
+          <ul className="list-no-bullets">
+            <li>
+              VT → variation|variantType (in case VCF is not VEP annotated)
+            </li>
+            <li>AF → frequencyInPopulations| frequencies| alleleFrequency</li>
+            <li>AN → frequencyInPopulations| frequencies| alleleNumber</li>
+            <li>AC → frequencyInPopulations| frequencies| alleleCount</li>
+            <li>
+              AC_Hom → frequencyInPopulations| frequencies|
+              alleleCountHomozygous
+            </li>
+            <li>
+              AC_Het → frequencyInPopulations| frequencies|
+              alleleCountHeterozygous
+            </li>
+            <li>
+              END → variation| location| interval| end| value (in case END
+              column is not filled in)
+            </li>
           </ul>
+
+          <p>
+            On the other hand, if your VCF doesn’t have VEP annotations or you
+            want to use your own customized annotations, you can do that by
+            editing the files that are located in{" "}
+            <a
+              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/pipelines/default/templates"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              this GitHub repository
+            </a>
+            . The files that you have to modify are{" "}
+            <strong>populations.json</strong> and
+            <strong> template.json</strong>. <br />
+            The <strong>populations.json</strong> will allow you to add how you
+            annotated all the allele frequency related entries:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                {`{ 
+  "numberOfPopulations": 1,
+  "source": "The Genome Aggregation Database (gnomAD)",
+  "sourceReference": "gnomad.broadinstitute.org/",
+  "populations": [{
+            "population": "Total",
+            "alleleFrequency": "AF",
+            "alleleCount": "AC",
+            "alleleCountHomozygous": "AC_hom",
+            "alleleCountHeterozygous": "AC_het",
+            "alleleNumber": "AN" }]
+  }`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    "genomic-data-extraction",
+                    `{
+    "numberOfPopulations": 1,
+    "source": "The Genome Aggregation Database (gnomAD)",
+    "sourceReference": "gnomad.broadinstitute.org/",
+    "populations": [
+        {
+            "population": "Total",
+            "alleleFrequency": "AF",
+            "alleleCount": "AC",
+            "alleleCountHomozygous": "AC_hom",
+            "alleleCountHeterozygous": "AC_het",
+            "alleleNumber": "AN"
+        }
+    ]
+}`
+                  )
+                }
+              >
+                {copySuccess["genomic-data-extraction"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              Tip: If numberOfPopulations is greater than 1, you have to add as
+              many populations you have in the populations array, while if
+              populations is 0, then, no allele frequency will be read from this
+              pipeline.
+            </div>
+          </p>
+          <p>
+            The template.json file will allow you to map the annotations entries
+            related to the variant type, the aminoacid change, the gene Id or
+            the molecular effects in your vcf:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                {`{
+    "template": false,
+    "variantType": "VT",
+    "aminoacidChange": "HGVSp",
+    "geneId": "SYMBOL",
+    "molecularEffects": "CONSEQUENCE"
+}`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    "variant-effects-json",
+                    `{
+    "template": false,
+    "variantType": "VT",
+    "aminoacidChange": "HGVSp",
+    "geneId": "SYMBOL",
+    "molecularEffects": "CONSEQUENCE"
+}`
+                  )
+                }
+              >
+                {copySuccess["variant-effects-json"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              Tip: If you want to activate this pipeline, change the template
+              variable to true. If you activate this template, this will
+              override the VEP annotations.
+            </div>
+          </p>
           <h2 id="variant-data-conversion"> Variant data conversion</h2>
           <p>
             If you do not want to fill the CSV file for the genomicVariations
@@ -165,6 +300,28 @@ const ConversionVCFBFF = () => {
             your machine as a BFF file (json) using one of the following
             commands:
           </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                docker exec -it ri-tools python genomicVariations_vcf.py
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    "genomicVariations_vcf",
+                    "docker exec -it ri-tools python genomicVariations_vcf.py"
+                  )
+                }
+              >
+                {copySuccess["genomicVariations_vcf"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
 
           <p className="note">
             <img

@@ -26,6 +26,11 @@ li {
   line-height: 19px;
 }
 
+.list-no-bullets {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
 a {
   color: #119bff;
 }
@@ -129,6 +134,7 @@ li code {
   margin-right: 10px;
   vertical-align: middle;
   display: inline-block;
+  justify-content: center;
 }
 
 .note span {
@@ -137,6 +143,7 @@ li code {
 }
 
 .note {
+  display: flex;
   align-items: center;
   border: none;
   padding-top: 16px;
@@ -154,6 +161,8 @@ li code {
 .note div {
   flex: 1;
   min-width: 0;
+  display: flex;
+  align-items: center;
 }
 
 .note b {
@@ -181,11 +190,6 @@ li code {
 
 .codeSnippet.codeSnippet-mongodb pre {
   padding-top: 30px;
-}
-
-.codeSnippet-mongodb ~ .note .note-symbol-custom {
-  background-color: darkkhaki;
-  margin-top: 50px;
 }
 
 .copySymbol-custom {

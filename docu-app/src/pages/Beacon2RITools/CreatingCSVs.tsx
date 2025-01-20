@@ -34,7 +34,7 @@ const CreatingCSVs: React.FC = () => {
           className="arrow-icon"
         />
         <a href="/creating-the-csv-files" className="no-undeline">
-          Beacon 2 RI Tools
+          Beacon 2 RI Tools v2
         </a>
 
         <img
@@ -48,7 +48,7 @@ const CreatingCSVs: React.FC = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon 2 RI Tools</h3>
+          <h3>Beacon 2 RI Tools v2</h3>
           <h1>Creating the CSV files</h1>
           <p>
             The CSV file is an intermediate file to allow Beacon2 RI tools v2

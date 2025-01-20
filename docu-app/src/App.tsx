@@ -64,7 +64,7 @@ function App() {
     "Introduction",
     "Beacon 2 PI API",
     "Beacon 2 RI API",
-    "Beacon 2 RI Tools",
+    "Beacon 2 RI Tools v2",
     // "Beacon Verifier",
     "Beacon UI",
     "Beacon Network UI",
@@ -88,7 +88,7 @@ function App() {
       "API Configuration",
       "Querying the API",
     ],
-    "Beacon 2 RI Tools": [
+    "Beacon 2 RI Tools v2": [
       "Starting Guide",
       "Configuration File",
       "Creating the CSV Files",

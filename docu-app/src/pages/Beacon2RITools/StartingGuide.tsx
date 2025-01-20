@@ -27,7 +27,7 @@ const StartingGuide: React.FC = () => {
           className="arrow-icon"
         />
         <a href="/starting-guide" className="no-undeline">
-          Beacon 2 RI Tools
+          Beacon 2 RI Tools v2
         </a>
 
         <img
@@ -41,7 +41,7 @@ const StartingGuide: React.FC = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon 2 RI Tools</h3>
+          <h3>Beacon 2 RI Tools v2</h3>
           <h1>Tools Introduction</h1>
           <p>
             The Beacon2 RI tools v2 is a set of tools written in Python
