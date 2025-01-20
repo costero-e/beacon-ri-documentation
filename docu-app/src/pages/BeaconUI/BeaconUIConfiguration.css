@@ -1,7 +1,7 @@
 .beaconUIConfigurationContainer {
   padding-left: 74px;
   padding-right: 16px;
-  width: 75%; /* Ensure full width within the parent container */
+  width: 100%;
   max-width: 100%;
   box-sizing: border-box;
 }
@@ -24,7 +24,7 @@
 @media (max-width: 800px) {
   .beaconUIConfigurationContainer {
     padding-right: 16px;
-    width: 100%; /* Ensure full width within the parent container */
+    width: 100%;
     max-width: 100%;
     box-sizing: border-box;
   }
@@ -33,7 +33,7 @@
 @media (max-width: 500px) {
   .beaconUIConfigurationContainer {
     padding-right: 16px;
-    width: 100%; /* Ensure full width within the parent container */
+    width: 100%;
     max-width: 100%;
     box-sizing: border-box;
   }

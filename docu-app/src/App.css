@@ -25,6 +25,7 @@ body {
 
   .contentContainer.withSubmenuClosed {
     margin-left: 280px;
+    margin-right: 100px;
   }
 }
 

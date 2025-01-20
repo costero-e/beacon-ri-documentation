@@ -223,7 +223,6 @@ li code {
 .sidebarColumn {
   flex: 1;
   max-width: 250px;
-  min-width: none;
   flex-shrink: 0;
   height: auto;
 }

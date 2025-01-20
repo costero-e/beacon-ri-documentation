@@ -29,7 +29,7 @@ const OnThisPage = () => {
   }
 
   return (
-    <div className="onThisPageContainer">
+    <div className="onThisPageContainer sidebarColumn">
       <h3 className="onThisPageTitle">On this page</h3>
       <ul>
         {headings.map((heading) => (

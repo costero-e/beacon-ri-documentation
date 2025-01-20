@@ -177,13 +177,13 @@
     position: relative;
     margin-top: 0;
     height: auto;
-    z-index: 999; /* Ensure it is below searchResults but above background */
+    z-index: 999;
     position: relative;
   }
 
   /* Optional: Disable pointer events for the overlapping search results area */
   .menuContainer .overlappingSearchResults {
-    pointer-events: none; /* This ensures the menu can be clicked when search results are displayed */
+    pointer-events: none;
   }
 
   .menuDiv {

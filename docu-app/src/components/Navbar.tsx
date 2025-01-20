@@ -70,6 +70,7 @@ const Navbar = ({ onSearch }: NavbarProps) => {
           )}`;
           return {
             ...item,
+            // route: `/${item.text.toLowerCase().replace(/ /g, "-")}`,
             previewText,
           };
         })

@@ -167,8 +167,8 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
     <Box
       sx={{
         display: "flex",
-        position: "relative", // Ensure it doesn't shift
-        top: "-40px", // Moves it up slightly
+        position: "relative",
+        top: "-40px",
       }}
     >
       <Toolbar sx={{ position: "relative" }}>
