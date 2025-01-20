@@ -76,16 +76,18 @@ const StartingGuide: React.FC = () => {
               alt="Note symbol"
             />
             <div>
-              Discover how to set up a Beacon v2 with MongoDB and learn to
-              inject BFF files by visiting the official{" "}
-              <a
-                href="https://github.com/EGA-archive/beacon2-ri-api"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Beacon v2 PI API
-              </a>
-              — where you can download your own Beacon v2 for free!
+              <p className="note-paragraph">
+                Discover how to set up a Beacon v2 with MongoDB and learn to
+                inject BFF files by visiting the official{" "}
+                <a
+                  href="https://github.com/EGA-archive/beacon2-ri-api"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Beacon v2 PI API
+                </a>
+                — where you can download your own Beacon v2 for free!
+              </p>
             </div>
           </div>
           <p>

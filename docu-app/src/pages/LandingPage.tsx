@@ -156,6 +156,8 @@ function LandingPage() {
           © Copyright 2024, B2RI Documentation Contributors
         </span>
       </footer>
+      <br></br>
+      <br></br>
     </div>
   );
 }

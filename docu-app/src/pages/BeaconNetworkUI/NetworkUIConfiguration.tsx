@@ -95,22 +95,23 @@ const NetworkUIConfiguration: React.FC = () => {
               alt="Note symbol"
             />
             <div>
-              For Life Science environment, please first create a user. After
-              that, you will need to register a service registry in order to be
-              able to administrate your logins. Please go{" "}
-              <a
-                href="https://services.aai.lifescience-ri.eu/spreg/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                here
-              </a>{" "}
-              and ask for a New Service - type OIDC.
+              <p className="note-paragraph">
+                For Life Science environment, please first create a user. After
+                that, you will need to register a service registry in order to
+                be able to administrate your logins. Please go&nbsp;
+                <a
+                  href="https://services.aai.lifescience-ri.eu/spreg/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  here
+                </a>
+                &nbsp;and ask for a New Service - type OIDC.
+              </p>
             </div>
           </p>
-
           <p>
-            Then please edit the file{" "}
+            Then please edit the file&nbsp;
             <a
               href="https://github.com/elixir-europe/beacon-network-ui/tree/main/frontend/src"
               target="_blank"

@@ -600,12 +600,14 @@ const PiApiConfiguration = () => {
               alt="Note symbol"
             />
             <div>
-              To save the logs in a file out of docker, you will need to create
-              a volume for the file. There is a default log file volume defined
-              in the docker-compose, which is -
-              <b>./beacon/logs/logs.log:/beacon/logs/logs.log </b>, hence no
-              need to create any other volume if you use this same file for
-              logs.
+              <p className="note-paragraph">
+                To save the logs in a file out of docker, you will need to
+                create a volume for the file. There is a default log file volume
+                defined in the docker-compose, which is -
+                <b>./beacon/logs/logs.log:/beacon/logs/logs.log </b>, hence no
+                need to create any other volume if you use this same file for
+                logs.
+              </p>
             </div>
           </p>
           <h2 id="TLS-configuration">TLS configuration</h2>
@@ -625,6 +627,8 @@ const PiApiConfiguration = () => {
               format client.key + "\n" + client.crt
             </li>
           </p>
+          <br></br>
+          <br></br>
         </div>
         <div className="sidebarColumn">
           <OnThisPage />

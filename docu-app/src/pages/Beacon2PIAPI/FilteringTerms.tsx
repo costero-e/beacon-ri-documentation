@@ -160,7 +160,10 @@ const FilteringTerms = () => {
               </button>
             </pre>
           </div>
+          <br></br>
+          <br></br>
         </div>
+
         <div className="sidebarColumn">
           <OnThisPage />
         </div>

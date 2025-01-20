@@ -211,7 +211,7 @@ const CreatingCSVs: React.FC = () => {
             indicate the field of the schema that this data will be placed in.
             Every new row will be appended to the final output file as a new and
             independent document. You can find the templates and examples of the
-            different CSV files in the
+            different CSV files in the&nbsp;
             <a
               href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples"
               target="_blank"
@@ -219,7 +219,7 @@ const CreatingCSVs: React.FC = () => {
             >
               csv folder
             </a>
-            of the repository.
+            &nbsp;of the repository.
           </p>
 
           <p>Fill in the CSV file, following the next rules:</p>
@@ -261,17 +261,19 @@ const CreatingCSVs: React.FC = () => {
               alt="Note symbol"
             />
             <div>
-              We have filled the different CSV files using the CINECA UK1
-              dataset as an example for each collection ready to be converted to
-              BFF. Please, take a look at it if you wish inside the
-              <a
-                href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                examples folder
-              </a>
-              .
+              <p className="note-paragraph">
+                We have filled the different CSV files using the CINECA UK1
+                dataset as an example for each collection ready to be converted
+                to BFF. Please, take a look at it if you wish inside the&nbsp;
+                <a
+                  href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  examples folder
+                </a>
+                .
+              </p>
             </div>
           </p>
           <p>

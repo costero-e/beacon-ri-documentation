@@ -208,6 +208,8 @@ const ConfigFileTools: React.FC = () => {
             but it was very slow sometimes to calculate all the variants number
             in a VCF.
           </p>
+          <br></br>
+          <br></br>
         </div>
         <div className="sidebarColumn">
           <OnThisPage />

@@ -15,7 +15,6 @@ code {
 
 p {
   margin-top: 26px;
-  margin-bottom: 26px;
   line-height: 25px;
   font-size: 14px;
 }
@@ -134,7 +133,6 @@ li code {
   margin-right: 10px;
   vertical-align: middle;
   display: inline-block;
-  justify-content: center;
 }
 
 .note span {
@@ -162,7 +160,6 @@ li code {
   flex: 1;
   min-width: 0;
   display: flex;
-  align-items: center;
 }
 
 .note b {
@@ -170,6 +167,11 @@ li code {
   max-width: 100%;
   word-wrap: break-word;
   overflow-wrap: break-word;
+}
+
+.note-paragraph {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .codeSnippet pre {

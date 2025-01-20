@@ -78,12 +78,13 @@ const PiQueryingAPI = () => {
               alt="Note symbol"
             />
             <div>
-              You can find further introduction to Beacon parameters in{" "}
+              You can find further introduction to Beacon parameters in&nbsp;
               <a
                 href="https://docs.genomebeacons.org/variant-queries/"
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                {" "}
                 Beacon v2 Documentation
               </a>
               .
