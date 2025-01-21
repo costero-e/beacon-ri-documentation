@@ -1,0 +1,39 @@
+Documentation
+Beacon v2 Reference/Production Implementation Documentation
+
+Welcome to the documentation for the Beacon v2 Reference/Production Implementation!
+
+Beacon v2 Reference Implementation (B2RI) and Beacon v2 Production Implementation (B2PI) are a set of tools that allow you to have a REST API, with genomic and phenotypic data according to Beacon v2 standards, that you can then query to explore and do some research on the data.
+
+Below, you can find the schema process of using B2RI/B2PI, which consists of processing data from raw to a .json that is Beacon v2 compliant, to then upload this data to the API and finally querying the API through a user-friendly interface. The four services that are used along this process are the next ones:
+
+Beacon RI Tools v2. Allows you to convert .csv/.vcf files to .json files in a Beacon Friendly Format (BFF). Notice that Beacon RI Tools v2 is meant to work with either Beacon 2 RI API or Beacon 2 PI API. Furthermore, it specifically comes with all the features that are needed for generating Beacon v2 PI API compatible data.
+Beacon RI API / PI API. The API, which is connected to a MongoDB that stores all the .json files, and that you can then query following the standards (rules for how to query the data). In case of B2PI, we provide an upgraded version of Beacon v2 RI API but meant to work for production environments (this replaces Beacon v2 RI API and is recommended to use for better experience and performance).
+Beacon Verifier v2. A tool that will check that the data in the API is Beacon v2 compliant and will generate a report about the validity of the API.
+Beacon User Interface. The friendly way of querying the API without concerning about the standards, just throwing intuitive queries and also enabling authentication through LifeScience or Keycloak.
+Security is one of the main concerns of beacon, and the API will always validate through the identity provider chosen if the authentication is correct, based on the OIDC and Oauth globally accepted protocols.
+
+What brings the new Beacon v2 Production Implementation?
+As stated before, Beacon v2 PI API is a beacon instance for production environments. The steps that this production instance follows are the next ones shown in the next flowchart:
+
+The process to deploy and inject data is the same as in Beacon v2 RI API (data comes from Beacon v2 RI Tools v2), but this instance is optimized and tested, having the following upgrades from Beacon v2 RI API:
+
+Handlers of the endpoints are classes, not functions.
+Unit testing has been developed for the application, starting with 108 unit tests that cover 4000 lines of code approximately (100%).
+Concurrency testing has been applied for this new beacon instance, showing results of responses for more than 3 million genomic variants split into different datasets in less than 100 milliseconds, for a total of 1000 requests made by 10 users per second at the same time.
+Linking IDs to a dataset in a YAML file is not needed anymore.
+A couple more indexes for MongoDB have been applied that, in addition to the restructuring of the code, have improved the speed of the responses.
+Authentication/Authorization is now applied as a decorator, not as a different container.
+Logs now show more relevant information about the different processes (from request to response), including transaction ID, the time of execution of each function, the initial call, and the return call.
+Exceptions now are raised from the lower layer to the top layer, with information and status for the origin of the exception.
+The architecture of the code is not dependent on a particular database, meaning that different types of databases (and more than one) can be potentially applied to this instance (although now only MongoDB is the one developed).
+Parameters are sanitized.
+Users can manage what entry types they want their beacon to show by editing a configuration file inside the source (Endpoint Mapper).
+Collaborators
+Europe
+CaixaBank
+EGA
+CRG
+ELIXIR
+EMBL-EBI
+© Copyright 2024, B2RI Documentation Contributors

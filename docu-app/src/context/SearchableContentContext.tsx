@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
 interface SearchableContent {
   route: string;
@@ -11,17 +11,25 @@ interface SearchableContentContextProps {
   addSearchableContent: (route: string, text: string, title: string) => void;
 }
 
-const SearchableContentContext = createContext<SearchableContentContextProps | undefined>(undefined);
+const SearchableContentContext = createContext<
+  SearchableContentContextProps | undefined
+>(undefined);
 
-export const SearchableContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [searchableContent, setSearchableContent] = useState<SearchableContent[]>([]);
+export const SearchableContentProvider: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
+  const [searchableContent, setSearchableContent] = useState<
+    SearchableContent[]
+  >([]);
 
   const addSearchableContent = (route: string, text: string, title: string) => {
     setSearchableContent((prev) => [...prev, { route, text, title }]);
   };
 
   return (
-    <SearchableContentContext.Provider value={{ searchableContent, addSearchableContent }}>
+    <SearchableContentContext.Provider
+      value={{ searchableContent, addSearchableContent }}
+    >
       {children}
     </SearchableContentContext.Provider>
   );
@@ -30,7 +38,9 @@ export const SearchableContentProvider: React.FC<{ children: React.ReactNode }> 
 export const useSearchableContent = () => {
   const context = useContext(SearchableContentContext);
   if (!context) {
-    throw new Error('useSearchableContent must be used within a SearchableContentProvider');
+    throw new Error(
+      "useSearchableContent must be used within a SearchableContentProvider"
+    );
   }
   return context;
 };

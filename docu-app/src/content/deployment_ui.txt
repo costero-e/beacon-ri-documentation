@@ -1,1 +1,6 @@
-Use the deployment for all the containers for beacon to also deploy the UI. You will find it running in http://localhost:3000
+Documentation > Beacon UI > Deployment
+Beacon UI
+Deployment
+Use the deployment documentation (https://github.com/EGA-archive/beacon2-ri-api/blob/master/deploy/README.md)
+for all the containers for Beacon to also deploy the user interface.
+You will find it running at *http://localhost:3000.

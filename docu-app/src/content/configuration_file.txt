@@ -1,0 +1,50 @@
+Documentation > Beacon 2 RI Tools v2 > Configuration File
+
+Beacon 2 RI Tools v2
+Configuration File
+
+In order to use Beacon2 RI tools v2 one needs to modify a configuration file with the desired files and options for the different collections.
+
+You will find conf.py inside the conf directory: 
+https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf.
+Inside this file, you will find the following information:
+
+Input and Output files config parameters:
+csv_filename='csv/examples/cohorts.csv'
+output_docs_folder='output_docs/CINECA_dataset/'
+
+VCF conversion config parameters:
+allele_frequency=1  # introduce float number, leave 1 if you want to convert all the variants
+reference_genome='GRCh38'  # Choose one between NCBI36, GRCh37, GRCh38
+datasetId='coadread_tcga_pan_can_atlas_2018'
+case_level_data=False
+num_rows=7000000
+population='Finnish'
+
+Generic config parameters:
+
+The first part of this configuration only concerns the conversion of CSV to BFF. It is used only when you are converting from CSV.
+
+The csv_filename variable sets where the CSV file is and from where the script will read the data. Bear in mind that the CSV must be inside the folder csv, and you can use subfolders within it. This CSV file needs to have the headers written as you can find in the files inside the templates directory:
+https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates.
+Note that any header that has a different name from the ones that appear inside the templates will not be read by the Beacon2 RI tools v2.
+
+The output_docs_folder sets the folder where your final BFF (JSON files) will be saved once execution of beacon tools finishes. This folder is mandatory to be always inside output_docs, so only the subdirectory inside output_docs can be modified in this path.
+
+VCF conversion config parameters:
+
+The second part of the configuration file pertains to the VCF to BFF conversion. This only needs to be used in case you are using a VCF as a source for the genomic variants collection.
+
+The num_variants is the variable you need to write in case you are executing the VCF converter (genomicVariations_vcf.py). This will tell the script how many variants will be read and converted from the file(s).
+
+The reference_genome field is the genome used to map the reads.
+
+The allele_frequency field lets you set a threshold for the allele frequency (AF) of the variants you want to convert from the VCF file. If you set it at 0.5, all the variants with 0.5 or less AF will be converted to BFF. 1 is the default value (all variants will be converted).
+
+The datasetId needs to match the id of your datasets.csv or datasets.json file. This will add a datasetId field in every record to match the record with the dataset it belongs to.
+
+The case_level_data is a boolean parameter (True or False) which will relate your variants to the samples they belong to. In case you set this to true, please, read as well the case level data paragraph below.
+
+The zygosity is a boolean parameter (True or False) which will insert if your sample is homozygous or heterozygous in case you have case_level_data activated.
+
+The num_rows is an approximate calculation of the total number of variants in each VCF. Make sure this is greater than the total variants expected. This was automatically calculated before but it was very slow sometimes to calculate all the variants number in a VCF.

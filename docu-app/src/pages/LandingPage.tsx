@@ -1,5 +1,4 @@
 import "./LandingPage.css";
-
 function LandingPage() {
   return (
     <div className="landingPage">

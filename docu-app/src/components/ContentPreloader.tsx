@@ -1,103 +1,158 @@
 import { useRegisterTextContent } from "../hooks/useRegisterTextContent";
-import manualDeploymentText from "../content/manual_deployment.txt";
-import automatedDeploymentText from "../content/automated_deployment.txt";
-import dataLinkingText from "../content/data_linking.txt";
-import configurationRiText from "../content/configuration_ri.txt";
-import configurationPiText from "../content/configuration_pi.txt";
-import queryingApiText from "../content/query_api.txt";
-import startingGuideText from "../content/introduction_ritools.txt";
-import configFileToolsText from "../content/configuration_ritools.txt";
-import creatingCSVsText from "../content/creating_csvs.txt";
-import conversionCSVBFFText from "../content/conversion_csvbff.txt";
-import conversionVCFBFFText from "../content/conversion_vcfbff.txt";
-import deploymentUIText from "../content/deployment_ui.txt";
-import configurationUIText from "../content/configuration_ui.txt";
-import deploymentNetworkUIText from "../content/deployment_networkui.txt";
-import configurationNetworkUIText from "../content/configuration_networkui.txt";
-import PiQueryingApiText from "../content/pi_query_api.txt";
+
+// Introduction
+import IntroductionText from "../content/introduction.txt";
+// Beacon 2 PI API
+import PiAutomatedDeploymentText from "../content/pi_automated_deployment.txt";
 import PiManualDeploymentText from "../content/pi_manual_deployment.txt";
+import FilteringTermsText from "../content/filtering_terms.txt";
+import ConfigurationPiText from "../content/configuration_pi.txt";
+import PiQueryingApiText from "../content/pi_query_api.txt";
+// Beacon 2 RI API
+import AutomatedDeploymentText from "../content/automated_deployment.txt";
+import ManualDeploymentText from "../content/manual_deployment.txt";
+import DataLinkingText from "../content/data_linking.txt";
+import QueryingApiText from "../content/query_api.txt";
+import ConfigurationRiText from "../content/configuration_ri.txt";
+// Beacon 2 RI API Tools v2
+import StartingGuideText from "../content/starting_guide.txt";
+import ConfigurationFile from "../content/configuration_file.txt";
+import CreatingCSVFilesText from "../content/creating_csv_files.txt";
+import ConversionCSVBFFText from "../content/conversion_csvbff.txt";
+import ConversionVCFBFFText from "../content/conversion_vcfbff.txt";
+// Beacon UI
+import QueryingUIText from "../content/querying_ui.txt";
+import DeploymentUIText from "../content/deployment_ui.txt";
+import ConfigurationUIText from "../content/configuration_ui.txt";
+// Beacon Network UI
+import NetworkQueryingTheUIText from "../content/network_querying_ui.txt";
+import NetworkDeploymentUIText from "../content/deployment_networkui.txt";
+import NetworkConfigurationUIText from "../content/configuration_networkui.txt";
+// Tutorials
+import TutorialsText from "../content/tutorials.txt";
+// Official Links
+import OfficialLinksText from "../content/official_links.txt";
 
 const ContentPreloader = () => {
-  useRegisterTextContent(
-    "/automated-deployment",
-    automatedDeploymentText,
-    "Automated Deployment"
-  );
-  useRegisterTextContent(
-    "/manual-deployment",
-    manualDeploymentText,
-    "Manual Deployment"
-  );
+  // Introduction
+  useRegisterTextContent("/", IntroductionText, "Introduction");
 
+  // Beacon 2 PI API
+  useRegisterTextContent(
+    "/pi-automated-deployment",
+    PiAutomatedDeploymentText,
+    "Pi Automated Deployment"
+  );
   useRegisterTextContent(
     "/pi-manual-deployment",
     PiManualDeploymentText,
     "Pi Manual Deployment"
   );
-
-  useRegisterTextContent("/data-linking", dataLinkingText, "Data Linking");
-
   useRegisterTextContent(
-    "/api-configuration",
-    configurationRiText,
-    "Configuration RI API"
+    "/filtering-terms",
+    FilteringTermsText,
+    "Filtering Terms"
   );
-
   useRegisterTextContent(
-    "/pi-api-configuration",
-    configurationPiText,
+    "/configuration",
+    ConfigurationPiText,
     "Configuration"
   );
-
   useRegisterTextContent(
-    "/pi-querying-api",
+    "/pi-querying-the-api",
     PiQueryingApiText,
+    "Pi Querying the API"
+  );
+
+  // Beacon 2 RI API
+  useRegisterTextContent(
+    "/automated-deployment",
+    AutomatedDeploymentText,
+    "Automated Deployment"
+  );
+  useRegisterTextContent(
+    "/manual-deployment",
+    ManualDeploymentText,
+    "Manual Deployment"
+  );
+  useRegisterTextContent("/data-linking", DataLinkingText, "Data Linking");
+  useRegisterTextContent(
+    "/api-configuration",
+    ConfigurationRiText,
+    "Configuration RI API"
+  );
+  useRegisterTextContent(
+    "/querying-the-api",
+    QueryingApiText,
     "Querying the API"
   );
 
-  useRegisterTextContent("/querying-api", queryingApiText, "Querying the API");
+  // Beacon 2 RI API Tools v2
   useRegisterTextContent(
     "/starting-guide",
-    startingGuideText,
+    StartingGuideText,
     "Starting Guide"
   );
   useRegisterTextContent(
     "/configuration-file",
-    configFileToolsText,
-    "Configuration File RI Tools"
+    ConfigurationFile,
+    "Configuration File"
   );
   useRegisterTextContent(
-    "/creating_csvs",
-    creatingCSVsText,
+    "/creating-the-csv-files",
+    CreatingCSVFilesText,
     "Creating the CSV files"
   );
   useRegisterTextContent(
-    "/conversion_csv_bff",
-    conversionCSVBFFText,
+    "/conversion-from-csv-to-bff",
+    ConversionCSVBFFText,
     "Conversion from CSV to BFF"
   );
   useRegisterTextContent(
-    "/conversion_vcf_bff",
-    conversionVCFBFFText,
+    "/conversion-from-vcf-to-bff",
+    ConversionVCFBFFText,
     "Conversion from VCF to BFF"
   );
-  useRegisterTextContent("/ui_deployment", deploymentUIText, "Deployment UI");
+
+  // Beacon UI
+  useRegisterTextContent("/deployment", DeploymentUIText, "Deployment");
+
   useRegisterTextContent(
-    "/ui_configuration",
-    configurationUIText,
+    "/configuration-ui",
+    ConfigurationUIText,
     "Configuration UI"
   );
+
+  useRegisterTextContent("/querying-the-ui", QueryingUIText, "Querying the UI");
+
+  // Beacon Network UI
   useRegisterTextContent(
-    "/networkui_deployment",
-    deploymentNetworkUIText,
-    "Deployment Network UI"
-  );
-  useRegisterTextContent(
-    "/networkui_configuration",
-    configurationNetworkUIText,
-    "Configuration Network UI"
+    "/network-deployment",
+    NetworkDeploymentUIText,
+    "Network Deployment"
   );
 
+  useRegisterTextContent(
+    "/network-configuration-ui",
+    NetworkConfigurationUIText,
+    "Network Configuration UI"
+  );
+
+  useRegisterTextContent(
+    "/network-querying-the-ui",
+    NetworkQueryingTheUIText,
+    "Network Querying the UI"
+  );
+
+  // Tutorials
+  useRegisterTextContent("/tutorials", TutorialsText, "Tutorials");
+
+  // Offical Links
+  useRegisterTextContent(
+    "/official-links",
+    OfficialLinksText,
+    "Official Links"
+  );
   return null;
 };
 

@@ -1,0 +1,62 @@
+Documentation > Beacon 2 RI Tools v2 > Creating the CSV files
+
+Beacon 2 RI Tools v2
+Creating the CSV files
+
+The CSV file is an intermediate file to allow Beacon2 RI tools v2 convert to BFF since the CSVs follow a harmonized structure.
+
+Picking headers
+You will find all the possible headers to be used for each entry type (analyses, biosamples, individuals…) in their respective template.csv file inside the [CSV templates folder](https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates). 
+
+For example, if we go to *biosamples.csv*, you will see the first column header named like **biosampleStatus|id**.
+
+This nomenclature is the same used in the [Beacon v2 spec](https://github.com/ga4gh-beacon/beacon-v2). The purpose of the pipe (|) is to separate different field names in the spec, being the left field the one that contains the field in the right.
+
+For this case, in the spec, we would have the biosampleStatus|id, defined in here:
+
+```
+"biosampleStatus": {
+  "$ref": "https://raw.githubusercontent.com/ga4gh-beacon/beacon-v2/main/framework/json/common/ontologyTerm.json",
+  "description": "Ontology value from Experimental Factor Ontology (EFO) Material Entity term (BFO:0000040). Classification of the sample in abnormal sample (EFO:0009655) or reference sample (EFO:0009654).",
+  "examples": [
+    {"id": "EFO:0009654", "label": "reference sample"},
+    {"id": "EFO:0009655", "label": "abnormal sample"},
+    {"id": "EFO:0009656", "label": "neoplastic sample"},
+    {"id": "EFO:0010941", "label": "metastasis sample"},
+    {"id": "EFO:0010942", "label": "primary tumor sample"},
+    {"id": "EFO:0010943", "label": "recurrent tumor sample"}
+  ]
+}
+```
+
+Being **biosampleStatus|id** the ontology inside id that belongs to biosampleStatus. So, the rows for this biosampleStatus|id column header should always have an ontology written, like this:
+
+```
+biosampleStatus|id
+EFO:0009654
+EFO:0009655
+```
+
+In case we add a **biosampleStatus|label**, then the CSV would look like this:
+
+```
+biosampleStatus|id, biosampleStatus|label
+EFO:0009654, reference sample
+EFO:0009655, abnormal sample
+```
+
+Filling data
+If you want to convert metadata or phenoclinic data into BFF, you will have to create the different CSV files for each collection needed, writing the records according to the header columns, which indicate the field of the schema that this data will be placed in. Every new row will be appended to the final output file as a new and independent document. 
+
+You can find the templates and examples of the different CSV files in the [CSV examples folder](https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples).
+
+Fill in the CSV file, following these rules:
+- If you want to write data that needs to be appended in the same document (e.g., two different measures, two different IDs), please write data separated with ‘|’. Example: *‘HG00001|HG00002’*.
+- For the `info` field in each collection, write JSON type data directly.
+- Respect the column headers as in the templates folder.
+- Only the columns with correctly spelled headers will be processed.
+- Not all CSVs for different collections need to be filled. If you want to populate a collection, mandatory fields must be included.
+
+A complete example dataset, using CINECA UK1, is available in the [examples folder](https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples).
+
+For mandatory fields, refer to the [Beacon specification](https://github.com/ga4gh-beacon/beacon-v2).

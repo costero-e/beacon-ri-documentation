@@ -1,64 +1,61 @@
-Cloning the repository
+Beacon 2 PI API - Manual Deployment
 
+Cloning the Repository
 First of all, start by cloning the GitHub repository in your system.
 
-git clone https://github.com/EGA-archive/beacon2-ri-api.git
+```bash
+git clone https://github.com/EGA-archive/beacon2-pi-api.git
+```
 
-Creating the containers
-
-Create the external docker network needed before building the containers.
-
-docker network create my-app-network
-
+Creating the Containers
 Make sure the next list of ports are free of use in your system:
-27017 → mongo
-8081 → mongo-express
-5050 → beacon
-5051 → permissions
-8010 → permissions UI
-8080 → Keycloak
-9991 → Keycloak SSL
-3000 → Beacon UI
+- 27017 → mongo
+- 8081 → mongo-express (optional)
+- 5050 → beacon
+- 8080 → Keycloak (optional)
+- 9991 → Keycloak SSL (optional)
 
 Light up the containers from the deploy folder.
 
-cd deploy && docker-compose up -d --build
+```bash
+docker-compose up -d --build
+```
+
+If you wish to light up only some of the services, not all, just write the name of the services in the `docker-compose.yml` file right after the command (e.g., for having the mandatory services only):
+
+```bash
+docker-compose up -d –build beaconprod db
+```
 
 If the containers are built correctly:
-The API will run in http://localhost:5050/api.
-The Beacon UI will run in http://localhost:3000.
-The mongo-express UI will run in http://localhost:8081.
-The Keycloak UI will run in http://localhost:8080/auth.
+- The API will run in [http://localhost:5050/api](http://localhost:5050/api).
+- The mongo-express UI will run in [http://localhost:8081](http://localhost:8081).
+- The Keycloak UI will run in [http://localhost:8080/auth](http://localhost:8080/auth).
 
-Data injection
+Data Injection
+Copy all the available BFF files you have to the [data folder for mongo database](https://github.com/EGA-archive/beacon2-pi-api/tree/main/beacon/connections/mongo/data).
 
-Copy all the available BFF files to the mongo container using the following commands:
-
-docker cp /path/to/analyses.json rimongo:tmp/analyses.json
-docker cp /path/to/biosamples.json rimongo:tmp/biosamples.json
-docker cp /path/to/cohorts.json rimongo:tmp/cohorts.json
-docker cp /path/to/datasets.json rimongo:tmp/datasets.json
-docker cp /path/to/genomicVariations.json rimongo:tmp/genomicVariations.json
-docker cp /path/to/individuals.json rimongo:tmp/individuals.json
-docker cp /path/to/runs.json rimongo:tmp/runs.json
-
-Note that not all the above commands are needed to run a beacon. A beacon can run without data or data for a single collection (e.g. only individuals).
+**Note:** A beacon can run without data or data for a single collection (e.g., only individuals).
 
 Now execute the insertion of the files copied into the mongo database.
 
-docker exec rimongo mongoimport --jsonArray --uri 'mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin' --file /tmp/datasets.json --collection datasets
-docker exec rimongo mongoimport --jsonArray --uri 'mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin' --file /tmp/analyses.json --collection analyses
-docker exec rimongo mongoimport --jsonArray --uri 'mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin' --file /tmp/biosamples.json --collection biosamples
-docker exec rimongo mongoimport --jsonArray --uri 'mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin' --file /tmp/cohorts.json --collection cohorts
-docker exec rimongo mongoimport --jsonArray --uri 'mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin' --file /tmp/genomicVariations.json --collection genomicVariations
-docker exec rimongo mongoimport --jsonArray --uri 'mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin' --file /tmp/individuals.json --collection individuals
-docker exec rimongo mongoimport --jsonArray --uri 'mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin' --file /tmp/runs.json --collection runs
+```bash
+docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/datasets.json --collection datasets
+docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/individuals.json --collection individuals
+docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/cohorts.json --collection cohorts
+docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/analyses.json --collection analyses
+docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/biosamples.json --collection biosamples
+docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/genomicVariations.json --collection genomicVariations
+docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/runs.json --collection runs
+docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/targets.json --collection targets
+docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/caseLevelData.json --collection caseLevelData
+```
 
-
-Data indexing
-
+Data Indexing
 For the API to respond fast to the queries, you have to index your database. You can create the necessary indexes by running the next script:
 
-docker exec beacon python beacon/reindex.py
+```bash
+docker exec beaconprod python /beacon/connections/mongo/reindex.py
+```
 
-Note that you will need to run this script each time you inject new data.
+**Note:** You will need to run this script each time you inject new data.

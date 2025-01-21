@@ -1,0 +1,6 @@
+Documentation > Beacon UI > Querying the UI
+
+Beacon UI
+Queries
+
+Coming soon...

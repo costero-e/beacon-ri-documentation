@@ -1,4 +1,10 @@
-This deployment  just uses a bash script and a Makefile which won’t deploy the idp authentication service. If you wish to build the idp service you will have to go to Manual Deployment.
+Documentation
+
+Beacon 2 RI API
+
+Automated Deployment
+
+This deployment just uses a bash script and a Makefile which won’t deploy the idp authentication service. If you wish to build the idp service you will have to go to Manual Deployment.
 
 Cloning the repository
 
@@ -7,12 +13,13 @@ First of all, start by cloning the GitHub repository in your system.
 git clone https://github.com/EGA-archive/beacon2-ri-api.git
 
 Make sure the next list of ports are free of use in your system:
+
 27017 → mongo
 5050 → beacon
 5051 → permissions
-
 Execute start script from root
 
 bash start.sh
 
-If the operation is successful, you will have a beacon up and running in http://localhost:5050/api.
+If the operation is successful, you will have a beacon up and running at:
+http://localhost:5050/api

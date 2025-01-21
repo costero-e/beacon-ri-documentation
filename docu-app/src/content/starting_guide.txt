@@ -1,0 +1,42 @@
+Documentation > Beacon 2 RI Tools v2 > Starting Guide
+
+Beacon 2 RI Tools v2
+Starting Guide
+
+The Beacon2 RI tools v2 is a set of tools written in Python available in the following GitHub repository:
+https://github.com/EGA-archive/beacon2-ri-tools-v2
+
+Notice that Beacon RI Tools v2 is meant to work with either Beacon 2 RI API or Beacon 2 PI API. Furthermore, it specifically comes with all the features that are needed for generating Beacon v2 PI API compatible data.
+
+The main goal of Beacon RI tools v2.0 is to obtain the Beacon Friendly Format (BFF) files, which are JSON files following Beacon v2 official specifications. These files have the correct format and structure to be injected into a Beacon v2 MongoDB database.
+
+Discover how to set up a Beacon v2 with MongoDB and learn to inject BFF files by visiting the official Beacon v2 PI API:
+https://github.com/EGA-archive/beacon2-ri-api — where you can download your own Beacon v2 for free!
+
+The Beacon data model consists of 7 collections:
+- Analyses
+- Biosamples
+- Cohorts
+- Datasets
+- GenomicVariations
+- Individuals
+- Runs
+
+Therefore, the Beacon RI tools v2.0 allows the user to create the different 7 BFF options.
+
+The 6 metadata BFF files are created populating a CSV file with a defined structure that follows the Beacon data model. However, the genomicVariations collection can be created either from a CSV or from a VCF file, minimizing conversion time.
+
+The initial step, since the Beacon2 RI tools v2 cannot convert the data from any source, is to populate the CSV templates that are built following the 7 collections of the Beacon data model. This enables the Beacon2 RI tools v2 to convert from CSV to BFF. Note that you can find the CSV templates in the templates folder of the repository:
+https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates
+
+Installation Guide
+
+First of all, clone or download the Beacon2 RI tools v2 repository to your computer:
+
+git clone https://github.com/EGA-archive/beacon2-ri-tools-v2.git
+
+To light up the container with Beacon RI tools v2, execute the docker-compose command inside the root folder of the repository:
+
+docker-compose up -d --build
+
+Once the container is up and running, you can start using Beacon RI tools v2, congratulations!
