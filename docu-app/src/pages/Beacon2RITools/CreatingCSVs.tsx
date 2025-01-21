@@ -58,13 +58,13 @@ const CreatingCSVs: React.FC = () => {
           <p>
             You will find all the possible headers to be used for each entry
             type (analyses, biosamples, individuals…) in their respective
-            template.csv file inside the
+            template.csv file inside the&nbsp;
             <a
               href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates"
               target="_blank"
               rel="noopener noreferrer"
             >
-              csv templates folder
+              csv templates folder&nbsp
             </a>
             . For example, if we go to <i>biosamples.csv</i>, you will see the
             first column header named like <b>biosampleStatus|id</b>.
@@ -205,7 +205,7 @@ const CreatingCSVs: React.FC = () => {
           </div>
           <h2 id="filling-data">Filling data</h2>
           <p>
-            If you want to convert metadata or phenoclinic data into BFF, you
+            If you want to convert metadata or phenoclinical data into BFF, you
             will have to create the different CSV files for each collection
             needed, writing the records according to the header columns, which
             indicate the field of the schema that this data will be placed in.
@@ -227,18 +227,45 @@ const CreatingCSVs: React.FC = () => {
             <li>
               If you want to write data that needs to be appended in the same
               document (e.g., two different measures, two different IDs), please
-              write data separated with ‘|’.  For example, if you need to write
-              two IDs, the structure would be <i>‘HG00001|HG00002’</i>. In
-              addition, you’ll need to respect this order for their correlatives
-              in the same document. For example, the next row label would need
-              to be: <i> ‘labelforHG00001|labelforHG00002’</i>
+              write data separated with ‘|’. For example, if you need to write
+              two IDs, the structure would be ‘HG00001|HG00002’. In addition,
+              you’ll need to respect this order for their correlatives in the
+              same document. For example, the next row label would need to be:{" "}
+              <i> ‘labelforHG00001|labelforHG00002’</i>
             </li>
             <li>
               As the<i>info</i> field for each collection is very generic and
-              can be filled with different data, you will need to fill the
+              can be filled with different data, you will need to fill in the
               column data directly with JSON type data. In case you are
-              converting variants with CSV, for copies and subjects for 
-              <i>genomicVariations</i>, JSON data is also needed.
+              converting variants with CSV, for copies and subjects for
+              <i>genomicVariations</i>, JSON data is also needed. You can
+              copy/paste this structure to fill in the info field:
+              <div className="codeSnippet">
+                <pre>
+                  <code id="info-snippet">
+                    {"{"}
+                    &nbsp;&nbsp;"info": "Some important information to be
+                    added."
+                    {"}"}
+                  </code>
+                  <button
+                    className="copyButtonCode"
+                    onClick={() => {
+                      const codeText =
+                        document.getElementById("info-snippet")?.innerText;
+                      if (codeText) {
+                        copyToClipboard(codeText, "info-snippet");
+                      }
+                    }}
+                  >
+                    {copySuccess["info-snippet"] ? (
+                      "Copied!"
+                    ) : (
+                      <img className="copySymbol" src={copyIcon} alt="Copy" />
+                    )}
+                  </button>
+                </pre>
+              </div>
             </li>
             <li>
               Please, respect the columns like the files inside the templates
@@ -246,12 +273,33 @@ const CreatingCSVs: React.FC = () => {
               "correctly spelled" headers.
             </li>
             <li>
-              Note that you do not have to write inside all the columns, as some
-              of the columns are optional and others are part of a possible
-              option of the Beacon specification but incompatible with other
-              columns (an exception will raise in case a column is misfilled).
-              Beacon2 RI tools will only convert the columns that contain
-              information, the rest can be removed if wanted.
+              Keep in mind that you don’t need to fill in all the columns. Some
+              are optional, while others belong to specific Beacon specification
+              options and may be incompatible with certain columns. If a column
+              is misfilled, an exception will be raised. Beacon2 RI tools will
+              only convert the columns that contain information, the rest can be
+              removed if wanted.
+            </li>
+          </ul>
+          <p>These are the mandatory fields for each collection:</p>
+          <ul>
+            <li>
+              <b>Analyses</b>: id, analysisDate and pipelineName
+            </li>
+            <li>
+              <b>Biosamples</b>: id, biosampleStatus and sampleOriginType
+            </li>
+            <li>
+              <b>Cohorts</b>: id, name and cohortType
+            </li>
+            <li>
+              <b>Datasets</b>: id and name
+            </li>
+            <li>
+              <b>Individuals</b>: id and sex
+            </li>
+            <li>
+              <b>Runs</b>: id, biosampleID and runDate
             </li>
           </ul>
           <p className="note">
@@ -260,7 +308,7 @@ const CreatingCSVs: React.FC = () => {
               src="/note-symbol.png"
               alt="Note symbol"
             />
-            <div>
+            {/* <div>
               <p className="note-paragraph">
                 We have filled the different CSV files using the CINECA UK1
                 dataset as an example for each collection ready to be converted
@@ -274,23 +322,49 @@ const CreatingCSVs: React.FC = () => {
                 </a>
                 .
               </p>
+            </div> */}
+            <div>
+              <p className="note-paragraph">
+                For further details on filling the fields, refer to the&nbsp;
+                <a
+                  href="https://github.com/ga4gh-beacon/beacon-v2/tree/main/models/json/beacon-v2-default-model"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  default schemas
+                </a>
+                &nbsp;and the&nbsp;
+                <a
+                  href="https://github.com/ga4gh-beacon/beacon-v2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Beacon specification
+                </a>
+                .
+              </p>
             </div>
           </p>
+          <ul>
+            <li>
+              The id field in Biosamples must match the samples ids in the VCF
+              header.{" "}
+            </li>
+            <li>
+              The id field in Individuals can match or not the samples names in
+              the VCF header. If it doesn’t match the field invidualsId field
+              must be filled in in Biosamples, mapping the ids in Individuals
+              and the ids in the VCF.{" "}
+            </li>
+            <li>
+              The datasetId in Datasets must match the datasetId field in the
+              conf.py.
+            </li>
+          </ul>
           <p>
-            Remember that not all the different CSVs for the different
+            Finally, remember that not all the different CSVs for the different
             collections have to be filled up. If a user does not have
-            information for one collection, Beacon will not complain. However,
-            if you want to populate a collection, there are mandatory fields
-            that need to be added in order to convert your data to BFF. You can
-            find the mandatory fields in the {""}
-            <a
-              href="https://github.com/ga4gh-beacon/beacon-v2"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Beacon specification
-            </a>
-            .
+            information for one collection, Beacon will not complain.
           </p>
         </div>
         <div className="sidebarColumn">
