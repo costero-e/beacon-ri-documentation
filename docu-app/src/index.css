@@ -7,6 +7,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.deploymentContainer {
+  padding-left: 74px;
+  padding-right: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 40px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

@@ -64,7 +64,7 @@ const CreatingCSVs: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              csv templates folder&nbsp
+              csv templates folder
             </a>
             . For example, if we go to <i>biosamples.csv</i>, you will see the
             first column header named like <b>biosampleStatus|id</b>.

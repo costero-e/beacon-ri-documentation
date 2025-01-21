@@ -7,14 +7,13 @@ import OnThisPage from "../../components/OnThisPage";
 const ApiConfiguration = () => {
   const location = useLocation();
 
-  // State to manage copy success for each snippet independently
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
 
   useEffect(() => {
     if (location.hash) {
-      const elementId = location.hash.substring(1); // Remove the '#' from the hash
+      const elementId = location.hash.substring(1);
       const element = document.getElementById(elementId);
       if (element) {
         const yOffset = -100; // Adjust this value as needed

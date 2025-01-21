@@ -1,9 +1,10 @@
 .queryingApiContainer {
   padding-left: 74px;
-  width: 1000px;
+  width: 100%;
   max-width: 100%;
   box-sizing: border-box;
   padding-bottom: 40px;
+  padding-right: 16px;
 }
 
 .queryingApiContainer h2.user-path {
