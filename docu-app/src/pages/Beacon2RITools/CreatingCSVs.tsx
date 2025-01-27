@@ -60,7 +60,7 @@ const CreatingCSVs: React.FC = () => {
             type (analyses, biosamples, individuals…) in their respective
             template.csv file inside the&nbsp;
             <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates"
+              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/templates"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -213,7 +213,7 @@ const CreatingCSVs: React.FC = () => {
             independent document. You can find the templates and examples of the
             different CSV files in the&nbsp;
             <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples"
+              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/examples"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -314,7 +314,7 @@ const CreatingCSVs: React.FC = () => {
                 dataset as an example for each collection ready to be converted
                 to BFF. Please, take a look at it if you wish inside the&nbsp;
                 <a
-                  href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples"
+                  href="https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/examples"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -101,7 +101,7 @@ const PiAutomatedDeployment = () => {
               </li>
               <li>
                 <a
-                  href="https://github.com/EGA-archive/beacon2-ri-tools-v2"
+                  href="https://github.com/EGA-archive/beacon-data-tools"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

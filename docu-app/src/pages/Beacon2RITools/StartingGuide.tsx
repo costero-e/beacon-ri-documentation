@@ -47,7 +47,7 @@ const StartingGuide: React.FC = () => {
             The Beacon Data Tools are a set of tools written in Python available
             in the following 
             <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2"
+              href="https://github.com/EGA-archive/beacon-data-tools"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -119,7 +119,7 @@ const StartingGuide: React.FC = () => {
             the Beacon Data Tools to convert from CSV to BFF. Note that you can
             find the CSV templates in the {""}
             <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates"
+              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/templates"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -136,13 +136,13 @@ const StartingGuide: React.FC = () => {
           <div className="codeSnippet">
             <pre>
               <code>
-                git clone https://github.com/EGA-archive/beacon2-ri-tools-v2.git
+                git clone https://github.com/EGA-archive/beacon-data-tools.git
               </code>
               <button
                 className="copyButtonCode"
                 onClick={() =>
                   copyToClipboard(
-                    "git clone https://github.com/EGA-archive/beacon2-ri-tools-v2.git",
+                    "git clone https://github.com/EGA-archive/beacon-data-tools.git",
                     "clone-repo"
                   )
                 }

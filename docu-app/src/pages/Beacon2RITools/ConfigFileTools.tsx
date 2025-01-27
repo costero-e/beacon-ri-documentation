@@ -55,7 +55,7 @@ const ConfigFileTools: React.FC = () => {
           <p>
             You will find conf.py inside the{" "}
             <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf"
+              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/conf"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -142,7 +142,7 @@ const ConfigFileTools: React.FC = () => {
             needs to have the headers written as you can find in the files
             inside{" "}
             <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates"
+              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/templates"
               target="_blank"
               rel="noopener noreferrer"
             >

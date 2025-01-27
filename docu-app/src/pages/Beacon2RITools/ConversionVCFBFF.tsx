@@ -150,7 +150,7 @@ const ConversionVCFBFF = () => {
             want to use your own customized annotations, you can do that by
             editing the files that are located in{" "}
             <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/pipelines/default/templates"
+              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/pipelines/default/templates"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -298,7 +298,7 @@ const ConversionVCFBFF = () => {
             compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon Data Tools
             will read all the VCF files inside the{" "}
             <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/files/vcf/files_to_read"
+              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/files/vcf/files_to_read"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -306,35 +306,6 @@ const ConversionVCFBFF = () => {
             </a>
             . You can convert one or multiple VCF files at a time.
           </p>
-
-          <p>
-            After that, if needed, export your documents from the MongoDB to
-            your machine as a BFF file (json) using one of the following
-            commands:
-          </p>
-          <div className="codeSnippet">
-            <pre>
-              <code>
-                docker exec -it ri-tools python genomicVariations_vcf.py
-              </code>
-              <button
-                className="copyButtonCode"
-                onClick={() =>
-                  copyToClipboard(
-                    "genomicVariations_vcf",
-                    "docker exec -it ri-tools python genomicVariations_vcf.py"
-                  )
-                }
-              >
-                {copySuccess["genomicVariations_vcf"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-
           <p className="note">
             <img
               className="note-symbol"

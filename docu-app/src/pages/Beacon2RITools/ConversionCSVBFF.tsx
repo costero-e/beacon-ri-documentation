@@ -75,7 +75,7 @@ const ConversionCSVBFF = () => {
           <p>
             Before getting the BFF (json) final documents, please make sure your{" "}
             <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf/conf.py"
+              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/conf/conf.py"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -83,7 +83,7 @@ const ConversionCSVBFF = () => {
             </a>
             , which you will find inside the{" "}
             <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf"
+              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/conf"
               target="_blank"
               rel="noopener noreferrer"
             >
