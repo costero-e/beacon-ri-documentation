@@ -9,55 +9,46 @@ function LandingPage() {
         </a>
         <h3>Beacon v2 Reference/Production Implementation Documentation</h3>
         <p>
-          Welcome to the documentation for the Beacon v2 Reference/Production
-          Implementation!
-        </p>
-        <p>
           <b>Beacon v2 Reference Implementation (B2RI) </b>and{" "}
-          <b>Beacon v2 Production Implementation (B2PI) </b>are a set of tools
-          that allow you to have a REST API, with genomic and phenotypic data
-          according to Beacon v2 standards, that you can then query to explore
-          and do some research on the data.
+          <b>Beacon v2 Production Implementation (B2PI) </b>) are tools that
+          provide a REST API and enable queries of genomic and phenotypic data
+          in compliance with Beacon v2 standard.
           <br />
-          Below, you can find the schema process of using B2RI/B2PI, which
-          consists on processing data from raw to a .json that is Beacon v2
-          compliant, to then upload this data to the API and finally querying
-          the API through a user-friendly interface.
+          Below is an overview of the schema process of B2RI/B2PI, which
+          involves transforming raw data into a Beacon v2-compliant .json
+          format, uploading it to the API and querying the API through a
+          user-friendly interface.
           <br />
-          The four services that are used along this process are the following:
+          The process relies on the following four processes:
         </p>
         <li>
-          <b>Beacon Data Tools.</b> Which allow you to convert .csv/.vcf files
-          to .json files in a Beacon Friendly Format (BFF). It is important to
-          notice that Beacon Data Tools are meant to work with either Beacon 2
-          RI API or Beacon 2 PI API. Furthermore, it specifically comes with all
-          the features that are needed for generating Beacon v2 PI API
-          compatible data.
+          <b>Beacon Data Tools.</b> This tool allows enables conversion of
+          .csv/.vcf files to .json files in a Beacon Friendly Format (BFF). Note
+          that Beacon RI Tools v2 is designed to work with both Beacon 2 RI API
+          or Beacon 2 PI API. Specifically, it includes all the features that
+          are needed for generating Beacon v2 PI API compatible data.
         </li>
         <li>
-          <b>Beacon RI API / PI API.</b> The API, which is connected to a
-          MongoDB that stores all the .json files, and that you can then query
-          following the standards (rules for how to query the data). In case of
-          B2PI, we provide an upgraded version of Beacon v2 RI API but meant to
-          work for production environments (this replaces Beacon v2 RI API and
-          is recommended to use for better experience and performance).
+          <b>Beacon RI API / PI API.</b> The API connects to a MongoDB database
+          that stores the .json files, allowing one to query the data following
+          the Beacon v2 standards. Beacon v2 PI is an upgraded version of Beacon
+          v2 RI API, developed for production environments and recommended for
+          improved performance and user experience.
         </li>
         <li>
-          <b>Beacon Verifier v2.</b> A tool that will check that the data in the
-          API is Beacon v2 compliant and will generate a report about the
-          validity of the API.
+          <b>Beacon Verifier v2.</b> A tool that checks that the data in the API
+          is compliant with Beacon v2 and provides a verification report.
         </li>
         <li>
-          <b>Beacon User Interface.</b> The friendly way of querying the API
-          without concerning about the standards, just throwing intuitive
-          queries and also enabling authentication through LifeScience or
-          Keycloak.
+          <b>Beacon User Interface.</b> The user-friendly interface for querying
+          the API without needing to worry about the underlying standards. It
+          supports intuitive queries and enables authentication through
+          LifeScience or Keycloak.
         </li>
         <p>
-          Related to this final point, security is one of the main concerns of
-          beacon and API will always validate through the identity provider
-          chosen if the authentication is correct, based on the OIDC and Oauth
-          globally accepted protocols.
+          Regarding security, the API always validates authentication through
+          the chosen identity provider, following the globally accepted OIDC and
+          Oauth protocols.
         </p>
       </div>
       <img
