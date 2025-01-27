@@ -105,7 +105,7 @@ const PiAutomatedDeployment = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Data from RI Tools
+                  Data from Beacon Data Tools
                 </a>
                 . Please, bear in mind that the datasetId for your records must
                 match the id for the dataset in the /datasets entry type.

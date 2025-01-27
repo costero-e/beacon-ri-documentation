@@ -71,7 +71,7 @@ const PiQueryingAPI = () => {
           <h3>Beacon 2 Production Implementation API</h3>
           <h1>Querying the API</h1>
           <p>Beacon PI accepts two types of request methods: GET and POST.</p>
-          <div className="note">
+          <p className="note">
             <img
               className="note-symbol"
               src="/note-symbol.png"
@@ -89,7 +89,7 @@ const PiQueryingAPI = () => {
               </a>
               .
             </div>
-          </div>
+          </p>
 
           <h2 id="pi-get-method">GET Method</h2>
           <p>
@@ -684,7 +684,7 @@ const PiQueryingAPI = () => {
             and all the filters, apart from the request parameters.
           </p>
           <h6 className="underline">Query Parameters</h6>
-          <table>
+          <table className="codeSnippet">
             <thead>
               <tr>
                 <th>Generic parameters</th>
@@ -1173,7 +1173,7 @@ const PiQueryingAPI = () => {
 
           <h2 id="pi-post-examples">POST query examples</h2>
 
-          <div className="note">
+          <p className="note">
             <img
               className="note-symbol"
               src="/note-symbol.png"
@@ -1185,7 +1185,7 @@ const PiQueryingAPI = () => {
               scope is not stated, then, the scope of the filter will be the
               same than the endpoint being queried.
             </div>
-          </div>
+          </p>
 
           <h5 className="cursive">Beacon Range Query</h5>
           <div className="codeSnippet">

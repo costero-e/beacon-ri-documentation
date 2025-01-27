@@ -17,19 +17,22 @@ function LandingPage() {
           <b>Beacon v2 Production Implementation (B2PI) </b>are a set of tools
           that allow you to have a REST API, with genomic and phenotypic data
           according to Beacon v2 standards, that you can then query to explore
-          and do some research on the data. Below, you can find the schema
-          process of using B2RI/B2PI, which consists on processing data from raw
-          to a .json that is Beacon v2 compliant, to then upload this data to
-          the API and finally querying the API through a user-friendly
-          interface. The four services that are used along this process are the
-          next ones:
+          and do some research on the data.
+          <br />
+          Below, you can find the schema process of using B2RI/B2PI, which
+          consists on processing data from raw to a .json that is Beacon v2
+          compliant, to then upload this data to the API and finally querying
+          the API through a user-friendly interface.
+          <br />
+          The four services that are used along this process are the following:
         </p>
         <li>
-          <b>Beacon RI Tools v2.</b> Which allows you to convert .csv/.vcf files
-          to .json files in a Beacon Friendly Format (BFF). Notice that Beacon
-          RI Tools v2 is meant to work with either Beacon 2 RI API or Beacon 2
-          PI API. Furthermore, it specifically comes with all the features that
-          are needed for generating Beacon v2 PI API compatible data.
+          <b>Beacon Data Tools.</b> Which allow you to convert .csv/.vcf files
+          to .json files in a Beacon Friendly Format (BFF). It is important to
+          notice that Beacon Data Tools are meant to work with either Beacon 2
+          RI API or Beacon 2 PI API. Furthermore, it specifically comes with all
+          the features that are needed for generating Beacon v2 PI API
+          compatible data.
         </li>
         <li>
           <b>Beacon RI API / PI API.</b> The API, which is connected to a
@@ -77,8 +80,8 @@ function LandingPage() {
       />
       <p>
         The process to deploy and inject data is the same than in Beacon v2 RI
-        API (data comes from Beacon v2 RI Tools v2) but this instance is
-        optimized and tested, having the next upgrades from Beacon v2 RI API:
+        API (data comes from Beacon Data Tools) but this instance is optimized
+        and tested, having the next upgrades from Beacon v2 RI API:
         <li>Handlers of the endpoints are classes, not functions.</li>
         <li>
           Unit testing has been developed for the application, starting with 108
@@ -152,7 +155,7 @@ function LandingPage() {
 
       <footer className="footer">
         <span className="footer-text">
-          © Copyright 2024, B2RI Documentation Contributors
+          © Copyright 2025, B2RI Documentation Contributors
         </span>
       </footer>
       <br></br>

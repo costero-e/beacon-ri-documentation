@@ -32,7 +32,7 @@ const ConfigFileTools: React.FC = () => {
           className="arrow-icon"
         />
         <a href="/configuration-file" className="no-undeline">
-          Beacon 2 RI Tools v2
+          Beacon Data Tools
         </a>
         <img
           src="arrow-right-bold.svg"
@@ -45,10 +45,10 @@ const ConfigFileTools: React.FC = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon 2 RI Tools v2</h3>
+          <h3>Beacon Data Tools</h3>
           <h1>Configuration File</h1>
           <p>
-            In order to use Beacon2 RI tools v2 one needs to modify a
+            In order to use Beacon Data Tools one needs to modify a
             configuration file with the desired files and options for the
             different collections.
           </p>
@@ -149,8 +149,8 @@ const ConfigFileTools: React.FC = () => {
               templates
             </a>
             . Note that any header that has a different name from the ones that
-            appear inside the templates will not be read by the Beacon2 RI tools
-            v2.
+            appear inside the templates will not be read by the Beacon Data
+            Tools.
           </p>
           <p>
             The <i>output_docs_folder</i> sets the folder where your final BFF

@@ -34,7 +34,7 @@ const CreatingCSVs: React.FC = () => {
           className="arrow-icon"
         />
         <a href="/creating-the-csv-files" className="no-undeline">
-          Beacon 2 RI Tools v2
+          Beacon Data Tools
         </a>
 
         <img
@@ -48,10 +48,10 @@ const CreatingCSVs: React.FC = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon 2 RI Tools v2</h3>
+          <h3>Beacon Data Tools</h3>
           <h1>Creating the CSV files</h1>
           <p>
-            The CSV file is an intermediate file to allow Beacon2 RI tools v2
+            The CSV file is an intermediate file to allow Beacon Data Tools
             convert to BFF since the CSVs follow an harmonized structure.
           </p>
           <h2 id="picking-headers">Picking headers</h2>
@@ -276,7 +276,7 @@ const CreatingCSVs: React.FC = () => {
               Keep in mind that you don’t need to fill in all the columns. Some
               are optional, while others belong to specific Beacon specification
               options and may be incompatible with certain columns. If a column
-              is misfilled, an exception will be raised. Beacon2 RI tools will
+              is misfilled, an exception will be raised. Beacon Data Tools will
               only convert the columns that contain information, the rest can be
               removed if wanted.
             </li>

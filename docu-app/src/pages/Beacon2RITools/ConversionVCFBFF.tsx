@@ -57,7 +57,7 @@ const ConversionVCFBFF = () => {
           className="arrow-icon"
         />
         <a href="/conversion-from-vcf-to-bff" className="no-undeline">
-          Beacon 2 RI Tools v2
+          Beacon Data Tools
         </a>
 
         <img
@@ -71,17 +71,17 @@ const ConversionVCFBFF = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon 2 RI Tools v2</h3>
+          <h3>Beacon Data Tools</h3>
           <h1>Conversion from VCF to BFF</h1>
           <h2 id="reading-VCF">Reading your VCF</h2>
           <p>
-            Beacon RI Tools v2 will read the different columns for your variants
+            Beacon Data Tools will read the different columns for your variants
             in the VCF and place them inside the Legacy Variation schema for the
             Beacon v2 Spec.
           </p>
           <p>
-            First of all, Beacon RI Tools v2 supports <b>VEP annotation</b>,
-            which means that if your VCF has this header:
+            First of all, Beacon Data Tools support <b>VEP annotation</b>, which
+            means that if your VCF has this header:
           </p>
 
           <div className="codeSnippet">
@@ -275,6 +275,18 @@ const ConversionVCFBFF = () => {
               override the VEP annotations.
             </div>
           </p>
+
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              Please, keep in mind that multiallelic variants need to be split
+              onto separate rows in the VCF, otherwise they will be ignored.
+            </div>
+          </p>
           <h2 id="variant-data-conversion"> Variant data conversion</h2>
           <p>
             If you do not want to fill the CSV file for the genomicVariations
@@ -283,7 +295,7 @@ const ConversionVCFBFF = () => {
           </p>
           <p>
             To convert data from a VCF file to BFF (json), the VCF must be
-            compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon2 RI tools v2
+            compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon Data Tools
             will read all the VCF files inside the{" "}
             <a
               href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/files/vcf/files_to_read"
@@ -444,7 +456,7 @@ const ConversionVCFBFF = () => {
           </p>
           <p>
             As it has already been mentioned, the variants read from the VCF are
-            directly stored into the Beacon2 RI tools MongoDB.
+            directly stored into the Beacon Data Tools MongoDB.
           </p>
           <p>
             If you need to do more conversions and you don’t want to keep the
@@ -482,7 +494,8 @@ const ConversionVCFBFF = () => {
           <h2 id="case-level-data-conversion">Case level data conversion</h2>
           <p>
             If you are converting with the paramater <b>case_level_data</b> to
-            True, this will add data into two collections: <b>targets</b> and
+            True, this will add data into two collections: <b>targets</b>{" "}
+            and&nbsp;
             <b>caseLevelData</b>. If you need to export the variants to insert
             them in another mongoDB, you will need to export these two
             collections as well, by executing the next commands:

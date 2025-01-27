@@ -6,7 +6,7 @@ You should have installed:
 
 Docker
 Docker Compose
-Data from RI Tools
+Data from Beacon Data Tools
 Bear in mind that the datasetId for your records must match the id for the dataset in the /datasets entry type.
 Automated Deployment
 This deployment uses a bash script and a Makefile and is ready for the MongoDB case production.

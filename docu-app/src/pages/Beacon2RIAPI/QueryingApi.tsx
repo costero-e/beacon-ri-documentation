@@ -97,7 +97,6 @@ const QueryingAPI = () => {
             the end of a URL used to provide additional information to a web
             server when making requests.
           </p>
-
           <table>
             <thead>
               <tr>
