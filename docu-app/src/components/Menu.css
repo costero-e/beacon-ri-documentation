@@ -73,13 +73,12 @@
   cursor: pointer;
 }
 
-.EGALogo {
-  width: 140px;
+.CRGLogo {
   padding: 24px 29.5px 0px 29.5px;
 }
 
 @media (max-width: 816px) {
-  .EGALogo {
+  .CRGLogo {
     padding: 60px 0px 0px 0px;
   }
 }

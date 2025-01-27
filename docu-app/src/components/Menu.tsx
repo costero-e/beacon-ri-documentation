@@ -72,8 +72,8 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   const drawerContent = (
     <Box>
       <Toolbar>
-        <a href="https://ega-archive.org/" target="_blank" rel="noreferrer">
-          <img className="EGALogo" src="./ega_logo_white.png" alt="EGALogo" />
+        <a href="https://www.crg.eu/" target="_blank" rel="noreferrer">
+          <img className="CRGLogo" src="./crg_logo_white.svg" alt="CRG Logo" />
         </a>
       </Toolbar>
       <Box sx={{ overflow: "auto" }}>

@@ -1,9 +1,9 @@
-Documentation > Beacon 2 RI Tools v2 > Configuration File
+Documentation > Beacon Data Tools > Configuration File
 
-Beacon 2 RI Tools v2
+Beacon Data Tools
 Configuration File
 
-In order to use Beacon2 RI tools v2 one needs to modify a configuration file with the desired files and options for the different collections.
+In order to use Beacon Data Tools one needs to modify a configuration file with the desired files and options for the different collections.
 
 You will find conf.py inside the conf directory: 
 https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf.
@@ -27,7 +27,7 @@ The first part of this configuration only concerns the conversion of CSV to BFF.
 
 The csv_filename variable sets where the CSV file is and from where the script will read the data. Bear in mind that the CSV must be inside the folder csv, and you can use subfolders within it. This CSV file needs to have the headers written as you can find in the files inside the templates directory:
 https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates.
-Note that any header that has a different name from the ones that appear inside the templates will not be read by the Beacon2 RI tools v2.
+Note that any header that has a different name from the ones that appear inside the templates will not be read by the Beacon Data Tools.
 
 The output_docs_folder sets the folder where your final BFF (JSON files) will be saved once execution of beacon tools finishes. This folder is mandatory to be always inside output_docs, so only the subdirectory inside output_docs can be modified in this path.
 

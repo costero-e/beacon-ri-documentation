@@ -1,12 +1,12 @@
 
-Beacon 2 RI Tools v2
+Beacon Data Tools
 Conversion from VCF to BFF
 
 Reading your VCF
 
-Beacon RI Tools v2 will read the different columns for your variants in the VCF and place them inside the Legacy Variation schema for the Beacon v2 Spec.
+Beacon Data Tools will read the different columns for your variants in the VCF and place them inside the Legacy Variation schema for the Beacon v2 Spec.
 
-First of all, Beacon RI Tools v2 supports **VEP annotation**, which means that if your VCF has this header:
+First of all, Beacon Data Tools supports **VEP annotation**, which means that if your VCF has this header:
 
 ```
 ##INFO=<ID=CSQ,Number=.,Type=String,Description="Consequence annotations from Ensembl VEP. Format: Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position|Amino_acids|Codons|Existing_variation|REF_ALLELE|UPLOADED_ALLELE|DISTANCE|STRAND|FLAGS|SYMBOL_SOURCE|HGNC_ID|CANONICAL|HGVS_OFFSET">
@@ -70,7 +70,7 @@ Variant Data Conversion
 
 If you do not want to fill the CSV file for the genomicVariations collection or you already have your data in the VCF format, you can convert directly from VCF to BFF.
 
-To convert data from a VCF file to BFF (json), the VCF must be compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon2 RI tools v2 will read all the VCF files inside the:
+To convert data from a VCF file to BFF (json), the VCF must be compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon Data Tools will read all the VCF files inside the:
 [files_to_read folder](https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/files/vcf/files_to_read).
 
 You can convert one or multiple VCF files at a time.
