@@ -206,10 +206,10 @@ const CreatingCSVs: React.FC = () => {
           <h2 id="filling-data">Filling data</h2>
           <p>
             If you want to convert metadata or phenoclinical data into BFF, you
-            will have to create the different CSV files for each collection
-            needed, writing the records according to the header columns, which
-            indicate the field of the schema that this data will be placed in.
-            Every new row will be appended to the final output file as a new and
+            will have to create different CSV files for each collection needed,
+            writing the records according to the header columns, which indicate
+            the field of the schema that this data will be placed in. Every new
+            row will be appended to the final output file as a new and
             independent document. You can find the templates and examples of the
             different CSV files in the&nbsp;
             <a
@@ -358,7 +358,8 @@ const CreatingCSVs: React.FC = () => {
             </li>
             <li>
               The datasetId in Datasets must match the datasetId field in the
-              conf.py.
+              conf.py (this requirement applies only in the Beacon Production
+              Implementation environment).
             </li>
           </ul>
           <p>

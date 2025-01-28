@@ -186,6 +186,18 @@ const ConfigFileTools: React.FC = () => {
             be converted).
           </p>
           <p>
+            The <i>num_rows</i>  is an approximate calculation of the total
+            number variants in each VCFf. Make sure this is greater than the
+            total variants expected. This was automatically calculated before
+            but it was very slow sometimes to calculate all the variants number
+            in a VCF.
+          </p>
+          <p>
+            Datasets, case-level data, and zygosity parameters are <b>only</b>{" "}
+            applicable in the{" "}
+            <b>Beacon Production Implementation environment</b>.
+          </p>
+          <p>
             The <i>datasetId</i> needs to match the id of your datasets.csv or
             datasets.json file. This will add a datasetId field in every record
             to match the record with the dataset it belongs to.
@@ -200,13 +212,6 @@ const ConfigFileTools: React.FC = () => {
             The <i>zygosity</i> is a boolean parameter (True or False) which
             will insert if your sample is homozygous or heterozygous in case you
             have case_level_data activated.
-          </p>
-          <p>
-            The <i>num_rows</i>  is an approximate calculation of the total
-            number variants in each VCFf. Make sure this is greater than the
-            total variants expected. This was automatically calculated before
-            but it was very slow sometimes to calculate all the variants number
-            in a VCF.
           </p>
           <br></br>
           <br></br>

@@ -291,6 +291,14 @@ const ConversionCSVBFF = () => {
               rel="noopener noreferrer"
             >
               Beacon v2 RI API
+            </a>{" "}
+            and in{" "}
+            <a
+              href="https://github.com/EGA-archive/beacon2-pi-api"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Beacon v2 PI API
             </a>
             .
           </p>

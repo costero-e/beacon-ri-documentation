@@ -284,7 +284,7 @@ const ConversionVCFBFF = () => {
             />
             <div>
               Please, keep in mind that multiallelic variants need to be split
-              onto separate rows in the VCF, otherwise they will be ignored.
+              onto separate rows in the VCF.
             </div>
           </p>
           <h2 id="variant-data-conversion"> Variant data conversion</h2>
@@ -534,6 +534,12 @@ const ConversionVCFBFF = () => {
               converting all VCFs for the same sampling (dataset) at the same
               time to avoid unnecessary target records to be created.
             </div>
+          </p>
+          <p>
+            Case level data conversion is only applicable in the Beacon
+            Production Implementation environment, as it is specifically
+            designed to handle detailed sample-level associations and structured
+            genomic data storage optimized for production use.
           </p>
         </div>
         <div className="sidebarColumn">

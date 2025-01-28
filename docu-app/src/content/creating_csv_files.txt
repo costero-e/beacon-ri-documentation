@@ -52,5 +52,5 @@ For further details on filling the fields, refer to the default schemas and the 
 
 The id field in Biosamples must match the samples ids in the VCF header.
 The id field in Individuals can match or not the samples names in the VCF header. If it doesn’t match the field invidualsId field must be filled in in Biosamples, mapping the ids in Individuals and the ids in the VCF.
-The datasetId in Datasets must match the datasetId field in the conf.py.
+The datasetId in Datasets must match the datasetId field in the conf.py (this requirement applies only in the Beacon Production Implementation environment).
 Finally, remember that not all the different CSVs for the different collections have to be filled up. If a user does not have information for one collection, Beacon will not complain.

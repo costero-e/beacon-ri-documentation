@@ -1,128 +1,105 @@
+Documentation Beacon Data Tools Conversion from VCF to BFF
 
 Beacon Data Tools
+
 Conversion from VCF to BFF
 
 Reading your VCF
 
 Beacon Data Tools will read the different columns for your variants in the VCF and place them inside the Legacy Variation schema for the Beacon v2 Spec.
 
-First of all, Beacon Data Tools supports **VEP annotation**, which means that if your VCF has this header:
+First of all, Beacon Data Tools support VEP annotation, which means that if your VCF has this header:
 
-```
 ##INFO=<ID=CSQ,Number=.,Type=String,Description="Consequence annotations from Ensembl VEP. Format: Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position|Amino_acids|Codons|Existing_variation|REF_ALLELE|UPLOADED_ALLELE|DISTANCE|STRAND|FLAGS|SYMBOL_SOURCE|HGNC_ID|CANONICAL|HGVS_OFFSET">
-```
 
 Some of the fields will be parsed into BFF. Right now, the fields that will be read are:
 
-- Symbol → molecularAttributes|geneIds
-- Uploaded_Allele → variation|variantType
-- HGVSp → molecularAttributes|aminoacidChanges
-- Consequence → molecularAttributes|molecularEffects|label
+Symbol → molecularAttributes|geneIds
+Uploaded_Allele → variation|variantType
+HGVSp → molecularAttributes|aminoacidChanges
+Consequence → molecularAttributes|molecularEffects|label
 
 Additionally, for filling in the required fields, the INFO column will read the next entries:
 
-- VT → variation|variantType (in case VCF is not VEP annotated)
-- AF → frequencyInPopulations| frequencies| alleleFrequency
-- AN → frequencyInPopulations| frequencies| alleleNumber
-- AC → frequencyInPopulations| frequencies| alleleCount
-- AC_Hom → frequencyInPopulations| frequencies| alleleCountHomozygous
-- AC_Het → frequencyInPopulations| frequencies| alleleCountHeterozygous
-- END → variation| location| interval| end| value (in case END column is not filled in)
+VT → variation|variantType (in case VCF is not VEP annotated)
+AF → frequencyInPopulations| frequencies| alleleFrequency
+AN → frequencyInPopulations| frequencies| alleleNumber
+AC → frequencyInPopulations| frequencies| alleleCount
+AC_Hom → frequencyInPopulations| frequencies| alleleCountHomozygous
+AC_Het → frequencyInPopulations| frequencies| alleleCountHeterozygous
+END → variation| location| interval| end| value (in case END column is not filled in)
 
-On the other hand, if your VCF doesn’t have VEP annotations or you want to use your own customized annotations, you can do that by editing the files that are located in:
-[GitHub repository](https://github.com/EGA-archive/beacon-data-tools/tree/main/pipelines/default/templates)
-
-The files that you have to modify are **populations.json** and **template.json**.
+On the other hand, if your VCF doesn’t have VEP annotations or you want to use your own customized annotations, you can do that by editing the files that are located in this GitHub repository. The files that you have to modify are populations.json and template.json.
 
 The populations.json will allow you to add how you annotated all the allele frequency related entries:
 
-```
 {
-  "numberOfPopulations": 1,
-  "source": "The Genome Aggregation Database (gnomAD)",
-  "sourceReference": "gnomad.broadinstitute.org/",
-  "populations": [{
-      "population": "Total",
-      "alleleFrequency": "AF",
-      "alleleCount": "AC",
-      "alleleCountHomozygous": "AC_hom",
-      "alleleCountHeterozygous": "AC_het",
-      "alleleNumber": "AN"
-  }]
+"numberOfPopulations": 1,
+"source": "The Genome Aggregation Database (gnomAD)",
+"sourceReference": "gnomad.broadinstitute.org/",
+"populations": [{
+"population": "Total",
+"alleleFrequency": "AF",
+"alleleCount": "AC",
+"alleleCountHomozygous": "AC_hom",
+"alleleCountHeterozygous": "AC_het",
+"alleleNumber": "AN" }]
 }
-```
-
-Tip: If numberOfPopulations is greater than 1, you have to add as many populations you have in the populations array, while if populations is 0, then, no allele frequency will be read from this pipeline.
 
 The template.json file will allow you to map the annotations entries related to the variant type, the aminoacid change, the gene Id or the molecular effects in your vcf:
 
-```
 {
-  "template": false,
-  "variantType": "VT",
-  "aminoacidChange": "HGVSp",
-  "geneId": "SYMBOL",
-  "molecularEffects": "CONSEQUENCE"
+"template": false,
+"variantType": "VT",
+"aminoacidChange": "HGVSp",
+"geneId": "SYMBOL",
+"molecularEffects": "CONSEQUENCE"
 }
-```
 
-Tip: If you want to activate this pipeline, change the template variable to true. If you activate this template, this will override the VEP annotations.
+Please, keep in mind that multiallelic variants need to be split onto separate rows in the VCF.
 
-Please, keep in mind that multiallelic variants need to be split onto separate rows in the VCF, otherwise they will be ignored.
-
----
-
-Variant Data Conversion
+Variant data conversion
 
 If you do not want to fill the CSV file for the genomicVariations collection or you already have your data in the VCF format, you can convert directly from VCF to BFF.
 
-To convert data from a VCF file to BFF (json), the VCF must be compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon Data Tools will read all the VCF files inside the:
-[files_to_read folder](https://github.com/EGA-archive/beacon-data-tools/tree/main/files/vcf/files_to_read).
+To convert data from a VCF file to BFF (json), the VCF must be compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon Data Tools will read all the VCF files inside the files_to_read folder. You can convert one or multiple VCF files at a time.
 
-You can convert one or multiple VCF files at a time.
+If you are using the ri-tools image directly into Beacon v2 PI API or Beacon v2 RI API you won’t need to mongoexport the .json files unless you specifically need them for any other purpose, as the MongoDB instance for the API will already be filled with the variants.
 
 To execute the conversion, use the next command:
 
-```
 docker exec -it ri-tools python genomicVariations_vcf.py
-```
 
-This command will do the conversion from VCF to BFF and will load the final BFF documents into a mongoDB inside a container.
+This command will do the conversion from VCF to BFF and will load the final BFF documents into a mongoDB inside a container. This is done for memory size usage.
 
----
+After that, if needed, export your documents from the mongoDB to your machine as a BFF file (json) using two possible commands.
 
-Exporting Data from MongoDB
+The first command will delete an internal "_id" for each record that is generated by MongoDB:
 
-If needed, export your documents from the MongoDB to your machine as a BFF file (json) using the following commands:
-
-1. Remove MongoDB’s internal `_id`:
-
-```
 docker exec ri-tools-mongo mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations | sed '/"_id":/s/"_id":[^,]*,//g' > genomicVariations.json
-```
 
-2. Keep MongoDB’s internal `_id`:
+The second command will keep the "_id" entries generated by MongoDB. Note that this ID is not part of the specifications of the Beacon and will not affect your data and Beacon, you can keep it if you want:
 
-```
 docker exec ri-tools-mongo mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > genomicVariations.json
-```
 
-This will generate the final BFF file (json) for the `genomicVariations` collection.
+This will generate the final BFF file (json) for the genomicVariations collection using the VCF format as the source. Bear in mind that this time, the file will be saved in the directory you are located, so if you want to save it in the output_docs folder, add it in the path of the mongoexport (e.g. > output_docs/genomicVariations.json).
 
----
+As it has already been mentioned, the variants read from the VCF are directly stored into the Beacon Data Tools MongoDB.
 
-Case Level Data Conversion
+If you need to do more conversions and you don’t want to keep the variants inside it, you can remove them by using the next command:
 
-If you are converting with the parameter **case_level_data** set to `True`, this will add data into two collections: **targets** and **caseLevelData**.
+docker exec ri-tools-mongo /bin/bash -c 'mongo beacon -u root -p example --authenticationDatabase admin --eval "db.genomicVariations.deleteMany()"'
 
-To export these collections, use:
+At this point, you should have your data ready to be injected into the Beacon v2 RI API.
 
-```
+Case level data conversion
+
+If you are converting with the parameter case_level_data to True, this will add data into two collections: targets and caseLevelData. If you need to export the variants to insert them in another mongoDB, you will need to export these two collections as well, by executing the next commands:
+
 docker exec ri-tools-mongo mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection caseLevelData > caseLevelData.json
-```
 
-```
 docker exec ri-tools-mongo mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection targets > targets.json
-```
 
-Now your data is ready for use in Beacon v2 RI API.
+Bear in mind that if you are converting VCFs one by one for the same samples and not by batches (multiple VCFs at the same time), this will generate a target file every time. We recommend converting all VCFs for the same sampling (dataset) at the same time to avoid unnecessary target records to be created.
+
+Case level data conversion is only applicable in the Beacon Production Implementation environment, as it is specifically designed to handle detailed sample-level associations and structured genomic data storage optimized for production use.
