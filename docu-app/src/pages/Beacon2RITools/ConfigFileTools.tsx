@@ -193,8 +193,8 @@ const ConfigFileTools: React.FC = () => {
             in a VCF.
           </p>
           <p>
-            Datasets, case-level data, and zygosity parameters are <b>only</b>{" "}
-            applicable in the{" "}
+            The <i>datasetId</i>, <i>case_level_data</i>, and <i>zygosity</i>{" "}
+            parameters are <b>only</b> applicable in the{" "}
             <b>Beacon Production Implementation environment</b>.
           </p>
           <p>
