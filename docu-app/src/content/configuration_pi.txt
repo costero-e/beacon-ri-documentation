@@ -1,15 +1,15 @@
+Documentation > 2 PI API > Configuration
+
 Beacon 2 Production Implementation API
 
 Configuration
 
-Beacon2 PI API has two folders where a user can configure their beacons:
-- conf: for general configuration of the beacon
-- source: for configuring the model of the beacon (e.g., entry types and related databases).
+Beacon2 PI API has two folders where a user can configure their beacons: conf for general configuration of the beacon and source for configuring the model of the beacon: e.g. entry types and the databases related to each entry type.
 
 Editing your beacon information
 
-To show your beacon’s information correctly, edit both conf.py files from beacon and deploy folders.
-Modify the following variables:
+To show correctly your beacon’s information you will need to edit both conf.py files from beacon and deploy folders.
+To do so, edit the following variables:
 
 beacon_id = 'org.ega-archive.beacon-ri-demo'
 beacon_name = 'Beacon Reference Implementation demo'
@@ -18,42 +18,48 @@ uri = 'https://beacon-apis-demo.ega-archive.org/api/'
 org_id = 'EGA'
 org_name = 'European Genome-Phenome Archive (EGA)'
 org_description = 'The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.'
-org_address = 'C/ Dr. Aiguader, 88 PRBB Building 08003 Barcelona, Spain'
+org_adress = 'C/ Dr. Aiguader, 88 PRBB Building 08003 Barcelona, Spain'
 org_welcome_url = 'https://ega-archive.org/'
 org_contact_url = 'mailto:beacon.ega@crg.eu'
 org_logo_url = 'https://legacy.ega-archive.org/images/logo.png'
 org_info = ''
-description = 'This Beacon is based on synthetic data hosted at the EGA. The dataset contains 2504 samples including genetic data based on 1K Genomes data, and 76 individual attributes and phenotypic data derived from UKBiobank.'
+description = "This Beacon is based on synthetic data hosted at the EGA. The dataset contains 2504 samples including genetic data based on 1K Genomes data, and 76 individual attributes and phenotypic data derived from UKBiobank."
 version = 'v2.0'
 welcome_url = 'https://beacon.ega-archive.org/'
 alternative_url = 'https://beacon-apis-demo.ega-archive.org/api/'
 create_datetime = '2021-11-29T12:00:00.000000'
 update_datetime = ''
 
+Note that this is the info that will be shown in the /info endpoint for your beacon.
+
 Managing dataset permissions
 
-There are 3 levels of beacon security for a dataset:
-- Public: A dataset returned in a beacon query without an authentication token.
-- Registered: A dataset that requires a valid token for access.
-- Controlled: A dataset requiring a valid token and explicit user permission.
+There are 3 possible levels of beacon security for a dataset: public, registered and controlled.
 
-Edit the .yml files inside permissions/datasets:
+A public dataset is a dataset that will be returned in a beacon query without an authentication token.
+A registered dataset is a dataset that will be shown after a user sends a valid token (in other words, is logged in).
+A controlled dataset is a dataset that needs a user to send a valid token for authentication and the user needs to be allowed to query that dataset.
 
-Public dataset:
+Edit the .yml files inside permissions/datasets
+
+For a public dataset, edit the public_datasets.yml file inside permissions folder and add the dataset with the exact name it appears in the id from its pertinent record in datasets mongo collection:
+
 public_datasets:
-- dataset_id
 
-Registered dataset:
+dataset_id
+For a registered dataset, edit the registered_datasets.yml file inside permissions folder and add the dataset with the exact name it appears in the id from its pertinent record in datasets mongo collection:
+
 registered_datasets:
-- dataset_id
 
-Controlled dataset:
+dataset_id
+For a controlled dataset, edit the controlled_datasets.yml file inside permissions folder and add the dataset inside the username you wish to give permissions with the exact name for the dataset as it appears in the id from its pertinent record in datasets mongo collection and the exact name the user has in Keycloak:
+
 username:
-- dataset_id
 
+dataset_id
 Supplying AAI credentials for your IDP
 
-For OpenID and OAuth2-based IDPs, create a file inside auth/idp_providers with the .env extension (e.g., something.env) and include:
+For making any IDP (based on OpenID and Oauthv2) work with beacon, you will need to add the client ID and client secret for each IDP in a new file you have to create inside auth/idp_providers folder (for each IDP). This file must have a name with an .env extension (e.g. something.env) and needs to have the following variables:
 
 CLIENT_ID=beacon
 CLIENT_SECRET='b26ca0f9-1137-4bee-b453-ee51eefbe7ba'
@@ -62,49 +68,47 @@ INTROSPECTION='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/token/
 ISSUER='http://localhost:8080/auth/realms/Beacon'
 JWKS_URL='http://idp:8080/auth/realms/Beacon/protocol/openid-connect/certs'
 
-Rebuild beacon container:
+After that, make sure you build your beacon container again:
+
 docker-compose up -d --build beaconprod
 
 Handling CORS
 
-Modify the variable cors_urls in beacon/conf/conf.py:
+To avoid CORS using beacon and the frontend or a third-party authorization site like Keycloak, you will have to include all these URLs inside variable cors_urls in beacon/conf/conf.py file.
 
 cors_urls = ["http://localhost:3000","https://cancer-beacon-demo.ega-archive.org", "https://beacon-network-demo2.ega-archive.org", "https://beacon.ega-archive.org"]
 
 Setting the default granularity
 
-Modify beacon/conf/conf.py:
+Beacon PI can only limit the granularity for all the beacon at the moment. If you want to limit the granularity for all the users to a maximum, you can point it in beacon/conf/conf.py, by editing the next variables:
 
 max_beacon_granularity = "record"
 
 Adding beacon handovers
 
-Modify beacon/utils/handovers.py:
+A handover can be added to the general beacon response or to the response per dataset.
 
-handover_1 = {
-    "note": "Description of the handover",
-    "url": "Link for the handover",
-    "handoverType": {
-        "id": "NCIT:C189151",
-        "label": "Study Data Repository"
-    }
+In any of the cases, you have to modify the beacon/utils/handovers.py file and you can write your handover there following the Beacon v2 spec response for handovers, e.g.
+
+handover_1= {
+"note": "Description of the handover",
+"url": "Link for the handover",
+"handoverType": {
+"id": "NCIT:C189151",
+"label": "Study Data Repository"
+}
 }
 
-To apply this to all datasets:
-list_of_handovers=[handover_1]
+Configuring your entry types
 
-To apply this per dataset:
-dataset1_handover = { "dataset": dataset1_id, "handover": handover_1 }
-list_of_handovers_per_dataset=[dataset1_handover]
+If you go to the source folder inside beacon folder, you will find a file called manage.py that you will need to edit in order to tell the API what is implemented in your beacon for each entry type and in what database you have the data related to each entry_type.
 
-Configuring entry types
-
-Modify source/manage.py:
+In order to do this, you will just need to put a True or False response to what granularity you have implemented per each entryType. See the next example:
 
 g_variants={ 'granularity': {
-    'boolean': True,
-    'count': True,
-    'record': True },
+'boolean': True,
+'count': True,
+'record': True },
 'singleEntryUrl': True,
 'endpoints': {'analysis': True, 'biosample': True, 'individual': True, 'run': True },
 'testMode': True,
@@ -112,24 +116,18 @@ g_variants={ 'granularity': {
 
 Setting the logs
 
-Modify beacon/conf/conf.py:
+In this production instance of beacon, you can set the level of the logs you want to output and where do you want to see the output in.
+
+For setting the level of the logs, specify one amongst NOTSET, DEBUG, ERROR, INFO in the variable level (after logging.):
 
 level=logging.NOTSET
 
-Define the log file path:
-log_file=None
-
 TLS configuration
 
-Enable TLS for the Beacon API by setting beacon_server_crt and beacon_server_key in beacon/conf/conf.py.
+To enable TLS for the Beacon API set beacon_server_crt and beacon_server_key to the full path of the server certificate and server key in beacon/conf/conf.py file.
 
 TLS secured MongoDB
 
-Modify beacon/connections/mongo/conf.py:
+Edit the file beacon/connections/mongo/conf.py and set database_certificate to the full path to the client certificate. If a private CA is used also set the database_cafile to the full path to the CA certificate.
 
-database_certificate = "path_to_client_certificate.pem"
-database_cafile = "path_to_ca_certificate.pem"
-
-The MongoDB client certificate should be in the combined PEM format: client.key + "
-" + client.crt
-
+The MongoDB client certificate should be in the combined PEM format client.key + "\n" + client.crt
