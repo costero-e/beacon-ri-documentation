@@ -10,7 +10,7 @@ function LandingPage() {
         <h3>Beacon v2 Reference/Production Implementation Documentation</h3>
         <p>
           <b>Beacon v2 Reference Implementation (B2RI) </b>and{" "}
-          <b>Beacon v2 Production Implementation (B2PI) </b>) are tools that
+          <b>Beacon v2 Production Implementation (B2PI) </b> are tools that
           provide a REST API and enable queries of genomic and phenotypic data
           in compliance with Beacon v2 standard.
           <br />
@@ -22,11 +22,11 @@ function LandingPage() {
           The process relies on the following four processes:
         </p>
         <li>
-          <b>Beacon Data Tools.</b> This tool allows enables conversion of
-          .csv/.vcf files to .json files in a Beacon Friendly Format (BFF). Note
-          that Beacon RI Tools v2 is designed to work with both Beacon 2 RI API
-          or Beacon 2 PI API. Specifically, it includes all the features that
-          are needed for generating Beacon v2 PI API compatible data.
+          <b>Beacon Data Tools.</b> This tool enables conversion of .csv/.vcf
+          files to .json files in a Beacon Friendly Format (BFF). Note that
+          Beacon Data Tools are designed to work with both Beacon 2 RI API or
+          Beacon 2 PI API. Specifically, it includes all the features that are
+          needed for generating Beacon v2 PI API compatible data.
         </li>
         <li>
           <b>Beacon RI API / PI API.</b> The API connects to a MongoDB database
@@ -146,7 +146,7 @@ function LandingPage() {
 
       <footer className="footer">
         <span className="footer-text">
-          © Copyright 2025, B2RI Documentation Contributors
+          © Copyright 2025, B2RI/PI Documentation Contributors
         </span>
       </footer>
       <br></br>
