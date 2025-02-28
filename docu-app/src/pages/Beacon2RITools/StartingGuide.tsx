@@ -27,7 +27,7 @@ const StartingGuide: React.FC = () => {
           className="arrow-icon"
         />
         <a href="/starting-guide" className="no-undeline">
-          Beacon Data Tools
+          Beacon RI Tools v2
         </a>
 
         <img
@@ -41,11 +41,11 @@ const StartingGuide: React.FC = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon Data Tools</h3>
+          <h3>Beacon RI Tools v2</h3>
           <h1>Tools Introduction</h1>
           <p>
-            The Beacon Data Tools are a set of tools written in Python available
-            in the following 
+            The Beacon RI Tools v2 are a set of tools written in Python
+            available in the following 
             <a
               href="https://github.com/EGA-archive/beacon-data-tools"
               target="_blank"
@@ -56,14 +56,14 @@ const StartingGuide: React.FC = () => {
             .
           </p>
           <p>
-            Notice that Beacon Data Tools are meant to work with either Beacon 2
-            RI API or Beacon 2 PI API. Furthermore, it specifically comes with
+            Notice that Beacon RI Tools v2 are meant to work with either Beacon
+            2 RI API or Beacon 2 PI API. Furthermore, it specifically comes with
             all the features that are needed for generating Beacon v2 PI API
             compatible data.
           </p>
 
           <p>
-            The main goal of Beacon Data Tools is to obtain the{" "}
+            The main goal of Beacon RI Tools v2 is to obtain the{" "}
             <b>Beacon Friendly Format (BFF) files </b>, which are JSON files
             following Beacon v2 official specifications. These files have the
             correct format and structure to be injected into a Beacon v2 MongoDB
@@ -103,7 +103,7 @@ const StartingGuide: React.FC = () => {
             </ul>{" "}
           </p>
           <p>
-            Therefore the Beacon Data Tools allow the user to create the
+            Therefore the Beacon RI Tools v2 allow the user to create the
             different 7 BFF options.
           </p>
           <p>
@@ -113,10 +113,10 @@ const StartingGuide: React.FC = () => {
             from a VCF file, minimising conversion time.
           </p>
           <p>
-            The initial step, since Beacon Data Tools cannot convert the data
+            The initial step, since Beacon RI Tools v2 cannot convert the data
             from any source, is to populate the CSV templates that are built
             following the 7 collections of the Beacon data model. This enables
-            the Beacon Data Tools to convert from CSV to BFF. Note that you can
+            the Beacon RI Tools v2 to convert from CSV to BFF. Note that you can
             find the CSV templates in the {""}
             <a
               href="https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/templates"
@@ -130,7 +130,7 @@ const StartingGuide: React.FC = () => {
 
           <h2 id="installation-guide">Installation Guide</h2>
           <p>
-            First of all, clone or download the Beacon Data Tools repository to
+            First of all, clone or download the Beacon RI Tools v2 repository to
             your computer:
           </p>
           <div className="codeSnippet">
@@ -156,7 +156,7 @@ const StartingGuide: React.FC = () => {
             </pre>
           </div>
           <p>
-            To light up the container with Beacon Data Tools, execute the
+            To light up the container with Beacon RI Tools v2, execute the
             docker-compose command inside the root folder of the repository:
           </p>
           <div className="codeSnippet">
@@ -180,8 +180,8 @@ const StartingGuide: React.FC = () => {
             </pre>
           </div>
           <p>
-            Once the container is up and running, you can start using Beacon
-            Data Tools, congratulations!
+            Once the container is up and running, you can start using Beacon RI
+            Tools v2 , congratulations!
           </p>
         </div>
         <div className="sidebarColumn">

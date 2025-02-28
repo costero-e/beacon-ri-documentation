@@ -22,9 +22,9 @@ function LandingPage() {
           The process relies on the following four processes:
         </p>
         <li>
-          <b>Beacon Data Tools.</b> This tool enables conversion of .csv/.vcf
+          <b>Beacon RI Tools v2.</b> This tool enables conversion of .csv/.vcf
           files to .json files in a Beacon Friendly Format (BFF). Note that
-          Beacon Data Tools are designed to work with both Beacon 2 RI API or
+          Beacon RI Tools v2 are designed to work with both Beacon 2 RI API or
           Beacon 2 PI API. Specifically, it includes all the features that are
           needed for generating Beacon v2 PI API compatible data.
         </li>
@@ -71,7 +71,7 @@ function LandingPage() {
       />
       <p>
         The process to deploy and inject data is the same than in Beacon v2 RI
-        API (data comes from Beacon Data Tools) but this instance is optimized
+        API (data comes from Beacon RI Tools v2) but this instance is optimized
         and tested, having the next upgrades from Beacon v2 RI API:
         <li>Handlers of the endpoints are classes, not functions.</li>
         <li>

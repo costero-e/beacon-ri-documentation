@@ -1,9 +1,9 @@
-Documentation > Beacon Data Tools > Creating the CSV files
+Documentation > Beacon RI Tools v2 > Creating the CSV files
 
-Beacon Data Tools
+Beacon RI Tools v2
 Creating the CSV files
 
-The CSV file is an intermediate file to allow Beacon Data Tools to convert to BFF since the CSVs follow a harmonized structure.
+The CSV file is an intermediate file to allow Beacon RI Tools v2 to convert to BFF since the CSVs follow a harmonized structure.
 
 Picking headers
 
@@ -39,7 +39,7 @@ As the info field for each collection is very generic and can be filled with dif
 { "info": "Some important information to be added." }
 
 Please, respect the columns like the files inside the templates folder, as the script will read only the columns with the "correctly spelled" headers.
-Keep in mind that you don’t need to fill in all the columns. Some are optional, while others belong to specific Beacon specification options and may be incompatible with certain columns. If a column is misfilled, an exception will be raised. The Beacon Data Tools will only convert the columns that contain information, the rest can be removed if wanted.
+Keep in mind that you don’t need to fill in all the columns. Some are optional, while others belong to specific Beacon specification options and may be incompatible with certain columns. If a column is misfilled, an exception will be raised. The Beacon RI Tools v2 will only convert the columns that contain information, the rest can be removed if wanted.
 These are the mandatory fields for each collection:
 
 Analyses: id, analysisDate and pipelineName

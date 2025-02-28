@@ -4,12 +4,10 @@ import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 
 const CreatingCSVs: React.FC = () => {
-  // State to manage copy success
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
 
-  // Function to handle copying text to clipboard
   const copyToClipboard = (text: string, snippetId: string) => {
     navigator.clipboard
       .writeText(text)
@@ -34,7 +32,7 @@ const CreatingCSVs: React.FC = () => {
           className="arrow-icon"
         />
         <a href="/creating-the-csv-files" className="no-undeline">
-          Beacon Data Tools
+          Beacon RI Tools v2
         </a>
 
         <img
@@ -48,10 +46,10 @@ const CreatingCSVs: React.FC = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon Data Tools</h3>
+          <h3>Beacon RI Tools v2</h3>
           <h1>Creating the CSV files</h1>
           <p>
-            The CSV file is an intermediate file to allow Beacon Data Tools
+            The CSV file is an intermediate file to allow Beacon RI Tools v2
             convert to BFF since the CSVs follow an harmonized structure.
           </p>
           <h2 id="picking-headers">Picking headers</h2>
@@ -276,7 +274,7 @@ const CreatingCSVs: React.FC = () => {
               Keep in mind that you don’t need to fill in all the columns. Some
               are optional, while others belong to specific Beacon specification
               options and may be incompatible with certain columns. If a column
-              is misfilled, an exception will be raised. Beacon Data Tools will
+              is misfilled, an exception will be raised. Beacon RI Tools v2 will
               only convert the columns that contain information, the rest can be
               removed if wanted.
             </li>

@@ -8,7 +8,7 @@ Below is an overview of the schema process of B2RI/B2PI, which involves transfor
 
 The process relies on the following four processes:
 
-Beacon Data Tools. This tool enables conversion of .csv/.vcf files to .json files in a Beacon Friendly Format (BFF). Note that Beacon Data Tools are designed to work with both Beacon 2 RI API or Beacon 2 PI API. Specifically, it includes all the features that are needed for generating Beacon v2 PI API compatible data.
+Beacon RI Tools v2. This tool enables conversion of .csv/.vcf files to .json files in a Beacon Friendly Format (BFF). Note that Beacon RI Tools v2 are designed to work with both Beacon 2 RI API or Beacon 2 PI API. Specifically, it includes all the features that are needed for generating Beacon v2 PI API compatible data.
 Beacon RI API / PI API. The API connects to a MongoDB database that stores the .json files, allowing one to query the data following the Beacon v2 standards. Beacon v2 PI is an upgraded version of Beacon v2 RI API, developed for production environments and recommended for improved performance and user experience.
 Beacon Verifier v2. A tool that checks that the data in the API is compliant with Beacon v2 and provides a verification report.
 Beacon User Interface. The user-friendly interface for querying the API without needing to worry about the underlying standards. It supports intuitive queries and enables authentication through LifeScience or Keycloak.
@@ -16,7 +16,7 @@ Regarding security, the API always validates authentication through the chosen i
 
 As stated before, Beacon v2 PI API is a beacon instance for production environments. The steps that this production instance follows are the next ones shown in the next flowchart:
 
-The process to deploy and inject data is the same than in Beacon v2 RI API (data comes from Beacon Data Tools) but this instance is optimized and tested, having the next upgrades from Beacon v2 RI API:
+The process to deploy and inject data is the same than in Beacon v2 RI API (data comes from Beacon RI Tools v2) but this instance is optimized and tested, having the next upgrades from Beacon v2 RI API:
 
 Handlers of the endpoints are classes, not functions.
 Unit testing has been developed for the application, starting with 108 unit tests that cover 4000 lines of code approximately (100%).

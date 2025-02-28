@@ -1,14 +1,14 @@
-Documentation Beacon Data Tools Conversion from VCF to BFF
+Documentation Beacon RI Tools v2 Conversion from VCF to BFF
 
-Beacon Data Tools
+Beacon RI Tools v2
 
 Conversion from VCF to BFF
 
 Reading your VCF
 
-Beacon Data Tools will read the different columns for your variants in the VCF and place them inside the Legacy Variation schema for the Beacon v2 Spec.
+Beacon RI Tools v2 will read the different columns for your variants in the VCF and place them inside the Legacy Variation schema for the Beacon v2 Spec.
 
-            By default, Beacon Data Tools supports VEP annotation, in
+            By default, Beacon RI Tools v2 supports VEP annotation, in
             case your VCF has the designated VEP row in the VCF header:
 
 ##INFO=<ID=CSQ,Number=.,Type=String,Description="Consequence annotations from Ensembl VEP. Format: Allele|Consequence|IMPACT|SYMBOL|Gene|Feature_type|Feature|BIOTYPE|EXON|INTRON|HGVSc|HGVSp|cDNA_position|CDS_position|Protein_position|Amino_acids|Codons|Existing_variation|REF_ALLELE|UPLOADED_ALLELE|DISTANCE|STRAND|FLAGS|SYMBOL_SOURCE|HGNC_ID|CANONICAL|HGVS_OFFSET">
@@ -63,7 +63,7 @@ Variant data conversion
 
 If you do not want to fill the CSV file for the genomicVariations collection or you already have your data in the VCF format, you can convert directly from VCF to BFF.
 
-To convert data from a VCF file to BFF (json), the VCF must be compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon Data Tools will read all the VCF files inside the files_to_read folder. You can convert one or multiple VCF files at a time.
+To convert data from a VCF file to BFF (json), the VCF must be compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon RI Tools v2 will read all the VCF files inside the files_to_read folder. You can convert one or multiple VCF files at a time.
 
 To execute the conversion, use the next command:
 
@@ -85,7 +85,7 @@ This will generate the final BFF file (json) for the genomicVariations collectio
 
 If you are using the ri-tools image directly into Beacon v2 PI API or Beacon v2 RI API you won’t need to mongoexport the .json files unless you specifically need them for any other purpose, as the MongoDB instance for the API will already be filled with the variants.
 
-As it has already been mentioned, the variants read from the VCF are directly stored into the Beacon Data Tools MongoDB.
+As it has already been mentioned, the variants read from the VCF are directly stored into the Beacon RI Tools v2 MongoDB.
 
 If you need to do more conversions and you don’t want to keep the variants inside it, you can remove them by using the next command:
 

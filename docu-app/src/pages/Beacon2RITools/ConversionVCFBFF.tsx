@@ -57,7 +57,7 @@ const ConversionVCFBFF = () => {
           className="arrow-icon"
         />
         <a href="/conversion-from-vcf-to-bff" className="no-undeline">
-          Beacon Data Tools
+          Beacon RI Tools v2
         </a>
 
         <img
@@ -71,16 +71,16 @@ const ConversionVCFBFF = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon Data Tools</h3>
+          <h3>Beacon RI Tools v2</h3>
           <h1>Conversion from VCF to BFF</h1>
           <h2 id="reading-VCF">Reading your VCF</h2>
           <p>
-            Beacon Data Tools will read the different columns for your variants
+            Beacon RI Tools v2 will read the different columns for your variants
             in the VCF and place them inside the Legacy Variation schema for the
             Beacon v2 Spec.
           </p>
           <p>
-            By default, Beacon Data Tools supports <b>VEP annotation</b>, in
+            By default, Beacon RI Tools v2 supports <b>VEP annotation</b>, in
             case your VCF has the designated VEP row in the VCF header:
           </p>
 
@@ -295,7 +295,7 @@ const ConversionVCFBFF = () => {
           </p>
           <p>
             To convert data from a VCF file to BFF (json), the VCF must be
-            compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon Data Tools
+            compressed and indexed (.vcf.gz + .vcf.gz.tbi). Beacon RI Tools v2
             will read all the VCF files inside the{" "}
             <a
               href="https://github.com/EGA-archive/beacon-data-tools/tree/main/files/vcf/files_to_read"
@@ -427,7 +427,7 @@ const ConversionVCFBFF = () => {
           </p>
           <p>
             As it has already been mentioned, the variants read from the VCF are
-            directly stored into the Beacon Data Tools MongoDB.
+            directly stored into the Beacon RI Tools v2 MongoDB.
           </p>
           <p>
             If you need to do more conversions and you don’t want to keep the

@@ -63,7 +63,7 @@ function App() {
     "Introduction",
     "Beacon 2 PI API",
     "Beacon 2 RI API",
-    "Beacon Data Tools",
+    "Beacon RI Tools v2",
     // "Beacon Verifier",
     "Beacon UI",
     "Beacon Network UI",
@@ -87,7 +87,7 @@ function App() {
       "API Configuration",
       "Querying the API",
     ],
-    "Beacon Data Tools": [
+    "Beacon RI Tools v2": [
       "Starting Guide",
       "Configuration File",
       "Creating the CSV Files",
@@ -156,7 +156,7 @@ function App() {
                 />
                 <Route path="/querying-the-api" element={<QueryingApi />} />
 
-                {/* Beacon Data Tools Routes */}
+                {/* Beacon RI Tools v2 Routes */}
                 <Route path="/starting-guide" element={<StartingGuide />} />
                 <Route
                   path="/configuration-file"

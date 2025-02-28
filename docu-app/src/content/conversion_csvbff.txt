@@ -1,6 +1,6 @@
-Documentation > Beacon Data Tools > Conversion from CSV to BFF
+Documentation > Beacon RI Tools v2 > Conversion from CSV to BFF
 
-Beacon Data Tools
+Beacon RI Tools v2
 
 Conversion from CSV to BFF
 

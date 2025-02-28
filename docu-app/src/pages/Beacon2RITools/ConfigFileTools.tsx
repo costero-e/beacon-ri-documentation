@@ -32,7 +32,7 @@ const ConfigFileTools: React.FC = () => {
           className="arrow-icon"
         />
         <a href="/configuration-file" className="no-undeline">
-          Beacon Data Tools
+          Beacon RI Tools v2
         </a>
         <img
           src="arrow-right-bold.svg"
@@ -45,10 +45,10 @@ const ConfigFileTools: React.FC = () => {
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
-          <h3>Beacon Data Tools</h3>
+          <h3>Beacon RI Tools v2</h3>
           <h1>Configuration File</h1>
           <p>
-            In order to use Beacon Data Tools one needs to modify a
+            In order to use Beacon RI Tools v2 one needs to modify a
             configuration file with the desired files and options for the
             different collections.
           </p>
