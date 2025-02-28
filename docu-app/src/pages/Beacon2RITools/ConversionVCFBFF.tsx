@@ -80,6 +80,32 @@ const ConversionVCFBFF = () => {
             Beacon v2 Spec.
           </p>
           <p>
+            First of all, Beacon RI Tools v2 will read the basic VCF parameters
+            that come inside their columns:
+            <ol>
+              <li>
+                CHROM: will add the chromosome number in the genomicHGVSId field
+                of the record.
+              </li>
+              <li>
+                POS: Will add the coordinates in start and end fields of the
+                record in 0-typed annotation.
+              </li>
+              <li>
+                ID: will add the identification of the variant in the
+                variantType field (SNP, INDEL, etc...)
+              </li>
+              <li>
+                REF: will fill the referenceBases field in the record of the
+                variant.
+              </li>
+              <li>
+                ALT: will fill the alternateBases field in the record of the
+                variant.
+              </li>
+            </ol>
+          </p>
+          <p>
             By default, Beacon RI Tools v2 supports <b>VEP annotation</b>, in
             case your VCF has the designated VEP row in the VCF header:
           </p>

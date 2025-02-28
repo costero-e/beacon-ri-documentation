@@ -534,14 +534,13 @@ const PiQueryingAPI = () => {
           <div className="codeSnippet">
             <pre>
               <code>
-                http://localhost:5050/api/g_variants?start=16050606&alternateBases=A
-                &referenceBases=G&referenceName=22&assemblyId=GRCh37
+                http://localhost:5050/api/g_variants?start=16050606&alternateBases=A&referenceBases=G&referenceName=22&assemblyId=GRCh37
               </code>
               <button
                 className="copyButtonCode"
                 onClick={() =>
                   copyToClipboard(
-                    "http://localhost:5050/api/g_variants?start=16050606&alternateBases=A &referenceBases=G&referenceName=22&assemblyId=GRCh37",
+                    "http://localhost:5050/api/g_variants?start=16050606&alternateBases=A&referenceBases=G&referenceName=22&assemblyId=GRCh37",
                     "beacon-sequence-query"
                   )
                 }
@@ -559,14 +558,13 @@ const PiQueryingAPI = () => {
           <div className="codeSnippet">
             <pre>
               <code>
-                http://localhost:5050/api/g_variants?start=16050606&end=16050607
-                &alternateBases=A&referenceBases=G&referenceName=22&assemblyId=GRCh37
+                http://localhost:5050/api/g_variants?start=16050606&end=16050607&alternateBases=A&referenceBases=G&referenceName=22&assemblyId=GRCh37
               </code>
               <button
                 className="copyButtonCode"
                 onClick={() =>
                   copyToClipboard(
-                    "http://localhost:5050/api/g_variants?start=16050606&end=16050607 &alternateBases=A&referenceBases=G&referenceName=22&assemblyId=GRCh37",
+                    "http://localhost:5050/api/g_variants?start=16050606&end=16050607&alternateBases=A&referenceBases=G&referenceName=22&assemblyId=GRCh37",
                     "beacon-range-query"
                   )
                 }
@@ -608,14 +606,13 @@ const PiQueryingAPI = () => {
           <div className="codeSnippet">
             <pre>
               <code>
-                http://localhost:5050/api/g_variants?referenceName=22&start=16050074,
-                16050076&end=16050090,16050096&variantType=SNP&assemblyId=GRCh38
+                http://localhost:5050/api/g_variants?referenceName=22&start=16050074,16050076&end=16050090,16050096&variantType=SNP&assemblyId=GRCh38
               </code>
               <button
                 className="copyButtonCode"
                 onClick={() =>
                   copyToClipboard(
-                    "http://localhost:5050/api/g_variants?referenceName=22&start=16050074, 16050076&end=16050090,16050096&variantType=SNP&assemblyId=GRCh38",
+                    "http://localhost:5050/api/g_variants?referenceName=22&start=16050074,16050076&end=16050090,16050096&variantType=SNP&assemblyId=GRCh38",
                     "beacon-bracket-query"
                   )
                 }

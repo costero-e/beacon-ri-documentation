@@ -136,17 +136,23 @@ const FilteringTerms = () => {
             </pre>
           </div>
           <h2 id="get-descendant-terms">
-            Get descendant terms <span className="optional">(optional)</span>
+            Get descendant and semantic similarity terms{" "}
+            <span className="optional">(optional)</span>
           </h2>
           <p>
-            To add descendant terms and similarity for ontologies, execute this
-            script:
+            If you have the ontologies loaded and the filtering terms
+            extracted*, you can automatically get their descendant and semantic
+            similarity terms by following the next two steps: Add your .obo
+            files inside ontologies naming them as the ontology prefix in
+            lowercase (e.g. ncit.obo) and rebuild the beacon container with:
+            <br></br>
+            Run the following script:
           </p>
           <div className="codeSnippet">
             <pre>
               <code>
                 docker exec beaconprod python
-                /beacon/connections/mongo/get_descendants.py
+                beacon/connections/mongo/get_descendants.py
               </code>
               <button
                 className="copyButtonCode"

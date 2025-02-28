@@ -1,14 +1,12 @@
-Beacon 2 PI API - Filtering Terms
+Beacon 2 PI API - Beacon 2 PI API - Filtering Terms
 
-Cloning the Repository
-First of all, start by cloning the GitHub repository in your system.
+Beacon 2 Production Implementation API
+
+Filtering Terms
 
 Extract filtering terms
 To automatically fill in the filtering terms endpoint and be able to apply the ontologies that are found inside your data to query your beacon, please execute the next script:
-
-```bash
 docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.py
-```
 
 Manually adding filtering terms (optional)
 To manually add filtering terms to your beacon, execute the following command in MongoDB for the `libraryStrategy` field in the `runs` collection:
@@ -20,10 +18,8 @@ db.filtering_terms.insertMany([{
   "scope": ["runs"]
 }])
 ```
+Get descendant and semantic similarity terms (optional)
+If you have the ontologies loaded and the filtering terms extracted*, you can automatically get their descendant and semantic similarity terms by following the next two steps: Add your .obo files inside ontologies naming them as the ontology prefix in lowercase (e.g. ncit.obo) and rebuild the beacon container with:
+Run the following script:
 
-Get descendant terms (optional)
-To add descendant terms and similarity for ontologies, execute this script:
-
-```bash
-docker exec beaconprod python /beacon/connections/mongo/get_descendants.py
-```
+docker exec beaconprod python beacon/connections/mongo/get_descendants.py
