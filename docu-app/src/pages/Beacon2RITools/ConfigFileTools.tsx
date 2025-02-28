@@ -137,10 +137,9 @@ const ConfigFileTools: React.FC = () => {
           <p>
             The <i>csv_filename</i> variable sets where the CSV file is and from
             where the script will read the data. Bear in mind that the CSV must
-            be inside the folder
-            <i>csv</i>, and you can use subfolders within it. This CSV file
-            needs to have the headers written as you can find in the files
-            inside{" "}
+            be inside the folder <i>csv</i>, and you can use subfolders within
+            it. This CSV file needs to have the headers written as you can find
+            in the files inside{" "}
             <a
               href="https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/templates"
               target="_blank"
@@ -170,7 +169,7 @@ const ConfigFileTools: React.FC = () => {
           </p>
           <p>
             The <i>num_variants</i> is the variable you need to write in case
-            you are executing the VCF conversor{" "}
+            you are executing the VCF conversion{" "}
             <i>(genomicVariations_vcf.py)</i>. This will tell the script how
             many variants will be read and converted from the file(s).
           </p>
@@ -187,7 +186,7 @@ const ConfigFileTools: React.FC = () => {
           </p>
           <p>
             The <i>num_rows</i>  is an approximate calculation of the total
-            number variants in each VCFf. Make sure this is greater than the
+            number variants in each VCF. Make sure this is greater than the
             total variants expected. This was automatically calculated before
             but it was very slow sometimes to calculate all the variants number
             in a VCF.

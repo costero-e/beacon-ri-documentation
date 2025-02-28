@@ -271,6 +271,12 @@ p {
   text-decoration: underline;
 }
 
+.qrcode {
+  margin-top: 20px;
+  width: 150px;
+  height: auto;
+}
+
 @media (max-width: 880px) {
   table {
     width: 100%;

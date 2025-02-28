@@ -669,7 +669,7 @@ const QueryingAPI = () => {
                   <br />
                   Default: "boolean"
                   <br />
-                  Enum: "boolean" "count" "aggregated" "record"
+                  Enum: "boolean" "count" "record"
                 </td>
                 <td>
                   <div className="codeSnippet-table">

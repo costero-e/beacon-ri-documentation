@@ -73,8 +73,8 @@ const Resources: React.FC = () => {
               >
                 https://docs.google.com/forms/d/e/1FAIpQLScORwEVRAlsa8qe9SerKZLGy6qjphApjsHXC8-EcaOrUpW8tw/viewform
               </a>
-              <img src={qrcode} />
             </li>
+            <img src={qrcode} className="qrcode" />
           </ul>
         </div>
         <div className="sidebarColumn">

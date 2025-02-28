@@ -80,7 +80,7 @@ cors_urls = ["http://localhost:3000","https://cancer-beacon-demo.ega-archive.org
 
 Setting the default granularity
 
-Beacon PI can only limit the granularity for all the beacon at the moment. If you want to limit the granularity for all the users to a maximum, you can point it in beacon/conf/conf.py, by editing the next variables:
+Beacon PI can only limit the granularity for all the beacon at the moment. If you want to limit the granularity for all users across all datasets, you can point it in beacon/conf/conf.py, by editing the next variables:
 
 max_beacon_granularity = "record"
 

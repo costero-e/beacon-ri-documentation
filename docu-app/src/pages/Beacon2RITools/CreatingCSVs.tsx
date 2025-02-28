@@ -234,10 +234,10 @@ const CreatingCSVs: React.FC = () => {
               <i> ‘labelforHG00001|labelforHG00002’</i>
             </li>
             <li>
-              As the<i>info</i> field for each collection is very generic and
+              As the <i>info</i> field for each collection is very generic and
               can be filled with different data, you will need to fill in the
               column data directly with JSON type data. In case you are
-              converting variants with CSV, for copies and subjects for
+              converting variants with CSV, for copies and subjects for{" "}
               <i>genomicVariations</i>, JSON data is also needed. You can
               copy/paste this structure to fill in the info field:
               <div className="codeSnippet">

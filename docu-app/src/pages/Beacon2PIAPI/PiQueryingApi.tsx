@@ -762,7 +762,7 @@ const PiQueryingAPI = () => {
                   <br />
                   Default: "boolean"
                   <br />
-                  Enum: "boolean" "count" "aggregated" "record"
+                  Enum: "boolean" "count" "record"
                 </td>
                 <td>
                   <div className="codeSnippet-table">
@@ -791,7 +791,6 @@ const PiQueryingAPI = () => {
                   boolean (TestMode)
                   <br />
                   Default: false <br />
-                  (comma separated strings of ontologies)
                 </td>
                 <td>
                   <div className="codeSnippet-table">

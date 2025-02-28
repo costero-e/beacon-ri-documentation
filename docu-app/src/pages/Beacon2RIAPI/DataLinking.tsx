@@ -218,7 +218,7 @@ const DataLinking = () => {
           <p>
             If you have extracted filtering terms. in case you wish to add
             information about the descendant terms and similarity found for each
-            ontology and be able to use the similarity and descendant terms
+            ontology and be able to use the similarity and descendant terms as
             beacon options, please execute the next script:
           </p>
           <div className="codeSnippet">

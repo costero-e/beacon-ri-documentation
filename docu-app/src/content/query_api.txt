@@ -107,7 +107,7 @@ Example: limit=10
 
 requestedGranularity	string (Granularity)
 Default: "boolean"
-Enum: "boolean" "count" "aggregated" "record"
+Enum: "boolean" "count" "record"
 
 testMode	
 boolean (TestMode)

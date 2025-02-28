@@ -370,9 +370,9 @@ const PiApiConfiguration = () => {
           </h2>
           <p>
             Beacon PI can only limit the granularity for all the beacon at the
-            moment. If you want to limit the granularity for all the users to a
-            maximum, you can point it in <b>becon/conf/conf.py</b>, by editing
-            the next variables:
+            moment. If you want to limit the granularity for all users across
+            all datasets, you can point it in <b>becon/conf/conf.py</b>, by
+            editing the next variables:
           </p>
           <div className="codeSnippet">
             <pre>
@@ -395,9 +395,9 @@ const PiApiConfiguration = () => {
             response per dataset.
             <br />
             In any of the cases, you have to modify the{" "}
-            <b>beacon/utils/handovers.py</b>
-            file and you can write your handover there following the Beacon v2
-            spec response for handovers, e.g.
+            <b>beacon/utils/handovers.py</b> file and you can write your
+            handover there following the Beacon v2 spec response for handovers,
+            e.g.
           </p>
           <div className="codeSnippet custom-codeSnippet">
             <pre>

@@ -80,8 +80,8 @@ const ConversionVCFBFF = () => {
             Beacon v2 Spec.
           </p>
           <p>
-            First of all, Beacon Data Tools support <b>VEP annotation</b>, which
-            means that if your VCF has this header:
+            By default, Beacon Data Tools supports <b>VEP annotation</b>, in
+            case your VCF has the designated VEP row in the VCF header:
           </p>
 
           <div className="codeSnippet">
@@ -306,20 +306,6 @@ const ConversionVCFBFF = () => {
             </a>
             . You can convert one or multiple VCF files at a time.
           </p>
-          <p className="note">
-            <img
-              className="note-symbol"
-              src="/note-symbol.png"
-              alt="Note symbol"
-            />
-            <div>
-              If you are using the ri-tools image directly into Beacon v2 PI API
-              or Beacon v2 RI API you won’t need to mongoexport the .json files
-              unless you specifically need them for any other purpose, as the
-              MongoDB instance for the API will already be filled with the
-              variants.
-            </div>
-          </p>
           <p>To execute the conversion, use the next command:</p>
           <div className="codeSnippet">
             <pre>
@@ -424,6 +410,20 @@ const ConversionVCFBFF = () => {
             <code>output_docs</code> folder, add it in the path of the{" "}
             <code>mongoexport</code> (e.g.{" "}
             <code>&gt; output_docs/genomicVariations.json</code>).
+          </p>
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              If you are using the ri-tools image directly into Beacon v2 PI API
+              or Beacon v2 RI API you won’t need to mongoexport the .json files
+              unless you specifically need them for any other purpose, as the
+              MongoDB instance for the API will already be filled with the
+              variants.
+            </div>
           </p>
           <p>
             As it has already been mentioned, the variants read from the VCF are
