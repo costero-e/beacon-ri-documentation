@@ -27,7 +27,7 @@ import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
 import PiManualDeployment from "./pages/Beacon2PIAPI/PiManualDeployment";
 import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
-import OfficialLinks from "./pages/OfficialLinks";
+import Resources from "./pages/Resources";
 import Tutorials from "./pages/Tutorials";
 
 interface SearchContextProps {
@@ -69,7 +69,7 @@ function App() {
     "Beacon Network UI",
     "Tutorials",
     // "FAQs",
-    "Official Links",
+    "Resources",
   ];
 
   const subMenuItems = {
@@ -198,7 +198,7 @@ function App() {
                 />
 
                 <Route path="/tutorials" element={<Tutorials />} />
-                <Route path="/official-links" element={<OfficialLinks />} />
+                <Route path="/resources" element={<Resources />} />
               </Routes>
             </div>
           </div>

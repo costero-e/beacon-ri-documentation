@@ -30,8 +30,8 @@ import NetworkDeploymentUIText from "../content/deployment_networkui.txt";
 import NetworkConfigurationUIText from "../content/configuration_networkui.txt";
 // Tutorials
 import TutorialsText from "../content/tutorials.txt";
-// Official Links
-import OfficialLinksText from "../content/official_links.txt";
+// Resources
+import ResourcesText from "../content/resources.txt";
 
 const ContentPreloader = () => {
   // Introduction
@@ -147,12 +147,8 @@ const ContentPreloader = () => {
   // Tutorials
   useRegisterTextContent("/tutorials", TutorialsText, "Tutorials");
 
-  // Offical Links
-  useRegisterTextContent(
-    "/official-links",
-    OfficialLinksText,
-    "Official Links"
-  );
+  // Resources
+  useRegisterTextContent("/resources", ResourcesText, "Resources");
   return null;
 };
 
