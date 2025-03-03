@@ -5,9 +5,15 @@ const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    console.log("Forcing scroll to top...");
+    console.log("🚀 ScrollToTop triggered for:", pathname);
+    console.log("📍 Before scroll: window.scrollY =", window.scrollY);
+
     setTimeout(() => {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
       window.scrollTo({ top: 0, behavior: "smooth" });
+
+      console.log("✅ After scroll: window.scrollY =", window.scrollY);
     }, 50);
   }, [pathname]);
 
