@@ -41,12 +41,12 @@ const ContentPreloader = () => {
   useRegisterTextContent(
     "/pi-automated-deployment",
     PiAutomatedDeploymentText,
-    "Pi Automated Deployment"
+    "Automated Deployment"
   );
   useRegisterTextContent(
     "/pi-manual-deployment",
     PiManualDeploymentText,
-    "Pi Manual Deployment"
+    "Manual Deployment"
   );
   useRegisterTextContent(
     "/filtering-terms",
@@ -61,7 +61,7 @@ const ContentPreloader = () => {
   useRegisterTextContent(
     "/pi-querying-the-api",
     PiQueryingApiText,
-    "Pi Querying the API"
+    "Querying the API"
   );
 
   // Beacon 2 RI API
@@ -79,7 +79,7 @@ const ContentPreloader = () => {
   useRegisterTextContent(
     "/api-configuration",
     ConfigurationRiText,
-    "Configuration RI API"
+    "Configuration"
   );
   useRegisterTextContent(
     "/querying-the-api",

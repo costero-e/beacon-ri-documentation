@@ -1,4 +1,4 @@
-Pi Automated Deployment
+Automated Deployment
 Documentation Path
 Documentation > Beacon 2 PI API > Automated Deployment
 Prerequisites

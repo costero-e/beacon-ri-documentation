@@ -75,17 +75,18 @@ function App() {
 
   const subMenuItems = {
     "Beacon 2 PI API": [
-      "PI Automated Deployment",
-      "PI Manual Deployment",
+      "Automated Deployment",
+      "Manual Deployment",
       "Filtering Terms",
       "Configuration",
-      "PI Querying the API",
+      "Querying the API",
     ],
     "Beacon 2 RI API": [
       "Automated Deployment",
       "Manual Deployment",
       "Data Linking",
-      "API Configuration",
+      // "API Configuration",
+      "Configuration",
       "Querying the API",
     ],
     "Beacon RI Tools v2": [

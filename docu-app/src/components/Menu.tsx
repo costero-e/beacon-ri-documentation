@@ -35,8 +35,6 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [activeMenuItem, setActiveMenuItem] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const theme = useTheme();
   const isSmallScreen = useMediaQuery("(max-width: 816px)");
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -68,8 +66,40 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
     }
   };
 
-  const handleSubMenuClick = (subItem: string) => {
-    navigate(`/${subItem.toLowerCase().replace(/ /g, "-")}`);
+  const handleSubMenuClick = (subItem: string, parentMenu: string) => {
+    let path = subItem.toLowerCase().replace(/ /g, "-");
+
+    if (subItem === "Configuration") {
+      path =
+        parentMenu === "Beacon 2 RI API"
+          ? "api-configuration"
+          : "configuration";
+    }
+
+    if (subItem === "Automated Deployment") {
+      path =
+        parentMenu === "Beacon 2 PI API"
+          ? "pi-automated-deployment"
+          : "automated-deployment";
+    }
+
+    if (subItem === "Manual Deployment") {
+      path =
+        parentMenu === "Beacon 2 PI API"
+          ? "pi-manual-deployment"
+          : "manual-deployment";
+    }
+
+    if (subItem === "Querying the API") {
+      path =
+        parentMenu === "Beacon 2 PI API"
+          ? "pi-querying-the-api"
+          : "querying-the-api";
+    }
+
+    setActiveMenuItem(subItem);
+
+    navigate(`/${path}`);
   };
 
   const drawerContent = (
@@ -130,16 +160,18 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
                   {subMenuItems[menuItem]?.map((subItem) => (
                     <ListItemButton
                       key={subItem}
-                      onClick={() => handleSubMenuClick(subItem)}
+                      onClick={() => handleSubMenuClick(subItem, menuItem)}
                       sx={{
                         color:
+                          activeMenuItem === subItem ||
                           location.pathname ===
-                          `/${subItem.toLowerCase().replace(/ /g, "-")}`
+                            `/${subItem.toLowerCase().replace(/ /g, "-")}`
                             ? "#185177"
                             : "#4A88B1",
                         bgcolor:
+                          activeMenuItem === subItem ||
                           location.pathname ===
-                          `/${subItem.toLowerCase().replace(/ /g, "-")}`
+                            `/${subItem.toLowerCase().replace(/ /g, "-")}`
                             ? "white"
                             : "#E5ECF3",
                         "&:hover": {

@@ -1,28 +1,12 @@
 import "./ApiConfiguration.css";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 
 const ApiConfiguration = () => {
-  const location = useLocation();
-
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
-
-  // useEffect(() => {
-  //   if (location.hash) {
-  //     const elementId = location.hash.substring(1);
-  //     const element = document.getElementById(elementId);
-  //     if (element) {
-  //       const yOffset = -100; // Adjust this value as needed
-  //       const y =
-  //         element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-  //       window.scrollTo({ top: 0, behavior: "smooth" });
-  //     }
-  //   }
-  // }, [location]);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {
@@ -92,13 +76,13 @@ const ApiConfiguration = () => {
           className="arrow-icon"
         />
         <a href="/api-configuration" className="no-undeline">
-          <span className="user-path-title">API Configuration</span>
+          <span className="user-path-title">Configuration</span>
         </a>
       </h2>
       <div className="contentWrapper">
         <div className="contentColumn">
           <h3>Beacon 2 RI API</h3>
-          <h1>API Configuration</h1>
+          <h1>Configuration</h1>
 
           <h2 id="managing-dataset-permissions">
             Managing dataset permissions
