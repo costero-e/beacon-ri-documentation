@@ -1,28 +1,12 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
 
 const FilteringTerms = () => {
-  const location = useLocation();
-
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
-
-  // useEffect(() => {
-  //   if (location.hash) {
-  //     const elementId = location.hash.substring(1); // Remove the '#' from the hash
-  //     const element = document.getElementById(elementId);
-  //     if (element) {
-  //       const yOffset = -100; // Adjust for fixed headers
-  //       const y =
-  //         element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-  //       window.scrollTo({ top: 0, behavior: "smooth" });
-  //     }
-  //   }
-  // }, [location.hash]);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy: { [key: string]: string } = {
