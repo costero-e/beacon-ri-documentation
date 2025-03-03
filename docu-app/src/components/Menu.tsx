@@ -16,7 +16,6 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import CloseIcon from "@mui/icons-material/Close";
 import { useMediaQuery } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import "./Menu.css";
 
 const desktopDrawerWidth = 240;
@@ -41,25 +40,51 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   };
 
   const handleMainMenuClick = (menuItem: string) => {
+    // console.log("🖇️ Clicked main menu:", menuItem);
+
     if (menuItem === "Introduction") {
+      // console.log("➡ Navigating to: /");
       navigate("/");
       window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveMenuItem(menuItem);
       setActiveMenu(null);
       return;
     }
+
     const subMenus = subMenuItems[menuItem];
+
     if (!subMenus) {
-      navigate(`/${menuItem.toLowerCase().replace(/ /g, "-")}`);
+      const path = `/${menuItem.toLowerCase().replace(/ /g, "-")}`;
+      // console.log(`🚀 Navigating to (no submenus): ${path}`);
+      navigate(path);
       window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveMenuItem(menuItem);
       setActiveMenu(null);
     } else if (activeMenu === menuItem) {
+      // console.log(`📂 Closing submenu for: ${menuItem}`);
       setActiveMenu(null);
       setActiveMenuItem(null);
     } else {
-      const firstSubMenuItem = subMenus[0];
-      navigate(`/${firstSubMenuItem.toLowerCase().replace(/ /g, "-")}`);
+      let firstSubMenuItem = subMenus[0];
+      let path = `/${firstSubMenuItem.toLowerCase().replace(/ /g, "-")}`;
+      if (
+        menuItem === "Beacon 2 PI API" &&
+        firstSubMenuItem === "Automated Deployment"
+      ) {
+        path = "/pi-automated-deployment";
+      }
+      if (
+        menuItem === "Beacon 2 RI API" &&
+        firstSubMenuItem === "Automated Deployment"
+      ) {
+        path = "/automated-deployment";
+      }
+
+      // console.log(
+      //   `📂 Expanding ${menuItem}, default subpage: ${firstSubMenuItem}`
+      // );
+      // console.log(`➡ Navigating to: ${path}`);
+      navigate(path);
       window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveMenu(menuItem);
       setActiveMenuItem(firstSubMenuItem);
@@ -98,7 +123,6 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
     }
 
     setActiveMenuItem(subItem);
-
     navigate(`/${path}`);
   };
 

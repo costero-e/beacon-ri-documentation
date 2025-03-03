@@ -328,6 +328,8 @@ const PiApiConfiguration = () => {
             To avoid CORS using beacon and the frontend or a third-party
             authorization site like Keycloak, you will have to include all these
             URLs inside variable cors_urls in <b>beacon/conf/conf.py file</b>.
+            <br></br>
+            Example usage:
           </p>
           <div className="codeSnippet">
             <pre>

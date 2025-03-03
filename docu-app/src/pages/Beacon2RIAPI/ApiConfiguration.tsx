@@ -315,7 +315,7 @@ const ApiConfiguration = () => {
             To avoid CORS using beacon and the frontend or a third-party
             authorization site like Keycloak, you will have to include all these
             URLs inside __main__.py in the beacon folder, including them in the
-            CORS middleware,
+            CORS middleware.
           </p>
           <div className="codeSnippet">
             <pre>
