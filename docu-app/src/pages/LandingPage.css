@@ -41,9 +41,11 @@ h4 {
 }
 
 .relationship-elements {
-  width: 724px;
+  width: 100%;
+  max-width: 724px;
   margin: 14px auto 0 auto;
   display: block;
+  overflow: visible;
 }
 
 .footer {

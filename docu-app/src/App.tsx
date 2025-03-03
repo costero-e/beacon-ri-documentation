@@ -29,6 +29,7 @@ import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
 import Resources from "./pages/Resources";
 import Tutorials from "./pages/Tutorials";
+import ScrollToTop from "./ScrollToTop";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -105,6 +106,7 @@ function App() {
   return (
     <SearchableContentProvider>
       <Router>
+        <ScrollToTop />
         <ContentPreloader />
         <div className="appContainer">
           <Navbar onSearch={handleSearch} />

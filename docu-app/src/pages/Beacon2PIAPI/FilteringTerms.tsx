@@ -11,18 +11,18 @@ const FilteringTerms = () => {
     {}
   );
 
-  useEffect(() => {
-    if (location.hash) {
-      const elementId = location.hash.substring(1); // Remove the '#' from the hash
-      const element = document.getElementById(elementId);
-      if (element) {
-        const yOffset = -100; // Adjust for fixed headers
-        const y =
-          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
-    }
-  }, [location.hash]);
+  // useEffect(() => {
+  //   if (location.hash) {
+  //     const elementId = location.hash.substring(1); // Remove the '#' from the hash
+  //     const element = document.getElementById(elementId);
+  //     if (element) {
+  //       const yOffset = -100; // Adjust for fixed headers
+  //       const y =
+  //         element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  //       window.scrollTo({ top: 0, behavior: "smooth" });
+  //     }
+  //   }
+  // }, [location.hash]);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy: { [key: string]: string } = {

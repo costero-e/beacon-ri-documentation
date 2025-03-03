@@ -11,18 +11,18 @@ const ApiConfiguration = () => {
     {}
   );
 
-  useEffect(() => {
-    if (location.hash) {
-      const elementId = location.hash.substring(1);
-      const element = document.getElementById(elementId);
-      if (element) {
-        const yOffset = -100; // Adjust this value as needed
-        const y =
-          element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
-    }
-  }, [location]);
+  // useEffect(() => {
+  //   if (location.hash) {
+  //     const elementId = location.hash.substring(1);
+  //     const element = document.getElementById(elementId);
+  //     if (element) {
+  //       const yOffset = -100; // Adjust this value as needed
+  //       const y =
+  //         element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  //       window.scrollTo({ top: 0, behavior: "smooth" });
+  //     }
+  //   }
+  // }, [location]);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {

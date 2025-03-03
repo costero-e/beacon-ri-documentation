@@ -1,7 +1,7 @@
 import React from "react";
 import "./BeaconNetworkUI/NetworkUIQueries.css";
 import OnThisPage from "../components/OnThisPage";
-import qrcode from "../pages/qrcode.png";
+import qrcode from "../pages/../assets/qrcode.png";
 
 const Resources: React.FC = () => {
   return (

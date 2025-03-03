@@ -9,6 +9,11 @@
   margin-top: 56px;
 }
 
+.contentContainer,
+.appContainer {
+  overflow: visible !important;
+}
+
 /* Large screens (1224px and above) */
 @media (min-width: 1224px) {
   .contentContainer.withSubmenuOpen {

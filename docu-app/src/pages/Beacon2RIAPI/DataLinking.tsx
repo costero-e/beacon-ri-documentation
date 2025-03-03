@@ -6,25 +6,23 @@ import OnThisPage from "../../components/OnThisPage";
 
 const DataLinking = () => {
   const location = useLocation();
-
-  // State to manage copy success for each snippet independently
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
     {}
   );
 
-  useEffect(() => {
-    if (location.hash) {
-      setTimeout(() => {
-        const element = document.getElementById(location.hash.substring(1));
-        if (element) {
-          const yOffset = -80; // Adjust this value based on your header height
-          const y =
-            element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }
-      }, 0);
-    }
-  }, [location]);
+  // useEffect(() => {
+  //   if (location.hash) {
+  //     setTimeout(() => {
+  //       const element = document.getElementById(location.hash.substring(1));
+  //       if (element) {
+  //         const yOffset = -80; // Adjust this value based on your header height
+  //         const y =
+  //           element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  //         window.scrollTo({ top: 0, behavior: "smooth" });
+  //       }
+  //     }, 0);
+  //   }
+  // }, [location]);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {

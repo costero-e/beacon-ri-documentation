@@ -49,6 +49,7 @@ const Navbar = ({ onSearch }: NavbarProps) => {
   const handleResultClick = (route: string) => {
     navigate(route);
     setIsSearchResultsVisible(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const searchResults = searchTerm

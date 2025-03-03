@@ -1,5 +1,6 @@
 html,
 body {
+  scroll-behavior: auto !important;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -277,6 +278,14 @@ p {
   height: auto;
 }
 
+/* .relationship-elements {
+  width: 100%;
+  max-width: 600px;
+  margin: 14px auto 0 auto;
+  display: block;
+  min-width: 370.69px;
+} */
+
 @media (max-width: 880px) {
   table {
     width: 100%;
@@ -285,20 +294,6 @@ p {
     overflow-x: scroll;
     display: flex;
     flex-direction: column;
-  }
-
-  .relationship-elements {
-    width: 579.2px;
-    margin: 14px auto 0 auto;
-    display: block;
-  }
-}
-
-@media (max-width: 879px) and (min-width: 581px) {
-  .relationship-elements {
-    width: 463.36px;
-    margin: 14px auto 0 auto;
-    display: block;
   }
 }
 
@@ -314,11 +309,5 @@ p {
 
   .onThisPageLink {
     font-size: 12px;
-  }
-
-  .relationship-elements {
-    width: 370.69px;
-    margin: 14px auto 0 auto;
-    display: block;
   }
 }

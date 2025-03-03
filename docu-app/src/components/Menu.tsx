@@ -45,6 +45,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
   const handleMainMenuClick = (menuItem: string) => {
     if (menuItem === "Introduction") {
       navigate("/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveMenuItem(menuItem);
       setActiveMenu(null);
       return;
@@ -52,6 +53,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
     const subMenus = subMenuItems[menuItem];
     if (!subMenus) {
       navigate(`/${menuItem.toLowerCase().replace(/ /g, "-")}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveMenuItem(menuItem);
       setActiveMenu(null);
     } else if (activeMenu === menuItem) {
@@ -60,6 +62,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
     } else {
       const firstSubMenuItem = subMenus[0];
       navigate(`/${firstSubMenuItem.toLowerCase().replace(/ /g, "-")}`);
+      window.scrollTo({ top: 0, behavior: "smooth" });
       setActiveMenu(menuItem);
       setActiveMenuItem(firstSubMenuItem);
     }

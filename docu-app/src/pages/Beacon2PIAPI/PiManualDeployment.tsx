@@ -11,19 +11,19 @@ const PiManualDeployment = () => {
     {}
   );
 
-  useEffect(() => {
-    if (location.hash) {
-      const elementId = location.hash.substring(1);
-      const element = document.getElementById(elementId);
+  // useEffect(() => {
+  //   if (location.hash) {
+  //     const elementId = location.hash.substring(1);
+  //     const element = document.getElementById(elementId);
 
-      if (element) {
-        const yOffset = -80; // Adjust for fixed header height
-        const y =
-          element.getBoundingClientRect().top + window.scrollY + yOffset;
-        window.scrollTo({ top: y, behavior: "smooth" });
-      }
-    }
-  }, [location.hash]);
+  //     if (element) {
+  //       const yOffset = -80; // Adjust for fixed header height
+  //       const y =
+  //         element.getBoundingClientRect().top + window.scrollY + yOffset;
+  //       window.scrollTo({ top: 0, behavior: "smooth" });
+  //     }
+  //   }
+  // }, [location.hash]);
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy = {
