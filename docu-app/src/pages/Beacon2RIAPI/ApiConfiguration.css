@@ -4,6 +4,8 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 .apiConfigContainer h2.user-path {

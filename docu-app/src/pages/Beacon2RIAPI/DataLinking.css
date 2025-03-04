@@ -5,6 +5,8 @@
   max-width: 100%;
   box-sizing: border-box;
   padding-bottom: 40px;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 .dataLinkingContainer h2.user-path {

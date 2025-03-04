@@ -4,8 +4,9 @@
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
-  height: 100vh;
+  max-height: 100vh;
   padding-bottom: 40px;
+  overflow-y: auto !important;
 }
 
 .networkUIQueriesContainer h2.user-path {
