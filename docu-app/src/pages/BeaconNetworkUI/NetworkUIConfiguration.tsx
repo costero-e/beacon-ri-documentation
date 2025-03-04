@@ -128,20 +128,19 @@ const NetworkUIConfiguration: React.FC = () => {
             <pre>
               <code>
                 {`{
-  "API_URL": "https://yourAPIdomain.com/beacon-network/v2.0.0",
-  "REDIRECT_URL": "https://yourUIdomain.com",
-  "KEYCLOAK_URL": "https://yourKEYCLOAKdomain.com"
+"API_URL": "https://yourAPIdomain.com/beacon-network/v2.0.0",
+"REDIRECT_URL": "https://yourUIdomain.com",
+"KEYCLOAK_URL": "https://yourKEYCLOAKdomain.com"
 }`}
               </code>
               <button
                 className="copyButtonCode"
                 onClick={() =>
                   copyToClipboard(
-                    `{
-  "API_URL": "https://yourAPIdomain.com/beacon-network/v2.0.0",
+                    `{ "API_URL": "https://yourAPIdomain.com/beacon-network/v2.0.0",
   "REDIRECT_URL": "https://yourUIdomain.com",
   "KEYCLOAK_URL": "https://yourKEYCLOAKdomain.com"
-}`,
+  }`,
                     "config-json"
                   )
                 }

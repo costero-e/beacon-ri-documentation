@@ -62,7 +62,7 @@ const AutomatedDeployment = () => {
           <h1>Automated Deployment</h1>
           <p>
             This deployment just uses a bash script and a Makefile which won’t
-            deploy the idp authentication service. If you wish to build the idp
+            deploy the IDP authentication service. If you wish to build the IDP
             service you will have to go to Manual Deployment.
           </p>
 

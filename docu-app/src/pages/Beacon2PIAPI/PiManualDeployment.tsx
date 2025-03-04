@@ -195,7 +195,7 @@ const PiManualDeployment = () => {
 
           <h2 id="data-injection">Data injection</h2>
           <p>
-            Copy all the available BFF files you have to the
+            Copy all the available BFF files you have to the{" "}
             <a
               href="https://github.com/EGA-archive/beacon2-pi-api/tree/main/beacon/connections/mongo/data"
               target="_blank"

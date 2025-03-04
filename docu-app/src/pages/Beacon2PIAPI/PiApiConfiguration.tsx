@@ -272,7 +272,7 @@ const PiApiConfiguration = () => {
             </pre>
           </div>
           <h2 id="supplying-aai-credentials">
-            Supplying AAI credentials for your IDP
+            Supplying AAI credentials for your Identity Provider (IDP)
           </h2>
           <p>
             For making any IDP (based on OpenID and Oauthv2) work with beacon,

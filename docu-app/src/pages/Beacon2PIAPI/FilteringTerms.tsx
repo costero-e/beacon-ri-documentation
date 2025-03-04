@@ -124,13 +124,12 @@ const FilteringTerms = () => {
             <span className="optional">(optional)</span>
           </h2>
           <p>
-            If you have the ontologies loaded and the filtering terms
-            extracted*, you can automatically get their descendant and semantic
-            similarity terms by following the next two steps: Add your .obo
-            files inside ontologies naming them as the ontology prefix in
-            lowercase (e.g. ncit.obo) and rebuild the beacon container with:
-            <br></br>
-            Run the following script:
+            If you have the ontologies loaded and the filtering terms extracted,
+            you can automatically get their descendant and semantic similarity
+            terms by following the next two steps: Add your .obo files inside
+            ontologies naming them as the ontology prefix in lowercase (e.g.
+            ncit.obo) and rebuild the beacon container by running the following
+            script:
           </p>
           <div className="codeSnippet">
             <pre>
