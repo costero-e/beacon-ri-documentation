@@ -5,9 +5,7 @@
   max-width: 100%;
   box-sizing: border-box;
   padding-bottom: 40px;
-  margin-bottom: 20px;
-  max-height: 100vh;
-  overflow-y: auto !important;
+  margin-bottom: 30px;
 }
 
 .networkUIConfigurationContainer h2.user-path {

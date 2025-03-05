@@ -680,8 +680,7 @@ const QueryingAPI = () => {
                 <td>
                   boolean (TestMode)
                   <br />
-                  Default: false <br />
-                  (comma separated strings of ontologies)
+                  Default: false
                 </td>
                 <td>
                   <div className="codeSnippet-table">

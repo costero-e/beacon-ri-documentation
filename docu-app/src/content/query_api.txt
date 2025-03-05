@@ -64,7 +64,7 @@ Example: clinicalRelevance=pathogenic
 
 Filters
 	
-	filters	string (comma separated strings of ontologies)
+	filters	string 
 	Example: filters=NCIT:C16576,NCIT:C42331
 
 GET query examples
