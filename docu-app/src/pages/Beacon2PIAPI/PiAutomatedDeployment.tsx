@@ -97,8 +97,8 @@ const PiAutomatedDeployment = () => {
           </p>
           <h2 id="automated-deployment">Automated Deployment</h2>
           <p>
-            This deployment just uses a bash script and a Makefile and only
-            ready for the mongo database case production.
+            This deployment relies on a Bash script and a Makefile and it is
+            only compatible with MongoDB database deployments.
           </p>
           <h2 id="cloning-repository">Cloning the repository</h2>
           <p>

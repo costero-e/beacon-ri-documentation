@@ -61,7 +61,7 @@ const AutomatedDeployment = () => {
           <h3>Beacon 2 RI API</h3>
           <h1>Automated Deployment</h1>
           <p>
-            This deployment just uses a bash script and a Makefile which won’t
+            This deployment relies on a Bash script and a Makefile, which won’t
             deploy the IDP authentication service. If you wish to build the IDP
             service you will have to go to Manual Deployment.
           </p>
