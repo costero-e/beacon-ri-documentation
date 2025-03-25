@@ -20,6 +20,7 @@ import ConfigurationFile from "../content/configuration_file.txt";
 import CreatingCSVFilesText from "../content/creating_csv_files.txt";
 import ConversionCSVBFFText from "../content/conversion_csvbff.txt";
 import ConversionVCFBFFText from "../content/conversion_vcfbff.txt";
+import ConversionPhenopacketsBFFText from "../content/ConversionPhenopacketsBFFText.txt";
 // Beacon UI
 import QueryingUIText from "../content/querying_ui.txt";
 import DeploymentUIText from "../content/deployment_ui.txt";
@@ -112,6 +113,12 @@ const ContentPreloader = () => {
     "/conversion-from-vcf-to-bff",
     ConversionVCFBFFText,
     "Conversion from VCF to BFF"
+  );
+
+  useRegisterTextContent(
+    "/conversion-from-phenopackets-to-bff",
+    ConversionPhenopacketsBFFText,
+    "Conversion from Phenopackets to BFF"
   );
 
   // Beacon UI

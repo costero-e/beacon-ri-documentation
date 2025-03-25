@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
@@ -27,6 +27,7 @@ import PiQueryingAPI from "./pages/Beacon2PIAPI/PiQueryingApi";
 import PiManualDeployment from "./pages/Beacon2PIAPI/PiManualDeployment";
 import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
+import ConversionPhenopacketsBFF from "./pages/Beacon2RITools/ConversionPhenopacketsBFF";
 import Resources from "./pages/Resources";
 import Tutorials from "./pages/Tutorials";
 import ScrollToTop from "./ScrollToTop";
@@ -95,6 +96,7 @@ function App() {
       "Creating the CSV Files",
       "Conversion from CSV to BFF",
       "Conversion from VCF to BFF",
+      "Conversion from Phenopackets to BFF",
     ],
     "Beacon UI": ["Deployment", "Configuration UI", "Querying the UI"],
     "Beacon Network UI": [
@@ -176,6 +178,11 @@ function App() {
                 <Route
                   path="/conversion-from-vcf-to-bff"
                   element={<ConversionVCFBFF />}
+                />
+
+                <Route
+                  path="/conversion-from-phenopackets-to-bff"
+                  element={<ConversionPhenopacketsBFF />}
                 />
 
                 {/* Beacon UI */}
