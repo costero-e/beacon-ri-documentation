@@ -48,6 +48,25 @@ const ConfigFileTools: React.FC = () => {
       <div className="contentWrapper">
         <div className="contentColumn">
           <h3>Beacon RI Tools v2</h3>
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              Please bear in mind that this is a beta version. If you encounter
+              issues or have questions, feel free to open an issue in the{" "}
+              <a
+                href="https://github.com/EGA-archive/phenopackets-to-BFF/issues"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub repository.
+              </a>
+            </div>
+          </p>
+
           <h1>Conversion from Phenopackets to BFF </h1>
           <p>
             This option will convert a <b>Phenopacket v2</b> into{" "}
