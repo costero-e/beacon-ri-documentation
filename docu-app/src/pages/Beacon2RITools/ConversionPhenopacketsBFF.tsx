@@ -50,19 +50,18 @@ const ConfigFileTools: React.FC = () => {
           <h3>Beacon RI Tools v2</h3>
           <h1>Conversion from Phenopackets to BFF </h1>
           <p>
-            This option will convert a Phenopacket v2 into Beacon Friendly
-            Format Biosamples and Individuals models while preserving as much
-            information as possible.
+            This option will convert a <b>Phenopacket v2</b> into{" "}
+            <b>Beacon Friendly Format</b> Biosamples and Individuals models
+            while preserving as much information as possible.
           </p>
           <p>
             For detailed information about the mapping of properties between
-            Phenopackets and Beacon schemas, please refer to this spreadsheet:
+            Phenopackets and Beacon schemas, please refer to this spreadsheet:{" "}
             <a
               href="https://docs.google.com/spreadsheets/d/1DfkV5BwXzOggDl53-ofi7obnHT4O7J-rtUrnhZH2BiE/edit?gid=474476020#gid=474476020)"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {" "}
               Beacon + Phenopackets Schemas.
             </a>
           </p>
@@ -70,28 +69,28 @@ const ConfigFileTools: React.FC = () => {
             Most of the mapping between the Phenopackets and Beacon models was
             straightforward. However, some fields in the Phenopacket schema did
             not have a direct match in the Beacon schema.
-          </p>
-          <p>
+            <br></br>
             Fields containing important metadata that could not be mapped to a
-            specific Beacon property were stored in the additionalInformation
-            (notes) field to preserve as much information as possible.
+            specific Beacon property were stored in the{" "}
+            <i>additionalInformation</i> (notes) field to preserve as much
+            information as possible.
           </p>
 
-          <h1 id="specific-mappings">Specific Mappings</h1>
-          <h2 id="individuals-diseases-notes">Individuals.diseases.notes</h2>
-          <p>
-            The file.individual_to_file_identifiers field from Phenopackets is
-            saved in the info property of the Beacon individual.
+          <h2 id="specific-mappings">Specific Mappings</h2>
+          <h4>Individuals.diseases.notes</h4>
+          <p className="lessMargin">
+            The <i>file.individual_to_file_identifiers</i> field from
+            Phenopackets is saved in the info property of the Beacon individual.
           </p>
-          <h2 id="biosample-notes">Biosamples.notes</h2>
-          <p>
-            The biosamples.description field is stored in the notes field of the
-            Beacon biosample.
+          <h4>Biosamples.notes</h4>
+          <p className="lessMargin">
+            The <i>biosamples.description</i> field is stored in the notes field
+            of the Beacon biosample.
           </p>
-          <h2 id="handling-collection-data">Handling collectionData</h2>
-          <p>
-            The biosamples.timeOfCollection property in Phenopackets supports
-            various data types, including:
+          <h4>Handling collectionData</h4>
+          <p className="lessMargin">
+            The <i>biosamples.timeOfCollection</i> property in Phenopackets
+            supports various data types, including:
             <ul>
               <li>gestationalAge: Measure of the age of a pregnancy</li>
               <li>Age: Age as an ISO8601 duration (e.g., P40Y10M05D)</li>
@@ -100,14 +99,14 @@ const ConfigFileTools: React.FC = () => {
               <li>Timestamp: Specific date and time</li>
               <li>TimeInterval: Time interval</li>
             </ul>
-            In contrast, the Beacon schema defines biosamples.collectionDate as
-            the "Date of biosample collection in ISO8601 format" and expects a
-            simple string.
-            <br></br>To maximize data retention, the tool converts the
-            collectionData from Phenopackets to a string and stores it in the
-            collectionDate property of Beacon. While this approach does not
-            fully align with the intended collectionDate field usage, it ensures
-            valuable data is not lost.
+            In contrast, the Beacon schema defines{" "}
+            <i>biosamples.collectionDate</i> as the "Date of biosample
+            collection in ISO8601 format" and expects a simple string.
+            <br></br>To maximize data retention, the tool converts the{" "}
+            <i>collectionData</i> from Phenopackets to a string and stores it in
+            the <i>collectionDate</i> property of Beacon. While this approach
+            does not fully align with the intended <i>collectionDate</i> field
+            usage, it ensures valuable data is not lost.
           </p>
           <h2 id="converting-data-from-phenopackets">
             Converting data from phenopackets
@@ -173,7 +172,6 @@ const ConfigFileTools: React.FC = () => {
               phenopackets-to-BFF.
             </a>
           </p>
-
           <br></br>
           <br></br>
         </div>

@@ -92,43 +92,6 @@ const ConfigFileTools: React.FC = () => {
               </button>
             </pre>
           </div>
-
-          <h2 id="VCF-conversion">VCF conversion config parameters</h2>
-          <div className="codeSnippet">
-            <pre>
-              <code id="vcf-config">
-                allele_frequency=1 # introduce float number, leave 1 if you want
-                to convert all the variants <br />
-                reference_genome='GRCh38' # Choose one between NCBI36, GRCh37,
-                GRCh38
-                <br />
-                datasetId='coadread_tcga_pan_can_atlas_2018'
-                <br />
-                case_level_data=False
-                <br />
-                num_rows=7000000
-                <br />
-                population='Finnish'
-              </code>
-              <button
-                className="copyButtonCode"
-                onClick={() => {
-                  const codeText =
-                    document.getElementById("vcf-config")?.innerText;
-                  if (codeText) {
-                    copyToClipboard(codeText, "vcf-config");
-                  }
-                }}
-              >
-                {copySuccess["vcf-config"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-
           <h2 id="generic-config-parameters">Generic config parameters</h2>
           <p>
             The first part of this configuration only concerns the conversion of
@@ -162,21 +125,56 @@ const ConfigFileTools: React.FC = () => {
           <h2 id="VCF-conversion-config-parameters">
             VCF conversion config parameters
           </h2>
+
+          <div className="codeSnippet">
+            <pre>
+              <code id="vcf-config">
+                allele_counts=False
+                <br />
+                reference_genome='GRCh37' # Choose one between NCBI36, GRCh37,
+                GRCh38
+                <br />
+                datasetId='COVID_pop11_fin_2'
+                <br />
+                case_level_data=False
+                <br />
+                exact_heterozygosity=False
+                <br />
+                num_rows=15000000
+                <br />
+                verbosity=False
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => {
+                  const codeText =
+                    document.getElementById("vcf-config")?.innerText;
+                  if (codeText) {
+                    copyToClipboard(codeText, "vcf-config");
+                  }
+                }}
+              >
+                {copySuccess["vcf-config"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
           <p>
             The second part of the configuration file pertains to the VCF to BFF
             conversion. This only needs to be used in case you are using a VCF
             as a source for the genomic variants collection.
           </p>
+
           <p>
             The <i>num_variants</i> is the variable you need to write in case
             you are executing the VCF conversion{" "}
             <i>(genomicVariations_vcf.py)</i>. This will tell the script how
             many variants will be read and converted from the file(s).
           </p>
-          <p>
-            The <i>reference_genome</i> field is the genome used to map the
-            reads. 
-          </p>
+
           <p>
             The <i>allele_frequency</i> field lets you set a threshold for the
             allele frequency (AF) of the variants you want to convert from the
@@ -184,16 +182,20 @@ const ConfigFileTools: React.FC = () => {
             will be converted to BFF. 1 is the default value (all variants will
             be converted).
           </p>
+
           <p>
-            The <i>num_rows</i>  is an approximate calculation of the total
-            number variants in each VCF. Make sure this is greater than the
-            total variants expected. This was automatically calculated before
-            but it was very slow sometimes to calculate all the variants number
-            in a VCF.
+            The <i>allele_counts</i> now is not implemented yet, just leave it
+            as False.
           </p>
           <p>
-            The <i>datasetId</i>, <i>case_level_data</i>, and <i>zygosity</i>{" "}
-            parameters are <b>only</b> applicable in the{" "}
+            The <i>reference_genome</i> is the reference genome the tool will
+            use to map the position of the chromosomes. Make sure to select the
+            same version as the one used to generate your data.
+          </p>
+
+          <p>
+            The <i>datasetId</i>, <i>case_level_data</i>, and{" "}
+            <i>exact_zygosity</i> parameters are <b>only</b> applicable in the{" "}
             <b>Beacon Production Implementation environment</b>.
           </p>
           <p>
@@ -208,10 +210,24 @@ const ConfigFileTools: React.FC = () => {
             paragraph below.
           </p>
           <p>
-            The <i>zygosity</i> is a boolean parameter (True or False) which
-            will insert if your sample is homozygous or heterozygous in case you
-            have case_level_data activated.
+            The <i>exact_zygosity</i> is a boolean parameter (True or False)
+            that, in case <i>case_level_data</i> is True, then, it will classify
+            the biosamples in being heterozygous for either the reference or the
+            alternate allele.
           </p>
+          <p>
+            The <i>num_rows</i>  are the aproximate calculation you expect for
+            the total of variants in each vcf there are. Make sure this is
+            greater than the total variants expected. It was automatically
+            calculated before but it was very slow sometimes to calculate all
+            the variants number in a VCF.
+          </p>
+          <p>
+            The <i>verbosity</i> will give streaming logs with the reason why a
+            variant has been skipped to be inserted. Recommendation is to leave
+            this as False.
+          </p>
+
           <br></br>
           <br></br>
         </div>

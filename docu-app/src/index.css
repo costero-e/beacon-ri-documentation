@@ -148,6 +148,10 @@ p {
   width: 100%;
 }
 
+p.lessMargin {
+  margin-top: 15px;
+}
+
 .note-symbol {
   height: 15px;
   margin-right: 10px;
