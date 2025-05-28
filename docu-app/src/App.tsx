@@ -29,7 +29,8 @@ import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
 import ConversionPhenopacketsBFF from "./pages/Beacon2RITools/ConversionPhenopacketsBFF";
 import Resources from "./pages/Resources";
-import Tutorials from "./pages/Tutorials";
+import Tutorials from "./pages/Tutorials/Tutorials";
+import CreateYourBeacon from "./pages/Tutorials/CreateYourBeacon";
 import ScrollToTop from "./ScrollToTop";
 
 interface SearchContextProps {
@@ -104,6 +105,7 @@ function App() {
       "Network Configuration UI",
       "Network Querying the UI",
     ],
+    Tutorials: ["Create your Beacon", "Use Case: Rare Diseases Data"],
   };
 
   return (
@@ -207,7 +209,16 @@ function App() {
                   element={<NetworkUIQueries />}
                 />
 
+                {/* Tutorials */}
                 <Route path="/tutorials" element={<Tutorials />} />
+                <Route
+                  path="/create-your-beacon"
+                  element={<CreateYourBeacon />}
+                />
+                <Route
+                  path="/use-case:-rare-diseases-data"
+                  element={<Tutorials />}
+                />
                 <Route path="/resources" element={<Resources />} />
               </Routes>
             </div>

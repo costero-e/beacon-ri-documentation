@@ -26,3 +26,18 @@
 .custom-codeSnippet {
   margin-bottom: 50px;
 }
+
+.stepsSection {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.stepsList {
+  margin: 0;
+}
+
+.pin-logo {
+  width: 19px;
+  height: 19px;
+}

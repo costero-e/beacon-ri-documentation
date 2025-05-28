@@ -10,7 +10,7 @@ const FilteringTerms = () => {
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy: { [key: string]: string } = {
-      "extract-terms": `docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.py`,
+      "extract-terms": `docker exec beaconprod python -m beacon.connections.mongo.extract_filtering_terms`,
       "manual-filtering-terms": `db.filtering_terms.insertMany([{
         "type": "alphanumeric",
         "id": "libraryStrategy",
@@ -19,7 +19,7 @@ const FilteringTerms = () => {
       "conf-py": `alphanumeric_terms = ['libraryStrategy',
         'molecularAttributes.geneIds',
         'diseases.ageOfOnset.iso8601duration']`,
-      "get-descendant-terms": `docker exec beaconprod python /beacon/connections/mongo/get_descendants.py`,
+      "get-descendant-terms": `docker exec beaconprod python -m beacon.connections.mongo.get_descendants`,
     };
 
     if (textToCopy[snippetId]) {
@@ -77,8 +77,8 @@ const FilteringTerms = () => {
           <div className="codeSnippet">
             <pre>
               <code>
-                docker exec beaconprod python
-                beacon/connections/mongo/extract_filtering_terms.py
+                docker exec beaconprod python -m
+                beacon.connections.mongo.extract_filtering_terms
               </code>
               <button
                 className="copyButtonCode"
@@ -133,8 +133,8 @@ const FilteringTerms = () => {
           <div className="codeSnippet">
             <pre>
               <code>
-                docker exec beaconprod python
-                beacon/connections/mongo/get_descendants.py
+                docker exec beaconprod python -m
+                beacon.connections.mongo.get_descendants
               </code>
               <button
                 className="copyButtonCode"

@@ -1,6 +1,6 @@
 import React from "react";
-import "./BeaconNetworkUI/NetworkUIQueries.css";
-import OnThisPage from "../components/OnThisPage";
+import "../BeaconNetworkUI/NetworkUIQueries.css";
+import OnThisPage from "../../components/OnThisPage";
 
 const Tutorials: React.FC = () => {
   return (

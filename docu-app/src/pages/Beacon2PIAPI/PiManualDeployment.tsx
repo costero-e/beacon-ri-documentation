@@ -26,7 +26,7 @@ const PiManualDeployment = () => {
         'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/caseLevelData.json --collection caseLevelData',
       ].join("\n"),
       "data-indexing":
-        "docker exec beaconprod python /beacon/connections/mongo/reindex.py",
+        "docker exec beaconprod python -m beacon.connections.mongo.reindex",
     }[snippetId];
 
     if (textToCopy) {
@@ -267,8 +267,8 @@ const PiManualDeployment = () => {
           <div className="codeSnippet">
             <pre>
               <code>
-                docker exec beaconprod python
-                /beacon/connections/mongo/reindex.py
+                docker exec beaconprod python -m
+                beacon.connections.mongo.reindex
               </code>
               <button
                 className="copyButtonCode"

@@ -65,6 +65,11 @@ h2 {
   margin-top: -80px;
 }
 
+.h2-less-margin {
+  margin-bottom: 20px;
+  padding-top: 90px;
+}
+
 h5 {
   font-style: oblique;
   font-weight: 400;
@@ -77,8 +82,8 @@ h6 {
   text-underline-offset: 2px;
 }
 
-th {
-  width: 300px;
+.examples {
+  margin-left: 10%;
 }
 
 .codeSnippet-table {
@@ -124,6 +129,26 @@ tbody tr {
   margin: 0px;
 }
 
+.dockerTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dockerTable th,
+.dockerTable td {
+  padding: 12px;
+}
+
+.dockerTable td {
+  padding-top: 0;
+  padding-bottom: 0;
+  vertical-align: top;
+}
+
+th {
+  width: 300px;
+}
+
 .endpoint-list li {
   margin: 10px 0;
 }
@@ -164,6 +189,12 @@ p.lessMargin {
   vertical-align: middle;
 }
 
+.copySymbol-custom {
+  display: block;
+  align-self: flex-start;
+  width: 15px;
+  margin-right: 12px;
+}
 .note {
   display: flex;
   align-items: center;
@@ -176,6 +207,28 @@ p.lessMargin {
   border-radius: 8px;
   justify-content: flex-start;
   width: 95% !important;
+}
+
+.wider-note {
+  display: flex;
+  /* align-items: center; */
+  border: none;
+  padding: 16px;
+  background-color: #f0f7ff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+  font-size: 14px;
+  border-radius: 8px;
+  justify-content: flex-start;
+  width: 95% !important;
+}
+
+.note-symbol-wider {
+  margin-top: 5px;
+  height: 15px;
+  margin-right: 10px;
+  vertical-align: middle;
+  display: inline-block;
 }
 
 .note div {
@@ -213,10 +266,6 @@ p.lessMargin {
 
 .codeSnippet.codeSnippet-mongodb pre {
   padding-top: 30px;
-}
-
-.copySymbol-custom {
-  margin-top: -18px;
 }
 
 .no-undeline {
