@@ -1266,7 +1266,6 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <br></br>
           <br></br>
         </div>
-
         <div className="sidebarColumn">
           <OnThisPage />
         </div>

@@ -30,7 +30,9 @@ import NetworkQueryingTheUIText from "../content/network_querying_ui.txt";
 import NetworkDeploymentUIText from "../content/deployment_networkui.txt";
 import NetworkConfigurationUIText from "../content/configuration_networkui.txt";
 // Tutorials
-import TutorialsText from "../content/tutorials.txt";
+import UseCaseText from "../content/use_case.txt";
+import CreateYourBeaconText from "../content/create_your_beacon.txt";
+
 // Resources
 import ResourcesText from "../content/resources.txt";
 
@@ -152,7 +154,16 @@ const ContentPreloader = () => {
   );
 
   // Tutorials
-  useRegisterTextContent("/tutorials", TutorialsText, "Tutorials");
+  useRegisterTextContent(
+    "/use-case:-rare-diseases-data",
+    UseCaseText,
+    "UseCase"
+  );
+  useRegisterTextContent(
+    "/create-your-beacon",
+    CreateYourBeaconText,
+    "CreateYourBeacon"
+  );
 
   // Resources
   useRegisterTextContent("/resources", ResourcesText, "Resources");

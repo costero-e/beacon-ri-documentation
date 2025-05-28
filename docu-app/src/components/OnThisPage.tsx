@@ -10,7 +10,7 @@ const OnThisPage = () => {
 
   useEffect(() => {
     const headingElements = Array.from(
-      document.querySelectorAll("h2[id], h3[id], h4[id]")
+      document.querySelectorAll("h1[id],h2[id], h3[id], h4[id]")
     );
 
     const headingsArray = headingElements.map((heading) => ({

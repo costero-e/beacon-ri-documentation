@@ -29,7 +29,7 @@ import FilteringTerms from "./pages/Beacon2PIAPI/FilteringTerms";
 import PiAutomatedDeployment from "./pages/Beacon2PIAPI/PiAutomatedDeployment";
 import ConversionPhenopacketsBFF from "./pages/Beacon2RITools/ConversionPhenopacketsBFF";
 import Resources from "./pages/Resources";
-import Tutorials from "./pages/Tutorials/Tutorials";
+import UseCase from "./pages/Tutorials/UseCase";
 import CreateYourBeacon from "./pages/Tutorials/CreateYourBeacon";
 import ScrollToTop from "./ScrollToTop";
 
@@ -210,14 +210,14 @@ function App() {
                 />
 
                 {/* Tutorials */}
-                <Route path="/tutorials" element={<Tutorials />} />
+                {/* <Route path="/tutorials" element={<Tutorials />} /> */}
                 <Route
                   path="/create-your-beacon"
                   element={<CreateYourBeacon />}
                 />
                 <Route
                   path="/use-case:-rare-diseases-data"
-                  element={<Tutorials />}
+                  element={<UseCase />}
                 />
                 <Route path="/resources" element={<Resources />} />
               </Routes>
