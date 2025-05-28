@@ -11,10 +11,83 @@ const UseCase = () => {
 
   const copyToClipboard = (snippetId: string) => {
     const textToCopy: { [key: string]: string } = {
+      "bash-mongostart": `bash mongostart.sh`,
+      "extract-filtering-terms": `docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.py`,
+      "public-datasets": `public_datasets:
+- EGAD00001008392`,
+
+      "beacon-ri-metadata": `beacon_id = 'org.ega-archive.beacon-ri-demo'
+
+beacon_name = 'Beacon Reference Implementation: Rare Diseases Use Case’
+
+api_version = 'v2.0.0'
+
+uri = 'https://beacon-apis-demo.ega-archive.org/api/'
+
+org_id = 'EGA'
+
+org_name = 'European Genome-Phenome Archive (EGA)'
+
+org_description = 'The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.'
+
+org_adress = 'C/ Dr. Aiguader, 88
+PRBB Building
+08003 Barcelona, Spain'
+
+org_welcome_url = 'https://ega-archive.org/'
+
+org_contact_url = 'mailto:beacon.ega@crg.eu'
+
+org_logo_url = 'https://legacy.ega-archive.org/images/logo.png'
+
+org_info = ''
+
+description = "This Beacon is based on synthetic data hosted at the EGA. It contains information from one sample from EGAD00001008392"
+
+version = 'v2.0'
+
+welcome_url = 'https://ega-archive.org/datasets/EGAD00001008392'
+
+alternative_url = 'https://beacon-apis-demo.ega-archive.org/api/'
+
+create_datetime = '2025-05-12T12:00:00.000000'
+
+update_datetime = ''`,
+      "convert-all": "docker exec -it ri-tools python convert_csvTObff.py",
+      "mongoexport-genomicVariations": `docker exec ri-tools-mongo mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > ri-tools/output_docs/genomicVariations.json`,
+      "vcf-file-path": `./beacon2-pi-api/ri-tools/files/vcf/files_to_read/case1C_subset.vcf.gz`,
+      "vcf-import-output": `files/vcf/files_to_read/case1C_subset.vcf.gz
+100% | 5/5 [00:00<00:00, 6603.12it/s]
+Successfully inserted 5 records into beacon
+A total of 5 variants were processed
+A total of 0 variants were skipped`,
+      "genomic-variations": `docker exec -it ri-tools python genomicVariations_vcf.py`,
+      "phenopacket-output": `The mandatory fields for BioSamples were not present in the phenopacket 
+Mandatory properties for Individual schema (id and sex) present in the phenopacket.
+-> Creating Individuals schema ...
+    - diseases added to Individuals
+    - phenotypicFeatures added to Individuals
+-> Creating Individuals schema - DONE
++ BFFs Individuals JSON saved in:  
+/beacon2-pi-api/ri-tools/phenopackets-to-BFF/case1c.json`,
+      "phenopacket-to-bff-case1c-command":
+        "docker exec phenopackets-to-BFF python working-w-phenopackets.py /usr/src/app/examples/case1c.json EGAD00001008392",
       "cloning-repository":
         "git clone https://github.com/EGA-archive/beacon2-pi-api.git",
       "compress-vcf": `bgzip Case1C_subset.vcf`,
-      "docker-compose": `docker compose up -d --build `,
+      "docker-compose": `docker compose up -d --build`,
+      conversionConfigRD: `#### Input and Output files config parameters ####
+csv_folder = './csv/use_case_RD/'
+output_docs_folder='./output_docs/use_case_RD_output/'
+
+#### VCF Conversion config parameters ####
+allele_counts=False # Variable still in test, leave it as False for now.
+reference_genome='GRCh37' # Choose one between NCBI36, GRCh37, GRCh38
+datasetId='EGAD00001008392'
+case_level_data=False
+exact_heterozygosity=False
+num_rows=5
+verbosity=False # This variable, if True, will make the program run slower but give logs about all the skipped variants and the reason why.`,
       "vcf-snippet": `##fileformat=VCFv4.2
 ##ALT=<ID=NON_REF,Description="Represents any possible alternative allele at this location">
 ##FILTER=<ID=LowQual,Description="Low quality">
@@ -1627,11 +1700,153 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               </tr>
             </tbody>
           </table>
-          {/* FINISHED HERE */}
-          <h1 id="deploying-a-beacon-2-production-implementation-API">
-            Deploying a Beacon 2 production implementation API
-          </h1>
+          <h6 className="sub-title">Setting up conf.py</h6>
 
+          <p>
+            This will be the content that you find in
+            beacon2-ri-tools-v2/conf/conf.py:
+          </p>
+
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                {`#### Input and Output files config parameters ####
+csv_folder = './csv/use_case_RD/'
+output_docs_folder='./output_docs/use_case_RD_output/'
+
+#### VCF Conversion config parameters ####
+allele_counts=False # Variable still in test, leave it as False for now.
+reference_genome='GRCh37' # Choose one between NCBI36, GRCh37, GRCh38
+datasetId='EGAD00001008392'
+case_level_data=False
+exact_heterozygosity=False
+num_rows=5
+verbosity=False # This variable, if True, will make the program run slower but give logs about all the skipped variants and the reason why.`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("conversionConfigRD")}
+              >
+                {copySuccess["conversionConfigRD"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            Let’s start at the beginning of the file with the parameters for the
+            CSV conversion.
+          </p>
+          <ul>
+            <li>
+              Create a folder named <em>use_case_RD</em> in <em>./csv/</em>  and
+              move the <em>dataset.csv</em> and  <em>run.csv</em> there, this
+              will be the CSV converted to BFF.  Please, make sure to end the
+              path with a slash (<em>/</em>). 
+            </li>
+          </ul>
+          <ul>
+            <li>
+              Create another folder where the output BFF will be saved. Let’s
+              name it <em>use_case_RD_output</em> inside the folder
+              <em>./output_docs/</em>
+              . 
+            </li>
+          </ul>
+          <p>Let’s continue with the parameters for the VCF. </p>
+          <ul>
+            <li>
+              From the header of the VCF we know that the variants belong to
+              GRCh37. 
+            </li>
+          </ul>
+          <ul>
+            <li>
+              <em>datasetId</em> must match the ID in the <em>dataset.csv</em>{" "}
+              for the mapping of the variant and metadata to be correct. So, in
+              our case we need to fill in datasetID as EGAD00001008392. 
+            </li>
+          </ul>
+          <ul>
+            <li>
+              The <em>case_level_data</em> is a boolean parameter (True or
+              False) which will relate your variants to the samples they belong
+              to. As we don’t have the biosamples schema, let’s set it as
+              False. 
+            </li>
+          </ul>
+          <ul>
+            <li>
+              The <em>exact_heterozygosity</em> is a boolean parameter (True or
+              False) that, in case case_level_data is True, then, it will
+              classify the biosamples as being heterozygous for either the
+              reference or the alternate allele. As in our case case_level_data
+              is false, let’s set exact_heterozygosity as False too. 
+            </li>
+          </ul>
+          <ul>
+            <li>
+              Fill in <em>num_rows</em> with a 5, as we only have 5 variants in
+              our VCF.
+            </li>
+          </ul>
+          <h6 className="sub-title">Conversion from CSV</h6>
+          <p>
+            As we have already moved our CSVs to the <em>./csv/use_case_RD/</em>{" "}
+            we only need to run: 
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>docker exec -it ri-tools python convert_csvTObff.py</code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("convert-all")}
+              >
+                {copySuccess["convert-all"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            In the folder <em>./output_docs/use_case_RD_output/</em> will find
+            two json. These files contain our run and dataset information in
+            Beacon Friendly Format. 
+          </p>
+          <h6 className="sub-title">Conversion from Phenopacket</h6>
+          <p>
+            Let’s save the <em>Case1C_phenopacket.json</em> in
+            <em>./beacon2-ri-tools-v2/phenopackets-to-BFF</em> folder and then
+            run:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>
+                docker exec phenopackets-to-BFF python working-w-phenopackets.py
+                /usr/src/app/examples/case1c.json EGAD00001008392
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard("phenopacket-to-bff-case1c-command")
+                }
+              >
+                {copySuccess["phenopacket-to-bff-case1c-command"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
           <p className="note">
             <img
               className="note-symbol"
@@ -1639,18 +1854,129 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               alt="Note symbol"
             />
             <div>
-              Ensure port 21017 and 5050 are free for MongoDb and Beacon.
+              Bear in mind that the path cannot be changed. Replace only the
+              name of the phenopacket, once it has been copied in
+              phenopackets-to-BFF folder.
             </div>
           </p>
-          <p>And now let’s build all the necessary containers: </p>
+          <p>
+            Make sure to add the same datasetID as in the dataset model. This
+            will allow the correct link between the phenopackets information and
+            the dataset it belongs to.
+          </p>
+          <p>
+            If everything works as expected your terminal output should look
+            like: 
+          </p>
           <div className="codeSnippet">
             <pre>
-              <code>docker compose up -d --build </code>
+              <code>{`The mandatory fields for BioSamples were not present in the phenopacket 
+Mandatory properties for Individual schema (id and sex) present in the phenopacket.
+-> Creating Individuals schema ...
+    - diseases added to Individuals
+    - phenotypicFeatures added to Individuals
+-> Creating Individuals schema - DONE
++ BFFs Individuals JSON saved in:  
+/beacon2-pi-api/ri-tools/phenopackets-to-BFF/case1c.json`}</code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("docker-compose")}
+                onClick={() => copyToClipboard("phenopacket-output")}
               >
-                {copySuccess["docker-compose"] ? (
+                {copySuccess["phenopacket-output"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            You’ll find your phenopacket in  
+            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/phenopackets-to-BFF">
+              phenopackets-to-BFF.
+            </a>
+          </p>
+          <h6 className="sub-title">Conversion from VCF</h6>
+          <p>First, let’s move the VCF to the correct folder: </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>{`./beacon2-pi-api/ri-tools/files/vcf/files_to_read/case1C_subset.vcf.gz`}</code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("vcf-file-path")}
+              >
+                {copySuccess["vcf-file-path"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>And now, run the conversion command from VCF to BFF: </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>{`docker exec -it ri-tools python genomicVariations_vcf.py`}</code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("genomic-variations")}
+              >
+                {copySuccess["genomic-variations"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>If everything ran correctly, this will be your output: </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>{`files/vcf/files_to_read/case1C_subset.vcf.gz
+100% | 5/5 [00:00<00:00, 6603.12it/s]
+Successfully inserted 5 records into beacon
+A total of 5 variants were processed
+A total of 0 variants were skipped`}</code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("vcf-import-output")}
+              >
+                {copySuccess["vcf-import-output"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              If the conversion of the variants is not working as expected
+              modify the conf.py and set verbosity = True, this will give you
+              information about which variants are being included and why.
+            </div>
+          </p>
+          <p>
+            The VCF was converted into BFF and saved in a MongoDB. Let’s extract
+            the variants to insert them into our beacon:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>{`docker exec ri-tools-mongo mongoexport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --collection genomicVariations > ri-tools/output_docs/genomicVariations.json`}</code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("mongoexport-genomicVariations")}
+              >
+                {copySuccess["mongoexport-genomicVariations"] ? (
                   "Copied!"
                 ) : (
                   <img className="copySymbol" src={copyIcon} alt="Copy" />
@@ -1659,16 +1985,136 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             </pre>
           </div>
           <p>
-            Let’s check if the building was correct. Run the following command:
+            Modify the output path so it works on your computer. In this case,
+            we’ve saved it with the BFFs converted from CSV.
+          </p>
+          <h1 id="deploying-a-beacon-2-production-implementation-api">
+            Deploying a Beacon 2 production implementation API
+          </h1>
+          <p>
+            Now that we have all the data ready let’s start with the
+            deployment. <br></br>
+            First, we’ll make three important steps for the configuration of the
+            beacon: 
+            <ul>
+              <li>Create our own landing page</li>
+              <li>Add the right permission for our dataset </li>
+              <li>Move our BFF to the correct folder</li>
+            </ul>
+          </p>
+          <p>
+            To know about further settings, please visit the{" "}
+            <a href="https://b2ri-documentation-demo.ega-archive.org/configuration">
+              {" "}
+              Configuration section.
+            </a>
+          </p>
+          <h6 className="sub-title">Personalize info entry point</h6>
+          <p>
+            The info entry point will be the landing page of your beacon, found
+            at <a href="http://localhost:5050/api">http://localhost:5050/api</a>
+            .
+          </p>
+          <p>
+            To modify the information shown you’ll need to update the
+            ./beacon2-pi-api/beacon/conf/conf.py <br></br>
+            Our conf.py would look something like:
           </p>
           <div className="codeSnippet">
             <pre>
-              <code>docker ps</code>
+              <code>{`beacon_id = 'org.ega-archive.beacon-ri-demo'
+
+beacon_name = 'Beacon Reference Implementation: Rare Diseases Use Case’
+
+api_version = 'v2.0.0'
+
+uri = 'https://beacon-apis-demo.ega-archive.org/api/'
+
+org_id = 'EGA'
+
+org_name = 'European Genome-Phenome Archive (EGA)'
+
+org_description = 'The European Genome-phenome Archive (EGA) is a service for permanent archiving and sharing of all types of personally identifiable genetic and phenotypic data resulting from biomedical research projects.'
+
+org_adress = 'C/ Dr. Aiguader, 88
+PRBB Building
+08003 Barcelona, Spain'
+
+org_welcome_url = 'https://ega-archive.org/'
+
+org_contact_url = 'mailto:beacon.ega@crg.eu'
+
+org_logo_url = 'https://legacy.ega-archive.org/images/logo.png'
+
+org_info = ''
+
+description = "This Beacon is based on synthetic data hosted at the EGA. It contains information from one sample from EGAD00001008392"
+
+version = 'v2.0'
+
+welcome_url = 'https://ega-archive.org/datasets/EGAD00001008392'
+
+alternative_url = 'https://beacon-apis-demo.ega-archive.org/api/'
+
+create_datetime = '2025-05-12T12:00:00.000000'
+
+update_datetime = ''`}</code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("docker-ps")}
+                onClick={() => copyToClipboard("beacon-ri-metadata")}
               >
-                {copySuccess["docker-ps"] ? (
+                {copySuccess["beacon-ri-metadata"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+
+          <h6 className="sub-title">Managing dataset permissions</h6>
+          <p>
+            There are 3 possible levels of beacon security for a dataset:
+            public, registered and controlled.
+            <ul>
+              <li>
+                A <b>public dataset</b> is a dataset that will be returned in a
+                beacon query without an authentication token.
+              </li>
+              <li>
+                A <b>registered dataset</b> is a dataset that will be shown
+                after a user sends a valid token (in other words, is logged in).
+              </li>
+              <li>
+                A <b>controlled dataset</b> is a dataset that needs a user to
+                send a valid token for authentication and the user needs to be
+                allowed to query that dataset.
+              </li>
+            </ul>
+          </p>
+          <p>
+            As our data is synthetic and has no control access demand, we’ll add
+            our dataset as a public dataset into the beacon. 
+          </p>
+          <p>
+            For this, first we’ll need to edit the .yml inside
+            ./beacon2-pi-api/beacon/permissions/datasets. As we have decided
+            that EGAD00001008392 will be of public access let’s edit
+            public_datasets.yml:
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code>{`public_datasets:
+- EGAD00001008392`}</code>
+              <button
+                className="copyButtonCode"
+                onClick={() => copyToClipboard("public-datasets")}
+              >
+                {copySuccess["public-datasets"] ? (
                   "Copied!"
                 ) : (
                   <img className="copySymbol" src={copyIcon} alt="Copy" />
@@ -1676,641 +2122,43 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               </button>
             </pre>
           </div>
+          <h6 className="sub-title">Move the BFF for the insertion</h6>
           <p>
-            This command will show all the running containers in your computer.
-            You should have built: 
+            Let’s prepare the data for the insertion. Edit the following
+            Makefile: <br></br>
+            <em>/beacon/connections/mongo/Makefile</em>
           </p>
-          <table className="dockerTable">
-            <thead>
-              <tr>
-                <th>Image</th>
-                <th>Names</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>
-                        ghcr.io/ega-archive/beacon2-ri-tools-v2:latest
-                      </code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-ri-tools")}
-                      >
-                        {copySuccess["img-ri-tools"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>ri-tools</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-ri-tools")}
-                      >
-                        {copySuccess["name-ri-tools"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>
-                        ghcr.io/ega-archive/phenopackets-to-bff:latest
-                      </code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-phenopackets")}
-                      >
-                        {copySuccess["img-phenopackets"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>phenopackets-to-BFF</code>
-
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-phenopackets")}
-                      >
-                        {copySuccess["name-phenopackets"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>mongo-express</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-mongo-express")}
-                      >
-                        {copySuccess["img-mongo-express"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>beacon2-pi-api-mongo-express-1</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-mongo-express")}
-                      >
-                        {copySuccess["name-mongo-express"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>
-                        ghcr.io/ega-archive/beacon2-ri-postgres-v2:latest
-                      </code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-postgres")}
-                      >
-                        {copySuccess["img-postgres"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>idp-db</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-postgres")}
-                      >
-                        {copySuccess["name-postgres"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-
-              <tr>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>beacon2-pi-api-beaconprod</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("img-beaconprod")}
-                      >
-                        {copySuccess["img-beaconprod"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-                <td>
-                  <div className="codeSnippet">
-                    <pre>
-                      <code>beaconprod</code>
-                      <button
-                        className="copyButtonCode"
-                        onClick={() => copyToClipboard("name-beaconprod")}
-                      >
-                        {copySuccess["name-beaconprod"] ? (
-                          "Copied!"
-                        ) : (
-                          <img
-                            src={copyIcon}
-                            alt="Copy"
-                            className="copySymbol"
-                          />
-                        )}
-                      </button>
-                    </pre>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <h2 id="understanding-beacon-data-models">
-            2. Understanding Beacon Data Models
-          </h2>
-          <p>
-            There are several ways of populating a beacon. To introduce
-            information into a beacon you need to populate one, some, or all of
-            the beacon model entities.
-          </p>
-          <p>
-            Let’s recapitulate about what model entities the beacon allows: 
-          </p>
-          <ul>
-            <li>
-              Collections (<strong>Datasets</strong> and{" "}
-              <strong>Cohorts</strong>): groupings of variants or individuals
-              that share something in common: e.g., who belong to the same
-              repository (datasets) or study populations (cohorts).
-            </li>
-            <li>
-              <strong>Genomic variations</strong>: unique genomic alterations,
-              e.g., position in a genome, sequence alterations, type, etc. This
-              model can be filled in directly with a VCF or creating a CSV.
-            </li>
-            <li>
-              <strong>Individuals</strong>: either patients or healthy controls
-              whose details (including phenotypic and clinical) are stored in
-              the repository.
-            </li>
-            <li>
-              <strong>Biosamples</strong>: samples taken from individuals,
-              including details of procedures, dates and times.
-            </li>
-            <li>
-              <strong>Analyses & Runs</strong>: details on (a) procedures used
-              for sequencing a biosample (runs), and (b) bioinformatic
-              procedures to identify variants (analyses).
-            </li>
-          </ul>
+          <p>And point the paths to your BFF files.</p>
           <p className="wider-note">
             <img
               className="note-symbol-wider"
               src="/note-symbol.png"
               alt="Note symbol"
             />
-          </p>
-          <h2 id="converting-vcf-to-genomic-variations-model-beacon2-ri-tools-v2">
-            3. Converting VCF to Genomic Variations Model beacon2-ri-tools-v2
-          </h2>
-          <p>
-            The most simple way of converting variant information into the
-            genomicVariations model is directly reading a VCF into Beacon
-            Friendly Format (BFF). To convert directly from a VCF, copy all the
-            files into the{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/files/vcf/files_to_read"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              files_to_read
-            </a>{" "}
-            folder and follow the instructions below to correctly fill in the
-            conf.py.
-          </p>
-          <p className="note">
-            <img
-              className="note-symbol"
-              src="/note-symbol.png"
-              alt="Note symbol"
-            />
             <div>
-              Bear in mind that if your variant information is not in a VCF
-              format you can also fill in the Genomic Variations CSV.
+              Bear in mind that if you don’t modify the commands in the Makefile
+              the files must be named as: {" "}
+              <ul>
+                <li>analyses.json</li>
+                <li>biosamples.json</li>
+                <li>genomicVariations.json</li>
+                <li>individuals.json</li>
+                <li>runs.json</li>
+                <li>cohorts.json</li>
+                <li>datasets.json</li>
+              </ul>
             </div>
           </p>
-          <h2 id="filling-in-the-csv-templates">
-            4. Filling in the CSV Templates
-          </h2>
-          <p>
-            Now, let’s see how to fill in the CSV that will be converted by the
-            beacon r.i tools into the models.
-          </p>
-          <p>
-            Here you’ll find the{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/templates"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              CSV templates
-            </a>{" "}
-            for all the models.
-          </p>
-          <p>
-            To correctly fill in all the properties you have two sources of
-            information:
-          </p>
-          <ul>
-            <li>
-              The{" "}
-              <a
-                href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/ref_schemas"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                JSON references schemas
-              </a>{" "}
-              which will be really useful if you are used to working with JSON
-              schemas.
-            </li>
-            <li>
-              The GA4GH Beacon v2 Documentation:
-              <ul>
-                <li>
-                  <a
-                    href="https://docs.genomebeacons.org/schemas-md/analyses_defaultSchema/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Cohorts
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.genomebeacons.org/schemas-md/datasets_defaultSchema/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Datasets
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.genomebeacons.org/schemas-md/biosamples_defaultSchema/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Biosamples
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.genomebeacons.org/schemas-md/genomicVariations_defaultSchema/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    genomicVariations
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.genomebeacons.org/schemas-md/individuals_defaultSchema/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Individuals
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.genomebeacons.org/schemas-md/runs_defaultSchema/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Runs
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.genomebeacons.org/schemas-md/analyses_defaultSchema/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Analyses
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <p>
-            {" "}
-            Beacon v2 aims to be a flexible tool, thus, again not all the fields
-            are mandatory to be filled in. These are the fields that must be
-            included in each model if you decide to include it:
-          </p>
-          <h2 className="h2-less-margin">
-            Model → <strong>Required fields</strong>
-          </h2>
-          <ul>
-            <li>Analyses → id, analysisDate, pipelineName</li>
-            <li>Biosamples → id, biosampleStatus, sampleOriginType</li>
-            <li>Cohorts → id, name, cohortType</li>
-            <li>Datasets → id, name</li>
-            <li>Individuals → id, sex</li>
-            <li>Runs → id, biosampleId, runDate</li>
-            <li>genomic Variations → variantInternalId, variation</li>
-          </ul>
-
-          <h2 id="csv-formatting-tips-and-rules">
-            5. CSV Formatting Tips and Rules
-          </h2>
-          <p>Here are some things to consider during your CSV creation:</p>
-          <ul>
-            <li>
-              Only “correctly spelled” fields (aka columns) will be inserted
-              into the beacon. You can delete unused columns of your CSV, but
-              don’t modify the headers of the used ones.
-            </li>
-            <li>
-              Every new row will be appended to the final output as a new and
-              independent document. e.g. If in dataset.csv you have two rows,
-              you will be creating two independent datasets.
-            </li>
-            <li>
-              To add multiple information in the same row separate it by a pipe{" "}
-              '|'. For instance, in genomicVariations, if several samples have
-              the same variant you will need to fill in caseLevelData properties
-              as below. Note that you can leave the pipe empty or write the
-              condition multiple times. e.g:
-              <br />
-              <br />
-              <code className="examples">
-                caseLevelData | biosampleId &nbsp;&nbsp;&nbsp;&nbsp;
-                caseLevelData | phenotypicEffects | conditionId
-              </code>
-              <br />
-              <code className="examples">
-                SAMPLE2 | SAMPLE3 | SAMPLE4 &nbsp;&nbsp;&nbsp;&nbsp; Alzheimer |
-                |
-              </code>
-              <br />
-              <br />
-              In this case, this would mean that the variant in that row was
-              found in sample 2, 3, and 4 and it’s associated to Alzheimer.
-            </li>
-            <li>
-              The info field for each collection is very generic and can be
-              filled with different data. You will need to fill the column data
-              directly with JSON-type data. e.g:
-              <br />
-              <br />
-              <code className="examples">{`{"info": "This dataset contains synthetic metadata"}`}</code>
-            </li>
-            <br />
-            <li>
-              The id field in Biosamples must match the sample IDs in the
-              genomicVariations/VCF model. If these IDs don’t match, the mapping
-              with the variants and the biosamples won’t be correctly performed.
-            </li>
-            <li>
-              The id in Individuals can match or not the ID in{" "}
-              genomicVariations/VCF. If it doesn’t match, for the mapping
-              between individuals and variants to be correctly performed, the
-              field individualsId must be filled in the Biosamples model,
-              mapping the IDs in Individuals and the IDs in
-              genomicVariations/VCF.
-            </li>
-            <li>
-              The datasetId in Datasets must match the datasetId field in the
-              conf.py (this requirement applies only in the Beacon Production
-              Implementation environment).
-            </li>
-          </ul>
-
-          <h2 id="configuring-conf-py">6. Configuring conf.py</h2>
-          <p>
-            Now that you’ve already gathered all the necessary information,
-            let’s convert it into Beacon Friendly Format (BFF) using the beacon
-            r.i tools.
-          </p>
-          <p>First, let’s edit the ./beacon2-pi-api/ri-tools/conf/conf.py:</p>
+          <h6 className="sub-title">Deploy a beacon instance</h6>
+          <p>Finally, simply run:</p>
           <div className="codeSnippet">
             <pre>
-              <code>
-                {`#### Input and Output files config parameters ####
-
-csv_folder = './csv/examples/'
-output_docs_folder='./output_docs/'
-
-#### VCF Conversion config parameters ####
-
-allele_counts=False
-reference_genome='GRCh37' # Choose one between NCBI36, GRCh37, GRCh38
-datasetId='COVID_pop11_fin_2'
-case_level_data=False
-exact_heterozygosity=False
-num_rows=1500000
-verbosity=False`}
-              </code>
+              <code>{`bash mongostart.sh`}</code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("edit-ri-tools")}
+                onClick={() => copyToClipboard("bash-mongostart")}
               >
-                {copySuccess["edit-ri-tools"] ? (
-                  "Copied!"
-                ) : (
-                  <img
-                    className="copySymbol copySymbol-custom"
-                    src={copyIcon}
-                    alt="Copy"
-                  />
-                )}
-              </button>
-            </pre>
-          </div>
-          <h4>How to fill in config.py?</h4>
-          <div>
-            <p>
-              The <code>csv_folder</code> variable sets the path of a folder
-              containing all the CSVs that will be converted to BFF.{" "}
-              <strong>
-                Please, don’t modify the path <code>./csv/</code>.
-              </strong>
-              <br />
-              The <code>output_docs_folder</code> variable sets the folder where
-              your final <code>.json</code> files (BFF format) will be saved
-              once execution of beacon tools finishes. This folder should always
-              be located within the folder <code>'output_docs'</code>, but
-              subdirectories can be created inside it.
-              <em> e.g</em>{" "}
-              <code>output_docs_folder='./output_docs/test1'</code>
-              <br />
-              If you’ve chosen to read variants directly from a VCF instead of
-              filling in the genomicVariations CSV you’ll need to fill in the
-              VCF Conversion config parameters:
-            </p>
-            <ul>
-              <li>
-                The <code>reference_genome</code> is the reference genome the
-                tool will use to map the position of the chromosomes. <br />
-                Make sure to select the same version as the one used to generate
-                your data.
-              </li>
-              <li>
-                The <code>datasetId</code> needs to match the id of your{" "}
-                datasets.csv or datasets.json file. <br />
-                This will add a datasetId field in every record to match the
-                record with the dataset it belongs to.
-              </li>
-              <li>
-                The <code>case_level_data</code> is a boolean parameter ( True
-                or False) which will relate your variants to the samples they
-                belong to. <br />
-                As we don’t have the biosamples schema, this mapping won’t work.
-                Let’s set it up as False.
-              </li>
-              <li>
-                The <code>exact_heterozygosity</code> is a boolean parameter (
-                True or False) that, in case case_level_data is True, then it
-                will classify the biosamples as being heterozygous for either
-                the reference or the alternate allele. <br />
-                In our case, as case_level_data is False, let’s set this
-                parameter as False too.
-              </li>
-              <li>
-                The <code>num_rows</code> are the approximate calculation you
-                expect for the total of variants in each VCF there are. <br />
-                Make sure this is greater than the total variants expected.
-              </li>
-              <li>
-                The <code>verbosity</code> will give streaming logs with the
-                reason why a variant has been skipped to be inserted. <br />
-                Recommendation is to leave this as False.
-              </li>
-            </ul>
-          </div>
-          <h2 id="converting-csv-vcf-to-bff">7. Converting CSV/VCF to BFF</h2>
-          <p>
-            Time for the conversion! 
-            <br /> Before preceding ensure that: 
-            <ul>
-              <li>
-                All the CSVs that you’ve created have been saved in the csv
-                folder stated in the conf.py,{" "}
-                <em>
-                  e.g ./beacon2-pi-api/ri-tools/conf/conf.py/csv/your/path. {" "}
-                </em>
-              </li>
-              <li>
-                All the VCFs to be converted are saved in
-                <em>./beacon2-pi-api/ri-tools/files/vcf/files_to_read</em>
-              </li>
-            </ul>
-          </p>
-          <p>If this is done, then run:</p>
-          <div className="codeSnippet">
-            <pre>
-              <code>docker exec -it ri-tools python convert_csvTObff.py</code>
-              <button
-                className="copyButtonCode"
-                onClick={() => copyToClipboard("python-convert-csvTObff-py")}
-              >
-                {copySuccess["python-convert-csvTObff-py"] ? (
+                {copySuccess["bash-mongostart"] ? (
                   "Copied!"
                 ) : (
                   <img className="copySymbol" src={copyIcon} alt="Copy" />
@@ -2318,131 +2166,9 @@ verbosity=False`}
               </button>
             </pre>
           </div>
+
           <p>
-            The Beacon Friendly Format JSONs from CSVs will be generated in the
-            output_docs folder, with the name of the collection followed by
-            .json extension, e.g. biosamples.json. <br />
-            If you have VCFs to convert, then run too:
-          </p>
-          <div className="codeSnippet">
-            <pre>
-              <code>
-                docker exec -it ri-tools python genomicVariations_vcf.py
-              </code>
-              <button
-                className="copyButtonCode"
-                onClick={() =>
-                  copyToClipboard("python-genomicVariations-vcf-py")
-                }
-              >
-                {copySuccess["python-genomicVariations-vcf-py"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-          <p>And export it from the mongoDB to a JSON BFF with: </p>
-          <div className="codeSnippet">
-            <pre>
-              <code>{`docker exec ri-tools mongoexport --jsonArray --uri "mongodb://
-root:example@127.0.0.1:27017/beacon?authSource=admin" --collection
-genomicVariations > ./beacon2-pi-api/ri-tools/output_docs//
-genomicVariations.json`}</code>
-              <button
-                className="copyButtonCode"
-                onClick={() => copyToClipboard("mongo-export-snippet")}
-              >
-                {copySuccess["mongo-export-snippet"] ? (
-                  "Copied!"
-                ) : (
-                  <img
-                    className="copySymbol copySymbol-custom"
-                    src={copyIcon}
-                    alt="Copy"
-                  />
-                )}
-              </button>
-            </pre>
-          </div>
-          <p>
-            All these BFF JSONs will be used to populate a mongoDB for beacon
-            usage.
-            <br></br>Before moving to the actual installation and population of
-            the beacon, ensure all the following steps have been accomplished:
-            <br></br>
-            <ol>
-              <li>
-                If reading from VCFs, move the necessary files to files_to_read
-                folder{" "}
-              </li>
-              <li>Fill in CSV templates </li>
-              <li>Set the correct paths in conf.py </li>
-              <li>Run: docker exec -it ri-tools python convert_csvTObff.py</li>
-              <li>
-                {" "}
-                If reading from a VCF, run: docker exec -it ri-tools python
-                genomicVariations_vcf.py
-              </li>
-              <li>Find your BFFs in the output_docs</li>{" "}
-            </ol>
-          </p>
-          <h2 id="deploying-a-beacon-2-production-implementation-api">
-            8. Deploying a Beacon 2 Production Implementation API
-          </h2>
-          <p>
-            To deploy your first beacon we’ll use the{" "}
-            <a
-              href="https://b2ri-documentation-demo.ega-archive.org/pi-automated-deployment"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              automated deployment
-            </a>{" "}
-            that relies on the beacon2-pi-api repository that we cloned at the
-            beginning of this tutorial.
-            <br />
-            By executing the automated deployment we’ll be performing two key
-            actions:
-            <ol>
-              <li>The deployment of your beacon instance</li>
-              <li>The initial insertion of data</li>
-            </ol>
-          </p>
-          <p>
-            By default, the data saved in the directory
-            <em> ./beacon2-pi-api/beacon/connections/mongo/data/test</em> will
-            be inserted.
-            <br />
-            <u>Want to insert your own data?</u>
-            <br />
-            <ul>
-              <li>Move your BFFs file to the /data/test directory.</li>
-              <li>
-                Update the path in the /beacon/connections/mongo/Makefile
-                document.
-              </li>
-            </ul>
-          </p>
-          <p>From the root of the repository, ./beacon2-pi-api, run:</p>
-          <div className="codeSnippet">
-            <pre>
-              <code>bash mongostart.sh</code>
-              <button
-                className="copyButtonCode"
-                onClick={() => copyToClipboard("execute-start-script")}
-              >
-                {copySuccess["execute-start-script"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-          <p>
-            If the operation is successful, you will have a beacon up and
+            If the operation is successful, you will have your beacon up and
             running at{" "}
             <a
               href="http://localhost:5050/api"
@@ -2453,174 +2179,36 @@ genomicVariations.json`}</code>
             </a>
             .
           </p>
-          <p>This is what you should be seeing:</p>
-          <div className="codeSnippet">
-            <pre>
-              <code>
-                docker exec -it ri-tools python genomicVariations_vcf.py
-              </code>
-              <button
-                className="copyButtonCode"
-                onClick={() =>
-                  copyToClipboard("python-genomicVariations-vcf-py")
-                }
-              >
-                {copySuccess["python-genomicVariations-vcf-py"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
+
           <img
             className="relationship-elements"
             alt="Relationship-elements"
-            src="/apiSchema.svg"
+            src="/beaconInstanceSchema.svg"
           />
+          <h6 className="sub-title">Filtering Terms</h6>
           <p>
-            When searching{" "}
-            <a
-              href="http://localhost:5050/api"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              http://localhost:5050/api
-            </a>{" "}
-            we land at the <code>/info</code> entrypoint of the API. To make
-            your own landing page please visit Editing your beacon information
-            webpage and modify the required files before deploying.
-          </p>
-
-          <h2 id="reviewing-inserted-entries">9. Reviewing Inserted Entries</h2>
-          <p>
-            Now, let’s move through your beacon and see the data you have
-            inserted. If you did not modify the content of the{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon2-pi-api/tree/main/beacon/connections/mongo/data"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              data folder
-            </a>{" "}
-            the test BFFs will have been included.
+            Filtering terms are metadata fields that allow users to query your
+            Beacon more precisely — for example, by filtering results based on
+            sequencing strategy (libraryStrategy), tissue type, disease, or
+            other structured attributes. These terms often rely on ontologies to
+            ensure consistent vocabulary across datasets.
           </p>
           <p>
-            To visit the inserted data you need to move through the different
-            beacon endpoints:
+            As we have some ontology fields, let’s create the filtering terms
+            for our beacon. We’ll populate the /filteringTerms endpoint
+            automatically by running:
           </p>
-          <div>
-            <li>
-              <a
-                href="http://localhost:5050/api/datasets"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/datasets
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/analyses"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/analyses
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/runs"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/runs
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/cohorts"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/cohorts
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/biosamples"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/biosamples
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/individuals"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/individuals
-              </a>
-            </li>
-            <li>
-              <a
-                href="http://localhost:5050/api/g_variants"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                http://localhost:5050/api/g_variants
-              </a>
-            </li>
-          </div>
-
-          <h2 id="loading-more-data">10. Loading more data</h2>
-          <p>From the cloned repository move to:</p>
           <div className="codeSnippet">
             <pre>
-              <code>cd ./beacon2-pi-api/beacon/connections/mongo/data</code>
+              <code>{`docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.py`}</code>
               <button
                 className="copyButtonCode"
-                onClick={() => copyToClipboard("connections-mongo-data")}
+                onClick={() => copyToClipboard("extract-filtering-terms")}
               >
-                {copySuccess["connections-mongo-data"] ? (
+                {copySuccess["extract-filtering-terms"] ? (
                   "Copied!"
                 ) : (
                   <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-          <p>
-            And copy all the BFFs that you want to insert.
-            <br></br> Then, run:
-          </p>
-          <div className="codeSnippet">
-            <pre>
-              <code id="bulk-mongoimport-snippet">
-                {`docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/datasets.json --collection datasets
-docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/individuals.json --collection individuals
-docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/cohorts.json --collection cohorts
-docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/analyses.json --collection analyses
-docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/biosamples.json --collection biosamples
-docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/genomicVariations.json --collection genomicVariations
-docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/runs.json --collection runs
-docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/targets.json --collection targets
-docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/caseLevelData.json --collection caseLevelData`}
-              </code>
-              <button
-                className="copyButtonCode"
-                onClick={() => copyToClipboard("bulk-mongoimport-snippet")}
-              >
-                {copySuccess["bulk-mongoimport-snippet"] ? (
-                  "Copied!"
-                ) : (
-                  <img
-                    className="copySymbol copySymbol-custom"
-                    src={copyIcon}
-                    alt="Copy"
-                  />
                 )}
               </button>
             </pre>
@@ -2632,32 +2220,28 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               alt="Note symbol"
             />
             <div>
-              Note that you will only need to run the command for the
-              collections that you have new data. 
+               If you want to add new filtering terms manually or enhance
+              ontology filtering with descendants and semantic similarities,
+              please visit the{" "}
+              <a href="https://b2ri-documentation-demo.ega-archive.org/filtering-terms">
+                Filtering Terms
+              </a>{" "}
+              section.
             </div>
           </p>
+
+          <h1>Acknowledgments</h1>
           <p>
-            Each time data is imported into the beacon, indexes need to be
-            created for the queries to run smoothly. Do it by running:
+            We acknowledge the use of data from the{" "}
+            <a href="https://platform.rd-connect.eu/#/">
+              RD-Connect Genome-Phenome Analysis Platform
+            </a>
+            . This work was supported by the European Commission H2020 projects
+            EJP-RD (grant number 825575) and B1MG (grant number 951724), as well
+            as the Generalitat de Catalunya VEIS project (grant number
+            001-P-001647).
           </p>
-          <div className="codeSnippet">
-            <pre>
-              <code>
-                docker exec beaconprod python
-                /beacon/connections/mongo/reindex.py
-              </code>
-              <button
-                className="copyButtonCode"
-                onClick={() => copyToClipboard("connections-mongo-reinde-py")}
-              >
-                {copySuccess["connections-mongo-reinde-py"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
+
           <br></br>
           <br></br>
         </div>
