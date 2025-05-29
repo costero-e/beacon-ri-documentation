@@ -32,7 +32,7 @@ const TestData: React.FC = () => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/configuration-file" className="no-undeline">
+        <a href="/test-data" className="no-undeline">
           Beacon RI Tools v2
         </a>
         <img
@@ -40,7 +40,7 @@ const TestData: React.FC = () => {
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/configuration-file" className="no-undeline">
+        <a href="/test-data" className="no-undeline">
           <span className="user-path-title">Test Data</span>
         </a>
       </h2>
@@ -62,22 +62,22 @@ const TestData: React.FC = () => {
             </li>
             <li>
               <strong>Origin: </strong>
-              Derived from
+              Derived from{" "}
               <a
                 href="https://ega-archive.org/datasets/EGAD00001006673"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 EGAD00001006673
-              </a>
-              (EGA) and a
+              </a>{" "}
+              (EGA) and a{" "}
               <a
                 href="https://github.com/EGA-archive/beacon2-ri-tools/blob/main/CINECA_synthetic_cohort_EUROPE_UK1/uk1.tsv"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 raw file
-              </a>
+              </a>{" "}
               with phenoclinic data gently donated to us from our CINECA-EU
               partners.
             </li>

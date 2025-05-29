@@ -349,7 +349,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/tutorials" className="no-undeline">
+        <a href="/use-case:-rare-diseases-data" className="no-undeline">
           Tutorials
         </a>
         <img
@@ -357,7 +357,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/tutorials" className="no-undeline">
+        <a href="/use-case:-rare-diseases-data" className="no-undeline">
           <span className="user-path-title">Use Case: Rare Diseases Data </span>
         </a>
       </h2>

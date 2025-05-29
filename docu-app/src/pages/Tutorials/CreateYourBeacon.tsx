@@ -88,7 +88,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/tutorials" className="no-undeline">
+        <a href="/create-your-beacon" className="no-undeline">
           Tutorials
         </a>
         <img
@@ -96,7 +96,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/tutorials" className="no-undeline">
+        <a href="/create-your-beacon" className="no-undeline">
           <span className="user-path-title">Create your Beacon</span>
         </a>
       </h2>
