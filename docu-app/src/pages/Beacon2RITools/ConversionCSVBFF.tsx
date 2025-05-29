@@ -430,43 +430,65 @@ labelForHG00001|labelForHG00002`
             </li>
           </ul>
           <h1 id="conversion-from-csv-to-bff">Conversion from CSV to BFF</h1>
-          <h6 className="underline">Convert All CSVs at Once</h6>
-          <h6 className="underline">Convert a Specific Collection</h6>
-          {/* HERE */}
           <p>
-            Before getting the BFF (json) final documents, please make sure your{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/conf/conf.py"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            Before converting your CSV files, ensure that the{" "}
+            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/conf/conf.py">
               conf.py
-            </a>
-            , which you will find inside the{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/conf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            </a>{" "}
+            file (located in the{" "}
+            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/conf">
               conf folder
             </a>
-            , is reading the right CSV document.
+            ) is correctly configured to read the appropriate input files and
+            settings.
           </p>
+          <h6 className="underline">Convert All CSVs at Once</h6>
           <p>
-            Now you can execute the next bash command from the root folder in
-            your terminal.
+            To convert all CSV files at once, make sure they are saved in the{" "}
+            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv">
+              csv folder
+            </a>{" "}
+            (refer to the{" "}
+            <a href="https://b2ri-documentation-demo.ega-archive.org/api-configuration">
+              Configuration File
+            </a>{" "}
+            section for details).
           </p>
-          <p>
-            If you want to convert all the csv you have at the same time, after
-            saving them in the csv input folder (see configuration head), just
-            execute:
-          </p>
+          <p>Then run the following command from the root of the project:</p>
+          <div className="codeSnippet">
+            <pre>
+              <code>docker exec -it ri-tools python convert_csvTObff.py</code>
+              <button
+                className="copyButtonCode"
+                onClick={() =>
+                  copyToClipboard(
+                    "convertCSVtoBFF",
+                    "docker exec -it ri-tools python convert_csvTObff.py"
+                  )
+                }
+              >
+                {copySuccess["convertCSVtoBFF"] ? (
+                  "Copied!"
+                ) : (
+                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                )}
+              </button>
+            </pre>
+          </div>
 
           <p>
-            On the other hand, you can convert one by one only, picking one of
-            the following commands for the entry type you need:
+            This script will process all available CSVs and generate one JSON
+            file per collection in the{" "}
+            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/output_docs">
+              output_docs
+            </a>{" "}
+            folder.
           </p>
-
+          <h6 className="underline">Convert a Specific Collection</h6>
+          <p>
+            If you prefer to convert only one collection at a time, you can use
+            one of the following commands depending on the type of data:
+          </p>
           <div className="codeSnippet">
             <pre>
               <code>docker exec -it ri-tools python analyses_csv.py</code>
@@ -617,27 +639,26 @@ labelForHG00001|labelForHG00002`
           </div>
 
           <p>
-            Once you execute any of the conversion scripts, it will generate the
-            final JSON files (BFF) in the output_docs folder with the name of
-            the collection followed by the .json extension (e.g. cohorts.json).
+            Each script will generate a corresponding JSON file (e.g.,
+            cohorts.json) inside the{" "}
+            <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/output_docs">
+              output_docs
+            </a>{" "}
+            folder.
           </p>
           <p>
-            These files can be used in a MongoDB for beacon usage. To know how
-            to import them into a Beacon v2, please follow the instructions
-            described in{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon2-ri-api"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            These JSON documents follow the Beacon File Format (BFF) and are
+            ready to be imported into a MongoDB database for use with a GA4GH
+            Beacon v2 instance.
+          </p>
+          <p>
+            To learn how to load these JSON files into your Beacon, refer to the
+            documentation for the{" "}
+            <a href="https://github.com/EGA-archive/beacon2-ri-api">
               Beacon v2 RI API
             </a>{" "}
-            and in{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon2-pi-api"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            and the{" "}
+            <a href="https://github.com/EGA-archive/beacon2-pi-api">
               Beacon v2 PI API
             </a>
             .
