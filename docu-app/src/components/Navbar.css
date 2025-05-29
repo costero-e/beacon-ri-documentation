@@ -55,6 +55,11 @@
   pointer-events: none;
 }
 
+.cite-box {
+  background-color: #f4fff1;
+  border: 1px solid #ade19f;
+}
+
 .clearButton {
   position: absolute;
   right: 10px; /* Adjust the right position to align within the input field */

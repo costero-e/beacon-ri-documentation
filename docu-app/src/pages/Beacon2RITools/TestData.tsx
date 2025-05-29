@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ConfigFileTools.css";
 import copyIcon from "../../assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
+import model from "../../assets/medal.svg";
 
 const TestData: React.FC = () => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
@@ -46,231 +47,575 @@ const TestData: React.FC = () => {
       <div className="contentWrapper">
         <div className="contentColumn">
           <h3>Beacon RI Tools v2</h3>
-          <h1>Configuration File</h1>
+          <h1>Test Data</h1>
           <p>
-            In order to use Beacon RI Tools v2 one needs to modify a
-            configuration file with the desired files and options for the
-            different collections.
+            This section contains test datasets you can use to explore and
+            validate the functionalities of the Beacon v2 Implementation.
           </p>
-          <p>
-            You will find conf.py inside the{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/conf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              conf directory
-            </a>
-            . Inside this file, you will find the following information:
-          </p>
-
-          <h2 id="input-output-files-config">
-            Input and Output files config parameters
-          </h2>
-          <div className="codeSnippet">
-            <pre>
-              <code id="input-output-config">
-                csv_filename='csv/examples/cohorts.csv'
-                output_docs_folder='output_docs/CINECA_dataset/'
-              </code>
-              <button
-                className="copyButtonCode"
-                onClick={() => {
-                  const codeText = document.getElementById(
-                    "input-output-config"
-                  )?.innerText;
-                  if (codeText) {
-                    copyToClipboard(codeText, "input-output-config");
-                  }
-                }}
+          <h1 id="dataset-1-cineca-synthetic-cohort-europe-uk1">
+            Dataset 1: CINECA Synthetic Cohort EUROPE UK1
+          </h1>
+          <ul>
+            <li>
+              <strong>Dataset name: </strong>
+              CINECA_synthetic_cohort_EUROPE_UK1
+            </li>
+            <li>
+              <strong>Origin: </strong>
+              Derived from
+              <a
+                href="https://ega-archive.org/datasets/EGAD00001006673"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {copySuccess["input-output-config"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-          <h2 id="generic-config-parameters">Generic config parameters</h2>
-          <p>
-            The first part of this configuration only concerns the conversion of
-            CSV to BFF. It is used only when you are converting from CSV.
-          </p>
-          <p>
-            The <i>csv_filename</i> variable sets where the CSV file is and from
-            where the script will read the data. Bear in mind that the CSV must
-            be inside the folder <i>csv</i>, and you can use subfolders within
-            it. This CSV file needs to have the headers written as you can find
-            in the files inside{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/templates"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              templates
-            </a>
-            . Note that any header that has a different name from the ones that
-            appear inside the templates will not be read by the Beacon Data
-            Tools.
-          </p>
-          <p>
-            The <i>output_docs_folder</i> sets the folder where your final BFF
-            (JSON files) will be saved once execution of beacon tools finishes.
-            This folder is mandatory to be always inside <i>output_docs</i>, so
-            only the subdirectory inside <i>output_docs</i>
-            can be modified in this path.
-          </p>
-
-          <h2 id="VCF-conversion-config-parameters">
-            VCF conversion config parameters
-          </h2>
-
-          <div className="codeSnippet">
-            <pre>
-              <code id="vcf-config">
-                allele_counts=False
-                <br />
-                reference_genome='GRCh37' # Choose one between NCBI36, GRCh37,
-                GRCh38
-                <br />
-                datasetId='COVID_pop11_fin_2'
-                <br />
-                case_level_data=False
-                <br />
-                exact_heterozygosity=False
-                <br />
-                num_rows=15000000
-                <br />
-                verbosity=False
-              </code>
-              <button
-                className="copyButtonCode"
-                onClick={() => {
-                  const codeText =
-                    document.getElementById("vcf-config")?.innerText;
-                  if (codeText) {
-                    copyToClipboard(codeText, "vcf-config");
-                  }
-                }}
+                EGAD00001006673
+              </a>
+              (EGA) and a
+              <a
+                href="https://github.com/EGA-archive/beacon2-ri-tools/blob/main/CINECA_synthetic_cohort_EUROPE_UK1/uk1.tsv"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {copySuccess["vcf-config"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-          <p>
-            The second part of the configuration file pertains to the VCF to BFF
-            conversion. This only needs to be used in case you are using a VCF
-            as a source for the genomic variants collection.
-          </p>
-
-          <p>
-            The <i>num_variants</i> is the variable you need to write in case
-            you are executing the VCF conversion{" "}
-            <i>(genomicVariations_vcf.py)</i>. This will tell the script how
-            many variants will be read and converted from the file(s).
-          </p>
-
-          <p>
-            The <i>allele_frequency</i> field lets you set a threshold for the
-            allele frequency (AF) of the variants you want to convert from the
-            VCF file. If you set it at 0.5, all the variants with 0.5 or less AF
-            will be converted to BFF. 1 is the default value (all variants will
-            be converted).
-          </p>
-
-          <p>
-            The <i>allele_counts</i> now is not implemented yet, just leave it
-            as False.
-          </p>
-          <p>
-            The <i>reference_genome</i> is the reference genome the tool will
-            use to map the position of the chromosomes. Make sure to select the
-            same version as the one used to generate your data.
-          </p>
-
-          <p>
-            The <i>datasetId</i>, <i>case_level_data</i>, and{" "}
-            <i>exact_zygosity</i> parameters are <b>only</b> applicable in the{" "}
-            <b>Beacon Production Implementation environment</b>.
-          </p>
-          <p>
-            The <i>datasetId</i> needs to match the id of your datasets.csv or
-            datasets.json file. This will add a datasetId field in every record
-            to match the record with the dataset it belongs to.
-          </p>
-          <p>
-            When converting a VCF file to BFF, you can use two optional boolean
-            parameters to include sample-level information about each variant:{" "}
-            <i>case_level_data</i> and <i>exact_zygosity</i>.
-          </p>
-          <p>
-            <i>case_level_data</i> will link variants to biosamples. If set to
-            True, this option enables mapping each variant to the specific
-            biosamples (i.e., samples) that carry it. This allows downstream
-            queries to return more granular, sample-level results instead of
-            just listing variants in general.
-          </p>
-          <p className="wider-note">
-            <img
-              className="note-symbol-wider"
-              src="/note-symbol.png"
-              alt="Note symbol"
-            />
+                raw file
+              </a>
+              with phenoclinic data gently donated to us from our CINECA-EU
+              partners.
+            </li>
+            <li>
+              <strong>Study size: </strong>
+              2504 samples with genetic data (low coverage WGS) based on 1000
+              Genomes data (phase3 and Geuvadis), and 76 synthetic subject
+              attributes and phenotypic data derived from UKBiobank.
+            </li>
+          </ul>
+          <p className="wider-note cite-box">
+            <img className="note-symbol-wider" src={model} alt="Note symbol" />
             <div>
-              Important: For this mapping to work correctly, you must:
-              <ul>
-                <li>Have genotype (GT) information available in the VCF. </li>
-                <li>Provide a valid biosamples schema in your BFF files.</li>
-              </ul>
+              In support of FAIRness in data sharing, this dataset is made
+              freely available under the Creative Commons Licence (CC-BY).
+              Please ensure this preamble is included with this dataset and that
+              the CINECA project (funding: EC H2020 grant 825775) is
+              acknowledged.
             </div>
           </p>
-          <p>
-            Be sure to read the Case-level{" "}
-            <a href="conversion-from-vcf-to-bff#case-level-data-conversion">
-              data conversion section
-            </a>{" "}
-            for detailed guidance on setting this up.
-          </p>
-          <p>
-            <i>exact_zygosity </i>will refine biosample classification. If set
-            to True This parameter classifies each biosample based on its
-            genotype:
-            <ul>
-              <li>Homozygous for the reference allele</li>
-              <li>Heterozygous</li>
-              <li>Homozygous for the alternate allele</li>
-            </ul>
-            This adds precision to your data and can help users interpret
-            zygosity in their queries.
-          </p>
+          <h6 className="underline">Included files</h6>
+          <table className="dockerTableSimple dockerTableLong">
+            <thead>
+              <tr>
+                <th>
+                  <b>File/Folder</b>
+                </th>
+                <th>
+                  <b>Description</b>
+                </th>
+                <th>
+                  <b>Where to find</b>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>uk1.tsv</td>
+                <td>
+                  Raw metadata and phenotypic data for 2,504 synthetic
+                  individuals
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/blob/main/csv/examples/CINECA_synthetic_cohort_EUROPE_UK1/uk1.tsv"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    uk1.tsv
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  chr22.Test.1000G.phas<br></br>e3.joint.vcf.gz
+                </td>
+                <td>
+                  VCF file consisting of WGS for chr22 – input used for
+                  genomicVariations
+                </td>
+                <td>
+                  $ wget ftp://<br></br>
+                  FTPuser:FTPusersPassword@xfer13<br></br>
+                  .crg.eu:221/external_files/<br></br>
+                  CINECA_synthetic_cohort_EUROPE_<br></br>
+                  UK1/vcf/<br></br>chr22.Test.1000G.phase3.joint.vcf<br></br>.gz
+                </td>
+              </tr>
+              <tr>
+                <td>CSV models</td>
+                <td>
+                  CSV filled in with the data and metadata from the dataset
+                  files, ready to convert to Beacon Friendly Format (BFF)
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples/CINECA_synthetic_cohort_EUROPE_UK1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Input folder
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>BFF output</td>
+                <td>
+                  Output BFF files obtained by converting the CSV models using
+                  the beacon2 ri tools v2
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/output_docs/CINECA_synthetic_cohort_EUROPE_UK1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    CINECA_synthetic_cohort_EUROPE_<br></br>UK1
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
           <p className="note">
             <img
-              className="note-symbol-wider"
+              className="note-symbol"
               src="/note-symbol.png"
               alt="Note symbol"
             />
             <div>
-              If <i>case_level_data</i> is set to False, make sure to also set
-              <i>exact_zygosity </i>to False — it won’t have any effect
-              otherwise.
+              <p className="note-paragraph">
+                 If you want to download the full original dataset metadata
+                please follow the{" "}
+                <a href="https://ega-archive.org/access/download/files/live-outbox/">
+                  Live Distribution
+                </a>{" "}
+                or the{" "}
+                <a href="https://ega-archive.org/access/download/files/pyega3/">
+                  pyEGA3
+                </a>{" "}
+                instructions. Notice that these datasets are free access.
+              </p>
             </div>
           </p>
-          <p>
-            The <i>num_rows</i>  are the aproximate calculation you expect for
-            the total of variants in each vcf there are. Make sure this is
-            greater than the total variants expected. It was automatically
-            calculated before but it was very slow sometimes to calculate all
-            the variants number in a VCF.
+          <h1 id="dataset-2-rare-disease-synthetic-dataset">
+            Dataset 2: Rare Disease Synthetic Dataset
+          </h1>
+          <ul>
+            <li>
+              <b>Dataset name:</b> Rare Disease Synthetic Dataset
+            </li>
+            <li>
+              <b>Origin:</b> Derived from{" "}
+              <a
+                href="https://ega-archive.org/datasets/EGAD00001008392"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                EGAD00001008392
+              </a>{" "}
+              (EGA).
+            </li>
+            <li>
+              <b>Study size:</b> 18 whole genome samples (6 index cases with
+              their parents) created with public human genomic background
+              combined with in-silico insertion of real disease-causing
+              variants.
+            </li>
+          </ul>
+          <p className="wider-note cite-box">
+            <img className="note-symbol-wider" src={model} alt="Note symbol" />
+            <div>
+              When using this dataset, please acknowledge the following
+              contributors and funding sources: the RD-Connect GPAP
+              (https://platform.rd-connect.eu/), EC H2020 project EJP-RD (grant
+              # 825575), EC H2020 project B1MG (grant # 951724) and Generalitat
+              de Catalunya VEIS project (grant # 001-P-001647).
+            </div>
           </p>
+
+          <table className="dockerTableSimple">
+            <thead>
+              <tr>
+                <th>
+                  <b>File/Folder</b>
+                </th>
+                <th>
+                  <b>Description</b>
+                </th>
+                <th>
+                  <b>Where to find</b>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <a
+                    href="https://metadata.ega-archive.org/datasets/EGAD00001008392"
+                    target="_blank"
+                  >
+                    EGAD00001008392
+                  </a>
+                </td>
+                <td>Rare Disease Synthetic Dataset</td>
+                <td>
+                  See Use Case: Inserting Rare Disease Synthetic Dataset into a
+                  beacon →{" "}
+                  <a href="https://b2ri-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#dataset-model-creation%C2%A0">
+                    {" "}
+                    Dataset model creation section
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://metadata.ega-archive.org/samples/EGAN00003364605"
+                    target="_blank"
+                  >
+                    EGAN00003364605
+                  </a>
+                </td>
+                <td>case1_index – Male sample with Central core disease.</td>
+                <td>
+                  See Use Case: Inserting Rare Disease Synthetic Dataset into a
+                  beacon →{" "}
+                  <a href="https://b2ri-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#dataset-model-creation%C2%A0">
+                    {" "}
+                    Dataset model creation section
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://metadata.ega-archive.org/runs/EGAR00003021166"
+                    target="_blank"
+                  >
+                    EGAR00003021166
+                  </a>
+                </td>
+                <td>case1_index fastq</td>
+                <td>
+                  See Use Case: Inserting Rare Disease Synthetic Dataset into a
+                  beacon →{" "}
+                  <a href="https://b2ri-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#run-model-creation">
+                    Run model from VCF section
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://metadata.ega-archive.org/analyses/EGAZ00001744017"
+                    target="_blank"
+                  >
+                    EGAZ00001744017
+                  </a>
+                </td>
+                <td>Information about the creation of the chromosome 21 VCF</td>
+                <td>
+                  See Use Case: Inserting Rare Disease Synthetic Dataset into a
+                  beacon →{" "}
+                  <a href="https://b2ri-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#Analysis-model-creation">
+                    Analysis model creation section
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://metadata.ega-archive.org/analyses/EGAZ00001744003"
+                    target="_blank"
+                  >
+                    EGAZ00001744003
+                  </a>
+                </td>
+                <td>
+                  Phenopacket with individual information from case1_index
+                  sample
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/phenopackets-to-BFF/rare-disease"
+                    target="_blank"
+                  >
+                    phenopacket
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a
+                    href="https://metadata.ega-archive.org/files/EGAF00005572743"
+                    target="_blank"
+                  >
+                    EGAF00005572743
+                  </a>
+                </td>
+                <td>
+                  5 variants subset of the chromosome 21 VCF from case1_index
+                </td>
+                <td>
+                  See Use Case: Inserting Rare Disease Synthetic Dataset into a
+                  beacon →{" "}
+                  <a href="https://b2ri-documentation-demo.ega-archive.org/use-case:-rare-diseases-data#genomicVariations-model-from-VCF">
+                    genomicVariations model from VCF creation section
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Rare disease use case folder</td>
+                <td>
+                  Folder with the CSVs for dataset and run creation, phenopacket
+                  for individuals model and the subset VCF for
+                  genomicVariations.
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples/Rare-diseases"
+                    target="_blank"
+                  >
+                    Input folder
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Rare disease use case output folder</td>
+                <td>
+                  Output BFF files obtained by converting the CSV models,
+                  phenopacket and VCF using the beacon2 ri tools v2
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/output_docs/Rare-diseases"
+                    target="_blank"
+                  >
+                    Output folder
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              <p className="note-paragraph">
+                 If you want to download the full original dataset metadata
+                please follow the{" "}
+                <a href="https://ega-archive.org/access/download/files/live-outbox/">
+                  Live Distribution
+                </a>{" "}
+                or the{" "}
+                <a href="https://ega-archive.org/access/download/files/pyega3/">
+                  pyEGA3
+                </a>{" "}
+                instructions. Notice that these datasets are free access.
+              </p>
+            </div>
+          </p>
+
+          <h1 id="dataset-3-example-csv-all-fields">
+            Dataset 3: Example CSV with all the fields filled in
+          </h1>
+          <ul>
+            <li>
+              <b>Dataset name:</b> Dataset with synthetic data for beacon
+              testing
+            </li>
+            <li>
+              <b>Origin:</b> All the metadata inserted is synthetic.
+            </li>
+            <li>
+              <b>Study size:</b> 20 female samples with breast carcinoma.
+            </li>
+          </ul>
+          <h6 className="underline">Included files</h6>
+          <table className="dockerTableSimple dockerTableLong">
+            <thead>
+              <tr>
+                <th>
+                  <b>File/Folder</b>
+                </th>
+                <th>
+                  <b>Description</b>
+                </th>
+                <th>
+                  <b>Where to find</b>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CSV folder</td>
+                <td>
+                  Example CSVs with all the possible fields filled in for
+                  analysis, datasets, cohorts, individuals, runs and biosamples
+                  model.
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples/all-fields"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Input folder
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>BFF output</td>
+                <td>
+                  Folder with the BFFs obtained by converting the VCF and the
+                  CSV using beacon2-ri-tools-v2
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/output_docs/all-fields"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Output folder
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h1 id="dataset-4-example-csv-mandatory-fields">
+            Dataset 4: Example CSV with only the mandatory fields filled in
+          </h1>
+
+          <h6 className="underline">Included files</h6>
+          <table className="dockerTableSimple dockerTableLong">
+            <thead>
+              <tr>
+                <th>
+                  <b>File/Folder</b>
+                </th>
+                <th>
+                  <b>Description</b>
+                </th>
+                <th>
+                  <b>Where to find</b>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CSV folder</td>
+                <td>
+                  Example CSVs with all the possible fields filled in for
+                  analysis, datasets, cohorts, individuals, runs and biosamples
+                  model.
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples/mandatory-fields"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Input folder
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <h1 id="dataset-5-genomicvariations-csvs">
+            Dataset 5: genomicVariations CSVs
+          </h1>
           <p>
-            The <i>verbosity</i> will give streaming logs with the reason why a
-            variant has been skipped to be inserted. Recommendation is to leave
-            this as False.
+            You can load genomicVariations data into Beacon using either a VCF
+            file or a CSV. Here you’ll find two genomicVariations CSVs examples,
+            one representing variants with caseLevelData information and the
+            second one with variantLevelData.
+            <ul>
+              <li>
+                <b>caseLevelData:</b> Describes which biosamples carry which
+                variants. This is sample-level information based on individual
+                analyses.
+              </li>
+              <li>
+                <b>variantLevelData:</b> Describes the variants themselves,
+                without linking them to specific individuals. This is
+                aggregate-level information, such as genomic position, alleles,
+                frequency or phenotype associated.
+              </li>
+            </ul>
+          </p>
+          <h6 className="underline">Included files</h6>
+          <table className="dockerTableSimple dockerTableLong">
+            <thead>
+              <tr>
+                <th>
+                  <b>File/Folder</b>
+                </th>
+                <th>
+                  <b>Description</b>
+                </th>
+                <th>
+                  <b>Where to find</b>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>caseLevelData folder</td>
+                <td>
+                  genomicVariations CSV with the mandatory fields of the model
+                  and the caseLevelData properties.
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples/genomicVariations/caseLevelData"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    caseLevelData
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>variantLevelData folder</td>
+                <td>
+                  genomicVariations CSV with the mandatory fields of the model
+                  and the variantLevelData properties.
+                </td>
+                <td>
+                  <a
+                    href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/csv/examples/genomicVariations/variantLevelData"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    variantLevelData
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              <p className="note-paragraph">
+                Note: You can include either or both blocks in your Beacon
+                instance. Combining both gives you a richer model that supports
+                individual-level queries and population-level insights.
+              </p>
+            </div>
           </p>
 
           <br></br>
