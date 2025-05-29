@@ -49,25 +49,36 @@ const CommonErrors: React.FC = () => {
           <h3>Beacon RI Tools v2</h3>
           <h1>Common Errors</h1>
           <h2 id="value-error">Case 1: Value Error</h2>
-
           <div className="codeSnippet error">
             <pre>
-              <code id="input-output-config">
-                csv_filename='csv/examples/cohorts.csv'
-                output_docs_folder='output_docs/CINECA_dataset/'
+              <code id="biosamples-error">
+                {`0%                                                
+ | 0/20 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/usr/src/app/biosamples_csv.py", line 358, in <module>
+    dict_generado, total_i = generate(dict_properties, list_of_headers)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/biosamples_csv.py", line 343, in generate
+    Biosamples(**definitivedict)
+  File "/usr/src/app/validators/biosamples.py", line 171, in __init__
+    super().__init__(**data)
+  File "/usr/local/lib/python3.11/site-packages/pydantic/main.py", line 171, in __init__
+    self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Biosamples
+histologicalDiagnosis.id
+  Value error, id must be CURIE, e.g. NCIT:C42331 [type=value_error, input_value='NCIT_C4194', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.6/v/value_error`}
               </code>
               <button
                 className="copyButtonCode"
                 onClick={() => {
-                  const codeText = document.getElementById(
-                    "input-output-config"
-                  )?.innerText;
+                  const codeText =
+                    document.getElementById("biosamples-error")?.innerText;
                   if (codeText) {
-                    copyToClipboard(codeText, "input-output-config");
+                    copyToClipboard(codeText, "biosamples-error");
                   }
                 }}
               >
-                {copySuccess["input-output-config"] ? (
+                {copySuccess["biosamples-error"] ? (
                   "Copied!"
                 ) : (
                   <img
@@ -79,187 +90,471 @@ const CommonErrors: React.FC = () => {
               </button>
             </pre>
           </div>
-          <h2 id="generic-config-parameters">Generic config parameters</h2>
           <p>
-            The first part of this configuration only concerns the conversion of
-            CSV to BFF. It is used only when you are converting from CSV.
+            This error is triggered during validation of the Biosamples model.
+            It specifically points to the id property within the
+            histologicalDiagnosis field.
           </p>
           <p>
-            The <i>csv_filename</i> variable sets where the CSV file is and from
-            where the script will read the data. Bear in mind that the CSV must
-            be inside the folder <i>csv</i>, and you can use subfolders within
-            it. This CSV file needs to have the headers written as you can find
-            in the files inside{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/templates"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              templates
-            </a>
-            . Note that any header that has a different name from the ones that
-            appear inside the templates will not be read by the Beacon Data
-            Tools.
-          </p>
-          <p>
-            The <i>output_docs_folder</i> sets the folder where your final BFF
-            (JSON files) will be saved once execution of beacon tools finishes.
-            This folder is mandatory to be always inside <i>output_docs</i>, so
-            only the subdirectory inside <i>output_docs</i>
-            can be modified in this path.
+            Let’s break it down:
+            <ul>
+              <li>histologicalDiagnosis is the term being validated.</li>
+              <li>.id is the property within it that’s incorrect.</li>
+            </ul>
           </p>
 
-          <h2 id="VCF-conversion-config-parameters">
-            VCF conversion config parameters
-          </h2>
-
-          <div className="codeSnippet">
+          <p>
+            The error says that the value 'NCIT_C4194' is not a valid CURIE
+            (Compact URI Expression). A CURIE must follow the format: PREFIX:ID.
+          </p>
+          <h6 className="underline">How to fix it</h6>
+          <p>
+            In the CSV search for the field histologicalDiagnosis|id and ensure
+            it’s filled in with the correct CURIE structure. 
+          </p>
+          <h2 id="required-field-missing">Case 2: Required field missing</h2>
+          <div className="codeSnippet error">
             <pre>
-              <code id="vcf-config">
-                allele_counts=False
-                <br />
-                reference_genome='GRCh37' # Choose one between NCBI36, GRCh37,
-                GRCh38
-                <br />
-                datasetId='COVID_pop11_fin_2'
-                <br />
-                case_level_data=False
-                <br />
-                exact_heterozygosity=False
-                <br />
-                num_rows=15000000
-                <br />
-                verbosity=False
+              <code id="datasets-error">
+                {`Traceback (most recent call last):
+  File "/usr/src/app/datasets_csv.py", line 417, in <module>
+    dict_generado, total_i = generate(dict_properties,list_of_headers)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/src/app/datasets_csv.py", line 401, in generate
+    Datasets(**definitivedict)
+  File "/usr/src/app/validators/datasets.py", line 61, in __init__
+    super().__init__(**data)
+  File "/usr/local/lib/python3.11/site-packages/pydantic/main.py", line 171, in __init__
+    self.__pydantic_validator__.validate_python(data, self_instance=self)
+pydantic_core._pydantic_core.ValidationError: 1 validation error for Datasets
+dataUseConditions.duoDataUse.description
+  Field required [type=missing, input_value={'id': 'DUO:0000019,DUO:0...rsion': '7-1-19,7-1-19'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.6/v/missing
+
+0%`}
               </code>
               <button
                 className="copyButtonCode"
                 onClick={() => {
                   const codeText =
-                    document.getElementById("vcf-config")?.innerText;
+                    document.getElementById("datasets-error")?.innerText;
                   if (codeText) {
-                    copyToClipboard(codeText, "vcf-config");
+                    copyToClipboard(codeText, "datasets-error");
                   }
                 }}
               >
-                {copySuccess["vcf-config"] ? (
+                {copySuccess["datasets-error"] ? (
                   "Copied!"
                 ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIconError}
+                    alt="Copy"
+                  />
                 )}
               </button>
             </pre>
           </div>
           <p>
-            The second part of the configuration file pertains to the VCF to BFF
-            conversion. This only needs to be used in case you are using a VCF
-            as a source for the genomic variants collection.
-          </p>
-
-          <p>
-            The <i>num_variants</i> is the variable you need to write in case
-            you are executing the VCF conversion{" "}
-            <i>(genomicVariations_vcf.py)</i>. This will tell the script how
-            many variants will be read and converted from the file(s).
-          </p>
-
-          <p>
-            The <i>allele_frequency</i> field lets you set a threshold for the
-            allele frequency (AF) of the variants you want to convert from the
-            VCF file. If you set it at 0.5, all the variants with 0.5 or less AF
-            will be converted to BFF. 1 is the default value (all variants will
-            be converted).
-          </p>
-
-          <p>
-            The <i>allele_counts</i> now is not implemented yet, just leave it
-            as False.
+            This validation error occurs when you're providing values for the
+            dataUseConditions.duoDataUse object but omitting one of its required
+            properties: description.
           </p>
           <p>
-            The <i>reference_genome</i> is the reference genome the tool will
-            use to map the position of the chromosomes. Make sure to select the
-            same version as the one used to generate your data.
-          </p>
-
-          <p>
-            The <i>datasetId</i>, <i>case_level_data</i>, and{" "}
-            <i>exact_zygosity</i> parameters are <b>only</b> applicable in the{" "}
-            <b>Beacon Production Implementation environment</b>.
+            In the JSON Schema for the duoDataUse object, the description field
+            is mandatory. This field should provide a human-readable explanation
+            of the data use conditions associated with the DUO (Data Use
+            Ontology) terms provided in id.
           </p>
           <p>
-            The <i>datasetId</i> needs to match the id of your datasets.csv or
-            datasets.json file. This will add a datasetId field in every record
-            to match the record with the dataset it belongs to.
+            Because dataUseConditions was included in your dataset entry, the
+            nested structure under duoDataUse must include all required
+            fields—including description.
           </p>
-          <p>
-            When converting a VCF file to BFF, you can use two optional boolean
-            parameters to include sample-level information about each variant:{" "}
-            <i>case_level_data</i> and <i>exact_zygosity</i>.
-          </p>
-          <p>
-            <i>case_level_data</i> will link variants to biosamples. If set to
-            True, this option enables mapping each variant to the specific
-            biosamples (i.e., samples) that carry it. This allows downstream
-            queries to return more granular, sample-level results instead of
-            just listing variants in general.
-          </p>
-          <p className="wider-note">
-            <img
-              className="note-symbol-wider"
-              src="/note-symbol.png"
-              alt="Note symbol"
-            />
-            <div>
-              Important: For this mapping to work correctly, you must:
-              <ul>
-                <li>Have genotype (GT) information available in the VCF. </li>
-                <li>Provide a valid biosamples schema in your BFF files.</li>
-              </ul>
-            </div>
-          </p>
-          <p>
-            Be sure to read the Case-level{" "}
-            <a href="conversion-from-vcf-to-bff#case-level-data-conversion">
-              data conversion section
-            </a>{" "}
-            for detailed guidance on setting this up.
-          </p>
-          <p>
-            <i>exact_zygosity </i>will refine biosample classification. If set
-            to True This parameter classifies each biosample based on its
-            genotype:
-            <ul>
-              <li>Homozygous for the reference allele</li>
-              <li>Heterozygous</li>
-              <li>Homozygous for the alternate allele</li>
-            </ul>
-            This adds precision to your data and can help users interpret
-            zygosity in their queries.
-          </p>
+          <h6 className="underline">How to fix it</h6>
+          <table className="dockerTableSimple">
+            <thead>
+              <tr>
+                <th>
+                  <b>Property</b>
+                </th>
+                <th>
+                  <b>Value</b>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>dataUseConditions | duoDataUse | id</td>
+                <td>DUO:0000019</td>
+              </tr>
+              <tr>
+                <td>dataUseConditions | duoDataUse | version</td>
+                <td>7-1-19</td>
+              </tr>
+              <tr>
+                <td>dataUseConditions | duoDataUse | description</td>
+                <td>Health/Medical/Biomedical use only</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>This will satisfy the schema and resolve the error.</p>
           <p className="note">
             <img
-              className="note-symbol-wider"
+              className="note-symbol"
               src="/note-symbol.png"
               alt="Note symbol"
             />
             <div>
-              If <i>case_level_data</i> is set to False, make sure to also set
-              <i>exact_zygosity </i>to False — it won’t have any effect
-              otherwise.
+              Reminder: Even if duoDataUse appears to be optional overall, any
+              time you provide an object, you must also provide its required
+              fields, as defined in the Beacon schema.
             </div>
           </p>
+          <h2 id="json-decode-error">Case 3: JSONDecodeError</h2>
+          <div className="codeSnippet error">
+            <pre>
+              <code id="jsondecode-error">
+                {`json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 54 (char 53)`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => {
+                  const codeText =
+                    document.getElementById("jsondecode-error")?.innerText;
+                  if (codeText) {
+                    copyToClipboard(codeText, "jsondecode-error");
+                  }
+                }}
+              >
+                {copySuccess["jsondecode-error"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIconError}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+
           <p>
-            The <i>num_rows</i>  are the aproximate calculation you expect for
-            the total of variants in each vcf there are. Make sure this is
-            greater than the total variants expected. It was automatically
-            calculated before but it was very slow sometimes to calculate all
-            the variants number in a VCF.
+            This error is not directly caused by the Beacon RI tools but instead
+            comes from Python’s built-in json library, which fails to parse a
+            malformed JSON string. It typically occurs during the conversion of
+            CSV fields into JSON structures.
           </p>
           <p>
-            The <i>verbosity</i> will give streaming logs with the reason why a
-            variant has been skipped to be inserted. Recommendation is to leave
-            this as False.
+            The message Expecting property name enclosed in double quotes
+            suggests that the parser encountered invalid syntax—usually due to
+            improper formatting of keys, quotes, or punctuation.
+          </p>
+          <p>
+            Some common causes are: 
+            <ul>
+              <li>
+                Wrong quotation marks: All JSON keys and string values must use
+                standard double quotes ("). Smart quotes or typographic quotes
+                (like “ or ‘) will trigger this error.
+              </li>
+              <li>
+                Malformed fields where JSON is expected: info and distribution
+                fields must be filled in as JSON type data. If it contains plain
+                text the conversion will fail. Ensure that info and distribution
+                fields have this structure:
+              </li>
+            </ul>
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code id="method-2-env">
+                {`{"info": "Your information "}
+{"datatypes": {"OGMS:0000015": 20, "OMIABIS:0001032": 20, “OGMS:0000073”:20}}`}
+              </code>
+              <button
+                className="copyButtonCode"
+                onClick={() => {
+                  const codeText =
+                    document.getElementById("method-2-env")?.innerText;
+                  if (codeText) {
+                    copyToClipboard(codeText, "method-2-env");
+                  }
+                }}
+              >
+                {copySuccess["method-2-env"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+          <p>
+            Now, let’s take a look to the headers of the CSV for
+            measurementValue and how we have filled them in:
           </p>
 
+          <h6 className="underline">How to fix it</h6>
+          <p>
+            Open the CSV file in plain text editor and check if all the double
+            quotes are the same and correct.
+          </p>
+          <h2 id="oneof-incorrect-use">Case 4: Incorrect use of OneOf</h2>
+          <p>
+            It’s caused by incorrectly mixing two alternative JSON structures
+            defined, in our example, under the <em>measurementValue</em>{" "}
+            property. Simplified error:
+          </p>
+          <p>Simplified error:</p>
+          <div className="codeSnippet error">
+            <pre>
+              <code id="complex-measurement-error">{`measurements.measurementValue.Quantity.unit
+  Field required [type=missing]
+
+measurements.measurementValue.Quantity.id
+  Extra inputs are not permitted
+
+measurements.measurementValue.Quantity.label
+  Extra inputs are not permitted
+
+measurements.measurementValue.OntologyTerm.value
+  Extra inputs are not permitted`}</code>
+              <button
+                className="copyButtonCode"
+                onClick={() => {
+                  const codeText = document.getElementById(
+                    "complex-measurement-error"
+                  )?.innerText;
+                  if (codeText) {
+                    copyToClipboard(codeText, "complex-measurement-error");
+                  }
+                }}
+              >
+                {copySuccess["complex-measurement-error"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIconError}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+
+          <p>
+            The root of the problem is how the measurementValue property is
+            defined in the JSON schema.
+          </p>
+          <div className="codeSnippet">
+            <pre>
+              <code id="measurement-value-schema">{`"measurementValue": {
+  "description": "The result of the measurement",
+  "oneOf": [
+    { "$ref": "./value.json" },
+    { "$ref": "./complexValue.json" }
+  ]
+}`}</code>
+              <button
+                className="copyButtonCode"
+                onClick={() => {
+                  const codeText = document.getElementById(
+                    "measurement-value-schema"
+                  )?.innerText;
+                  if (codeText) {
+                    copyToClipboard(codeText, "measurement-value-schema");
+                  }
+                }}
+              >
+                {copySuccess["measurement-value-schema"] ? (
+                  "Copied!"
+                ) : (
+                  <img
+                    className="copySymbol copySymbol-custom"
+                    src={copyIcon}
+                    alt="Copy"
+                  />
+                )}
+              </button>
+            </pre>
+          </div>
+
+          <p>
+            The key detail here is oneOf. This means: Only one of these two
+            structures (value.json or complexValue.json) can be used — not both.
+          </p>
+          <p>
+            If you choose to use <em>value.json</em>, the structure looks like
+            this (<em>quantity.json</em>):
+          </p>
+          <ul>
+            <li>referenceRange</li>
+            <li>unit [REQUIRED]</li>
+            <li>value [REQUIRED]</li>
+          </ul>
+
+          <p>
+            Now, let’s take a look to the structure of{" "}
+            <em>complexValue.json</em>:
+          </p>
+          <ul>
+            <li>Quantity – referenceRange, unit, value [REQUIRED]</li>
+            <li>QuantityType – ontologyTerm [REQUIRED]</li>
+          </ul>
+
+          <p>
+            Now, let’s take a look to the headers of the CSV for{" "}
+            <em>measurementValue</em> and how we have filled them in:
+          </p>
+          <table className="dockerTableSimple dockerTableLong">
+            <thead>
+              <tr>
+                <th>
+                  <b>Property</b>
+                </th>
+                <th>
+                  <b>Value</b>
+                </th>
+                <th>
+                  <b>Schema</b>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>measurements | measurementValue | id</td>
+                <td>LOINC:26515-7</td>
+                <td>value.json</td>
+              </tr>
+              <tr>
+                <td>measurements | measurementValue | label</td>
+                <td>Platelets [#/volume] in Blood</td>
+                <td>value.json</td>
+              </tr>
+              <tr>
+                <td>measurements | measurementValue | referenceRange | high</td>
+                <td></td>
+                <td>value.json</td>
+              </tr>
+              <tr>
+                <td>measurements | measurementValue | referenceRange | low</td>
+                <td>10</td>
+                <td>value.json</td>
+              </tr>
+              <tr>
+                <td>
+                  measurements | measurementValue | referenceRange | unit | id
+                </td>
+                <td>NCIT:C8253</td>
+                <td>value.json</td>
+              </tr>
+              <tr>
+                <td>
+                  measurements | measurementValue | referenceRange | unit |
+                  label
+                </td>
+                <td>Milligram</td>
+                <td>value.json</td>
+              </tr>
+              <tr>
+                <td>
+                  measurements | measurementValue | typedQuantities | quantity |
+                  referenceRange | high
+                </td>
+                <td></td>
+                <td>complexValue.json</td>
+              </tr>
+              <tr>
+                <td>
+                  measurements | measurementValue | typedQuantities | quantity |
+                  referenceRange | low
+                </td>
+                <td></td>
+                <td>complexValue.json</td>
+              </tr>
+              <tr>
+                <td>
+                  measurements | measurementValue | typedQuantities | quantity |
+                  referenceRange | unit
+                </td>
+                <td></td>
+                <td>complexValue.json</td>
+              </tr>
+              <tr>
+                <td>
+                  measurements | measurementValue | typedQuantities | quantity |
+                  unit | id
+                </td>
+                <td>-</td>
+                <td>complexValue.json</td>
+              </tr>
+              <tr>
+                <td>
+                  measurements | measurementValue | typedQuantities | quantity |
+                  unit | label
+                </td>
+                <td></td>
+                <td>complexValue.json</td>
+              </tr>
+              <tr>
+                <td>
+                  measurements | measurementValue | typedQuantities | quantity |
+                  value
+                </td>
+                <td></td>
+                <td>complexValue.json</td>
+              </tr>
+              <tr>
+                <td>measurements | measurementValue | unit | id</td>
+                <td></td>
+                <td>complexValue.json</td>
+              </tr>
+              <tr>
+                <td>measurements | measurementValue | unit | label</td>
+                <td></td>
+                <td>complexValue.json</td>
+              </tr>
+              <tr>
+                <td>measurements | measurementValue | value</td>
+                <td>5</td>
+                <td>complexValue.json</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>
+            Since measurementValue only accepts one schema (value.json or
+            complexValue.json), combining fields from both leads to:
+          </p>
+          <ul>
+            <li>Extra input errors → You added fields from the wrong schema</li>
+            <li>
+              Missing required field → You didn't complete the schema you
+              intended to use
+            </li>
+          </ul>
+          <h6 className="underline">How to fix it</h6>
+          <p>
+            Decide whether you're using:
+            <ul>
+              <li>Simple Quantity (value.json) → Use only value and unit</li>
+              <li>
+                Complex Quantity (complexValue.json) → Use only typedQuantities,
+                quantityType, and related nested fields
+              </li>
+            </ul>
+          </p>
+          <p>
+            Then, ensure all required fields for that choice are included, and
+            remove any fields from the other structure.
+          </p>
           <br></br>
           <br></br>
         </div>

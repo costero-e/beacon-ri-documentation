@@ -140,6 +140,17 @@ tbody tr {
   border-collapse: collapse;
 }
 
+.dockerTableLong td:first-child {
+  max-width: 100px;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.dockerTableLong td,
+.dockerTableLong th {
+  padding-right: 20px;
+}
+
 .dockerTable th,
 .dockerTable td {
   padding: 12px;
@@ -279,7 +290,7 @@ p.lessMargin {
 
 .codeSnippet.error pre {
   background-color: #ffe6e6;
-  border: 1px solid red;
+  border: 1px solid #972121;
   padding: 12px;
   font-family: monospace;
 }
