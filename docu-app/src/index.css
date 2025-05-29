@@ -277,6 +277,13 @@ p.lessMargin {
   line-height: 20px;
 }
 
+.codeSnippet.error pre {
+  background-color: #ffe6e6;
+  border: 1px solid red;
+  padding: 12px;
+  font-family: monospace;
+}
+
 .codeSnippet.codeSnippet-mongodb pre {
   padding-top: 30px;
 }

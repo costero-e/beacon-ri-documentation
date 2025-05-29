@@ -1,18 +1,106 @@
-Documentation > Beacon RI Tools v2 > Conversion from CSV to BFF
-
+Documentation Beacon RI Tools v2 Conversion from CSV to BFF
 Beacon RI Tools v2
-
 Conversion from CSV to BFF
+Choosing Column Headers
+Each type of entry (e.g., analyses, biosamples, individuals, etc.) has its own corresponding CSV template located in the csv-templates folder. These templates list all the valid column headers you can use.
 
-Before getting the BFF (json) final documents, please make sure your conf.py, which you will find inside the conf folder, is reading the right CSV document.
+For example, in biosamples.csv, one of the headers you'll see is:
 
-Now you can execute the next bash command from the root folder in your terminal.
+biosampleStatus|id
 
-If you want to convert all the CSV files you have at the same time, after saving them in the CSV input folder (see configuration head), just execute:
+This naming convention follows the GA4GH Beacon v2 specification. The | (pipe) character separates different levels of a nested field: the part on the left represents the parent field, and the part on the right is the nested element within it. In this case:
+
+biosampleStatus is an object field.
+id is one of its subfields, representing an ontology identifier.
+According to the Beacon v2 specification, biosampleStatus is defined as an ontology term describing the classification of the sample (e.g., whether it’s a reference or abnormal sample). Here’s a simplified excerpt from the spec:
+
+"biosampleStatus": {
+  "description": "Classification of the sample using EFO ontology terms.",
+  "examples": [
+    { "id": "EFO:0009654", "label": "reference sample" },
+    { "id": "EFO:0009655", "label": "abnormal sample" },
+    { "id": "EFO:0009656", "label": "neoplastic sample" }
+    // ...
+  ]
+}
+
+So, in your CSV file, the biosampleStatus|id column should contain ontology IDs like:
+
+biosampleStatus|id
+EFO:0009654
+EFO:0009655
+
+Optionally, you can include the label for each ontology ID in a second column called biosampleStatus|label, like so:
+
+biosampleStatus|id,biosampleStatus|label
+EFO:0009654,reference sample
+EFO:0009655,abnormal sample
+
+Each row corresponds to a different biosample, and both the id and label must match the values defined in the ontology.
+
+Filling in Data
+To convert metadata or phenotypic/clinical data into BFF (Beacon File Format), you need to create one CSV file per collection type (e.g., individuals, biosamples, analyses, etc.). Each file should contain records formatted according to the column headers, which map directly to fields in the Beacon v2 schema.
+
+Each row in a CSV file represents a new and independent document in the final output. Templates and examples for each collection type can be found in the csv folder of the repository.
+
+General Rules for Filling In the CSV Files
+Multiple values in the same document:
+To include multiple values in a single field (e.g. multiple IDs, multiple measures), separate them using the pipe symbol (|).
+Example:
+
+id
+HG00001|HG00002
+
+Make sure the values in related columns are in the same order:
+
+label
+labelForHG00001|labelForHG00002
+
+
+Filling in info fields:
+The info field is flexible and accepts free-form data, but must be written as JSON. This is also required for certain fields in the genomicVariations collection (e.g., copies or subjects).
+Example:
+
+{"info": "Some important information to be added."}
+
+
+Respect the column names:
+Column headers must match exactly those defined in the template files. The conversion script will only recognize correctly spelled headers. Mistyped headers will be ignored or cause errors.
+
+
+Optional vs. required fields:
+Not all columns need to be filled in. Some are optional or context-specific. However, certain fields are required depending on the collection type (see below). If a required field is missing or misfilled, an error will be raised. Only columns with actual data will be included in the final output — unused columns can be removed if preferred.
+
+Required Fields per Collection
+Collection	Required Fields
+Analyses	id, analysisDate, pipelineName
+Biosamples	id, biosampleStatus, sampleOriginType
+Cohorts	id, name, cohortType
+Datasets	id, name
+Individuals	id, sex
+Runs	id, biosampleId, runDate
+Note symbol
+For more information about each field, refer to the default schemas and the Beacon v2 specification.
+
+Additional Notes
+The id field in the Biosamples collection must match the sample IDs in your VCF header.
+The id field in the Individuals collection does not have to match VCF sample IDs. But, if it doesn’t, you must fill in the individualId field in the Biosamples collection to link individuals and samples.
+The datasetId in the Datasets collection must match the datasetId defined in your conf.py file (this applies only to production Beacon deployments).
+You are not required to submit CSV files for all collections. If you do not have data for a given collection, you can omit its CSV file — the Beacon tools will not raise any errors.
+Conversion from CSV to BFF
+Before converting your CSV files, ensure that the conf.py file (located in the conf folder) is correctly configured to read the appropriate input files and settings.
+
+Convert All CSVs at Once
+To convert all CSV files at once, make sure they are saved in the csv folder (refer to the Configuration File section for details).
+
+Then run the following command from the root of the project:
 
 docker exec -it ri-tools python convert_csvTObff.py
 
-On the other hand, you can convert one by one only, picking one of the following commands for the entry type you need:
+This script will process all available CSVs and generate one JSON file per collection in the output_docs folder.
+
+Convert a Specific Collection
+If you prefer to convert only one collection at a time, you can use one of the following commands depending on the type of data:
 
 docker exec -it ri-tools python analyses_csv.py
 
@@ -28,6 +116,8 @@ docker exec -it ri-tools python individuals_csv.py
 
 docker exec -it ri-tools python runs_csv.py
 
-Once you execute any of the conversion scripts, it will generate the final JSON files (BFF) in the output_docs folder with the name of the collection followed by the .json extension (e.g., cohorts.json).
+Each script will generate a corresponding JSON file (e.g., cohorts.json) inside the output_docs folder.
 
-These files can be used in a MongoDB for beacon usage. To know how to import them into a Beacon v2, please follow the instructions described in Beacon v2 RI API.
+These JSON documents follow the Beacon File Format (BFF) and are ready to be imported into a MongoDB database for use with a GA4GH Beacon v2 instance.
+
+To learn how to load these JSON files into your Beacon, refer to the documentation for the Beacon v2 RI API and the Beacon v2 PI API.

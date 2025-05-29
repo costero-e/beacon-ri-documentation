@@ -32,6 +32,8 @@ import Resources from "./pages/Resources";
 import UseCase from "./pages/Tutorials/UseCase";
 import CreateYourBeacon from "./pages/Tutorials/CreateYourBeacon";
 import ScrollToTop from "./ScrollToTop";
+import CommonErrors from "./pages/Beacon2RITools/CommonErrors";
+import TestData from "./pages/Beacon2RITools/TestData";
 
 interface SearchContextProps {
   searchTerm: string;
@@ -97,6 +99,8 @@ function App() {
       "Conversion from CSV to BFF",
       "Conversion from VCF to BFF",
       "Conversion from Phenopackets to BFF",
+      "Common Errors",
+      "Test Data",
     ],
     "Beacon UI": ["Deployment", "Configuration UI", "Querying the UI"],
     "Beacon Network UI": [
@@ -185,6 +189,8 @@ function App() {
                   path="/conversion-from-phenopackets-to-bff"
                   element={<ConversionPhenopacketsBFF />}
                 />
+                <Route path="/common-errors" element={<CommonErrors />} />
+                <Route path="/test-data" element={<TestData />} />
 
                 {/* Beacon UI */}
                 <Route path="/deployment" element={<BeaconUIDeployment />} />
