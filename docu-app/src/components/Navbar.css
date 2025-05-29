@@ -197,6 +197,10 @@
   }
 }
 
+.no-underline {
+  text-decoration: none;
+}
+
 /* @media (max-width: 845px) and (min-width: 535px) {
   .inputContainer {
     background-color: coral;

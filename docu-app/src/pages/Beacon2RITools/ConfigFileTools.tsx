@@ -204,16 +204,61 @@ const ConfigFileTools: React.FC = () => {
             to match the record with the dataset it belongs to.
           </p>
           <p>
-            The <i>case_level_data</i> is a boolean parameter (True or False)
-            which will relate your variants to the samples they belong to. In
-            case you set this to true, please, read as well the case level data
-            paragraph below.
+            When converting a VCF file to BFF, you can use two optional boolean
+            parameters to include sample-level information about each variant:{" "}
+            <i>case_level_data</i> and <i>exact_zygosity</i>.
           </p>
           <p>
-            The <i>exact_zygosity</i> is a boolean parameter (True or False)
-            that, in case <i>case_level_data</i> is True, then, it will classify
-            the biosamples in being heterozygous for either the reference or the
-            alternate allele.
+            <i>case_level_data</i> will link variants to biosamples. If set to
+            True, this option enables mapping each variant to the specific
+            biosamples (i.e., samples) that carry it. This allows downstream
+            queries to return more granular, sample-level results instead of
+            just listing variants in general.
+          </p>
+          <p className="wider-note">
+            <img
+              className="note-symbol-wider"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              Important: For this mapping to work correctly, you must:
+              <ul>
+                <li>Have genotype (GT) information available in the VCF. </li>
+                <li>Provide a valid biosamples schema in your BFF files.</li>
+              </ul>
+            </div>
+          </p>
+          <p>
+            Be sure to read the Case-level{" "}
+            <a href="conversion-from-vcf-to-bff#case-level-data-conversion">
+              data conversion section
+            </a>{" "}
+            for detailed guidance on setting this up.
+          </p>
+          <p>
+            <i>exact_zygosity </i>will refine biosample classification. If set
+            to True This parameter classifies each biosample based on its
+            genotype:
+            <ul>
+              <li>Homozygous for the reference allele</li>
+              <li>Heterozygous</li>
+              <li>Homozygous for the alternate allele</li>
+            </ul>
+            This adds precision to your data and can help users interpret
+            zygosity in their queries.
+          </p>
+          <p className="note">
+            <img
+              className="note-symbol-wider"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              If <i>case_level_data</i> is set to False, make sure to also set
+              <i>exact_zygosity </i>to False — it won’t have any effect
+              otherwise.
+            </div>
           </p>
           <p>
             The <i>num_rows</i>  are the aproximate calculation you expect for

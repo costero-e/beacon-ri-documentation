@@ -101,11 +101,11 @@ const ContentPreloader = () => {
     ConfigurationFile,
     "Configuration File"
   );
-  useRegisterTextContent(
-    "/creating-the-csv-files",
-    CreatingCSVFilesText,
-    "Creating the CSV files"
-  );
+  // useRegisterTextContent(
+  //   "/creating-the-csv-files",
+  //   CreatingCSVFilesText,
+  //   "Creating the CSV files"
+  // );
   useRegisterTextContent(
     "/conversion-from-csv-to-bff",
     ConversionCSVBFFText,
@@ -157,12 +157,12 @@ const ContentPreloader = () => {
   useRegisterTextContent(
     "/use-case:-rare-diseases-data",
     UseCaseText,
-    "UseCase"
+    "Use Case: Rare Disease Data"
   );
   useRegisterTextContent(
     "/create-your-beacon",
     CreateYourBeaconText,
-    "CreateYourBeacon"
+    "Create Your Beacon"
   );
 
   // Resources

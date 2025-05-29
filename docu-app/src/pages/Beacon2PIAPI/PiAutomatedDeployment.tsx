@@ -132,6 +132,10 @@ const PiAutomatedDeployment = () => {
             <li>5050 → beacon</li>
           </ul>
           <h2 id="execute-start-script">Execute start script from root</h2>
+          <p>
+            To quickly deploy your Beacon instance and load initial data, run
+            the following command from the root of your project:
+          </p>
           <div className="codeSnippet">
             <pre>
               <code>bash mongostart.sh</code>
@@ -147,6 +151,29 @@ const PiAutomatedDeployment = () => {
               </button>
             </pre>
           </div>
+          <p>
+            This script will:
+            <ul>
+              <li>Deploy the Beacon API</li>
+              <li>
+                Insert default Beacon-formatted data into your MongoDB instance,
+                using the files located at:{" "}
+                <em>/beacon2-pi-api/beacon/connections/mongo/data</em>
+              </li>
+            </ul>
+          </p>
+          <p className="note">
+            <img
+              className="note-symbol"
+              src="/note-symbol.png"
+              alt="Note symbol"
+            />
+            <div>
+              Want to insert your own data?<br></br>
+              Simply replace the contents of the data folder with your custom
+              Beacon Friendly Format (BFF) files before running the script.
+            </div>
+          </p>
           <p className="paragraph-final">
             If the operation is successful, you will have a beacon up and
             running at{" "}
@@ -158,6 +185,40 @@ const PiAutomatedDeployment = () => {
               http://localhost:5050/api
             </a>
             .
+          </p>
+          <h2 id="customize-your-beacon">Next Steps: Customize Your Beacon</h2>
+          <p>
+            Make your Beacon your own by following these next steps:
+            <ul>
+              <li>
+                Edit your instance’s{" "}
+                <a href="https://b2ri-documentation-demo.ega-archive.org/configuration#editing-beacon-info">
+                  metadata
+                </a>
+                . Update the <em>/info</em> endpoint with your organization's
+                name, description, version, and contact details.
+              </li>
+              <li>
+                Manage dataset{" "}
+                <a href="https://b2ri-documentation-demo.ega-archive.org/configuration#managing-dataset-permissions">
+                  permissions
+                </a>
+                . Control which datasets are public or require authentication.
+              </li>
+              <li>
+                Enable advanced{" "}
+                <a href="https://b2ri-documentation-demo.ega-archive.org/filtering-terms#extract-terms">
+                  {" "}
+                  filtering
+                </a>
+              </li>
+              <li>
+                Found more setting options in{" "}
+                <a href="https://b2ri-documentation-demo.ega-archive.org/configuration">
+                  Configuration
+                </a>
+              </li>
+            </ul>
           </p>
         </div>
         <div className="sidebarColumn">

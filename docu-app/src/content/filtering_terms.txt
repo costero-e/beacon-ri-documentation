@@ -1,25 +1,50 @@
-Beacon 2 PI API - Beacon 2 PI API - Filtering Terms
-
+Documentationat Beacon 2 PI API Filtering Terms
 Beacon 2 Production Implementation API
-
 Filtering Terms
+Filtering terms are metadata fields that allow users to query your Beacon more precisely — for example, by filtering results based on sequencing strategy (libraryStrategy), tissue type, disease, or other structured attributes. These terms often rely on ontologies to ensure consistent vocabulary across datasets.
 
-Extract filtering terms
-To automatically fill in the filtering terms endpoint and be able to apply the ontologies that are found inside your data to query your beacon, please execute the next script:
-docker exec beaconprod python -m beacon.connections.mongo.extract_filtering_terms
+This section explains how to extract, add, and enhance filtering terms for your Beacon instance.
 
-Manually adding filtering terms (optional)
-To manually add filtering terms to your beacon, execute the following command in MongoDB for the `libraryStrategy` field in the `runs` collection:
+Automatically Extract Filtering Terms
+If your data collections (e.g., runs, biosamples, etc.) already contain structured metadata using ontology terms (like NCIT, UBERON, EFO...), you can extract filtering terms automatically.
+This will populate the /filteringTerms endpoint of your Beacon, enabling more advanced queries.
 
-```bash
-db.filtering_terms.insertMany([{
-  "type": "alphanumeric",
-  "id": "libraryStrategy",
-  "scope": ["runs"]
-}])
-```
-Get descendant and semantic similarity terms (optional)
-If you have the ontologies loaded and the filtering terms extracted*, you can automatically get their descendant and semantic similarity terms by following the next two steps: Add your .obo files inside ontologies naming them as the ontology prefix in lowercase (e.g. ncit.obo) and rebuild the beacon container with:
-Run the following script:
+docker exec beaconprod python beacon/connections/mongo/extract_filtering_terms.py
 
-docker exec beaconprod python -m beacon.connections.mongo.get_descendants
+Manually Add Filtering Terms (optional)
+If you want to enable filtering for fields that aren’t auto-detected or don’t use ontologies (e.g., simple alphanumeric fields like libraryStrategy), you can add them manually.
+
+Execute the following command:
+
+db.filtering_terms.insertMany([
+  {
+     "type": "alphanumeric",
+     "id": "libraryStrategy",
+     "scope": ["runs"]
+  }
+])
+
+Field descriptions:
+type: alphanumeric indicates this is a plain text value, not an ontology term.
+id: The metadata field name.
+scope: The collection where this field is used (e.g., runs, biosamples, analyses).
+
+Enhance Ontology Filtering with Descendants and semantic similarities (optional)
+To make ontology-based filtering more powerful and user-friendly, you can enable two features:
+Descendant terms: Automatically include all subcategories of a given ontology term (e.g., querying for “cancer” also returns “lung cancer”, “breast cancer”, etc.).
+id: The metadata field name.
+Semantic similarity: Enable matching to related ontology terms based on meaning, not just hierarchy. This allows for more flexible queries when users don’t know the exact term used in the data.
+
+Example
+If your data uses the term “glioblastoma”, but a user searches for “brain tumor”, semantic similarity can help bridge the gap — even if “brain tumor” isn’t a direct parent of “glioblastoma”.
+
+How to Enable
+Add your .obo ontology files
+Place ontology files into the ontologies/ folder in your Beacon instance. The filename must match the ontology prefix in lowercase (e.g., ncit.obo, uberon.obo, etc.).
+
+Run the script to enhance filtering terms
+docker exec beaconprod python beacon/connections/mongo/get_descendants.py
+
+This script:
+Adds descendant terms from the ontologies to each filtering term.
+Computes semantic similarities based on the ontology structure, enriching your Beacon’s ability to match related terms.

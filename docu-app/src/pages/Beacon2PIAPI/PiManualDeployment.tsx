@@ -12,8 +12,8 @@ const PiManualDeployment = () => {
     const textToCopy = {
       "cloning-repository":
         "git clone https://github.com/EGA-archive/beacon2-pi-api.git",
-      "cd-deploy": "docker-compose up -d --build",
-      "create-network": "docker-compose up -d –build beaconprod db",
+      "cd-deploy": "docker compose up -d --build",
+      "create-network": "docker compose up -d –build beaconprod db",
       "data-injection": [
         'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/datasets.json --collection datasets',
         'docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.0.0.1:27017/beacon?authSource=admin" --file /data/individuals.json --collection individuals',
@@ -118,8 +118,7 @@ const PiManualDeployment = () => {
           <p>Light up the containers from the deploy folder.</p>
           <div className="codeSnippet">
             <pre>
-              <code>docker-compose up -d --build</code>
-
+              <code>docker compose up -d --build</code>
               <button
                 className="copyButtonCode"
                 onClick={() => copyToClipboard("cd-deploy")}
@@ -142,7 +141,7 @@ const PiManualDeployment = () => {
 
           <div className="codeSnippet">
             <pre>
-              <code>docker-compose up -d –build beaconprod db</code>
+              <code>docker compose up -d –build beaconprod db</code>
               <button
                 className="copyButtonCode"
                 onClick={() => copyToClipboard("create-network")}

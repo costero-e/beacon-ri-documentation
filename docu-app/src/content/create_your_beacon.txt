@@ -28,7 +28,7 @@ First, let’s clone the beacon production implementation repository in your sys
 
 git clone https://github.com/EGA-archive/beacon2-pi-api.git
 
-Note symbol
+
 Ensure port 21017 and 5050 are free for MongoDb and Beacon.
 
 And now let’s build all the necessary containers: 
@@ -72,7 +72,7 @@ Genomic variations: unique genomic alterations, e.g., position in a genome, sequ
 Individuals: either patients or healthy controls whose details (including phenotypic and clinical) are stored in the repository.
 Biosamples: samples taken from individuals, including details of procedures, dates and times.
 Analyses & Runs: details on (a) procedures used for sequencing a biosample (runs), and (b) bioinformatic procedures to identify variants (analyses).
-Note symbol
+
 Note that none of these models are mandatory for a beacon to be functional, but the dataset model is mandatory for the API to be queryable. All the beacons will respond with boolean, count and full response. But the response type, hit, miss, all and none  will be available if the dataset model was included in the beacon. This is what these responses mean:
 Hit: it returns the positive results of the query per dataset. 
 Miss: it returns the datasets where the query did not have a hit. 
@@ -84,7 +84,7 @@ If you are interested in using them, make sure to include the datasets model int
 3. Converting VCF to Genomic Variations Model beacon2-ri-tools-v2
 The most simple way of converting variant information into the genomicVariations model is directly reading a VCF into Beacon Friendly Format (BFF). To convert directly from a VCF, copy all the files into the files_to_read folder and follow the instructions below to correctly fill in the conf.py.
 
-Note symbol
+
 Bear in mind that if your variant information is not in a VCF format you can also fill in the Genomic Variations CSV.
 
 4. Filling in the CSV Templates
@@ -150,7 +150,7 @@ case_level_data=False
 exact_heterozygosity=False
 num_rows=1500000
 verbosity=False
-Copy
+
 How to fill in config.py?
 The csv_folder variable sets the path of a folder containing all the CSVs that will be converted to BFF. Please, don’t modify the path ./csv/.
 The output_docs_folder variable sets the folder where your final .json files (BFF format) will be saved once execution of beacon tools finishes. This folder should always be located within the folder 'output_docs', but subdirectories can be created inside it. e.g output_docs_folder='./output_docs/test1'
@@ -177,19 +177,19 @@ All the VCFs to be converted are saved in./beacon2-pi-api/ri-tools/files/vcf/fil
 If this is done, then run:
 
 docker exec -it ri-tools python convert_csvTObff.py
-Copy
+
 The Beacon Friendly Format JSONs from CSVs will be generated in the output_docs folder, with the name of the collection followed by .json extension, e.g. biosamples.json.
 If you have VCFs to convert, then run too:
 
 docker exec -it ri-tools python genomicVariations_vcf.py
-Copy
+
 And export it from the mongoDB to a JSON BFF with: 
 
 docker exec ri-tools mongoexport --jsonArray --uri "mongodb://
 root:example@127.0.0.1:27017/beacon?authSource=admin" --collection
 genomicVariations > ./beacon2-pi-api/ri-tools/output_docs//
 genomicVariations.json
-Copy
+
 All these BFF JSONs will be used to populate a mongoDB for beacon usage.
 Before moving to the actual installation and population of the beacon, ensure all the following steps have been accomplished:
 If reading from VCFs, move the necessary files to files_to_read folder

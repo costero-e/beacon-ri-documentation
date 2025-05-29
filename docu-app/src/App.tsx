@@ -94,7 +94,6 @@ function App() {
     "Beacon RI Tools v2": [
       "Starting Guide",
       "Configuration File",
-      "Creating the CSV Files",
       "Conversion from CSV to BFF",
       "Conversion from VCF to BFF",
       "Conversion from Phenopackets to BFF",
@@ -169,10 +168,10 @@ function App() {
                   path="/configuration-file"
                   element={<ConfigFileTools />}
                 />
-                <Route
+                {/* <Route
                   path="/creating-the-csv-files"
                   element={<CreatingCSVs />}
-                />
+                /> */}
                 <Route
                   path="/conversion-from-csv-to-bff"
                   element={<ConversionCSVBFF />}

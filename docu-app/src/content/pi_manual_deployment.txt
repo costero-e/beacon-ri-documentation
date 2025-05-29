@@ -18,13 +18,13 @@ Make sure the next list of ports are free of use in your system:
 Light up the containers from the deploy folder.
 
 ```bash
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 If you wish to light up only some of the services, not all, just write the name of the services in the `docker-compose.yml` file right after the command (e.g., for having the mandatory services only):
 
 ```bash
-docker-compose up -d –build beaconprod db
+docker compose up -d –build beaconprod db
 ```
 
 If the containers are built correctly:

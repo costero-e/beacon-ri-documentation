@@ -2,7 +2,6 @@ import { useState } from "react";
 import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
-import pin from "../../pin.svg";
 
 const UseCase = () => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(

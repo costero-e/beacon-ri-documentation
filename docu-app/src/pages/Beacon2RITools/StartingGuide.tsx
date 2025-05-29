@@ -136,7 +136,14 @@ const StartingGuide: React.FC = () => {
           <div className="codeSnippet">
             <pre>
               <code>
-                git clone https://github.com/EGA-archive/beacon-data-tools.git
+                git clone{" "}
+                <a
+                  href="https://github.com/EGA-archive/beacon-data-tools.git"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  https://github.com/EGA-archive/beacon-data-tools.git
+                </a>
               </code>
               <button
                 className="copyButtonCode"
@@ -161,12 +168,12 @@ const StartingGuide: React.FC = () => {
           </p>
           <div className="codeSnippet">
             <pre>
-              <code>docker-compose up -d --build</code>
+              <code>docker compose up -d --build</code>
               <button
                 className="copyButtonCode"
                 onClick={() =>
                   copyToClipboard(
-                    "docker-compose up -d --build",
+                    "docker compose up -d --build",
                     "docker-command"
                   )
                 }

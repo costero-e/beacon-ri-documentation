@@ -132,65 +132,70 @@ const ConfigFileTools: React.FC = () => {
           </h2>
           <p>
             To convert a phenopacket into Biosamples and Individuals schemas
-            first save the phenopacket in this folder:{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/phenopackets-to-BFF"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              phenopackets-to-BFF.
-            </a>
-            <br></br>
-            And then run:
+            follow the following steps:
           </p>
-
-          <div className="codeSnippet">
-            <pre>
-              <code id="phenopackets-to-BFF">
-                docker exec phenopackets-to-BFF python working-w-phenopackets.py
-                /usr/src/app/examples/phenopacket.json
-              </code>
-              <button
-                className="copyButtonCode"
-                onClick={() => {
-                  const codeText = document.getElementById(
-                    "phenopackets-to-BFF"
-                  )?.innerText;
-                  if (codeText) {
-                    copyToClipboard(codeText, "phenopackets-to-BFF");
-                  }
-                }}
+          <ul>
+            <li>
+              Copy the phenopacket into this folder:{" "}
+              <a
+                href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/phenopackets-to-BFF"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {copySuccess["phenopackets-to-BFF"] ? (
-                  "Copied!"
-                ) : (
-                  <img className="copySymbol" src={copyIcon} alt="Copy" />
-                )}
-              </button>
-            </pre>
-          </div>
-          <p className="note">
-            <img
-              className="note-symbol"
-              src="/note-symbol.png"
-              alt="Note symbol"
-            />
-            <div>
-              Bear in mind that the path **/usr/src/app/examples** must remain
-              unchanged.
+                phenopackets-to-BFF.
+              </a>
+            </li>
+            <li>Modify and run the execution query:</li>
+            <div className="codeSnippet">
+              <pre>
+                <code id="phenopackets-to-BFF">
+                  docker exec phenopackets-to-BFF python
+                  working-w-phenopackets.py
+                  /usr/src/app/examples/YOUR_PHENOPACKET_NAME.json
+                </code>
+                <button
+                  className="copyButtonCode"
+                  onClick={() => {
+                    const codeText = document.getElementById(
+                      "phenopackets-to-BFF"
+                    )?.innerText;
+                    if (codeText) {
+                      copyToClipboard(codeText, "phenopackets-to-BFF");
+                    }
+                  }}
+                >
+                  {copySuccess["phenopackets-to-BFF"] ? (
+                    "Copied!"
+                  ) : (
+                    <img className="copySymbol" src={copyIcon} alt="Copy" />
+                  )}
+                </button>
+              </pre>
             </div>
-          </p>
-          <p>
-            You'll find your BFFs in the same folder where you saved the
-            phenopacket:{" "}
-            <a
-              href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/phenopackets-to-BFF"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              phenopackets-to-BFF.
-            </a>
-          </p>
+            <p className="note">
+              <img
+                className="note-symbol"
+                src="/note-symbol.png"
+                alt="Note symbol"
+              />
+              <div>
+                Bear in mind that the path **/usr/src/app/examples** must remain
+                unchanged, but you need to add your phenopackets name to the
+                query.
+              </div>
+            </p>
+            <li>
+              You'll find your BFFs in the same folder where you saved the
+              phenopacket:{" "}
+              <a
+                href="https://github.com/EGA-archive/beacon2-ri-tools-v2/tree/main/phenopackets-to-BFF"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                phenopackets-to-BFF.
+              </a>
+            </li>
+          </ul>
           <br></br>
           <br></br>
         </div>

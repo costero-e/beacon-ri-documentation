@@ -1,37 +1,41 @@
-Automated Deployment
-Documentation Path
-Documentation > Beacon 2 PI API > Automated Deployment
+Documentation Beacon 2 PI API Automated Deployment
+Beacon 2 Production Implementation API
 Prerequisites
 You should have installed:
-
 Docker
 Docker Compose
-Data from Beacon RI Tools v2
-Bear in mind that the datasetId for your records must match the id for the dataset in the /datasets entry type.
-Automated Deployment
-This deployment uses a bash script and a Makefile and is ready for the MongoDB case production.
+Data from Beacon RI Tools v2. Please, bear in mind that the datasetId for your records must match the id for the dataset in the /datasets entry type.
 
-Cloning the Repository
+Automated Deployment
+This deployment relies on a Bash script and a Makefile and it is only compatible with MongoDB database deployments.
+
+Cloning the repository
 First of all, start by cloning the GitHub repository in your system.
 
-bash
-Copy
-Edit
 git clone https://github.com/EGA-archive/beacon2-pi-api.git
-Free Ports
-Make sure the following ports are free on your system:
+
+Make sure the next list of ports are free of use in your system:
 
 27017 → mongo
 5050 → beacon
-Execute Start Script from Root
-Run the following command:
+Execute start script from root
+To quickly deploy your Beacon instance and load initial data, run the following command from the root of your project:
 
-bash
-Copy
-Edit
 bash mongostart.sh
-Successful Deployment
-If the operation is successful, you will have a beacon up and running at:
 
-http://localhost:5050/api
+This script will:
+Deploy the Beacon API
+Insert default Beacon-formatted data into your MongoDB instance, using the files located at: /beacon2-pi-api/beacon/connections/mongo/data
 
+
+Want to insert your own data?
+Simply replace the contents of the data folder with your custom Beacon Friendly Format (BFF) files before running the script.
+
+If the operation is successful, you will have a beacon up and running at http://localhost:5050/api.
+
+Next Steps: Customize Your Beacon
+Make your Beacon your own by following these next steps:
+Edit your instance’s metadata. Update the /info endpoint with your organization's name, description, version, and contact details.
+Manage dataset permissions. Control which datasets are public or require authentication.
+Enable advanced filtering
+Found more setting options in Configuration

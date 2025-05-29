@@ -1,52 +1,63 @@
-Documentation > Beacon RI Tools v2 > Configuration File
-
+Documentation Beacon RI Tools v2 Configuration File
 Beacon RI Tools v2
 Configuration File
-
 In order to use Beacon RI Tools v2 one needs to modify a configuration file with the desired files and options for the different collections.
 
-You will find conf.py inside the conf directory: 
-https://github.com/EGA-archive/beacon-data-tools/tree/main/conf.
-Inside this file, you will find the following information:
+You will find conf.py inside the conf directory. Inside this file, you will find the following information:
 
-Input and Output files config parameters:
-csv_filename='csv/examples/cohorts.csv'
-output_docs_folder='output_docs/CINECA_dataset/'
+Input and Output files config parameters
+csv_filename='csv/examples/cohorts.csv' output_docs_folder='output_docs/CINECA_dataset/'
 
-VCF conversion config parameters:
-allele_frequency=1  # introduce float number, leave 1 if you want to convert all the variants
-reference_genome='GRCh38'  # Choose one between NCBI36, GRCh37, GRCh38
-datasetId='coadread_tcga_pan_can_atlas_2018'
-case_level_data=False
-num_rows=7000000
-population='Finnish'
-
-Generic config parameters:
-
+Generic config parameters
 The first part of this configuration only concerns the conversion of CSV to BFF. It is used only when you are converting from CSV.
 
-The csv_filename variable sets where the CSV file is and from where the script will read the data. Bear in mind that the CSV must be inside the folder csv, and you can use subfolders within it. This CSV file needs to have the headers written as you can find in the files inside the templates directory:
-https://github.com/EGA-archive/beacon-data-tools/tree/main/csv/templates.
-Note that any header that has a different name from the ones that appear inside the templates will not be read by the Beacon RI Tools v2.
+The csv_filename variable sets where the CSV file is and from where the script will read the data. Bear in mind that the CSV must be inside the folder csv, and you can use subfolders within it. This CSV file needs to have the headers written as you can find in the files inside templates. Note that any header that has a different name from the ones that appear inside the templates will not be read by the Beacon Data Tools.
 
-The output_docs_folder sets the folder where your final BFF (JSON files) will be saved once execution of beacon tools finishes. This folder is mandatory to be always inside output_docs, so only the subdirectory inside output_docs can be modified in this path.
+The output_docs_folder sets the folder where your final BFF (JSON files) will be saved once execution of beacon tools finishes. This folder is mandatory to be always inside output_docs, so only the subdirectory inside output_docscan be modified in this path.
 
-VCF conversion config parameters:
+VCF conversion config parameters
+allele_counts=False
+reference_genome='GRCh37' # Choose one between NCBI36, GRCh37, GRCh38
+datasetId='COVID_pop11_fin_2'
+case_level_data=False
+exact_heterozygosity=False
+num_rows=15000000
+verbosity=False
 
 The second part of the configuration file pertains to the VCF to BFF conversion. This only needs to be used in case you are using a VCF as a source for the genomic variants collection.
 
-The num_variants is the variable you need to write in case you are executing the VCF converter (genomicVariations_vcf.py). This will tell the script how many variants will be read and converted from the file(s).
-
-The reference_genome field is the genome used to map the reads.
+The num_variants is the variable you need to write in case you are executing the VCF conversion (genomicVariations_vcf.py). This will tell the script how many variants will be read and converted from the file(s).
 
 The allele_frequency field lets you set a threshold for the allele frequency (AF) of the variants you want to convert from the VCF file. If you set it at 0.5, all the variants with 0.5 or less AF will be converted to BFF. 1 is the default value (all variants will be converted).
 
-The num_rows is an approximate calculation of the total number of variants in each VCF. Make sure this is greater than the total variants expected. This was automatically calculated before but it was very slow sometimes to calculate all the variants number in a VCF.
+The allele_counts now is not implemented yet, just leave it as False.
 
-Datasets, case-level data, and zygosity parameters are only applicable in the Beacon Production Implementation environment.
+The reference_genome is the reference genome the tool will use to map the position of the chromosomes. Make sure to select the same version as the one used to generate your data.
+
+The datasetId, case_level_data, and exact_zygosity parameters are only applicable in the Beacon Production Implementation environment.
 
 The datasetId needs to match the id of your datasets.csv or datasets.json file. This will add a datasetId field in every record to match the record with the dataset it belongs to.
 
-The case_level_data is a boolean parameter (True or False) which will relate your variants to the samples they belong to. In case you set this to true, please, read as well the case level data paragraph below.
+When converting a VCF file to BFF, you can use two optional boolean parameters to include sample-level information about each variant: case_level_data and exact_zygosity.
 
-The zygosity is a boolean parameter (True or False) which will insert if your sample is homozygous or heterozygous in case you have case_level_data activated.
+case_level_data will link variants to biosamples. If set to True, this option enables mapping each variant to the specific biosamples (i.e., samples) that carry it. This allows downstream queries to return more granular, sample-level results instead of just listing variants in general.
+
+
+Important: For this mapping to work correctly, you must:
+Have genotype (GT) information available in the VCF.
+Provide a valid biosamples schema in your BFF files.
+
+Be sure to read the Case-level data conversion section for detailed guidance on setting this up.
+
+exact_zygosity will refine biosample classification. If set to True This parameter classifies each biosample based on its genotype:
+Homozygous for the reference allele
+Heterozygous
+Homozygous for the alternate allele
+This adds precision to your data and can help users interpret zygosity in their queries.
+
+
+If case_level_data is set to False, make sure to also setexact_zygosity to False — it won’t have any effect otherwise.
+
+The num_rows  are the aproximate calculation you expect for the total of variants in each vcf there are. Make sure this is greater than the total variants expected. It was automatically calculated before but it was very slow sometimes to calculate all the variants number in a VCF.
+
+The verbosity will give streaming logs with the reason why a variant has been skipped to be inserted. Recommendation is to leave this as False.

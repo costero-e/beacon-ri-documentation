@@ -140,10 +140,10 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               </ol>
             </div>
           </div>
-          <h2 id="installing-beacon-2-production-implementation-api-and-beacon2-ri-tools-v2">
+          <h1 id="installing-beacon-2-production-implementation-api-and-beacon2-ri-tools-v2">
             1. Installing Beacon 2 Production Implementation API and
             beacon2-ri-tools-v2
-          </h2>
+          </h1>
           <div className="stepsSection">
             <div>
               <p className="stepsList">
@@ -494,9 +494,9 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               </tr>
             </tbody>
           </table>
-          <h2 id="understanding-beacon-data-models">
+          <h1 id="understanding-beacon-data-models">
             2. Understanding Beacon Data Models
-          </h2>
+          </h1>
           <p>
             There are several ways of populating a beacon. To introduce
             information into a beacon you need to populate one, some, or all of
@@ -569,9 +569,9 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               </p>
             </div>
           </p>
-          <h2 id="converting-vcf-to-genomic-variations-model-beacon2-ri-tools-v2">
+          <h1 id="converting-vcf-to-genomic-variations-model-beacon2-ri-tools-v2">
             3. Converting VCF to Genomic Variations Model beacon2-ri-tools-v2
-          </h2>
+          </h1>
           <p>
             The most simple way of converting variant information into the
             genomicVariations model is directly reading a VCF into Beacon
@@ -598,9 +598,9 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
               format you can also fill in the Genomic Variations CSV.
             </div>
           </p>
-          <h2 id="filling-in-the-csv-templates">
+          <h1 id="filling-in-the-csv-templates">
             4. Filling in the CSV Templates
-          </h2>
+          </h1>
           <p>
             Now, let’s see how to fill in the CSV that will be converted by the
             beacon r.i tools into the models.
@@ -721,9 +721,9 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             <li>genomic Variations → variantInternalId, variation</li>
           </ul>
 
-          <h2 id="csv-formatting-tips-and-rules">
+          <h1 id="csv-formatting-tips-and-rules">
             5. CSV Formatting Tips and Rules
-          </h2>
+          </h1>
           <p>Here are some things to consider during your CSV creation:</p>
           <ul>
             <li>
@@ -787,7 +787,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
             </li>
           </ul>
 
-          <h2 id="configuring-conf-py">6. Configuring conf.py</h2>
+          <h1 id="configuring-conf-py">6. Configuring conf.py</h1>
           <p>
             Now that you’ve already gathered all the necessary information,
             let’s convert it into Beacon Friendly Format (BFF) using the beacon
@@ -889,7 +889,7 @@ verbosity=False`}
               </li>
             </ul>
           </div>
-          <h2 id="converting-csv-vcf-to-bff">7. Converting CSV/VCF to BFF</h2>
+          <h1 id="converting-csv-vcf-to-bff">7. Converting CSV/VCF to BFF</h1>
           <p>
             Time for the conversion! 
             <br /> Before preceding ensure that: 
@@ -993,9 +993,9 @@ genomicVariations.json`}</code>
               <li>Find your BFFs in the output_docs</li>{" "}
             </ol>
           </p>
-          <h2 id="deploying-a-beacon-2-production-implementation-api">
+          <h1 id="deploying-a-beacon-2-production-implementation-api">
             8. Deploying a Beacon 2 Production Implementation API
-          </h2>
+          </h1>
           <p>
             To deploy your first beacon we’ll use the{" "}
             <a
@@ -1097,7 +1097,7 @@ genomicVariations.json`}</code>
             webpage and modify the required files before deploying.
           </p>
 
-          <h2 id="reviewing-inserted-entries">9. Reviewing Inserted Entries</h2>
+          <h1 id="reviewing-inserted-entries">9. Reviewing Inserted Entries</h1>
           <p>
             Now, let’s move through your beacon and see the data you have
             inserted. If you did not modify the content of the{" "}
@@ -1180,7 +1180,7 @@ genomicVariations.json`}</code>
             </li>
           </div>
 
-          <h2 id="loading-more-data">10. Loading more data</h2>
+          <h1 id="loading-more-data">10. Loading more data</h1>
           <p>From the cloned repository move to:</p>
           <div className="codeSnippet">
             <pre>
