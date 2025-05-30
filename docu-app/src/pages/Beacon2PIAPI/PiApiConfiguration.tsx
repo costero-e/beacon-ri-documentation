@@ -1,5 +1,5 @@
 import { useState } from "react";
-import copyIcon from "../../assets/copy-symbol.svg";
+import copyIcon from "https://raw.githubusercontent.com/costero-e/beacon-ri-documentation/bb5928dddc3683806d2a314e6a113fa8bdd767ee/docu-app/src/assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
 
@@ -63,16 +63,15 @@ const PiApiConfiguration = () => {
           Documentation
         </a>
         <img
-          src="arrow-right-light.svg"
+          src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/arrow-right-light.svg?raw=true"
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/configuration" className="no-undeline">
+        <a href="/filtering-terms" className="no-undeline">
           Beacon 2 PI API
         </a>
-
         <img
-          src="arrow-right-bold.svg"
+          src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/arrow-right-bold.svg?raw=true"
           alt="arrow right"
           className="arrow-icon"
         />

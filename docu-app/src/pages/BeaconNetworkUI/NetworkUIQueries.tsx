@@ -10,16 +10,15 @@ const NetworkUIQueries: React.FC = () => {
           Documentation
         </a>
         <img
-          src="arrow-right-light.svg"
+          src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/arrow-right-light.svg?raw=true"
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/network-querying-the-ui" className="no-undeline">
-          Beacon Network UI
+        <a href="/filtering-terms" className="no-undeline">
+          Beacon 2 PI API
         </a>
-
         <img
-          src="arrow-right-bold.svg"
+          src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/arrow-right-bold.svg?raw=true"
           alt="arrow right"
           className="arrow-icon"
         />

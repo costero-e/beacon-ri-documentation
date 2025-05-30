@@ -1,8 +1,8 @@
 import { useState } from "react";
-import copyIcon from "../../assets/copy-symbol.svg";
+import copyIcon from "https://raw.githubusercontent.com/costero-e/beacon-ri-documentation/bb5928dddc3683806d2a314e6a113fa8bdd767ee/docu-app/src/assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
-import pin from "../../pin.svg";
+import pin from "https://raw.githubusercontent.com/costero-e/beacon-ri-documentation/bb5928dddc3683806d2a314e6a113fa8bdd767ee/docu-app/src/pin.svg";
 
 const CreateYourBeacon = () => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(
@@ -84,15 +84,15 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           Documentation
         </a>
         <img
-          src="arrow-right-light.svg"
+          src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/arrow-right-light.svg?raw=true"
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/create-your-beacon" className="no-undeline">
-          Tutorials
+        <a href="/filtering-terms" className="no-undeline">
+          Beacon 2 PI API
         </a>
         <img
-          src="arrow-right-bold.svg"
+          src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/arrow-right-bold.svg?raw=true"
           alt="arrow right"
           className="arrow-icon"
         />
@@ -1081,7 +1081,7 @@ genomicVariations.json`}</code>
           <img
             className="relationship-elements"
             alt="Relationship-elements"
-            src="/apiSchema.svg"
+            src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/apiSchema.svg?raw=true"
           />
           <p>
             When searching{" "}

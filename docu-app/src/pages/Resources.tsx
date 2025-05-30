@@ -11,7 +11,7 @@ const Resources: React.FC = () => {
           Documentation
         </a>
         <img
-          src="arrow-right-bold.svg"
+          src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/arrow-right-bold.svg?raw=true"
           alt="arrow right"
           className="arrow-icon"
         />

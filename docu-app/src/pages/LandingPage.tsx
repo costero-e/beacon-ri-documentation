@@ -67,7 +67,7 @@ function LandingPage() {
       <img
         className="relationship-elements"
         alt="Relationship-elements"
-        src="./scheme_PI.svg"
+        src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/scheme_PI.svg?raw=true"
       />
       <p>
         The process to deploy and inject data is the same than in Beacon v2 RI

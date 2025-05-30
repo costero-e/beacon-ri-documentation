@@ -130,7 +130,7 @@ export default function Menu({ menuItems, subMenuItems }: MenuProps) {
     <Box>
       <Toolbar>
         <a href="https://www.crg.eu/" target="_blank" rel="noreferrer">
-          <img className="CRGLogo" src="./crg_logo_white.svg" alt="CRG Logo" />
+          <img className="CRGLogo" src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/crg_logo_white.svg?raw=true" alt="CRG Logo" />
         </a>
       </Toolbar>
       <Box sx={{ overflow: "auto" }}>

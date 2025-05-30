@@ -1,6 +1,6 @@
 import "./ManualDeployment.css";
 import { useState } from "react";
-import copyIcon from "../../assets/copy-symbol.svg";
+import copyIcon from "https://raw.githubusercontent.com/costero-e/beacon-ri-documentation/bb5928dddc3683806d2a314e6a113fa8bdd767ee/docu-app/src/assets/copy-symbol.svg";
 import OnThisPage from "../../components/OnThisPage";
 
 const ManualDeployment = () => {
@@ -63,15 +63,15 @@ const ManualDeployment = () => {
           Documentation
         </a>
         <img
-          src="arrow-right-light.svg"
+          src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/arrow-right-light.svg?raw=true"
           alt="arrow right"
           className="arrow-icon"
         />
-        <a href="/manual-deployment" className="no-undeline">
-          Beacon 2 RI API
+        <a href="/filtering-terms" className="no-undeline">
+          Beacon 2 PI API
         </a>
         <img
-          src="arrow-right-bold.svg"
+          src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/arrow-right-bold.svg?raw=true"
           alt="arrow right"
           className="arrow-icon"
         />
