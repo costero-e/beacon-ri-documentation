@@ -54,7 +54,7 @@ function LandingPage() {
       <img
         className="relationship-elements"
         alt="Relationship-elements"
-        src="/scheme_RI.svg"
+        src="./scheme_RI.svg"
       />
       <h2 className="h2-subtitle">
         What brings the new Beacon v2 Production Implementation?
@@ -67,7 +67,7 @@ function LandingPage() {
       <img
         className="relationship-elements"
         alt="Relationship-elements"
-        src="/scheme_PI.svg"
+        src="./scheme_PI.svg"
       />
       <p>
         The process to deploy and inject data is the same than in Beacon v2 RI
@@ -121,25 +121,25 @@ function LandingPage() {
           <img
             className="collaborators-img"
             alt="Europe"
-            src="/europe_logo.png"
+            src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/europe_logo.png?raw=true"
           />
           <img
             className="collaborators-img"
             alt="CaixaBank"
-            src="/caixabank_logo.png"
+            src="./caixabank_logo.png"
           />
-          <img className="collaborators-img" alt="EGA" src="/ega_logo.png" />
-          <img className="collaborators-img" alt="CRG" src="/crg_logo.png" />
+          <img className="collaborators-img" alt="EGA" src="./ega_logo.png" />
+          <img className="collaborators-img" alt="CRG" src="./crg_logo.png" />
 
           <img
             className="collaborators-img"
             alt="ELIXIR"
-            src="/elixir_logo.png"
+            src="./elixir_logo.png"
           />
           <img
             className="collaborators-img"
             alt="EMBL-EBI"
-            src="/embl-ebi_logo.png"
+            src="./embl-ebi_logo.png"
           />
         </div>
       </div>
