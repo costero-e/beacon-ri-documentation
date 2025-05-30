@@ -479,7 +479,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <p className="note">
             <img
               className="note-symbol"
-              src="/note-symbol.png"
+              src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/note-symbol.png?raw=true"
               alt="Note symbol"
             />
             <div>
@@ -1849,7 +1849,7 @@ verbosity=False # This variable, if True, will make the program run slower but g
           <p className="note">
             <img
               className="note-symbol"
-              src="/note-symbol.png"
+              src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/note-symbol.png?raw=true"
               alt="Note symbol"
             />
             <div>
@@ -1955,7 +1955,7 @@ A total of 0 variants were skipped`}</code>
           <p className="note">
             <img
               className="note-symbol"
-              src="/note-symbol.png"
+              src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/note-symbol.png?raw=true"
               alt="Note symbol"
             />
             <div>
@@ -2131,7 +2131,7 @@ update_datetime = ''`}</code>
           <p className="wider-note">
             <img
               className="note-symbol-wider"
-              src="/note-symbol.png"
+              src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/note-symbol.png?raw=true"
               alt="Note symbol"
             />
             <div>
@@ -2215,7 +2215,7 @@ update_datetime = ''`}</code>
           <p className="note">
             <img
               className="note-symbol"
-              src="/note-symbol.png"
+              src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/note-symbol.png?raw=true"
               alt="Note symbol"
             />
             <div>

@@ -54,7 +54,7 @@ function LandingPage() {
       <img
         className="relationship-elements"
         alt="Relationship-elements"
-        src="./scheme_RI.svg"
+        src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/scheme_RI.svg?raw=true"
       />
       <h2 className="h2-subtitle">
         What brings the new Beacon v2 Production Implementation?
@@ -126,20 +126,20 @@ function LandingPage() {
           <img
             className="collaborators-img"
             alt="CaixaBank"
-            src="./caixabank_logo.png"
+            src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/caixabank_logo.png?raw=true"
           />
-          <img className="collaborators-img" alt="EGA" src="./ega_logo.png" />
-          <img className="collaborators-img" alt="CRG" src="./crg_logo.png" />
+          <img className="collaborators-img" alt="EGA" src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/ega_logo.png?raw=true" />
+          <img className="collaborators-img" alt="CRG" src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/crg_logo.png?raw=true" />
 
           <img
             className="collaborators-img"
             alt="ELIXIR"
-            src="./elixir_logo.png"
+            src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/elixir_logo.png?raw=true"
           />
           <img
             className="collaborators-img"
             alt="EMBL-EBI"
-            src="./embl-ebi_logo.png"
+            src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/embl-ebi_logo.png?raw=true"
           />
         </div>
       </div>

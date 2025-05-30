@@ -202,7 +202,7 @@ dataUseConditions.duoDataUse.description
           <p className="note">
             <img
               className="note-symbol"
-              src="/note-symbol.png"
+              src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/note-symbol.png?raw=true"
               alt="Note symbol"
             />
             <div>

@@ -82,7 +82,7 @@ const Navbar = ({ onSearch }: NavbarProps) => {
       <div className="divOptionsInput">
         <div className="inputContainer">
           <div className="inputDiv">
-            <img src="./Zoom-in.png" className="searchIcon" alt="Search Icon" />
+            <img src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/Zoom-in.png?raw=true" className="searchIcon" alt="Search Icon" />
             <input
               className="inputSearch"
               type="text"

@@ -210,7 +210,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <p className="note">
             <img
               className="note-symbol"
-              src="/note-symbol.png"
+              src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/note-symbol.png?raw=true"
               alt="Note symbol"
             />
             <div>
@@ -535,7 +535,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <p className="wider-note">
             <img
               className="note-symbol-wider"
-              src="/note-symbol.png"
+              src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/note-symbol.png?raw=true"
               alt="Note symbol"
             />
             <div>
@@ -590,7 +590,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <p className="note">
             <img
               className="note-symbol"
-              src="/note-symbol.png"
+              src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/note-symbol.png?raw=true"
               alt="Note symbol"
             />
             <div>
@@ -1233,7 +1233,7 @@ docker exec mongoprod mongoimport --jsonArray --uri "mongodb://root:example@127.
           <p className="note">
             <img
               className="note-symbol"
-              src="/note-symbol.png"
+              src="https://github.com/costero-e/beacon-ri-documentation/blob/main/docu-app/public/note-symbol.png?raw=true"
               alt="Note symbol"
             />
             <div>
