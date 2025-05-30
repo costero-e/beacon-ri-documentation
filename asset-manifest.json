@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/beacon-ri-documentation/static/css/main.f88948d2.css",
-    "main.js": "/beacon-ri-documentation/static/js/main.c0a2b724.js",
-    "static/js/510.2517cac3.chunk.js": "/beacon-ri-documentation/static/js/510.2517cac3.chunk.js",
+    "main.js": "/beacon-ri-documentation/static/js/main.d58be892.js",
+    "static/js/510.43678a5e.chunk.js": "/beacon-ri-documentation/static/js/510.43678a5e.chunk.js",
     "static/media/qrcode.png": "/beacon-ri-documentation/static/media/qrcode.375e0c6c742eaa87792c.png",
     "static/media/medal.svg": "/beacon-ri-documentation/static/media/medal.b5262ca9ed35624405d4c8935b51512e.svg",
     "static/media/copy-symbol.svg": "/beacon-ri-documentation/static/media/copy-symbol.e5f79483cb3d662c42bb7c6b7aacef44.svg",
@@ -10,11 +10,11 @@
     "index.html": "/beacon-ri-documentation/index.html",
     "static/media/pin.svg": "/beacon-ri-documentation/static/media/pin.c509a3a2c6533bfcfaf0c4b2ff6fc801.svg",
     "main.f88948d2.css.map": "/beacon-ri-documentation/static/css/main.f88948d2.css.map",
-    "main.c0a2b724.js.map": "/beacon-ri-documentation/static/js/main.c0a2b724.js.map",
-    "510.2517cac3.chunk.js.map": "/beacon-ri-documentation/static/js/510.2517cac3.chunk.js.map"
+    "main.d58be892.js.map": "/beacon-ri-documentation/static/js/main.d58be892.js.map",
+    "510.43678a5e.chunk.js.map": "/beacon-ri-documentation/static/js/510.43678a5e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f88948d2.css",
-    "static/js/main.c0a2b724.js"
+    "static/js/main.d58be892.js"
   ]
 }
