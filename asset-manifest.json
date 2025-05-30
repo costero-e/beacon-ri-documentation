@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/beacon-ri-documentation/static/css/main.f88948d2.css",
-    "main.js": "/beacon-ri-documentation/static/js/main.b572170d.js",
+    "main.js": "/beacon-ri-documentation/static/js/main.53955aac.js",
     "static/js/510.43678a5e.chunk.js": "/beacon-ri-documentation/static/js/510.43678a5e.chunk.js",
     "static/media/qrcode.png": "/beacon-ri-documentation/static/media/qrcode.375e0c6c742eaa87792c.png",
     "static/media/medal.svg": "/beacon-ri-documentation/static/media/medal.b5262ca9ed35624405d4c8935b51512e.svg",
@@ -10,11 +10,11 @@
     "index.html": "/beacon-ri-documentation/index.html",
     "static/media/pin.svg": "/beacon-ri-documentation/static/media/pin.c509a3a2c6533bfcfaf0c4b2ff6fc801.svg",
     "main.f88948d2.css.map": "/beacon-ri-documentation/static/css/main.f88948d2.css.map",
-    "main.b572170d.js.map": "/beacon-ri-documentation/static/js/main.b572170d.js.map",
+    "main.53955aac.js.map": "/beacon-ri-documentation/static/js/main.53955aac.js.map",
     "510.43678a5e.chunk.js.map": "/beacon-ri-documentation/static/js/510.43678a5e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f88948d2.css",
-    "static/js/main.b572170d.js"
+    "static/js/main.53955aac.js"
   ]
 }
