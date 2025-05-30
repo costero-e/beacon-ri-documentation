@@ -1,8 +1,8 @@
 import { useState } from "react";
-import copyIcon from "https://raw.githubusercontent.com/costero-e/beacon-ri-documentation/bb5928dddc3683806d2a314e6a113fa8bdd767ee/docu-app/src/assets/copy-symbol.svg";
+import copyIcon from "../../assets/copy-symbol.svg";
 import "../Beacon2RIAPI/ApiConfiguration.css";
 import OnThisPage from "../../components/OnThisPage";
-import pin from "https://raw.githubusercontent.com/costero-e/beacon-ri-documentation/bb5928dddc3683806d2a314e6a113fa8bdd767ee/docu-app/src/pin.svg";
+import pin from "../../pin.svg";
 
 const CreateYourBeacon = () => {
   const [copySuccess, setCopySuccess] = useState<{ [key: string]: boolean }>(

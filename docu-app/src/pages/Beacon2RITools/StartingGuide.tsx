@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import copyIcon from "https://raw.githubusercontent.com/costero-e/beacon-ri-documentation/bb5928dddc3683806d2a314e6a113fa8bdd767ee/docu-app/src/assets/copy-symbol.svg";
+import copyIcon from "../../assets/copy-symbol.svg";
 import "./StartingGuide.css";
 import OnThisPage from "../../components/OnThisPage";
 

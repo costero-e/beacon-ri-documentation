@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ConfigFileTools.css";
-import copyIcon from "https://raw.githubusercontent.com/costero-e/beacon-ri-documentation/bb5928dddc3683806d2a314e6a113fa8bdd767ee/docu-app/src/assets/copy-symbol.svg";
-import copyIconError from "https://raw.githubusercontent.com/costero-e/beacon-ri-documentation/bb5928dddc3683806d2a314e6a113fa8bdd767ee/docu-app/src/assets/copyIconError.svg";
+import copyIcon from "../../assets/copy-symbol.svg";
+import copyIconError from "../..assets/copyIconError.svg";
 import OnThisPage from "../../components/OnThisPage";
 
 const CommonErrors: React.FC = () => {
